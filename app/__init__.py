@@ -1,4 +1,4 @@
-from os import path
+from datetime import datetime
 from pathlib import Path
 
 import requests
@@ -15,10 +15,26 @@ AUTH = {"Authorization": "Bearer 1bc6439b946fd03c02a0b319924d49459a05c4763372d0a
 
 @app.route("/")
 def home():
-    response = requests.get(f"{CMS_URL}/api/actualites", params={'populate': 'images', "sort": "id:desc"}, headers=AUTH)
-    return render_template("index.html", actualites=response.json(), CMS_URL=CMS_URL)
+    response = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={'populate': 'images', "sort": "id:desc"},
+        headers=AUTH)
+
+    return render_template(
+        "index.html",
+        actualites=response.json(),
+        CMS_URL=CMS_URL)
 
 
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
+
+
+@app.template_filter('date')
+def _date(s):
+    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%d/%m/%Y")
+
+@app.template_filter('time')
+def _time(s):
+    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
