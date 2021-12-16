@@ -17,12 +17,21 @@ AUTH = {"Authorization": "Bearer 1bc6439b946fd03c02a0b319924d49459a05c4763372d0a
 def home():
     response = requests.get(
         url=f"{CMS_URL}/api/actualites",
-        params={'populate': 'images', "sort": "id:desc"},
+        params={'populate': 'images', "sort": "id:desc", "pagination[limit]": 300},
         headers=AUTH)
+
+    actu_list = response.json()
+    new_actu_list = { "data": [] }
+
+    for data in actu_list["data"]:
+        print(data)
+        if data["attributes"]["images"]["data"] is not None:
+            if data["attributes"]["images"]["data"][0]["attributes"]["size"] > 80:
+                new_actu_list["data"].append(data)
 
     return render_template(
         "index.html",
-        actualites=response.json(),
+        actualites=new_actu_list,
         CMS_URL=CMS_URL)
 
 
