@@ -188,70 +188,18 @@
             <h2 class="text-5xl font-normal robotoslab">Flash Actu</h2>
             <div class="text-xl pb-4">Lun, 11 Novembre 2021</div>
             <div class="list no-scrollbar pb-1">
+              {% for news in actualites["data"] %}
               <div class="flex flex-wrap items-center border-b-2 py-5">
                 <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
+                  <p>
+                    {{ news["attributes"]["head"] }}
+                  </p>
                 </div>
-                <div class="text-center w-1/4">9h30</div>
-              </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
+                <div class="text-center w-1/4">
+                  {{ news["attributes"]["createdAt"]|time }}
                 </div>
-                <div class="text-center w-1/4">9h40</div>
               </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
-                </div>
-                <div class="text-center w-1/4">9h45</div>
-              </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
-                </div>
-                <div class="text-center w-1/4">9h49</div>
-              </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
-                </div>
-                <div class="text-center w-1/4">9h50</div>
-              </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
-                </div>
-                <div class="text-center w-1/4">9h54</div>
-              </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
-                </div>
-                <div class="text-center w-1/4">10h00</div>
-              </div>
-              <div class="flex flex-wrap items-center border-b-2 py-5">
-                <div class="text-xl w-3/4">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi
-                    architecto cumque ea eos et, maiores nihil officia praesentium quae quaerat
-                    quidem repellat sint, sunt, totam unde velit voluptates voluptatum.</p>
-                </div>
-                <div class="text-center w-1/4">10h10</div>
-              </div>
+              {% endfor %}
             </div>
             <div class="flex justify-center items-center text-center cursor-pointer pt-5">
               <div class="text-2xl robotoslab px-5 py-5">Voir Plus</div>
