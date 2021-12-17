@@ -15,23 +15,25 @@ AUTH = {"Authorization": "Bearer 1bc6439b946fd03c02a0b319924d49459a05c4763372d0a
 
 @app.route("/")
 def home():
-    response = requests.get(
+    spotlighted = requests.get(
         url=f"{CMS_URL}/api/actualites",
-        params={'populate': 'images', "sort": "id:asc", "pagination[limit]": 1000},
+        params={'populate': 'images', 'sort': "id:desc", "filters[spotlight][$eq]": "true" },
+        headers=AUTH)
+    regular = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
         headers=AUTH)
 
-    actu_list = response.json()
-    new_actu_list = { "data": [] }
+    actualites = {"data": []}
 
-    for data in actu_list["data"]:
-        print(data)
+    for data in regular.json()["data"]:
         if data["attributes"]["images"]["data"] is not None:
-            if data["attributes"]["images"]["data"][0]["attributes"]["size"] > 90:
-                new_actu_list["data"].append(data)
+            actualites["data"].append(data)
 
     return render_template(
         "index.html",
-        actualites=new_actu_list,
+        actualites=actualites,
+        actu_spotlighted=spotlighted.json(),
         CMS_URL=CMS_URL)
 
 
@@ -42,8 +44,12 @@ def serve_assets(filename):
 
 @app.template_filter('date')
 def _date(s):
-    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%d/%m/%Y")
+    if isinstance(s, str):
+        return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%d/%m/%Y")
+    return ""
 
 @app.template_filter('time')
 def _time(s):
-    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
+    if isinstance(s, str):
+        return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
+    return ""
