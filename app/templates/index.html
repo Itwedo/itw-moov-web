@@ -276,25 +276,27 @@
             class="robotoslab inline-block1 text-gray-600 text-4xl font-normal pb-4 mb-7 border-b-2 border-gray-600 sm:text-5xl">
             Les derniers articles</div>
           <h2 class="text-6xl text-bold text-gray-600 pb-7 sm:text-7xl md:text-8xl lg:text-7xl xl:text-9xl">
-            Titre : Lorem ipsum dolor sit amet</h2>
+            {{ actu_spotlighted["data"][0]["attributes"]["title"] }}
+          </h2>
           <div class="news-card news-card-lg relative overflow-hidden w-full">
-            <img class="img-absolute-cover img-hover-scale" src="assets/images/elonmusk@2x.jpg">
+            <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ actu_spotlighted["data"][0]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
               href="article.html">
               <div class="cat-pasti">
                 <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">News</span>
               </div>
-              <h3 class="text-4xl mb-3 md:text-7xl">Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit</h3>
+              <h3 class="text-4xl mb-3 md:text-7xl">
+
+              </h3>
               <div class="card-time">
                 <span class="mr-4">03/11/2021</span>
                 <span class="mr-4">09:30</span>
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="assets/images/share-white.svg">130</span>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste labore
-                molestias pariatur quis quo similique voluptatum! Architecto ea enim error
-                exercitationem libero provident repellendus sit temporibus veritatis voluptatem.</p>
+              <p>
+                {{ actu_spotlighted["data"][0]["attributes"]["head"] }}
+              </p>
             </a>
           </div>
         </div>
@@ -326,7 +328,7 @@
                     </p>
                   </div>
                 </div>
-              </a>\
+              </a>
               {% endfor %}
             </div>
             <div
