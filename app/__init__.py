@@ -3,7 +3,7 @@ from pathlib import Path
 
 import requests
 from flask import Flask, render_template, send_from_directory
-
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -37,6 +37,34 @@ def home():
         CMS_URL=CMS_URL)
 
 
+@app.route("/actualite/<id>")
+def actualite(id):
+    response = requests.get(
+        url=f"{CMS_URL}/api/actualites/{id}",
+        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
+        headers=AUTH)
+
+    body = cut_body(response.json()["data"]["attributes"]["body"])
+
+    regular = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
+        headers=AUTH)
+
+    actualites = {"data": []}
+
+    for data in regular.json()["data"]:
+        if data["attributes"]["images"]["data"] is not None:
+            actualites["data"].append(data)
+
+    return render_template(
+        "actualites.html",
+        actualites=actualites,
+        news=response.json(),
+        body=body,
+        CMS_URL=CMS_URL)
+
+
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
@@ -53,3 +81,25 @@ def _time(s):
     if isinstance(s, str):
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
     return ""
+
+
+def cut_body(text):
+    FIRST_LIMIT_CHAR = 1750
+
+    if not "<p>" in text:
+        return [text]
+
+    # TODO:use beautifulsoup to cut in FIRST_LIMIT_CHAR
+    # Get length of traversed node
+    first_part = []
+    second_part = []
+    for child in BeautifulSoup(text):
+        if len("".join([str(tag) for tag in first_part])) >= FIRST_LIMIT_CHAR:
+            second_part.append(child)
+        else:
+            first_part.append(child)
+
+    return (
+        "".join([str(tag) for tag in first_part]),
+        "".join([str(tag) for tag in second_part ]),
+    )
