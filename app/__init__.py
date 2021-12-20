@@ -65,6 +65,26 @@ def actualite(id):
         CMS_URL=CMS_URL)
 
 
+@app.route("/category")
+def category():
+
+    regular = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
+        headers=AUTH)
+
+    actualites = {"data": []}
+
+    for data in regular.json()["data"]:
+        if data["attributes"]["images"]["data"] is not None:
+            actualites["data"].append(data)
+
+    return render_template(
+        "category.html",
+        actualites=actualites,
+        CMS_URL=CMS_URL)
+
+
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
