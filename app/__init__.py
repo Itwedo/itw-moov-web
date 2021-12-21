@@ -2,8 +2,9 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
-from flask import Flask, render_template, send_from_directory
+from flask import request
 from bs4 import BeautifulSoup
+from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
 
@@ -67,21 +68,21 @@ def actualite(id):
 
 @app.route("/category")
 def category():
-
-    regular = requests.get(
+    # 10/page
+    result = requests.get(
         url=f"{CMS_URL}/api/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
+        params={
+            'populate': 'images',
+            'sort': "id:desc",
+            "pagination[pageSize]": 10,
+            "pagination[page]": request.args.get("page", 1),
+            "pagination[withCount]": 1},
         headers=AUTH)
-
-    actualites = {"data": []}
-
-    for data in regular.json()["data"]:
-        if data["attributes"]["images"]["data"] is not None:
-            actualites["data"].append(data)
 
     return render_template(
         "category.html",
-        actualites=actualites,
+        result=result.json(),
+        page=request.args.get("page", 1),
         CMS_URL=CMS_URL)
 
 
