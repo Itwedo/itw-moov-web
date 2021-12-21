@@ -85,6 +85,26 @@ def category():
         CMS_URL=CMS_URL)
 
 
+@app.route("/tendance")
+def tendance():
+
+    regular = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
+        headers=AUTH)
+
+    actualites = {"data": []}
+
+    for data in regular.json()["data"]:
+        if data["attributes"]["images"]["data"] is not None:
+            actualites["data"].append(data)
+
+    return render_template(
+        "tendance.html",
+        actualites=actualites,
+        CMS_URL=CMS_URL)
+
+
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
