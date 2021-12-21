@@ -126,11 +126,6 @@ def _time(s):
 def cut_body(text):
     FIRST_LIMIT_CHAR = 1750
 
-    if not "<p>" in text:
-        return [text]
-
-    # TODO:use beautifulsoup to cut in FIRST_LIMIT_CHAR
-    # Get length of traversed node
     first_part = []
     second_part = []
     for child in BeautifulSoup(text, "html.parser"):
