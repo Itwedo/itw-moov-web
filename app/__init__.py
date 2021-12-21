@@ -88,21 +88,21 @@ def category():
 
 @app.route("/tendance")
 def tendance():
-
-    regular = requests.get(
+    # 18/page
+    result = requests.get(
         url=f"{CMS_URL}/api/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
+        params={
+            'populate': 'images',
+            'sort': "id:desc",
+            "pagination[pageSize]": 18,
+            "pagination[page]": request.args.get("page", 1),
+            "pagination[withCount]": 1},
         headers=AUTH)
-
-    actualites = {"data": []}
-
-    for data in regular.json()["data"]:
-        if data["attributes"]["images"]["data"] is not None:
-            actualites["data"].append(data)
 
     return render_template(
         "tendance.html",
-        actualites=actualites,
+        result=result.json(),
+        page=request.args.get("page", 1),
         CMS_URL=CMS_URL)
 
 
