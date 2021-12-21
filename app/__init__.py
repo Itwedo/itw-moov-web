@@ -106,6 +106,11 @@ def tendance():
         CMS_URL=CMS_URL)
 
 
+@app.route("/mention.html")
+def mention():
+    return render_template("mention.html")
+
+
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
