@@ -14,7 +14,7 @@
     <div class="mx-auto bg-gray-100 py-7 mt-5">
       <div class="flex flex-wrap">
         <div class="w-full pl-5 pr-5 lg:pl-10 lg:pr-0 lg:w-3/5">
-          <form>
+          <form method="get" action="{{ url_for('recherche') }}">
             <label class="relative my-4 block" for="header-search-form">
               <input class="block text-left text-2xl h-12 pl-12 rounded-xl border-2 border-gray-300 w-full max-w-5xl"
                 placeholder="Mots clés" id="header-search-form" name="query" value="{{ query }}">
