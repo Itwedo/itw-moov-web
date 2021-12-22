@@ -154,6 +154,11 @@ def pharmacie():
     return render_template("pharmacie.html")
 
 
+@app.route("/coming_soon.html")
+def coming_soon():
+    return render_template("coming_soon.html")
+
+
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
