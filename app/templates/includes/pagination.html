@@ -1,0 +1,38 @@
+<div class="pagination relative">
+  <ul
+    class="py-5 px-5 list-none bg-gray-100 inline-flex flex-nowrap items-center justify-center absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+    {% if result["meta"]["pagination"]["page"] > 1 %}
+    <li>
+      <a class="px-4 text-2xl font-normal hover:font-bold" href="?page={{ result["meta"]["pagination"]["page"]-1 }}{% if query %}&query={{ query }}{% endif %}">&lt;</a>
+    </li>
+    {% endif %}
+    {% if result["meta"]["pagination"]["page"]-2 >= 1 %}
+    <li>
+      <a class="px-4 text-2xl font-normal hover:font-bold" href="?page={{ result["meta"]["pagination"]["page"]-2 }}{% if query %}&query={{ query }}{% endif %}">{{ result["meta"]["pagination"]["page"]-2 }}</a>
+    </li>
+    {% endif %}
+    {% if result["meta"]["pagination"]["page"]-1 >= 1 %}
+    <li>
+      <a class="px-4 text-2xl font-normal hover:font-bold" href="?page={{ result["meta"]["pagination"]["page"]-1 }}{% if query %}&query={{ query }}{% endif %}">{{ result["meta"]["pagination"]["page"]-1 }}</a>
+    </li>
+    {% endif %}
+    <li>
+      <p class="px-4 text-2xl font-normal hover:font-bold" href="#"><strong>{{ result["meta"]["pagination"]["page"] }}</strong></p>
+    </li>
+    {% if result["meta"]["pagination"]["page"]+1 <= result["meta"]["pagination"]["pageCount"] %}
+    <li>
+      <a class="px-4 text-2xl font-normal hover:font-bold" href="?page={{ result["meta"]["pagination"]["page"]+1 }}{% if query %}&query={{ query }}{% endif %}">{{ result["meta"]["pagination"]["page"]+1 }}</a>
+    </li>
+    {% endif %}
+    {% if result["meta"]["pagination"]["page"]+2 <= result["meta"]["pagination"]["pageCount"] %}
+    <li>
+      <a class="px-4 text-2xl font-normal hover:font-bold" href="?page={{ result["meta"]["pagination"]["page"]+2 }}{% if query %}&query={{ query }}{% endif %}">{{ result["meta"]["pagination"]["page"]+2 }}</a>
+    </li>
+    {% endif %}
+    {% if result["meta"]["pagination"]["page"] < result["meta"]["pagination"]["pageCount"] %}
+    <li>
+      <a class="px-4 text-2xl font-normal hover:font-bold" href="?page={{ result["meta"]["pagination"]["page"]+1 }}{% if query %}&query={{ query }}{% endif %}">&gt;</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>

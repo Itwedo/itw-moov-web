@@ -13,262 +13,196 @@
     </div>
     <div class="mx-auto bg-gray-100 py-7 mt-5">
       <div class="flex flex-wrap">
-        <div class="w-full pl-5 pr-5 lg:pl-10 lg:pr-0 lg:w-3/5"><label class="relative my-4 block"
-            for="header-search-form"><input
-              class="block text-left text-2xl h-12 pl-12 rounded-xl border-2 border-gray-300 w-full max-w-5xl"
-              placeholder="Mots clés" id="header-search-form"><img
-              class="absolute top-1/2 left-3 h-9 pr-2 transform -translate-y-1/2 cursor-pointer"
-              src="assets/images/search-gray.svg"></label>
-          <div class="mini-card-v2 no-scrollbar mt-10 pr-0 lg:pr-24"><a class="mini-card relative flex"
-              href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/140038_w-850_h-400_q-100_m-crop.jpg"></div>
+        <div class="w-full pl-5 pr-5 lg:pl-10 lg:pr-0 lg:w-3/5">
+          <form>
+            <label class="relative my-4 block" for="header-search-form">
+              <input class="block text-left text-2xl h-12 pl-12 rounded-xl border-2 border-gray-300 w-full max-w-5xl"
+                placeholder="Mots clés" id="header-search-form" name="query" value="{{ query }}">
+              <img class="absolute top-1/2 left-3 h-9 pr-2 transform -translate-y-1/2 cursor-pointer"
+                src="/assets/images/search-gray.svg">
+            </label>
+          </form>
+          <div class="mini-card-v2 no-scrollbar mt-10 pr-0 lg:pr-24">
+            {% for news in result["data"] %}
+            <a class="mini-card relative flex" href={{ url_for('actualite', id=news["id"]) }}>
+              <div class="relative overflow-hidden w-full md:w-1/3">
+                <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
+                  news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+              </div>
               <div class="relative w-full md:w-2/3">
                 <div class="w-full text-gray-600 px-4 pb-3">
                   <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
+                    <div class="cat-pasti">
+                      <span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span>
+                    </div>
+                    <div class="card-time">
+                      <span class="mr-4 text-2xl">{{ news["attributes"]["createdAt"]|date }}</span>
+                    </div>
                   </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit.</p>
+                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">
+                    {{ news["attributes"]["title"] }}
+                  </h3>
+                  <p class="text-xl md:text-2xl leading-snug">
+                    {{ news["attributes"]["head"] }}
+                  </p>
                 </div>
               </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/unnamed (2).jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/Michael-B.-Jordan-est-l-homme-le-plus-sexy-de-l-annee-2020.jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/facebook-comprendre-algorithme-fil-actualites-publications-1@2x.jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/combattants-talibans-Kaboul-lundi-16_1.jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/biden_joe_20_0002112_jpg_640_350_1@2x.jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/images.jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a><a class="mini-card relative flex" href="article.html">
-              <div class="relative overflow-hidden w-full md:w-1/3"><img class="img-absolute-cover img-hover-scale"
-                  src="assets/images/intel-alder-lake-processeur_05DC000001677388.jpg"></div>
-              <div class="relative w-full md:w-2/3">
-                <div class="w-full text-gray-600 px-4 pb-3">
-                  <div class="flex flex-wrap justify-start items-center">
-                    <div class="cat-pasti"><span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span></div>
-                    <div class="card-time"><span class="mr-4 text-2xl">03/11/2021</span></div>
-                  </div>
-                  <h3 class="text-3xl mb-3 md:text-5xl leading-snug text-gray-800">Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit</h3>
-                  <p class="text-xl md:text-2xl leading-snug">Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Asperiores fuga iste labore molestias pariatur quis quo similique voluptatum! Architecto ea
-                    enim error exercitationem libero</p>
-                </div>
-              </div>
-            </a></div>
-          <div class="pagination relative">
-            <ul
-              class="py-5 px-5 list-none bg-gray-100 inline-flex flex-nowrap items-center justify-center absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">&lt;</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">1</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">2</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">3</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">...</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">29</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">30</a></li>
-              <li><a class="px-4 text-2xl font-normal hover:font-bold" href="#">&gt;</a></li>
-            </ul>
+            </a>
+            {% endfor %}
           </div>
+          {% include 'includes/pagination.html' %}
         </div>
         <div class="w-full lg:w-2/5 hidden lg:block">
           <div class="relative bg-white py-10 px-0 mt-12 mr-0 ml-2 shadow-xl md:px-10 md:mr-10 md:ml-0">
             <div class="mini-card-v1 no-scrollbar">
-              <div class="side-mini-card-header"><button
-                  class="active text-3xl font-light pl-2 pr-3 pb-3 border-r-2 border-gray-200">Les plus lus</button>
+              <div class="side-mini-card-header">
+                <button class="active text-3xl font-light pl-2 pr-3 pb-3 border-r-2 border-gray-200">Les plus
+                  lus</button>
                 <button class="text-3xl font-light pl-2 pr-3 pb-3 border-r-2 border-gray-200">Les plus
-                  récents</button></div><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/CR27OVV77NETJPXQIJ7LMJPGJA.jpg"></div>
+                  récents</button>
+              </div>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/CR27OVV77NETJPXQIJ7LMJPGJA.jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim error exercitationem
                       libero</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/FFKM-2018.jpg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/FFKM-2018.jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/i141101-ravitoto-sy-henankisoa-feuilles-de-manioc-hachees-au-porc.jpeg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale"
+                    src="/assets/images/i141101-ravitoto-sy-henankisoa-feuilles-de-manioc-hachees-au-porc.jpeg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/images (2).jpg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/images (2).jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/rtxnvidiaampere.jpg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/rtxnvidiaampere.jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/41d6867f78_50171855_bitcoin@2x.jpg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale"
+                    src="/assets/images/41d6867f78_50171855_bitcoin@2x.jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/Rova-1@2x.jpg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/Rova-1@2x.jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
                 </div>
-              </a><a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5"><img class="img-absolute-cover img-hover-scale"
-                    src="assets/images/I4182@2x.jpg"></div>
+              </a>
+              <a class="mini-card relative flex pb-4" href="article.html">
+                <div class="relative overflow-hidden w-full md:w-2/5">
+                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/I4182@2x.jpg">
+                </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
                     <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time"><span class="mr-4">03/11/2021</span><span class="mr-4">09:30</span><span
-                        class="mr-4 inline-flex items-center flex-nowrap"><img class="h-6 pr-2"
-                          src="assets/images/share-gray.svg">130</span></div>
+                    <div class="card-time">
+                      <span class="mr-4">03/11/2021</span>
+                      <span class="mr-4">09:30</span>
+                      <span class="mr-4 inline-flex items-center flex-nowrap">
+                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
+                    </div>
                     <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
                       labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
                   </div>
@@ -277,13 +211,16 @@
             </div>
             <div
               class="flex justify-center items-center absolute bottom-0 left-0 h-22 text-center bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm w-full cursor-pointer">
-              <img class="h-20 mx-5 py-5" src="assets/images/arrow-down.svg"></div>
+              <img class="h-20 mx-5 py-5" src="/assets/images/arrow-down.svg">
+            </div>
           </div>
           <div class="flex flex-row w-full md:flex-wrap md:flex-col">
-            <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full"><img
-                src="assets/images/powerbox1_0.jpg"></div>
-            <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full"><img
-                src="assets/images/morateamb.jpg"></div>
+            <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
+              <img src="/assets/images/powerbox1_0.jpg">
+            </div>
+            <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
+              <img src="/assets/images/morateamb.jpg">
+            </div>
           </div>
         </div>
       </div>

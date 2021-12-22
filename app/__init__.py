@@ -106,14 +106,30 @@ def tendance():
         CMS_URL=CMS_URL)
 
 
+@app.route("/recherche")
+def recherche():
+    result = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={
+            'populate': 'images',
+            'sort': "id:desc",
+            'filters[title][$containsi]': request.args.get("query", ""),
+            "pagination[pageSize]": 8,
+            "pagination[page]": request.args.get("page", 1),
+            "pagination[withCount]": 1},
+        headers=AUTH)
+
+    return render_template(
+        "recherche.html",
+        result=result.json(),
+        query=request.args.get("query", ""),
+        page=request.args.get("page", 1),
+        CMS_URL=CMS_URL)
+
+
 @app.route("/mention.html")
 def mention():
     return render_template("mention.html")
-
-
-@app.route("/recherche.html")
-def recherche():
-    return render_template("recherche.html")
 
 
 @app.route("/contact.html")
