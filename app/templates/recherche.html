@@ -61,153 +61,33 @@
                 <button class="text-3xl font-light pl-2 pr-3 pb-3 border-r-2 border-gray-200">Les plus
                   récents</button>
               </div>
-              <a class="mini-card relative flex pb-4" href="article.html">
+              {% for news in actualites["data"] %}
+              <a class="mini-card relative flex pb-4" href={{ url_for('actualite', id=news["id"]) }}>
                 <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/CR27OVV77NETJPXQIJ7LMJPGJA.jpg">
+                  <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
                 </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
+                    <h3 class="text-3xl mb-3">
+                      {{ news["attributes"]["title"] }}
+                    </h3>
                     <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
+                      <span class="mr-4">
+                        {{ news["attributes"]["createdAt"]|date }}
+                      </span>
+                      <span class="mr-4">
+                        {{ news["attributes"]["createdAt"]|time }}
+                      </span>
                       <span class="mr-4 inline-flex items-center flex-nowrap">
                         <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
                     </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim error exercitationem
-                      libero</p>
+                    <p class="text-xl">
+                      {{ news["attributes"]["head"] }}
+                    </p>
                   </div>
                 </div>
               </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/FFKM-2018.jpg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale"
-                    src="/assets/images/i141101-ravitoto-sy-henankisoa-feuilles-de-manioc-hachees-au-porc.jpeg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/images (2).jpg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/rtxnvidiaampere.jpg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale"
-                    src="/assets/images/41d6867f78_50171855_bitcoin@2x.jpg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/Rova-1@2x.jpg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
-              <a class="mini-card relative flex pb-4" href="article.html">
-                <div class="relative overflow-hidden w-full md:w-2/5">
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/I4182@2x.jpg">
-                </div>
-                <div class="relative w-full md:w-3/5">
-                  <div class="w-full text-gray-600 px-4 pb-3">
-                    <h3 class="text-3xl mb-3">Lorem ipsum dolor sit amet</h3>
-                    <div class="card-time">
-                      <span class="mr-4">03/11/2021</span>
-                      <span class="mr-4">09:30</span>
-                      <span class="mr-4 inline-flex items-center flex-nowrap">
-                        <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
-                    </div>
-                    <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores fuga iste
-                      labore molestias pariatur quis quo similique voluptatum! Architecto ea enim</p>
-                  </div>
-                </div>
-              </a>
+              {% endfor %}
             </div>
             <div
               class="flex justify-center items-center absolute bottom-0 left-0 h-22 text-center bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm w-full cursor-pointer">
