@@ -289,16 +289,16 @@
         <div class="inline-block text-4xl text-gray-600 border-b-2 border-gray-400 mb-7">Liens utiles</div>
         <ul class="block">
           <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="recherche.html">Recherche</a>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('recherche') }}">Recherche</a>
           </li>
           <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="contact.html">Contact</a>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('contact') }}">Contact</a>
           </li>
           <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="article.html">Article</a>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('category') }}">Article</a>
           </li>
           <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="pharmacie.html">Pharmacie</a>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('pharmacie') }}">Pharmacie</a>
           </li>
         </ul>
       </div>

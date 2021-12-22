@@ -111,6 +111,21 @@ def mention():
     return render_template("mention.html")
 
 
+@app.route("/recherche.html")
+def recherche():
+    return render_template("recherche.html")
+
+
+@app.route("/{{ url_for('contact') }}")
+def contact():
+    return render_template("{{ url_for('contact') }}")
+
+
+@app.route("/pharmacie.html")
+def pharmacie():
+    return render_template("pharmacie.html")
+
+
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)

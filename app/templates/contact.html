@@ -25,7 +25,7 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="assets/images/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-  <title>Mentions légales</title>
+  <title>Contact</title>
   <script defer="defer" src="./assets/scripts/manifest-338105182854d6bd0d7f.js"></script>
   <script defer="defer" src="./assets/scripts/main-6731bc2efb0608c06434.js"></script>
   <link href="./assets/styles/main-4eca6c8dbda212f15ad7.css" rel="stylesheet">
@@ -60,9 +60,9 @@
       <div class="flex items-center bg-black mx-auto 3xl:container">
         <ul
           class="main-menu-list list-none container flex flex-nowrap items-center justify-start mx-auto px-7 md:justify-center w-4/5">
-          <li class="mx-3"><a class="menu-item" href="{{ url_for('category') }}">Actualités<span
+          <li class="mx-3"><a class="menu-item" href="category.html">Actualités<span
                 class="menu-hover-line bg-red-400"></span></a></li>
-          <li class="mx-3"><a class="menu-item" href="{{ url_for('home') }}">Tendances Moov<span
+          <li class="mx-3"><a class="menu-item" href="tendance.html">Tendances Moov<span
                 class="menu-hover-line bg-blue-400"></span></a></li>
           <li class="mx-3"><a class="menu-item" href="{{ url_for('mention') }}">Infos pratiques<span
                 class="menu-hover-line bg-pink-300"></span></a></li>
@@ -83,50 +83,49 @@
     </div>
   </header>
   <main>
-    <article class="pb-12">
-      <div class="container mx-auto flex justify-center">
-        <h1 class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100">Mentions légales</h1>
+    <section class="relative mx-auto overflow-hidden 3xl:container">
+      <div class="relative bg-contact"><img
+          class="img-absolute-cover bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm"
+          src="assets/images/76354.jpg"></div>
+      <div
+        class="flex flex-wrap flex-col justify-center items-center absolute text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-60 w-full h-full">
+        <h1 class="text-7xl pb-2">Contactez-nous</h1>
+        <p class="font-bold text-2xl text-gray-100">Nous sommes toujours disponible pour vous</p>
       </div>
-      <div class="container mx-auto text-black content-wysiwyg">
-        <h2>INFORMATION LÉGALES</h2>
-        <p>Le Monde.fr Numéro ISSN : 1950-6244 Numéro CPPAP : 1219 Y 900 64 Numéro TVA : FR 67 433 891 850</p><br>
-        <p>Editeur SOCIÉTE ÉDITRICE DU MONDE Société anonyme à directoire et conseil de surveillance Au capital de 124
-          610 348,70 euros Immatriculée au RCS de Paris sous le n° 433 891 850 Dont le siège social est situé 67/69,
-          avenue Pierre Mendès France – 75707 Paris cedex 13</p><br>
-        <p>Directeur de la publication Louis DREYFUS, président du directoire</p><br>
-        <p>Téléphone : 01-57-28-20-00 Pour nous contacter : cliquez ici.</p><br>
-        <p>Hébergeur www.lemonde.fr Google Cloud Platform 8 rue de Londres 75009 Paris Téléphone : 01-42-68-53-00
-          Contact : cloud.google.com/contact</p><br>
-        <p>Hébergeur abo.lemonde.fr ; moncompte.lemonde.fr ; boutique.lemonde.fr ; abosh.lemonde.fr YZEE Services Rue
-          des Frères Lumière 62880 Vendin-le-Vieil Téléphone : 03-21-74-88-00 Contact : yzee.spotskills.fr/contact</p>
-        <h2>PROPRIETÉ INTELLECTUELLE</h2>
-        <p>Société Editrice du Monde est le propriétaire exclusif de tous les droits de propriété intellectuelle portant
-          tant sur la structure que sur le contenu du Site www.lemonde.fr.</p><br>
-        <p>Les contenus du site www.lemonde.fr sont destinés à usage strictement personnel, privé et non collectif,
-          librement pour le contenu gratuit, en contrepartie d’un abonnement pour le contenu payant. Il en est de même
-          pour les fils RSS et les newsletters.</p><br>
-        <p>Toute utilisation dans un cadre professionnel ou commercial ou toute commercialisation de ce contenu auprès
-          de tiers est interdite, sauf accord exprès de la Société Editrice du Monde à demander à l’adresse suivante :
-          droitsdauteur@lemonde.fr.</p>
-        <h2>INDEX DE L’ÉGALITÉ FEMMES HOMMES</h2>
-        <p>Afin de renforcer la mobilisation des entreprises sur le sujet de l’égalité salariale entre les femmes et les
-          hommes, la loi du 5 septembre 2018 pour la liberté de choisir son avenir professionnel prévoit que celles-ci
-          doivent désormais calculer puis publier chaque année le résultat d’un index portant sur l’égalité salariale
-          entre les femmes et les hommes.</p><br>
-        <p>Au titre de l’année 2020, la Société Éditrice du Monde obtient un résultat de 94/100</p><br>
-        <p>Cet index, compris entre 0 et 100 points, est le résultat des indicateurs suivants pour lesquels les
-          résultats de la société sont précisés ici :</p><br>
-        <p></p>
-        <ul>
-          <li>l’écart de rémunération entre les femmes et les hommes : 39 points obtenus sur 40</li>
-          <li>l’écart de taux d’augmentations individuelles : 20 points obtenus sur 20</li>
-          <li>l’écart de taux de promotions : 15 points obtenus sur 1</li>
-          <li>l’évolution salariale des femmes à leur retour d'un congé maternité : 15 points obtenus sur 15</li>
-          <li>le nombre de femmes et d’hommes parmi les 10 plus hauts salaires : 5 points obtenus sur 10</li>
-        </ul>
-        <p></p>
+    </section>
+    <section class="relative">
+      <div class="mx-auto 3xl:container 2xl:px-36 3xl:px-48">
+        <div class="flex flex-wrap">
+          <div class="w-full md:w-2/3 lg:w-1/2">
+            <form class="contact-form text-white bg-blue-400 py-24 px-10 mb-7 md:mb-16 mx-5 md:mx-0">
+              <h2 class="text-3xl mb-14 md:mb-28 xl:mb-32">Envoyer nous un message</h2>
+              <div class="flex flex-wrap md:flex-nowrap">
+                <div class="w-full lg:w-1/2 mr-0 md:mr-5"><input class="input-form" placeholder="Nom"> <input
+                    class="input-form" placeholder="Numéro de téléphone"> <input class="input-form" type="email"
+                    placeholder="E-mail"></div>
+                <div class="w-full lg:w-1/2"><textarea class="textarea-form" rows="7"
+                    placeholder="Votre message"></textarea></div>
+              </div>
+              <div class="w-full"><button class="button-form" type="submit">Envoyer</button></div>
+            </form>
+          </div>
+          <div class="w-full md:w-1/3 lg:w-1/2 px-7 md:px-16 py-20 mb-16">
+            <h2 class="text-4xl font-black robotoslab pb-7">The Malagasy Way Of Life</h2>
+            <div class="address">
+              <div class="relative text-2xl font-bold pl-14 mb-5"><img class="absolute top-0 left-0 h-10"
+                  src="assets/images/map.png">ADRESSE</div>
+              <address class="ml-12">91 Avenue de l'indépendance<br>Antananarivo 101<br>Madagascar</address>
+            </div>
+            <div class="email mt-10"><a class="text-2xl font-bold relative pl-14 lg:text-3xl"
+                href="mailto:service.client@moov.mg"><img class="absolute top-1/2 transform -translate-y-1/2 left-0 h-7"
+                  src="assets/images/mail.png">service.client@moov.mg</a></div>
+            <div class="tel relative mt-10"><a class="text-2xl font-bold relative pl-14 lg:text-3xl"
+                href="tel:034000807"><img class="absolute top-1/2 transform -translate-y-1/2 left-0 h-8"
+                  src="assets/images/phone.png">034 00 0 807</a></div>
+          </div>
+        </div>
       </div>
-    </article>
+    </section>
   </main>
   <footer class="pt-12 pb-14 px-5 bg-gray-100 mx-auto 3xl:container" id="main-footer">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -186,22 +185,22 @@
         <ul class="main-menu-list list-none flex flex-wrap flex-col items-start justify-start px-10 py-12 w-full">
           <li class="w-full open">
             <div class="relative border-b-2 border-white w-full"><a class="menu-item"
-                href="{{ url_for('category') }}">Actualités</a><span class="menu-arrow absolute top-0 right-2"><img
+                href="category.html">Actualités</a><span class="menu-arrow absolute top-0 right-2"><img
                   class="w-6 transform rotate-90" src="assets/images/icon-arrow-down.png"></span></div>
             <ul class="sub-menu robotoslab text-bold h-1 opacity-0 z-0">
-              <li><a class="block pl-7 py-4" href="{{ url_for('category') }}">Sous catégorie</a></li>
-              <li><a class="block pl-7 py-4" href="{{ url_for('category') }}">Sous catégorie</a></li>
-              <li><a class="block pl-7 py-4" href="{{ url_for('category') }}">Sous catégorie</a></li>
+              <li><a class="block pl-7 py-4" href="category.html">Sous catégorie</a></li>
+              <li><a class="block pl-7 py-4" href="category.html">Sous catégorie</a></li>
+              <li><a class="block pl-7 py-4" href="category.html">Sous catégorie</a></li>
             </ul>
           </li>
           <li class="w-full">
-            <div class="relative border-b-2 border-white w-full"><a class="menu-item" href="{{ url_for('home') }}">Tendances
+            <div class="relative border-b-2 border-white w-full"><a class="menu-item" href="tendance.html">Tendances
                 Moov</a><span class="menu-arrow absolute top-0 right-2"><img class="w-6 transform rotate-90"
                   src="assets/images/icon-arrow-down.png"></span></div>
             <ul class="sub-menu robotoslab text-bold h-1 opacity-0 z-0">
-              <li><a class="block pl-7 py-4" href="{{ url_for('category') }}">Sous catégorie</a></li>
-              <li><a class="block pl-7 py-4" href="{{ url_for('category') }}">Sous catégorie</a></li>
-              <li><a class="block pl-7 py-4" href="{{ url_for('category') }}">Sous catégorie</a></li>
+              <li><a class="block pl-7 py-4" href="category.html">Sous catégorie</a></li>
+              <li><a class="block pl-7 py-4" href="category.html">Sous catégorie</a></li>
+              <li><a class="block pl-7 py-4" href="category.html">Sous catégorie</a></li>
             </ul>
           </li>
           <li class="w-full">
