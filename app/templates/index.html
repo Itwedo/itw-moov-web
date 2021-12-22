@@ -87,7 +87,7 @@
             </a>
           </li>
           <li class="mx-3">
-            <a class="menu-item" href="mention.html">
+            <a class="menu-item" href="{{ url_for('mention') }}">
               Infos pratiques
               <span class="menu-hover-line bg-pink-300">
               </span>
@@ -384,7 +384,7 @@
         <a class="block px-7 py-7 mx-auto h-40" href={{ url_for("home") }}>
           <img class="h-20 w-auto" src="assets/images/Moov-logo_0@2x.png" alt="Moov logo">
         </a>
-        <a class="text-3xl text-center text-gray-600 hover:underline" href="mention.html">Mention Légales et
+        <a class="text-3xl text-center text-gray-600 hover:underline" href="{{ url_for('mention') }}">Mention Légales et
           CGV</a>
       </div>
       <div class="flex items-center justify-center m-ht">
@@ -485,7 +485,7 @@
           </li>
           <li class="w-full">
             <div class="relative border-b-2 border-white w-full">
-              <a class="menu-item" href="mention.html">Infos pratiques</a>
+              <a class="menu-item" href="{{ url_for('mention') }}">Infos pratiques</a>
               <span class="menu-arrow absolute top-0 right-2">
                 <img class="w-6 transform rotate-90" src="assets/images/icon-arrow-down.png">
               </span>
