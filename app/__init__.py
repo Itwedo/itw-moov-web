@@ -116,9 +116,9 @@ def recherche():
     return render_template("recherche.html")
 
 
-@app.route("/{{ url_for('contact') }}")
+@app.route("/contact.html")
 def contact():
-    return render_template("{{ url_for('contact') }}")
+    return render_template("contact.html")
 
 
 @app.route("/pharmacie.html")
