@@ -114,6 +114,14 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "markdown2"
+version = "2.4.2"
+description = "A fast and complete Python implementation of Markdown"
+category = "main"
+optional = false
+python-versions = ">=3.5, <4"
+
+[[package]]
 name = "markupsafe"
 version = "2.0.1"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -174,7 +182,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "9e051e911c1aa4885be8aa4b8f818e6746085ed43259b7e285569d0043a7a557"
+content-hash = "ceb983b8fa6783357b837e011f6bd4a869e397f228499cc265306a8f0b353e7c"
 
 [metadata.files]
 beautifulsoup4 = [
@@ -216,6 +224,10 @@ itsdangerous = [
 jinja2 = [
     {file = "Jinja2-3.0.3-py3-none-any.whl", hash = "sha256:077ce6014f7b40d03b47d1f1ca4b0fc8328a692bd284016f806ed0eaca390ad8"},
     {file = "Jinja2-3.0.3.tar.gz", hash = "sha256:611bb273cd68f3b993fabdc4064fc858c5b47a973cb5aa7999ec1ba405c87cd7"},
+]
+markdown2 = [
+    {file = "markdown2-2.4.2-py2.py3-none-any.whl", hash = "sha256:8f4ac8d9a124ab408c67361090ed512deda746c04362c36c2ec16190c720c2b0"},
+    {file = "markdown2-2.4.2.tar.gz", hash = "sha256:91113caf23aa662570fe21984f08fe74f814695c0a0ea8e863a8b4c4f63f9f6e"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.0.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:d8446c54dc28c01e5a2dbac5a25f071f6653e6e40f3a8818e8b45d790fe6ef53"},

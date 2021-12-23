@@ -1,10 +1,17 @@
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
+
+from flask import (
+    Flask,
+    request,
+    render_template,
+    send_from_directory
+)
 
 import requests
-from flask import request
+import markdown2
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, send_from_directory
+
 
 app = Flask(__name__)
 
@@ -174,6 +181,20 @@ def _date(s):
 def _time(s):
     if isinstance(s, str):
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
+    return ""
+
+@app.template_filter('markdown')
+def _markdown(s):
+    if isinstance(s, str):
+        return markdown2.markdown(s, extras=[
+            "break-on-newline",
+            "cuddled-lists",
+            "markdown-in-html",
+            "header-ids",
+            "strike",
+            "target-blank-links",
+            "task_list",
+        ])
     return ""
 
 
