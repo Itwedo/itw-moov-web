@@ -27,6 +27,10 @@ def home():
         url=f"{CMS_URL}/api/actualites",
         params={'populate': 'images', 'sort': "id:desc", "filters[spotlight][$eq]": "true" },
         headers=AUTH)
+    flashed = requests.get(
+        url=f"{CMS_URL}/api/actualites",
+        params={'populate': 'images', 'sort': "id:desc", "filters[flash][$eq]": "true" },
+        headers=AUTH)
     regular = requests.get(
         url=f"{CMS_URL}/api/actualites",
         params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
@@ -42,6 +46,7 @@ def home():
         "index.html",
         actualites=actualites,
         actu_spotlighted=spotlighted.json(),
+        actu_flashed=flashed.json(),
         CMS_URL=CMS_URL)
 
 
