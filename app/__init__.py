@@ -3,23 +3,45 @@ from datetime import datetime, date
 
 from flask import (
     Flask,
+    redirect,
     request,
     render_template,
     send_from_directory
 )
 
+from flask_wtf import FlaskForm
+from wtforms import StringField, TextAreaField, SubmitField
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 import os
+import smtplib
+import ssl
 import requests
 import markdown2
 from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
+app.config.from_mapping(SECRET_KEY=b'\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G')
 
+EMAIL_USER = os.environ.get('EMAIL_USER', '')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
+SMTP_SERVER = os.environ.get('SMTP_SERVER', '')
+SMTP_PORT = 465
+EMAIL_ACCOUNT = os.environ.get('EMAIL_ACCOUNT', 'rhino.rabe-harifetra@telma.mg')
 
 STRAPI_API_URL = os.environ.get('STRAPI_API_URL', 'http://localhost:2337/api')
 STRAPI_API_AUTH_TOKEN = {'Authorization': f'Bearer {os.environ.get("STRAPI_API_AUTH_TOKEN", "")}'}
 CMS_URL = STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', '')
+
+
+class ContactForm(FlaskForm):
+    name = StringField("Nom")
+    phonenumber = StringField("Numéro de téléphone")
+    email = StringField("E-mail")
+    message = TextAreaField("Message")
+    submit = SubmitField("Envoyer")
 
 
 @app.route("/")
@@ -157,9 +179,44 @@ def mention():
     return render_template("mention.html")
 
 
-@app.route("/contact.html")
+@app.route("/contact.html", methods=['GET', 'POST'])
 def contact():
-    return render_template("contact.html")
+    form = ContactForm()
+    if request.method == "POST":
+        data = form.data
+        moment = datetime.now()
+        response = requests.post(
+            url=f"{STRAPI_API_URL}/contacts",
+            headers=STRAPI_API_AUTH_TOKEN,
+            json={
+                'data': {
+                    'date': moment.isoformat(),
+                    'name': data['name'],
+                    'phonenumber': data['phonenumber'],
+                    'email': data['email'],
+                    'message': data['message']
+                }
+            }
+        )
+        # message = MIMEMultipart('alternative')
+        # message['Subject'] = 'Contact'
+        # message['From'] = data['email']
+        # message['To'] = EMAIL_ACCOUNT
+        # text = [
+        #     f'Date et heure: {moment.isoformat()}',
+        #     f'Nom: {data["name"]}',
+        #     f'Telephone: {data["phonenumber"]}',
+        #     f'Email: {data["email"]}',
+        #     f'Message: {data["message"]}'
+        # ]
+        # text = '\n'.join(text)
+        # message.attach(MIMEText(text, 'plain'))
+        # context = ssl.create_default_context()
+        # with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
+        #     server.login(EMAIL_USER, EMAIL_PASSWORD)
+        #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
+        return redirect('/contact.html')
+    return render_template("contact.html", form=form)
 
 
 @app.route("/taux-de-change.html")

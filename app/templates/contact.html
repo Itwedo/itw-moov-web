@@ -20,16 +20,16 @@
     <div class="mx-auto 3xl:container 2xl:px-36 3xl:px-48">
       <div class="flex flex-wrap">
         <div class="w-full md:w-2/3 lg:w-1/2">
-          <form class="contact-form text-white bg-blue-400 py-24 px-10 mb-7 md:mb-16 mx-5 md:mx-0">
+          <form class="contact-form text-white bg-blue-400 py-24 px-10 mb-7 md:mb-16 mx-5 md:mx-0" action="" method="POST">{{ form.csrf_token }}
             <h2 class="text-3xl mb-14 md:mb-28 xl:mb-32">Envoyer nous un message</h2>
             <div class="flex flex-wrap md:flex-nowrap">
-              <div class="w-full lg:w-1/2 mr-0 md:mr-5"><input class="input-form" placeholder="Nom"> <input
-                  class="input-form" placeholder="Numéro de téléphone"> <input class="input-form" type="email"
+              <div class="w-full lg:w-1/2 mr-0 md:mr-5"><input class="input-form" name="name" placeholder="Nom"> <input
+                  class="input-form" placeholder="Numéro de téléphone" name="phonenumber"> <input class="input-form" name="email" type="email"
                   placeholder="E-mail"></div>
-              <div class="w-full lg:w-1/2"><textarea class="textarea-form" rows="7"
+              <div class="w-full lg:w-1/2"><textarea name="message" class="textarea-form" rows="7"
                   placeholder="Votre message"></textarea></div>
             </div>
-            <div class="w-full"><button class="button-form" type="submit">Envoyer</button></div>
+            <div class="w-full"><button name='submit' class="button-form" type="submit">Envoyer</button></div>
           </form>
         </div>
         <div class="w-full md:w-1/3 lg:w-1/2 px-7 md:px-16 py-20 mb-16">
