@@ -1,5 +1,5 @@
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, date
 
 from flask import (
     Flask,
@@ -8,6 +8,7 @@ from flask import (
     send_from_directory
 )
 
+import os
 import requests
 import markdown2
 from bs4 import BeautifulSoup
@@ -16,25 +17,25 @@ from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 
-CMS_URL = "https://moov-cms.sudo.mg"
-# CMS_URL = "http://localhost:2337"
-AUTH = {"Authorization": "Bearer 1bc6439b946fd03c02a0b319924d49459a05c4763372d0ad5683a3fad3fdb8f17822dbcffc7507078dc337bd01cda5992c8197fe99b795f6374a1c85909bbdfbc4a6cb6fd652049c899034ae4a3410951721433910106ff9f6647cb137b70a3f91740dba3924a57b25a807adc68f28e4c58d3c0b3d06eda16dee9344685dd58c"}
+STRAPI_API_URL = os.environ.get('STRAPI_API_URL', 'http://localhost:2337/api')
+STRAPI_API_AUTH_TOKEN = {'Authorization': f'Bearer {os.environ.get("STRAPI_API_AUTH_TOKEN", "")}'}
+CMS_URL = STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', '')
 
 
 @app.route("/")
 def home():
     spotlighted = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={'populate': 'images', 'sort': "id:desc", "filters[spotlight][$eq]": "true" },
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
     flashed = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={'populate': 'images', 'sort': "id:desc", "filters[flash][$eq]": "true" },
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
     regular = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     actualites = {"data": []}
 
@@ -53,16 +54,16 @@ def home():
 @app.route("/actualite/<id>")
 def actualite(id):
     response = requests.get(
-        url=f"{CMS_URL}/api/actualites/{id}",
+        url=f"{STRAPI_API_URL}/actualites/{id}",
         params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     body = cut_body(response.json()["data"]["attributes"]["body"])
 
     regular = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     actualites = {"data": []}
 
@@ -82,14 +83,14 @@ def actualite(id):
 def category():
     # 10/page
     result = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={
             'populate': 'images',
             'sort': "id:desc",
             "pagination[pageSize]": 10,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     return render_template(
         "category.html",
@@ -102,14 +103,14 @@ def category():
 def tendance():
     # 18/page
     result = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={
             'populate': 'images',
             'sort': "id:desc",
             "pagination[pageSize]": 18,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     return render_template(
         "tendance.html",
@@ -121,7 +122,7 @@ def tendance():
 @app.route("/recherche")
 def recherche():
     result = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={
             'populate': 'images',
             'sort': "id:desc",
@@ -129,12 +130,12 @@ def recherche():
             "pagination[pageSize]": 8,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     regular = requests.get(
-        url=f"{CMS_URL}/api/actualites",
+        url=f"{STRAPI_API_URL}/actualites",
         params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=AUTH)
+        headers=STRAPI_API_AUTH_TOKEN)
 
     actualites = {"data": []}
 
@@ -163,7 +164,22 @@ def contact():
 
 @app.route("/pharmacie.html")
 def pharmacie():
-    return render_template("pharmacie.html")
+    today = date.today().strftime('%Y-%m-%d')
+    todays_month = today.split('-')[1]
+    response = requests.get(
+        url=f"{STRAPI_API_URL}/allnighters",
+        headers=STRAPI_API_AUTH_TOKEN,
+        params={
+            "filters[$and][0][start][$lte]": today,
+            "filters[$and][1][stop][$gte]": today,
+            "sort": "start:desc",
+            "populate": "drugstore"
+        }
+    )
+    result = response.json()['data']
+    start = datetime.strptime(result[0]['attributes']['start'], '%Y-%m-%d').strftime('%d/%m/%Y')
+    stop = datetime.strptime(result[0]['attributes']['stop'], '%Y-%m-%d').strftime('%d/%m/%Y')
+    return render_template("pharmacie.html", start=start, stop=stop, result=result)
 
 
 @app.route("/coming_soon.html")
