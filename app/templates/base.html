@@ -137,15 +137,36 @@
         <ul
           class="main-menu-list navbar list-none container flex flex-nowrap items-center justify-start mx-auto px-7 md:justify-center w-4/5">
           <li class="mx-3">
-            <a class="menu-item" href="{{ url_for('category') }}">Actualités<span class="menu-hover-line bg-red-400">
-              </span>
-            </a>
+            <div class="dropdown">
+              <button class="dropbtn menu-item" onclick="myFunction()">Actualités<span
+                class="menu-hover-line bg-red-400">
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content" id="myDropdown">
+                <a href="#" class="menu-item">Vaovao</a>
+                <a href="#" class="menu-item">Nationale</a>
+                <a href="#" class="menu-item">Economie</a>
+                <a href="#" class="menu-item">Sports</a>
+                <a href="#" class="menu-item">Culture</a>
+              </div>
+              </div>
           </li>
           <li class="mx-3">
-            <a class="menu-item" href="{{ url_for('tendance') }}">Tendances Moov<span
-                class="menu-hover-line bg-blue-400">
-              </span>
-            </a>
+            <div class="dropdown">
+              <button class="dropbtn menu-item" onclick="myFunction()">Bons plans Mada<span
+                class="menu-hover-line bg-red-400">
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content" id="myDropdown">
+                <a href="#" class="menu-item">Gastronomie</a>
+                <a href="#" class="menu-item">Tourisme & Voyage</a>
+                <a href="#" class="menu-item">Education & Emploi</a>
+                <a href="#" class="menu-item">Santé & Bien-Etre</a>
+                <a href="#" class="menu-item">Maison & Jardin</a>
+                <a href="#" class="menu-item">Auto-Moto</a>
+                <a href="#" class="menu-item">Famille</a>
+              </div>
+              </div>
           </li>
 	        <li class="mx-3">
             <div class="dropdown">
@@ -154,8 +175,10 @@
                 <i class="fa fa-caret-down"></i>
               </button>
               <div class="dropdown-content" id="myDropdown">
-                <a href="{{ url_for('drugstores') }}" class="menu-item">Pharmacies de garde</a>
                 <a href="{{ url_for('exchange_rates') }}" class="menu-item">Cours de change</a>
+                <a href="{{ url_for('drugstores') }}" class="menu-item">Pharmacies de garde</a>
+                <a href="#" class="menu-item">Programme de vols</a>
+                
               </div>
               </div>
           </li>
