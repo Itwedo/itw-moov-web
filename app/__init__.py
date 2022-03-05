@@ -238,7 +238,7 @@ def contact():
     return render_template("contact.html", form=form)
 
 
-@app.route("/taux-de-change.html")
+@app.route("/taux-de-change")
 def exchange_rates():
     today = date.today().strftime("%Y-%m-%d")
     response = requests.get(
@@ -259,8 +259,8 @@ def exchange_rates():
     )
 
 
-@app.route("/pharmacie.html")
-def pharmacie():
+@app.route("/pharmacies")
+def drugstores():
     today = date.today().strftime("%Y-%m-%d")
     todays_month = today.split("-")[1]
     response = requests.get(

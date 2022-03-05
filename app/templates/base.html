@@ -154,8 +154,8 @@
                 <i class="fa fa-caret-down"></i>
               </button>
               <div class="dropdown-content" id="myDropdown">
-                <a href="#" class="menu-item">Pharmacies de garde</a>
-                <a href="#" class="menu-item">Cours de change</a>
+                <a href="{{ url_for('drugstores') }}" class="menu-item">Pharmacies de garde</a>
+                <a href="{{ url_for('exchange_rates') }}" class="menu-item">Cours de change</a>
               </div>
               </div>
           </li>
@@ -208,7 +208,7 @@
             <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('category') }}">Article</a>
           </li>
           <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('pharmacie') }}">Pharmacie</a>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('drugstores') }}">Pharmacie</a>
           </li>
         </ul>
       </div>
