@@ -1,13 +1,7 @@
 from pathlib import Path
 from datetime import datetime, date
 
-from flask import (
-    Flask,
-    redirect,
-    request,
-    render_template,
-    send_from_directory
-)
+from flask import Flask, redirect, request, render_template, send_from_directory
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
@@ -23,17 +17,21 @@ from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
-app.config.from_mapping(SECRET_KEY=b'\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G')
+app.config.from_mapping(SECRET_KEY=b"\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G")
 
-EMAIL_USER = os.environ.get('EMAIL_USER', '')
-EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')
-SMTP_SERVER = os.environ.get('SMTP_SERVER', '')
+EMAIL_USER = os.environ.get("EMAIL_USER", "")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", "")
+SMTP_SERVER = os.environ.get("SMTP_SERVER", "")
 SMTP_PORT = 465
-EMAIL_ACCOUNT = os.environ.get('EMAIL_ACCOUNT', 'rhino.rabe-harifetra@telma.mg')
+EMAIL_ACCOUNT = os.environ.get("EMAIL_ACCOUNT", "rhino.rabe-harifetra@telma.mg")
 
-STRAPI_API_URL = os.environ.get('STRAPI_API_URL', 'http://localhost:2337/api')
-STRAPI_API_AUTH_TOKEN = {'Authorization': f'Bearer {os.environ.get("STRAPI_API_AUTH_TOKEN", "")}'}
-CMS_URL = STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', '')
+STRAPI_API_URL = os.environ.get("STRAPI_API_URL", "http://localhost:2337/api")
+STRAPI_API_AUTH_TOKEN = {
+    "Authorization": f'Bearer {os.environ.get("STRAPI_API_AUTH_TOKEN", "")}'
+}
+CMS_URL = os.environ.get(
+    "STRAPI_PUBLIC_URL", STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', "")
+)
 
 
 class ContactForm(FlaskForm):
@@ -48,16 +46,23 @@ class ContactForm(FlaskForm):
 def home():
     spotlighted = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "filters[spotlight][$eq]": "true" },
-        headers=STRAPI_API_AUTH_TOKEN)
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[spotlight][$eq]": "true",
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
     flashed = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "filters[flash][$eq]": "true" },
-        headers=STRAPI_API_AUTH_TOKEN)
+        params={"populate": "images", "sort": "id:desc", "filters[flash][$eq]": "true"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=STRAPI_API_AUTH_TOKEN)
+        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     actualites = {"data": []}
 
@@ -70,22 +75,25 @@ def home():
         actualites=actualites,
         actu_spotlighted=spotlighted.json(),
         actu_flashed=flashed.json(),
-        CMS_URL=CMS_URL)
+        CMS_URL=CMS_URL,
+    )
 
 
 @app.route("/actualite/<id>")
 def actualite(id):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
-        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=STRAPI_API_AUTH_TOKEN)
+        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     body = cut_body(response.json()["data"]["attributes"]["body"])
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=STRAPI_API_AUTH_TOKEN)
+        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     actualites = {"data": []}
 
@@ -98,7 +106,8 @@ def actualite(id):
         actualites=actualites,
         news=response.json(),
         body=body,
-        CMS_URL=CMS_URL)
+        CMS_URL=CMS_URL,
+    )
 
 
 @app.route("/category")
@@ -107,18 +116,21 @@ def category():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            'populate': 'images',
-            'sort': "id:desc",
+            "populate": "images",
+            "sort": "id:desc",
             "pagination[pageSize]": 10,
             "pagination[page]": request.args.get("page", 1),
-            "pagination[withCount]": 1},
-        headers=STRAPI_API_AUTH_TOKEN)
+            "pagination[withCount]": 1,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     return render_template(
         "category.html",
         result=result.json(),
         page=request.args.get("page", 1),
-        CMS_URL=CMS_URL)
+        CMS_URL=CMS_URL,
+    )
 
 
 @app.route("/tendance")
@@ -127,18 +139,21 @@ def tendance():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            'populate': 'images',
-            'sort': "id:desc",
+            "populate": "images",
+            "sort": "id:desc",
             "pagination[pageSize]": 18,
             "pagination[page]": request.args.get("page", 1),
-            "pagination[withCount]": 1},
-        headers=STRAPI_API_AUTH_TOKEN)
+            "pagination[withCount]": 1,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     return render_template(
         "tendance.html",
         result=result.json(),
         page=request.args.get("page", 1),
-        CMS_URL=CMS_URL)
+        CMS_URL=CMS_URL,
+    )
 
 
 @app.route("/recherche")
@@ -146,18 +161,21 @@ def recherche():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            'populate': 'images',
-            'sort': "id:desc",
-            'filters[title][$containsi]': request.args.get("query", ""),
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[title][$containsi]": request.args.get("query", ""),
             "pagination[pageSize]": 8,
             "pagination[page]": request.args.get("page", 1),
-            "pagination[withCount]": 1},
-        headers=STRAPI_API_AUTH_TOKEN)
+            "pagination[withCount]": 1,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={'populate': 'images', 'sort': "id:desc", "pagination[limit]": 100},
-        headers=STRAPI_API_AUTH_TOKEN)
+        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
 
     actualites = {"data": []}
 
@@ -171,7 +189,8 @@ def recherche():
         actualites=actualites,
         query=request.args.get("query", ""),
         page=request.args.get("page", 1),
-        CMS_URL=CMS_URL)
+        CMS_URL=CMS_URL,
+    )
 
 
 @app.route("/mention.html")
@@ -179,7 +198,7 @@ def mention():
     return render_template("mention.html")
 
 
-@app.route("/contact.html", methods=['GET', 'POST'])
+@app.route("/contact.html", methods=["GET", "POST"])
 def contact():
     form = ContactForm()
     if request.method == "POST":
@@ -189,14 +208,14 @@ def contact():
             url=f"{STRAPI_API_URL}/contacts",
             headers=STRAPI_API_AUTH_TOKEN,
             json={
-                'data': {
-                    'date': moment.isoformat(),
-                    'name': data['name'],
-                    'phonenumber': data['phonenumber'],
-                    'email': data['email'],
-                    'message': data['message']
+                "data": {
+                    "date": moment.isoformat(),
+                    "name": data["name"],
+                    "phonenumber": data["phonenumber"],
+                    "email": data["email"],
+                    "message": data["message"],
                 }
-            }
+            },
         )
         # message = MIMEMultipart('alternative')
         # message['Subject'] = 'Contact'
@@ -215,36 +234,35 @@ def contact():
         # with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
         #     server.login(EMAIL_USER, EMAIL_PASSWORD)
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
-        return redirect('/contact.html')
+        return redirect("/contact.html")
     return render_template("contact.html", form=form)
 
 
 @app.route("/taux-de-change.html")
 def exchange_rates():
-    today = date.today().strftime('%Y-%m-%d')
+    today = date.today().strftime("%Y-%m-%d")
     response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
         headers=STRAPI_API_AUTH_TOKEN,
-        params={
-            "filters[date][$eq]": today,
-            "filters[currency][$in]": ["USD", "EUR"]
-        }
+        params={"filters[date][$eq]": today, "filters[currency][$in]": ["USD", "EUR"]},
     )
     result = [
         {
-            'currency': i['attributes']['currency'],
-            'value': round(1/i['attributes']['rate'])
+            "currency": i["attributes"]["currency"],
+            "value": round(1 / i["attributes"]["rate"]),
         }
-        for i in response.json()['data']
+        for i in response.json()["data"]
     ]
     print(result)
-    return render_template('exchange.html', result=result, date=date.today().strftime('%d/%m/%Y'))
-    
+    return render_template(
+        "exchange.html", result=result, date=date.today().strftime("%d/%m/%Y")
+    )
+
 
 @app.route("/pharmacie.html")
 def pharmacie():
-    today = date.today().strftime('%Y-%m-%d')
-    todays_month = today.split('-')[1]
+    today = date.today().strftime("%Y-%m-%d")
+    todays_month = today.split("-")[1]
     response = requests.get(
         url=f"{STRAPI_API_URL}/allnighters",
         headers=STRAPI_API_AUTH_TOKEN,
@@ -252,12 +270,16 @@ def pharmacie():
             "filters[$and][0][start][$lte]": today,
             "filters[$and][1][stop][$gte]": today,
             "sort": "start:desc",
-            "populate": "drugstore"
-        }
+            "populate": "drugstore",
+        },
     )
-    result = response.json()['data']
-    start = datetime.strptime(result[0]['attributes']['start'], '%Y-%m-%d').strftime('%d/%m/%Y')
-    stop = datetime.strptime(result[0]['attributes']['stop'], '%Y-%m-%d').strftime('%d/%m/%Y')
+    result = response.json()["data"]
+    start = datetime.strptime(result[0]["attributes"]["start"], "%Y-%m-%d").strftime(
+        "%d/%m/%Y"
+    )
+    stop = datetime.strptime(result[0]["attributes"]["stop"], "%Y-%m-%d").strftime(
+        "%d/%m/%Y"
+    )
     return render_template("pharmacie.html", start=start, stop=stop, result=result)
 
 
@@ -266,35 +288,40 @@ def coming_soon():
     return render_template("coming_soon.html")
 
 
-@app.route('/assets/<path:filename>')
+@app.route("/assets/<path:filename>")
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
 
 
-@app.template_filter('date')
+@app.template_filter("date")
 def _date(s):
     if isinstance(s, str):
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%d/%m/%Y")
     return ""
 
-@app.template_filter('time')
+
+@app.template_filter("time")
 def _time(s):
     if isinstance(s, str):
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
     return ""
 
-@app.template_filter('markdown')
+
+@app.template_filter("markdown")
 def _markdown(s):
     if isinstance(s, str):
-        return markdown2.markdown(s, extras=[
-            "break-on-newline",
-            "cuddled-lists",
-            "markdown-in-html",
-            "header-ids",
-            "strike",
-            "target-blank-links",
-            "task_list",
-        ])
+        return markdown2.markdown(
+            s,
+            extras=[
+                "break-on-newline",
+                "cuddled-lists",
+                "markdown-in-html",
+                "header-ids",
+                "strike",
+                "target-blank-links",
+                "task_list",
+            ],
+        )
     return ""
 
 
@@ -311,5 +338,5 @@ def cut_body(text):
 
     return (
         "".join([str(tag) for tag in first_part]),
-        "".join([str(tag) for tag in second_part ]),
+        "".join([str(tag) for tag in second_part]),
     )
