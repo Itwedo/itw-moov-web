@@ -30,6 +30,69 @@
   </script>
   <script defer="defer" src="/assets/scripts/main-6731bc2efb0608c06434.js">
   </script>
+  <style>
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: white;
+  background-color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+  </style>
   {% block styles %}{% endblock %}
   <link href="/assets/styles/main-4eca6c8dbda212f15ad7.css" rel="stylesheet">
 </head>
@@ -72,7 +135,7 @@
       </div>
       <div class="flex items-center bg-black mx-auto 3xl:container">
         <ul
-          class="main-menu-list list-none container flex flex-nowrap items-center justify-start mx-auto px-7 md:justify-center w-4/5">
+          class="main-menu-list navbar list-none container flex flex-nowrap items-center justify-start mx-auto px-7 md:justify-center w-4/5">
           <li class="mx-3">
             <a class="menu-item" href="{{ url_for('category') }}">Actualités<span class="menu-hover-line bg-red-400">
               </span>
@@ -84,11 +147,17 @@
               </span>
             </a>
           </li>
-          <li class="mx-3">
-            <a class="menu-item" href="{{ url_for('coming_soon') }}">Infos pratiques<span
+	        <li class="mx-3">
+            <div class="dropdown">
+              <button class="dropbtn menu-item" onclick="myFunction()">Infos pratiques<span
                 class="menu-hover-line bg-pink-300">
-              </span>
-            </a>
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content" id="myDropdown">
+                <a href="#" class="menu-item">Pharmacies de garde</a>
+                <a href="#" class="menu-item">Cours de change</a>
+              </div>
+              </div>
           </li>
           <li class="mx-3">
             <a class="menu-item" href="{{ url_for('coming_soon') }}">Publicités et annonces<span
@@ -321,6 +390,23 @@
       </div>
     </div>
   </div> -->
+  <script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+      if (!e.target.matches('.dropbtn')) {
+      var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown.classList.contains('show')) {
+          myDropdown.classList.remove('show');
+        }
+      }
+    }
+    </script>
 </body>
 
 </html>
