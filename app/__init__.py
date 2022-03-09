@@ -44,6 +44,21 @@ class ContactForm(FlaskForm):
 
 @app.route("/")
 def home():
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[name][$in]": [
+                "header_large_leaderboard",
+                "home_vertical_rectangle_1",
+                "home_vertical_rectangle_2",
+                "home_hugeboard"
+            ],
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    
     spotlighted = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
