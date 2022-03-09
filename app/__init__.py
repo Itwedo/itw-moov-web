@@ -61,7 +61,8 @@ def home():
     ads_data = ads_data.json()['data']
     ads = {}
     for ad in ads_data:
-        ads[ad['attributes']['location']] = ad['attributes']['image']['data']['attributes']['url']
+        attr = ad['attributes']
+        ads[attr['location']] = attr['image']['data']['attributes']['url']
     spotlighted = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
