@@ -44,26 +44,7 @@ class ContactForm(FlaskForm):
 
 @app.route("/")
 def home():
-    ads_data = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={
-            "populate": "images",
-            "sort": "id:desc",
-            "filters[name][$in]": [
-                "header_large_leaderboard",
-                "home_vertical_rectangle_1",
-                "home_vertical_rectangle_2",
-                "home_hugeboard"
-            ],
-        },
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads_data = ads_data.json()['data']
-    ads = {}
-    for ad in ads_data:
-        attr = ad['attributes']
-        ads[attr['location']] = attr['image']['data']['attributes']['url']
-    spotlighted = requests.get(
+    spotlights = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
             "populate": "images",
@@ -72,12 +53,12 @@ def home():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    flashed = requests.get(
+    flashes = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={"populate": "images", "sort": "id:desc", "filters[flash][$eq]": "true"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    regular = requests.get(
+    news = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
         headers=STRAPI_API_AUTH_TOKEN,
@@ -85,16 +66,39 @@ def home():
 
     actualites = {"data": []}
 
-    for data in regular.json()["data"]:
+    for data in news.json()["data"]:
         if data["attributes"]["images"]["data"] is not None:
             actualites["data"].append(data)
 
+    data = {
+        'today': datetime.now().strftime('%A, %d %B %Y'),
+        'spotlighs': [
+            # each spotligh needs an image, an id, a title, createdAt, head
+            {
+                'id': item['id'],
+                'title': item['attributes']['title'],
+                'createdAt': item['attributes']['createdAt'],
+                'head': item['attributes']['head'],
+                'images': item['attributes']['images']['data']
+            }
+            for item in spotlights.json()['data']
+        ],
+        'flashes': [
+            {
+                'head': item['attributes']['head'],
+                'createdAt': item['attributes']['createdAt']
+            }
+            for item in flashes.json()['data']
+        ],
+        'news': [
+            item for item in news.json()['data']
+            if item["attributes"]["images"]["data"]
+        ]
+    }
+            
     return render_template(
         "index.html",
-        ads=ads,
-        actualites=actualites,
-        actu_spotlighted=spotlighted.json(),
-        actu_flashed=flashed.json(),
+        data=data,
         CMS_URL=CMS_URL,
     )
 
