@@ -71,23 +71,29 @@
       </div>
       <div class="relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
-          <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ actu_spotlighted["data"][1]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+	  {% if data["spotlights"][1]["images"] %}
+          <img class="img-absolute-cover img-hover-scale"
+	       src={{ CMS_URL }}{{ data["spotlights"][1]["images"][0]["attributes"]["url"] }}>
+	  {% else %}
+	  <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+               src="/assets/imagess/void.png" alt="Image">
+	  {% endif %}
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-            href={{ url_for('actualite', id=actu_spotlighted["data"][1]["id"]) }}>
+            href={{ url_for('actualite', id=data["spotlights"][1]["id"]) }}>
             <h2 class="text-2xl mb-3 sm:text-4xl">
-              {{ actu_spotlighted["data"][1]["attributes"]["title"] }}
+              {{ data["spotlights"][1]["title"] }}
             </h2>
             <div class="card-time">
-              <span class="mr-4">{{ actu_spotlighted["data"][1]["attributes"]["createdAt"]|date }}</span>
-              <span class="mr-4">{{ actu_spotlighted["data"][1]["attributes"]["createdAt"]|time }}</span>
+              <span class="mr-4">{{ data["spotlights"][1]["createdAt"]|date }}</span>
+              <span class="mr-4">{{ data["spotlights"][1]["createdAt"]|time }}</span>
               <span class="mr-4 inline-flex items-center flex-nowrap">
                 <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
             </div>
             <p>
-              {{ actu_spotlighted["data"][1]["attributes"]["head"] }}
+              {{ data["spotlights"][1]["head"] }}
             </p>
           </a>
         </div>
@@ -103,7 +109,10 @@
         {% for item in data["news"][:6] %}
         <div class="news-card relative overflow-hidden w-full">
           {% if item["attributes"]["images"]["data"] %}
-            <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+          <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+	  {% else %}
+	  <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+             src="/assets/imagess/void.png" alt="Image">
           {% endif %}
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
