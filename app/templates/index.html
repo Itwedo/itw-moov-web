@@ -180,10 +180,15 @@
       <div class="relative w-full lg:w-1/2 xl:w-2/5">
         <div class="relative bg-white py-10 px-0 mt-12 mr-0 ml-2 md:px-10 md:mr-12 md:ml-0">
           <div class="mini-card-v1 no-scrollbar">
-            {% for item in news %}
+            {% for item in data["news"] %}
             <a class="mini-card relative flex pb-4" href={{ url_for('actualite', id=item["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
+		{% if item["attributes"]["images"]["data"] %}
                 <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+		{% else %}
+		<img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+		     src="/assets/imagess/void.png" alt="Image">
+		{% endif %}
               </div>
               <div class="relative w-full md:w-3/5">
                 <div class="w-full text-gray-600 px-4 pb-3">
