@@ -72,7 +72,7 @@ def home():
 
     data = {
         'today': datetime.now().strftime('%A, %d %B %Y'),
-        'spotlighs': [
+        'spotlights': [
             # each spotligh needs an image, an id, a title, createdAt, head
             {
                 'id': item['id'],
