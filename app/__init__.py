@@ -86,7 +86,8 @@ def home():
         'flashes': [
             {
                 'head': item['attributes']['head'],
-                'createdAt': item['attributes']['createdAt']
+                'createdAt': item['attributes']['createdAt'],
+                'id': item['id']
             }
             for item in flashes.json()['data']
         ],
