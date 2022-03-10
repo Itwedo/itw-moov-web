@@ -10,7 +10,7 @@
       <div class="block-slide relative overflow-hidden">
 	{% if item["images"] %}
 	<img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-             src={{ CMS_URL }}{{ item["images"][0]["attributes"]["url"] }} alt="Image">
+             src="{{ CMS_URL }}{{ item['images'][0]['attributes']['url'] }}" alt="Image">
 	{% else %}
 	<img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
              src="/assets/imagess/void.png" alt="Image">
@@ -126,7 +126,6 @@
               <span class="mr-4 inline-flex items-center flex-nowrap">
                 <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
             </div>
-            <p class="text-xl sm:text-2xl">{{ item["attributes"]["head"] }}</p>
           </a>
         </div>
         {% endfor %}
