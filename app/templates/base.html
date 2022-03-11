@@ -24,6 +24,7 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/assets/images/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
+  {% block meta %}{% endblock %}
   <title>{% block title %}{% endblock %}</title>
   <script defer="defer" src="/assets/scripts/manifest-338105182854d6bd0d7f.js"></script>
   <script defer="defer" src="/assets/scripts/main-6731bc2efb0608c06434.js"></script>
@@ -130,7 +131,10 @@
             href="{{ url_for('home') }}"><img class="h-full w-auto mr-0 lg:mr-14" src="/assets/images/Moov-logo_0@2x.png"
               alt="Moov logo"></a>
         </div>
-        <div class="header-pub"><img src="/assets/images/offre_gamme_yelow_3840@2x.jpg" alt="Moov publicité" id="header_large_leaderboard">
+        <div class="header-pub">
+          {% block header_large_leaderboard %}
+          <img src="/assets/images/offre_gamme_yelow_3840@2x.jpg" alt="Moov publicité" id="header_large_leaderboard">
+          {% endblock %}
         </div>
       </div>
       <div class="flex items-center bg-black mx-auto 3xl:container">

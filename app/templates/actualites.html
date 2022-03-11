@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
+{% block meta %}
+<meta name="description" content="Article">
+{% endblock %}
 {% block title %}Moov{% endblock %}
 
 {% block content %}
@@ -44,7 +46,7 @@
           </span>
         </div>
         <div class="content">
-          <p>{{ actualites['data'][0]['attributes']['body'] }}</p><br />
+          {{ actualites['data'][0]['attributes']['body']|markdown|safe }}br />
           <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
               <img src="/assets/images/powerbox1_0.jpg">
