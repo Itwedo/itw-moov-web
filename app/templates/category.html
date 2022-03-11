@@ -12,18 +12,15 @@
         <div class="breadcrumb flex justify-center md:justify-start">
           <ul class="list-none flex flex-nowrap flex-column">
             <li class="breadcrumb-item">
-              <a href={{ url_for("home") }}>Accueil</a>
+              <a href="{{ url_for('home') }}">Accueil</a>
             </li>
             <li class="breadcrumb-item">
               <a href="{{ url_for('category') }}">Actualités</a>
             </li>
-            <li class="breadcrumb-item">
-              <span>Vie sociale</span>
-            </li>
           </ul>
         </div>
         <div class="big-title flex items-center w-full pt-5 pb-9">
-          <h2 class="title text-8xl text-center md:text-left w-full md:w-1/2 xl:w-1/3 md:text-6xl">Vie sociale</h2>
+          <h2 class="title text-8xl text-center md:text-left w-full md:w-1/2 xl:w-1/3 md:text-6xl">Actualités</h2>
           <div class="line flex items-center hidden md:block w-1/2 xl:w-2/3">
             <div class="h-1 w-full bg-gray-400">
             </div>
@@ -31,13 +28,18 @@
         </div>
         <div class="grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][0]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+            {% if result['data'][0]['attributes']['images']['data'] %}
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+              src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
+            {% else %}
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+              alt="Image">
+            {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ result["data"][0]["attributes"]["category"] }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][0]["id"]) }}>
+              href="{{ url_for('actualite', id=result['data'][0]['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ result["data"][0]["attributes"]["title"] }}
               </h2>
@@ -51,118 +53,41 @@
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
               </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][0]["attributes"]["head"] }}
-              </p>
             </a>
           </div>
           <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex">
             <img class="img-absolute-contain" src="/assets/images/DLwaMuJWsAAkY45@2x.jpg">
           </div>
+          {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][1]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+            {% if element['attributes']['images']['data'] %}
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
+            {% else %}
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+              alt="Image">
+            {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"] }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][0]["id"]) }}>
+              href="{{ url_for('actualite', id=element['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][1]["attributes"]["title"] }}
+                {{ element["attributes"]["title"] }}
               </h2>
               <div class="card-time flex items-center text-xl">
                 <span class="mr-4">
-                  {{ result["data"][1]["attributes"]["createdAt"]|date }}
+                  {{ element["attributes"]["createdAt"]|date }}
                 </span>
                 <span class="mr-4">
-                  {{ result["data"][1]["attributes"]["createdAt"]|time }}
+                  {{ element["attributes"]["createdAt"]|time }}
                 </span>
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
               </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][1]["attributes"]["head"] }}
-              </p>
             </a>
           </div>
-          <div class="news-card relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][2]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][2]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][2]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][2]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][2]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][2]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
-          <div class="news-card relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][3]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][3]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][3]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][3]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][3]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][3]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
-          <div class="news-card relative overflow-hidden w-full v2 lg:hidden">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][4]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][4]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][4]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][4]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][4]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][4]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
+          {% endfor %}
           <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex">
             <img class="img-absolute-contain" src="/assets/images/DLwaMuJWsAAkY45@2x.jpg">
           </div>
@@ -174,136 +99,36 @@
               <img src="/assets/images/morateamb.jpg">
             </div>
           </div>
-          <div class="news-card col-span-2 relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][5]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][5]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][5]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][5]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][5]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][5]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
+          {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][6]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+            {% if element['attributes']['images']['data'] %}
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
+            {% else %}
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+              alt="Image">
+            {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"] }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][6]["id"]) }}>
+              href="{{ url_for('actualite', id=element['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][6]["attributes"]["title"] }}
+                {{ element["attributes"]["title"] }}
               </h2>
               <div class="card-time flex items-center text-xl">
                 <span class="mr-4">
-                  {{ result["data"][6]["attributes"]["createdAt"]|date }}
+                  {{ element["attributes"]["createdAt"]|date }}
                 </span>
                 <span class="mr-4">
-                  {{ result["data"][6]["attributes"]["createdAt"]|time }}
+                  {{ element["attributes"]["createdAt"]|time }}
                 </span>
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
               </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][6]["attributes"]["head"] }}
-              </p>
             </a>
           </div>
-          <div class="news-card relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][7]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][7]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][7]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][7]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][7]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][7]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
-          <div class="news-card relative overflow-hidden w-full v2">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][8]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][8]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][8]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][8]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][8]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][8]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
-          <div class="news-card relative overflow-hidden w-full v2 lg:hidden">
-            <img class="img-absolute-cover img-hover-scale"
-              src={{ CMS_URL }}{{ result["data"][9]["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Finance</span>
-            </div>
-            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href={{ url_for('actualite', id=result["data"][9]["id"]) }}>
-              <h2 class="text-2xl mb-3 sm:text-4xl">
-                {{ result["data"][9]["attributes"]["title"] }}
-              </h2>
-              <div class="card-time flex items-center text-xl">
-                <span class="mr-4">
-                  {{ result["data"][9]["attributes"]["createdAt"]|date }}
-                </span>
-                <span class="mr-4">
-                  {{ result["data"][9]["attributes"]["createdAt"]|time }}
-                </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
-              </div>
-              <p class="text-xl sm:text-2xl">
-                {{ result["data"][9]["attributes"]["head"] }}
-              </p>
-            </a>
-          </div>
+          {% endfor %}
         </div>
         {% include 'includes/pagination.html' %}
       </div>
@@ -318,8 +143,13 @@
             {% for news in result["data"] %}
             <a class="mini-card relative flex pb-4" href={{ url_for('actualite', id=news["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
-                <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-                  news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+                {% if news['attributes']['images']['data'] %}
+                <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+                  src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
+                {% else %}
+                <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+                  alt="Image">
+                {% endif %}
               </div>
               <div class="relative w-full md:w-3/5">
                 <div class="w-full text-gray-600 px-4 pb-3">
@@ -336,9 +166,6 @@
                     <span class="mr-4 inline-flex items-center flex-nowrap">
                       <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>
                   </div>
-                  <p class="text-xl">
-                    {{ news["attributes"]["head"] }}
-                  </p>
                 </div>
               </div>
             </a>
