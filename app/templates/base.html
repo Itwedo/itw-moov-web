@@ -139,11 +139,12 @@
         <ul
           class="main-menu-list list-none container flex flex-nowrap items-center justify-start mx-auto px-7 md:justify-center w-4/5">
           <li class="mx-3 dropdown">
-            <a class="menu-item horizontal" href="{{ url_for('category') }}">
+            <a class="menu-item horizontal" href="{{ url_for('news') }}">
               Actualités<span class="menu-hover-line bg-red-400"></span>
             </a>
             <div class="dropdown-content">
               <a href="#" class="menu-item horizontal">Vaovao</a>
+              <a href="#" class="menu-item horizontal">Nationale</a>
               <a href="#" class="menu-item horizontal">Nationale</a>
               <a href="#" class="menu-item horizontal">Economie</a>
               <a href="#" class="menu-item horizontal">Sports</a>
@@ -208,7 +209,7 @@
             <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('contact') }}">Contact</a>
           </li>
           <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('category') }}">Article</a>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news') }}">Actualités</a>
           </li>
           <li>
             <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('drugstores') }}">Pharmacie</a>
@@ -286,7 +287,7 @@
         <ul class="main-menu-list list-none flex flex-wrap flex-col items-start justify-start px-10 py-12 w-full">
           <li class="w-full open">
             <div class="relative border-b-2 border-white w-full">
-              <a class="menu-item" href="{{ url_for('category') }}">Actualités</a>
+              <a class="menu-item" href="{{ url_for('news') }}">Actualités</a>
               <span class="menu-arrow absolute top-0 right-2">
                 <img class="w-6 transform rotate-90" src="/assets/images/icon-arrow-down.png">
               </span>
@@ -297,6 +298,9 @@
               </li>
               <li>
                 <a href="#" class="block pl-7 py-4">Nationale</a>
+              </li>
+	      <li>
+                <a href="#" class="block pl-7 py-4">Internationale</a>
               </li>
               <li>
                 <a href="#" class="block pl-7 py-4">Economie</a>

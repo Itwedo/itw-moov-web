@@ -120,7 +120,7 @@ def home():
     )
 
 
-@app.route("/actualite/<id>")
+@app.route("/actualites/<id>")
 def actualite(id):
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
@@ -140,7 +140,7 @@ def actualite(id):
     )
 
     body = response.json()["data"]["attributes"]["body"]
-    body = body.replace('- ', '## ').replace(' -', '')
+    body = body.replace('- ', '# ').replace(' -', '')
 
     # body = cut_body(response.json()["data"]["attributes"]["body"])
 
@@ -166,8 +166,8 @@ def actualite(id):
     )
 
 
-@app.route("/category")
-def category():
+@app.route("/actualites")
+def news():
     # 10/page
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
