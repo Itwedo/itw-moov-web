@@ -108,7 +108,7 @@ def home():
         ],
         "ads": [
             {
-                ad['attributes']['location']: ad['attributes']['image']['attributes']['url']
+                ad['attributes']['location']: ad['attributes']['image']['data']['attributes']['url']
             }
             for ad in ads.json()['data']
         ]
