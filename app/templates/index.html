@@ -68,8 +68,8 @@
       </div>
       <div class="relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
-          {% if data["spotlights"][1]["images"] %}
-          <img class="img-absolute-cover img-hover-scale" src="{{ CMS_URL }}{{data['spotlights'][1]['images'][0]['attributes']['url'] }}">
+          {% if data["magazine"] %}
+          <img class="img-absolute-cover img-hover-scale" src="{{ CMS_URL }}{{data['magazine'][0]['images'][0]['attributes']['url'] }}">
           {% else %}
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/void.png" alt="Image">
           {% endif %}
