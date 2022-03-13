@@ -9,7 +9,7 @@
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden"><img class="img-absolute-cover"
         src="{{ CMS_URL }}{{ news['data']['attributes']['images']['data'][0]['attributes']['url'] }}"
-        alt="barea"></div>
+        alt="Image"></div>
     <div class="px-5 py-2 bg-black w-full">
       <div class="breadcrumb article-breadcrumb pl-0 md:pl-4 xl:pl-12">
         <ul class="list-none flex flex-nowrap flex-column">
@@ -48,7 +48,7 @@
           </span>
         </div>
         <div class="content">
-          {{ news['data']['attributes']['body']|markdown|safe }}br />
+          {{ body|markdown|safe }}
           <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
               <img src="/assets/images/powerbox1_0.jpg">
