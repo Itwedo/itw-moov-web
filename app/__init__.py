@@ -135,7 +135,7 @@ def actualite(id):
     }
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
-        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        params={"populate": "images"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
