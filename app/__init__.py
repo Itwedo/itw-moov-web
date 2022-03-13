@@ -157,7 +157,7 @@ def actualite(id):
             actualites["data"].append(data)
 
     return render_template(
-        "actualites.html",
+        "actualite.html",
         actualites=actualites,
         news=response.json(),
         body=body,
@@ -193,7 +193,7 @@ def news():
     )
 
     return render_template(
-        "category.html",
+        "actualites.html",
         result=result.json(),
         page=request.args.get("page", 1),
         CMS_URL=CMS_URL,
