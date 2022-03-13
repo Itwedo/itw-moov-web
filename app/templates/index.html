@@ -99,13 +99,12 @@
     <div class="pt-12 pb-12 bg-gray-100 px-2 md:px-10">
       <div class="grid gap-4 2xl:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div class="news-pub relative overflow-hidden w-full v1 hidden lg:flex">
-          <img class="img-absolute-contain" src="/assets/images/DLwaMuJWsAAkY45@2x.jpg">
+	  <img src="{{ CMS_URL }}{{ data['ads']['home_vertical_rectangle_1'] }}" alt="Moov publicité" id="header_vertical_rectangle_1">
         </div>
         {% for item in data["news"][:6] %}
         <div class="news-card relative overflow-hidden w-full">
           {% if item["attributes"]["images"]["data"] %}
-          <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
+          <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{ item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
           {% else %}
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
             alt="Image">
@@ -126,14 +125,13 @@
         </div>
         {% endfor %}
         <div class="news-pub flex relative overflow-hidden w-full v1">
-          <img class="img-absolute-contain"
-            src="/assets/images/d-lain-en-show-case-salle-mas-paris_5aaa2b0e1d331@2x.jpg">
+	  <img src="{{ CMS_URL }}{{ data['ads']['home_vertical_rectangle_2'] }}" alt="Moov publicité" id="header_vertical_rectangle_2">
         </div>
       </div>
     </div>
   </section>
   <section class="mx-auto py-12 3xl:container 2xl:px-36 3xl:px-48">
-    <img class="w-auto" src="/assets/images/206504526_4371917949494124_5011724154299493509_n@2x.jpg" alt="banner">
+    <img src="{{ CMS_URL }}{{ data['ads']['home_hugeboard'] }}" alt="Moov publicité" id="home_hugeboard">
   </section>
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <div class="flex flex-wrap bg-gray-100 pb-7">
@@ -149,7 +147,7 @@
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             data["spotlights"][0]["images"][0]["attributes"]["url"] }}>
           {% else %}
-          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/void.png"
             alt="Image">
           {% endif %}
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
