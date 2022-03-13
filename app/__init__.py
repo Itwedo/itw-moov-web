@@ -215,7 +215,7 @@ def news():
     )
 
 
-@app.route("/tendance")
+@app.route("/magazine")
 def tendance():
     # 18/page
     ads = requests.get(
