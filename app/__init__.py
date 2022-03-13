@@ -46,9 +46,7 @@ class ContactForm(FlaskForm):
 def home():
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
-        params={
-            "populate": "image"
-        },
+        params={"populate": "image"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     spotlights = requests.get(
@@ -106,22 +104,35 @@ def home():
         "news": [
             item for item in news.json()["data"] if item["attributes"]["images"]["data"]
         ],
-        "ads": {
-                ad['attributes']['location']: ad['attributes']['image']['data']['attributes']['url']
-                for ad in ads.json()['data']
-        }
     }
-    
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
 
     return render_template(
         "index.html",
         data=data,
+        ads=ads,
         CMS_URL=CMS_URL,
     )
 
 
 @app.route("/actualite/<id>")
 def actualite(id):
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
@@ -148,12 +159,24 @@ def actualite(id):
         news=response.json(),
         body=body,
         CMS_URL=CMS_URL,
+        ads=ads,
     )
 
 
 @app.route("/category")
 def category():
     # 10/page
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -171,12 +194,24 @@ def category():
         result=result.json(),
         page=request.args.get("page", 1),
         CMS_URL=CMS_URL,
+        ads=ads,
     )
 
 
 @app.route("/tendance")
 def tendance():
     # 18/page
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -194,11 +229,23 @@ def tendance():
         result=result.json(),
         page=request.args.get("page", 1),
         CMS_URL=CMS_URL,
+        ads=ads,
     )
 
 
 @app.route("/recherche")
 def recherche():
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -231,16 +278,39 @@ def recherche():
         query=request.args.get("query", ""),
         page=request.args.get("page", 1),
         CMS_URL=CMS_URL,
+        ads=ads,
     )
 
 
 @app.route("/mention.html")
 def mention():
-    return render_template("mention.html")
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
+    return render_template("mention.html", CMS_URL=CMS_URL, ads=ads)
 
 
 @app.route("/contact.html", methods=["GET", "POST"])
 def contact():
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     form = ContactForm()
     if request.method == "POST":
         data = form.data
@@ -276,11 +346,22 @@ def contact():
         #     server.login(EMAIL_USER, EMAIL_PASSWORD)
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
         return redirect("/contact.html")
-    return render_template("contact.html", form=form)
+    return render_template("contact.html", form=form, CMS_URL=CMS_URL, ads=ads)
 
 
 @app.route("/taux-de-change")
 def exchange_rates():
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     today = date.today().strftime("%Y-%m-%d")
     response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
@@ -296,12 +377,27 @@ def exchange_rates():
     ]
     print(result)
     return render_template(
-        "exchange.html", result=result, date=date.today().strftime("%d/%m/%Y")
+        "exchange.html",
+        result=result,
+        date=date.today().strftime("%d/%m/%Y"),
+        CMS_URL=CMS_URL,
+        ads=ads,
     )
 
 
 @app.route("/pharmacies")
 def drugstores():
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
     today = date.today().strftime("%Y-%m-%d")
     todays_month = today.split("-")[1]
     response = requests.get(
@@ -321,7 +417,14 @@ def drugstores():
     stop = datetime.strptime(result[0]["attributes"]["stop"], "%Y-%m-%d").strftime(
         "%d/%m/%Y"
     )
-    return render_template("pharmacie.html", start=start, stop=stop, result=result)
+    return render_template(
+        "pharmacie.html",
+        start=start,
+        stop=stop,
+        result=result,
+        CMS_URL=CMS_URL,
+        ads=ads,
+    )
 
 
 @app.route("/coming_soon.html")
