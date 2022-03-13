@@ -70,6 +70,16 @@ def home():
     )
     flashes  = flashes_0.json()['data'] + flashes_1.json()['data']
     flashes = sorted(flashes, key=lambda x: x['attributes']['publishedAt'], reverse=True)
+    magazine = requests.get(
+        url=f"{STRAPI_API_URL}/actualites",
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[Type][$eq]": "Tendance",
+            "pagination[limit]": 1,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
     news = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -105,6 +115,9 @@ def home():
         "news": [
             item for item in news.json()["data"] if item["attributes"]["images"]["data"]
         ],
+        "magazine": [
+            item for item in magazine.json()['data'] if item["attributes"]["images"]["data"]
+        ]
     }
     ads = {
         ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
