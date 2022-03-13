@@ -60,7 +60,12 @@ def home():
     )
     news = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[source][$eq]": "moov",
+            "pagination[limit]": 100,
+        },
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
@@ -71,32 +76,31 @@ def home():
             actualites["data"].append(data)
 
     data = {
-        'today': datetime.now().strftime('%A, %d %B %Y'),
-        'spotlights': [
+        "today": datetime.now().strftime("%A, %d %B %Y"),
+        "spotlights": [
             # each spotligh needs an image, an id, a title, createdAt, head
             {
-                'id': item['id'],
-                'title': item['attributes']['title'],
-                'createdAt': item['attributes']['createdAt'],
-                'head': item['attributes']['head'],
-                'images': item['attributes']['images']['data']
+                "id": item["id"],
+                "title": item["attributes"]["title"],
+                "createdAt": item["attributes"]["createdAt"],
+                "head": item["attributes"]["head"],
+                "images": item["attributes"]["images"]["data"],
             }
-            for item in spotlights.json()['data']
+            for item in spotlights.json()["data"]
         ],
-        'flashes': [
+        "flashes": [
             {
-                'head': item['attributes']['head'],
-                'createdAt': item['attributes']['createdAt'],
-                'id': item['id']
+                "head": item["attributes"]["head"],
+                "createdAt": item["attributes"]["createdAt"],
+                "id": item["id"],
             }
-            for item in flashes.json()['data']
+            for item in flashes.json()["data"]
         ],
-        'news': [
-            item for item in news.json()['data']
-            if item["attributes"]["images"]["data"]
-        ]
+        "news": [
+            item for item in news.json()["data"] if item["attributes"]["images"]["data"]
+        ],
     }
-            
+
     return render_template(
         "index.html",
         data=data,
