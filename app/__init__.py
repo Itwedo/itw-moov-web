@@ -106,13 +106,12 @@ def home():
         "news": [
             item for item in news.json()["data"] if item["attributes"]["images"]["data"]
         ],
-        "ads": [
-            {
+        "ads": {
                 ad['attributes']['location']: ad['attributes']['image']['data']['attributes']['url']
-            }
-            for ad in ads.json()['data']
-        ]
+                for ad in ads.json()['data']
+        }
     }
+    
 
     return render_template(
         "index.html",
