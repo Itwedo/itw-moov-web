@@ -139,7 +139,10 @@ def actualite(id):
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
-    body = cut_body(response.json()["data"]["attributes"]["body"])
+    body = response.json()["data"]["attributes"]["body"]
+    body = body.replace('- ', '## ').replace(' -', '')
+
+    # body = cut_body(response.json()["data"]["attributes"]["body"])
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
