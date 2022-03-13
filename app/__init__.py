@@ -58,11 +58,18 @@ def home():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    flashes = requests.get(
+    flashes_0 = requests.get(
+        url=f"{STRAPI_API_URL}/flash-news",
+        params={"populate": "images", "sort": "id:desc"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    flashes_1 = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={"populate": "images", "sort": "id:desc", "filters[flash][$eq]": "true"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
+    flashes  = flashes_0.json()['data'] + flashes_1.json()['data']
+    flashes = sorted(flashes, key=lambda x: x['attributes']['publishedAt'], reverse=True)
     news = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -73,12 +80,6 @@ def home():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
-    actualites = {"data": []}
-
-    for data in news.json()["data"]:
-        if data["attributes"]["images"]["data"] is not None:
-            actualites["data"].append(data)
 
     data = {
         "today": datetime.now().strftime("%A, %d %B %Y"),
@@ -99,7 +100,7 @@ def home():
                 "createdAt": item["attributes"]["createdAt"],
                 "id": item["id"],
             }
-            for item in flashes.json()["data"]
+            for item in flashes[:20]
         ],
         "news": [
             item for item in news.json()["data"] if item["attributes"]["images"]["data"]
