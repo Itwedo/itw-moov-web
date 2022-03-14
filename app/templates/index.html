@@ -75,7 +75,7 @@
           {% endif %}
           <div class="cat-pasti absolute top-8 left-0">
 	    {% if data["magazine"] %}
-	    <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ data["magazine"]["attributes"][0]["category"] }}</span>
+	    <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ data["magazine"][0]["attributes"]["category"] }}</span>
 	    {% else %}
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Tendance à la Une</span>
 	    {% endif %}
