@@ -196,7 +196,7 @@ def actualite(id):
         same_category = [
             i for i in same_category
             if i['id'] != id and i['attributes']['images']['data']
-            ][:4]
+        ][:4]
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
@@ -210,8 +210,8 @@ def actualite(id):
     regular = regular.json()['data']
     if regular:
         regular = [
-            i for i in regular
-            if i['id'] != id and i['attributes']['images']['data']
+            element for element in regular
+            if element['id'] != id and element['attributes']['images']['data']
         ][:20]
 
     return render_template(
