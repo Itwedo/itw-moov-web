@@ -34,6 +34,23 @@ CMS_URL = os.environ.get(
 )
 
 
+def cut_body(text):
+    FIRST_LIMIT_CHAR = 1750
+
+    first_part = []
+    second_part = []
+    for child in BeautifulSoup(text, "html.parser"):
+        if len("".join([str(tag) for tag in first_part])) >= FIRST_LIMIT_CHAR:
+            second_part.append(child)
+        else:
+            first_part.append(child)
+
+    return (
+        "".join([str(tag) for tag in first_part]),
+        "".join([str(tag) for tag in second_part]),
+    )
+
+
 class ContactForm(FlaskForm):
     name = StringField("Nom")
     phonenumber = StringField("Numéro de téléphone")
@@ -154,29 +171,57 @@ def actualite(id):
         params={"populate": "images"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
-    body = response.json()["data"]["attributes"]["body"]
+    news = response.json()
+    images = news['data']['attributes']['images']['data']
+    if images:
+        number_of_images = len(images)
+    else:
+        number_of_images = 0
+    body = news["data"]["attributes"]["body"]
     body = body.replace('- ', '# ').replace(' -', '')
+    body = cut_body(response.json()["data"]["attributes"]["body"])
 
-    # body = cut_body(response.json()["data"]["attributes"]["body"])
+    same_category = requests.get(
+        url=f"{STRAPI_API_URL}/actualites/{id}",
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "pagination[limit]": 100,
+            "filter[category][$eq]": news['data']['attributes']['category']
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    same_category = same_category.json()['data']
+    if same_category:
+        same_category = [
+            i for i in same_category
+            if i['id'] != id and i['attributes']['images']['data']
+            ][:4]
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "pagination[limit]": 100
+        },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
-    actualites = {"data": []}
-
-    for data in regular.json()["data"]:
-        if data["attributes"]["images"]["data"] is not None:
-            actualites["data"].append(data)
+    regular = regular.json()['data']
+    if regular:
+        regular = [
+            i for i in regular
+            if i['id'] != id and i['attributes']['images']['data']
+        ][:20]
 
     return render_template(
         "actualite.html",
-        actualites=actualites,
-        news=response.json(),
+        news=news,
+        images=images,
+        number_of_images=number_of_images,
         body=body,
+        same_category=same_category,
+        regular=regular,
         CMS_URL=CMS_URL,
         ads=ads,
     )
@@ -486,20 +531,3 @@ def _markdown(s):
             ],
         )
     return ""
-
-
-def cut_body(text):
-    FIRST_LIMIT_CHAR = 1750
-
-    first_part = []
-    second_part = []
-    for child in BeautifulSoup(text, "html.parser"):
-        if len("".join([str(tag) for tag in first_part])) >= FIRST_LIMIT_CHAR:
-            second_part.append(child)
-        else:
-            first_part.append(child)
-
-    return (
-        "".join([str(tag) for tag in first_part]),
-        "".join([str(tag) for tag in second_part]),
-    )
