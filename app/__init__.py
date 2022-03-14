@@ -182,7 +182,7 @@ def actualite(id):
     body = cut_body(response.json()["data"]["attributes"]["body"])
 
     same_category = requests.get(
-        url=f"{STRAPI_API_URL}/actualites/{id}",
+        url=f"{STRAPI_API_URL}/actualites",
         params={
             "populate": "images",
             "sort": "id:desc",
