@@ -55,6 +55,7 @@ def home():
             "populate": "images",
             "sort": "id:desc",
             "filters[spotlight][$eq]": "true",
+            "filters[Type][$eq]": "Actualite",
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -75,6 +76,7 @@ def home():
         params={
             "populate": "images",
             "sort": "id:desc",
+            "filters[spotlight][$eq]": "true",
             "filters[Type][$eq]": "Tendance",
             "pagination[limit]": 1,
         },
