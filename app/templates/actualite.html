@@ -70,6 +70,14 @@
             {% endif %}
           </div>
           {{ body[0]|markdown|safe }}
+          {% if not body[1] %}
+          <div class="comment-btn my-9 flex justify-center md:justify-end">
+            <button
+              class="modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
+              <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
+            </button>
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -78,6 +86,7 @@
     <img class="w-auto" src="/assets/images/206504526_4371917949494124_5011724154299493509_n@2x.jpg" alt="banner">
   </section>
   <section class="mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
+    {% if body[1] %}
     <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5">
         <div class="content px-5 md:px-0">
           <div class="picture float-right mb-2 w-full overflow-hidden">
@@ -94,6 +103,7 @@
           </button>
         </div>
     </div>
+    {% endif %}
     <div class="relative m-ht hidden md:block w-full lg:w-1/2 xl:w-2/5">
       <div class="relative bg-gray-100 py-10 px-0 mt-12 mr-0 ml-2 shadow-lg md:px-10 md:ml-0">
         <h2 class="block border-b-2 robotoslab text-5xl font-normal text-gray-600 pb-4 mb-7 text-center md:text-left">
