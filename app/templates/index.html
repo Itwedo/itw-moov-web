@@ -69,7 +69,7 @@
       <div class="relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
           {% if data["magazine"] %}
-          <img class="img-absolute-cover img-hover-scale" src="{{ CMS_URL }}{{data['magazine'][0]['images'][0]['attributes']['url'] }}">
+          <img class="img-absolute-cover img-hover-scale" src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images'][0]['attributes']['url'] }}">
           {% else %}
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/void.png" alt="Image">
           {% endif %}
@@ -77,19 +77,31 @@
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Tendance à la Une</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-            href="#">
-            <h2 class="text-2xl mb-3 sm:text-4xl">La Tendance Moov à la Une</h2>
+             href="#">
+	    {% if data["magazine"] %}
+	    <h2 class="text-2xl mb-3 sm:text-4xl">
+	      {{ data["magazine"]["attributes"][0]["category"] }}
+	    </h2>
+	    {% else %}
+	    <h2 class="text-2xl mb-3 sm:text-4xl">
+	      La Tendance Moov à la Une
+	    </h2>
+	    {% endif %}
             <div class="card-time">
 	      {% if data["magazine"] %}
-              <span class="mr-4">{{ data["magazine"][0]["createdAt"]|date }}</span>
-              <span class="mr-4">{{ data["magazine"][0]["createdAt"]|time }}</span>
+              <span class="mr-4">{{ data["magazine"]["attributes"][0]["createdAt"]|date }}</span>
+              <span class="mr-4">{{ data["magazine"]["attributes"][0]["createdAt"]|time }}</span>
               <span class="mr-4 inline-flex items-center flex-nowrap">
                 <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
 	      {% endif %}
             </div>
-            <p>
-              Ici s'affichera le synopsis de la tendance Moov du jour
-            </p>
+
+            {% if data["magazine"] %}
+	    <p>{{ data["magazine"]["attributes"][0]["title"] }}</p>
+	    {% else %}
+	    <p>Titre de la tendance du jour</p>
+	    {% endif %}
+
           </a>
         </div>
       </div>
