@@ -54,9 +54,8 @@ def preview_page(slug):
         number_of_images = len(images)
     else:
         number_of_images = 0
-    body = news["data"][0]["attributes"]["body"]
-    body = body.replace('- ', '# ').replace(' -', '')
-    body = cut_body(response.json()["data"]["attributes"]["body"])
+
+    body = cut_body(news["data"][0]["attributes"]["body"])
 
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
