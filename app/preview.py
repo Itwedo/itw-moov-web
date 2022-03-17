@@ -47,7 +47,7 @@ def preview_page(slug):
     news = response.json()
     if not news['data']:
         return redirect(
-            f"{STRAPI_PUBLIC_URL}not-found.html"
+            f"{STRAPI_PUBLIC_URL}not_found.html"
         )
     article = news['data'][0]
     images = article['attributes']['images']['data']
