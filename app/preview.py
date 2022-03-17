@@ -54,7 +54,7 @@ def preview_page(slug):
         number_of_images = len(images)
     else:
         number_of_images = 0
-    body = news["data"]["attributes"]["body"]
+    body = news["data"][0]["attributes"]["body"]
     body = body.replace('- ', '# ').replace(' -', '')
     body = cut_body(response.json()["data"]["attributes"]["body"])
 
@@ -93,7 +93,7 @@ def preview_page(slug):
 
     return render_template(
         "actualite.html",
-        news=news,
+        news={'data': news['data'][0]},
         images=images,
         number_of_images=number_of_images,
         body=body,
