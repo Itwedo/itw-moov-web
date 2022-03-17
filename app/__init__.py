@@ -114,3 +114,8 @@ def not_found(error):
         for ad in ads.json()["data"]
     }
     return render_template('404.html', CMS_URL=STRAPI_PUBLIC_URL, ads=ads), 404
+
+
+@app.route("/assets/<path:filename>")
+def serve_assets(filename):
+    return send_from_directory(Path() / "assets/", filename)
