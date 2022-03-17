@@ -20,7 +20,7 @@ def cmd():
 
 @cmd.command()
 @click.option("--hostname", default="127.0.0.1", help="Hostname or Address.")
-@click.option("--port", default="6000", help="Port used to serve app.")
+@click.option("--port", default="8000", help="Port used to serve app.")
 def run(hostname, port):
     app.run(host=hostname, port=port, debug=True)
 
