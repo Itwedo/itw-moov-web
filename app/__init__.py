@@ -86,7 +86,34 @@ def mention():
 
 @app.route("/coming_soon.html")
 def coming_soon():
-    return render_template("coming_soon.html")
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
+    return render_template("coming_soon.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
+
+
+@app.route("/not_found.html")
+def not_found():
+    ads = requests.get(
+        url=f"{STRAPI_API_URL}/ads",
+        params={"populate": "image"},
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    ads = {
+        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
+            "url"
+        ]
+        for ad in ads.json()["data"]
+    }
+    return render_template("not_found.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
 
 
 @app.route("/assets/<path:filename>")

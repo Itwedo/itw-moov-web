@@ -45,7 +45,11 @@ def preview_page(slug):
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
-    images = news['data']['attributes']['images']['data']
+    if not news['data']:
+        return redirect(
+            f"{STRAPI_PUBLIC_URL}not-found.html"
+        )
+    images = news['data'][0]['attributes']['images']['data']
     if images:
         number_of_images = len(images)
     else:
