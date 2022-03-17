@@ -100,8 +100,8 @@ def coming_soon():
     return render_template("coming_soon.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
 
 
-@app.route("/not_found.html")
-def not_found():
+@app.errorhandler(404)
+def not_found(error):
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
         params={"populate": "image"},
@@ -113,9 +113,4 @@ def not_found():
         ]
         for ad in ads.json()["data"]
     }
-    return render_template("not_found.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('404.html'), 404
+    return render_template('404.html', CMS_URL=STRAPI_PUBLIC_URL, ads=ads), 404
