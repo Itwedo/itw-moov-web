@@ -40,7 +40,7 @@ def preview_page(slug):
         params={
             "populate": "images",
             "publicationState": "preview",
-            "filter[slug][$eq]": slug
+            "filters[slug][$eq]": slug
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
