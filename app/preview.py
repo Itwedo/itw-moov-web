@@ -49,13 +49,14 @@ def preview_page(slug):
         return redirect(
             f"{STRAPI_PUBLIC_URL}not-found.html"
         )
-    images = news['data'][0]['attributes']['images']['data']
+    article = news['data'][0]
+    images = article['attributes']['images']['data']
     if images:
         number_of_images = len(images)
     else:
         number_of_images = 0
 
-    body = cut_body(news["data"][0]["attributes"]["body"])
+    body = cut_body(article["attributes"]["body"])
 
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
@@ -63,7 +64,7 @@ def preview_page(slug):
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": news['data']['attributes']['category']
+            "filter[category][$eq]": article['attributes']['category']
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -92,7 +93,7 @@ def preview_page(slug):
 
     return render_template(
         "actualite.html",
-        news={'data': news['data'][0]},
+        news={'data': article},
         images=images,
         number_of_images=number_of_images,
         body=body,
