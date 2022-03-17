@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import (
+    abort,
     Blueprint,
     redirect,
     request,
@@ -46,9 +47,7 @@ def preview_page(slug):
     )
     news = response.json()
     if not news['data']:
-        return redirect(
-            f"{STRAPI_PUBLIC_URL}not_found.html"
-        )
+        abort(404)
     article = news['data'][0]
     images = article['attributes']['images']['data']
     if images:

@@ -116,6 +116,6 @@ def not_found():
     return render_template("not_found.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
 
 
-@app.route("/assets/<path:filename>")
-def serve_assets(filename):
-    return send_from_directory(Path() / "assets/", filename)
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
