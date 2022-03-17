@@ -15,7 +15,7 @@ app = Blueprint("search", __name__, url_prefix="/recherche")
 
 
 @app.route("/")
-def recherche():
+def search():
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
         params={"populate": "image"},
