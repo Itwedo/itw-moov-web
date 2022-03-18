@@ -1,0 +1,32 @@
+/* header  */
+.header-slide{
+    width: 100%;
+    height: 100%;
+
+}
+
+.pub-slide{
+    height: 15vh;
+    justify-content: center;
+    object-fit: contain !important;
+}
+
+/* slider */
+.slide-img-item{    
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+/* end slider */
+
+/* pub */
+#home-pub{
+    display: flex;
+    flex-direction: row;
+}
+.pub-section{
+    width: 50%;
+    object-fit: cover;
+}

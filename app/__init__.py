@@ -17,20 +17,24 @@ from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
-app.config.from_mapping(SECRET_KEY=b"\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G")
+app.config.from_mapping(
+    SECRET_KEY=b"\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G")
 
 EMAIL_USER = os.environ.get("EMAIL_USER", "")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", "")
 SMTP_SERVER = os.environ.get("SMTP_SERVER", "")
 SMTP_PORT = 465
-EMAIL_ACCOUNT = os.environ.get("EMAIL_ACCOUNT", "rhino.rabe-harifetra@telma.mg")
+EMAIL_ACCOUNT = os.environ.get(
+    "EMAIL_ACCOUNT", "rhino.rabe-harifetra@telma.mg")
 
-STRAPI_API_URL = os.environ.get("STRAPI_API_URL", "http://localhost:2337/api")
+STRAPI_API_URL = os.environ.get(
+    "STRAPI_API_URL", "https://moov-cms.sudo.mg/api")
 STRAPI_API_AUTH_TOKEN = {
-    "Authorization": f'Bearer {os.environ.get("STRAPI_API_AUTH_TOKEN", "")}'
+    "Authorization": f'Bearer {os.environ.get("STRAPI_API_AUTH_TOKEN", "912680fd67ce5fe5d7b10ebbfe147fd70a63667bcf56b9c1eccbb48de1a2af92f71f0b1a3c25eb81af688e0ccbac6910723809951539cc0ce401a774daab858f5e09855fdf4765faac911c2313f4eaec60d4bdb21fdde8e5f85b55a983bac31bddcac49b0467e2c7cca646fc8b84b7e0868750c103ecbc898c5935d0275a76b0")}'
 }
 CMS_URL = os.environ.get(
-    "STRAPI_PUBLIC_URL", STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', "")
+    "STRAPI_PUBLIC_URL", STRAPI_API_URL.replace(
+        f'/{STRAPI_API_URL.split("/")[-1]}', "")
 )
 
 
@@ -83,11 +87,13 @@ def home():
     )
     flashes_1 = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={"populate": "images", "sort": "id:desc", "filters[flash][$eq]": "true"},
+        params={"populate": "images", "sort": "id:desc",
+                "filters[flash][$eq]": "true"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    flashes  = flashes_0.json()['data'] + flashes_1.json()['data']
-    flashes = sorted(flashes, key=lambda x: x['attributes']['publishedAt'], reverse=True)
+    flashes = flashes_0.json()['data'] + flashes_1.json()['data']
+    flashes = sorted(
+        flashes, key=lambda x: x['attributes']['publishedAt'], reverse=True)
     magazine = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -325,7 +331,8 @@ def recherche():
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        params={"populate": "images", "sort": "id:desc",
+                "pagination[limit]": 100},
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
@@ -430,7 +437,8 @@ def exchange_rates():
     response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
         headers=STRAPI_API_AUTH_TOKEN,
-        params={"filters[date][$eq]": today, "filters[currency][$in]": ["USD", "EUR"]},
+        params={"filters[date][$eq]": today,
+                "filters[currency][$in]": ["USD", "EUR"]},
     )
     result = [
         {
