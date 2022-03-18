@@ -109,7 +109,7 @@
   </section>
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <div class="pt-12 pb-12 bg-gray-100 px-2 md:px-10">
-      <div class="grid gap-4 2xl:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="news-grid grid gap-4 2xl:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div class="news-pub relative overflow-hidden w-full v1 hidden lg:flex">
           <img src="{{ CMS_URL }}{{ ads['home_vertical_rectangle_1'] }}" alt="Moov publicité"
             id="header_vertical_rectangle_1">
@@ -147,8 +147,7 @@
   </section>
   <section class="mx-auto py-12 3xl:container 2xl:px-36 3xl:px-48" id="home-pub">
     <img src="{{ CMS_URL }}{{ ads['home_hugeboard'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section">
-    <img src="/assets/images/170697908_1059188741237791_1130985662165123693_n@2x.jpg" alt="Moov publicité"
-      class="pub-section">
+
   </section>
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <div class="flex flex-wrap bg-gray-100 pb-7">
@@ -159,7 +158,7 @@
         <h2 class="text-6xl text-bold text-gray-600 pb-7 sm:text-7xl md:text-8xl lg:text-7xl xl:text-9xl">
           {{ data["spotlights"][0]["title"] }}
         </h2>
-        <div class="news-card news-card-lg relative overflow-hidden w-full">
+        <div class="big-news-card news-card news-card-lg relative overflow-hidden w-full">
           {% if data["spotlights"][0]["images"] %}
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             data["spotlights"][0]["images"][0]["attributes"]["url"] }}>
@@ -194,10 +193,10 @@
             <a class="mini-card relative flex pb-4" href={{ url_for('actualite', id=item["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 {% if item["attributes"]["images"]["data"] %}
-                <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
+                <img class="mini-img-cover img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
                   item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
                 {% else %}
-                <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+                <img class=" img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="/assets/imagess/void.png" alt="Image">
                 {% endif %}
               </div>
