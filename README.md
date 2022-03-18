@@ -1,21 +1,21 @@
 # moov-proto
 
-Prototype du nouveau portail Moov.
+Prototype for the brand new moov.mg portal.
 
-Utilise l'API REST du CMS https://github.com/codeandscale/moov-cms (powered by Strapi)
+This application is using Flask and consuming the Strapi CMS REST API (https://github.com/codeandscale/moov-cms)
 
 ## Installation & Configuration
 
-Cette application est prévue pour être installée sur un système type GNU/Linux | Unix
+This app is intended to be installed on a GNU/Linux | Unix system
 
-### Pré-requis
+### Pre-requisites
 
 * python3
 * python3-venv
 
 ### Installation via git
 
-Clonez, et configurez
+Clone and configure
 
 ```
 $ git clone git@github.com:codeandscale/moov-proto.git
@@ -25,7 +25,7 @@ moov-proto$ source .env/bin/activate
 (.env)moov-proto$ pip install .
 ```
 
-### Installation via le paquet moov-website-x.y.z.tar.gz
+### Install package moov-website-x.y.z.tar.gz
 
 ```
 $ mkdir moov-proto
@@ -35,21 +35,27 @@ moov-proto$ source .env/bin/activate
 (.env)moov-proto$ pip install moov-website-x.y.z.tar.gz
 ```
 
-Le paquet est installé dans votre environnement virtuel sous le nom `moov-website` et propose une commande `moov`
+The package is now installed as `moov-website` in your environment and provides a management command`moov`
 
 ### Configuration
 
-L'application requiert un fichier de config situé dans  `/etc/moov-website/config.ini` .
-Avec la commande `moov` vous pouvez initialiser ce fichier:
+This app requires a configuraiton file located in `/etc/moov-website/config.ini` .
+With the `moov` command, you can actually initalize this file:
 
 ```
 (.env)moov-proto$ moov config generate
 ```
 
-### Lancement
+### Launching
 
-L'application propose un serveur HTTP de développement, accessible via:
+Dev mode
 
 ```
 (.env)moov-proto$ moov run
+```
+
+Production mode
+
+```
+(.env)moov-proto$ gunicorn app:app --bind 127.0.0.1:8000
 ```
