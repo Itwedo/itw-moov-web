@@ -1,0 +1,2 @@
+graft app/assets
+graft app/templates
