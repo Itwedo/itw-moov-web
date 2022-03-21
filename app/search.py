@@ -7,6 +7,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
+from .ads import get_ads
 
 import requests
 
@@ -16,17 +17,7 @@ app = Blueprint("search", __name__, url_prefix="/recherche")
 
 @app.route("/")
 def search():
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
-            "url"
-        ]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -42,7 +33,11 @@ def search():
 
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
-        params={"populate": "images", "sort": "id:desc", "pagination[limit]": 100},
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "pagination[limit]": 100,
+        },
         headers=STRAPI_API_AUTH_TOKEN,
     )
 

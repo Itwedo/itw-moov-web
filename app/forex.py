@@ -7,6 +7,7 @@ from flask import (
 )
 from datetime import datetime, date
 from .config import *
+from .ads import get_ads
 
 import requests
 
@@ -16,22 +17,15 @@ app = Blueprint("forex", __name__, url_prefix="/taux-de-change")
 
 @app.route("/")
 def exchange_rates():
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
-            "url"
-        ]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     today = date.today().strftime("%Y-%m-%d")
     response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
         headers=STRAPI_API_AUTH_TOKEN,
-        params={"filters[date][$eq]": today, "filters[currency][$in]": ["USD", "EUR"]},
+        params={
+            "filters[date][$eq]": today,
+            "filters[currency][$in]": ["USD", "EUR"],
+        },
     )
     result = [
         {

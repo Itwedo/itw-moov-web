@@ -8,6 +8,7 @@ from flask import (
 )
 from pathlib import Path
 from .config import *
+from .ads import get_ads
 from .contact import app as contact
 from .drugstores import app as drugstores
 from .forex import app as forex
@@ -71,33 +72,13 @@ def _markdown(s):
 
 @app.route("/mention.html")
 def mention():
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"][
-            "attributes"
-        ]["url"]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     return render_template("mention.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
 
 
 @app.route("/coming_soon.html")
 def coming_soon():
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"][
-            "attributes"
-        ]["url"]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     return render_template(
         "coming_soon.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads
     )
@@ -105,17 +86,7 @@ def coming_soon():
 
 @app.errorhandler(404)
 def not_found(error):
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"][
-            "attributes"
-        ]["url"]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     return render_template("404.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads), 404
 
 

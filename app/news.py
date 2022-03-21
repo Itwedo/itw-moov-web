@@ -7,6 +7,7 @@ from flask import (
 )
 from .config import *
 from .utils import cut_body
+from .ads import get_ads
 
 import requests
 
@@ -16,18 +17,7 @@ app = Blueprint("news", __name__, url_prefix="/actualites")
 
 @app.route("/")
 def news():
-    # 10/page
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
-            "url"
-        ]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -51,30 +41,20 @@ def news():
 
 @app.route("/<id>")
 def news_article(id):
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
-            "url"
-        ]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": "images"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
-    images = news['data']['attributes']['images']['data']
+    images = news["data"]["attributes"]["images"]["data"]
     if images:
         number_of_images = len(images)
     else:
         number_of_images = 0
     body = news["data"]["attributes"]["body"]
-    body = body.replace('- ', '# ').replace(' -', '')
+    body = body.replace("- ", "# ").replace(" -", "")
     body = cut_body(response.json()["data"]["attributes"]["body"])
 
     same_category = requests.get(
@@ -83,15 +63,16 @@ def news_article(id):
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": news['data']['attributes']['category']
+            "filter[category][$eq]": news["data"]["attributes"]["category"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    same_category = same_category.json()['data']
+    same_category = same_category.json()["data"]
     if same_category:
         same_category = [
-            i for i in same_category
-            if i['id'] != id and i['attributes']['images']['data']
+            i
+            for i in same_category
+            if i["id"] != id and i["attributes"]["images"]["data"]
         ][:4]
 
     regular = requests.get(
@@ -99,15 +80,16 @@ def news_article(id):
         params={
             "populate": "images",
             "sort": "id:desc",
-            "pagination[limit]": 100
+            "pagination[limit]": 100,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    regular = regular.json()['data']
+    regular = regular.json()["data"]
     if regular:
         regular = [
-            element for element in regular
-            if element['id'] != id and element['attributes']['images']['data']
+            element
+            for element in regular
+            if element["id"] != id and element["attributes"]["images"]["data"]
         ][:20]
 
     return render_template(

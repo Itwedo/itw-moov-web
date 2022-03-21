@@ -9,47 +9,35 @@ from flask import (
     render_template,
     send_from_directory,
 )
+
+from .ads import get_ads
 from .config import *
 from .utils import cut_body
 
 import requests
 
 
-app = Blueprint(
-    "preview",
-    __name__,
-    url_prefix="/preview"
-)
+app = Blueprint("preview", __name__, url_prefix="/preview")
 
 
 @app.route("/actualites/<string:slug>", methods=["GET", "POST"])
 def preview_page(slug):
     """Given a slug, fetch and display page"""
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"]["attributes"][
-            "url"
-        ]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
             "populate": "images",
             "publicationState": "preview",
-            "filters[slug][$eq]": slug
+            "filters[slug][$eq]": slug,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
-    if not news['data']:
+    if not news["data"]:
         abort(404)
-    article = news['data'][0]
-    images = article['attributes']['images']['data']
+    article = news["data"][0]
+    images = article["attributes"]["images"]["data"]
     if images:
         number_of_images = len(images)
     else:
@@ -63,15 +51,16 @@ def preview_page(slug):
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": article['attributes']['category']
+            "filter[category][$eq]": article["attributes"]["category"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    same_category = same_category.json()['data']
+    same_category = same_category.json()["data"]
     if same_category:
         same_category = [
-            i for i in same_category
-            if i['id'] != id and i['attributes']['images']['data']
+            i
+            for i in same_category
+            if i["id"] != id and i["attributes"]["images"]["data"]
         ][:4]
 
     regular = requests.get(
@@ -79,20 +68,21 @@ def preview_page(slug):
         params={
             "populate": "images",
             "sort": "id:desc",
-            "pagination[limit]": 100
+            "pagination[limit]": 100,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    regular = regular.json()['data']
+    regular = regular.json()["data"]
     if regular:
         regular = [
-            element for element in regular
-            if element['id'] != id and element['attributes']['images']['data']
+            element
+            for element in regular
+            if element["id"] != id and element["attributes"]["images"]["data"]
         ][:20]
 
     return render_template(
         "actualite.html",
-        news={'data': article},
+        news={"data": article},
         images=images,
         number_of_images=number_of_images,
         body=body,
@@ -100,4 +90,4 @@ def preview_page(slug):
         regular=regular,
         CMS_URL=STRAPI_PUBLIC_URL,
         ads=ads,
-    )    
+    )

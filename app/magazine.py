@@ -5,6 +5,8 @@ from flask import (
     render_template,
     send_from_directory,
 )
+
+from .ads import get_ads
 from .config import *
 
 import requests
@@ -16,17 +18,7 @@ app = Blueprint("magazine", __name__, url_prefix="/magazine")
 @app.route("/")
 def magazine():
     # 18/page
-    ads = requests.get(
-        url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"][
-            "attributes"
-        ]["url"]
-        for ad in ads.json()["data"]
-    }
+    ads = get_ads()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
