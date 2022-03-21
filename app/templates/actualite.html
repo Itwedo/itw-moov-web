@@ -9,12 +9,10 @@
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden">
       {% if images %}
-      <img class="img-absolute-cover"
-        src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}"
-        alt="Image">
+      <img class="img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image">
       {% else %}
       <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
-          alt="Image">
+        alt="Image">
       {% endif %}
     </div>
     <div class="px-5 py-2 bg-black w-full">
@@ -28,7 +26,8 @@
   </section>
   <article class="mx-auto 3xl:container">
     <div class="flex flex-wrap">
-      <div class="hidden flex-wrap flex-row justify-end w-full md:flex lg:flex-col lg:justify-start lg:w-1/3 py-10 2xl:pl-36 3xl:pl-48">
+      <div
+        class="hidden flex-wrap flex-row justify-end w-full md:flex lg:flex-col lg:justify-start lg:w-1/3 py-10 2xl:pl-36 3xl:pl-48">
         <div
           class="news-pub news-side flex flex-wrap relative overflow-hidden my-7 items-end justify-end ml-auto mr-0 w-1/2 lg:w-full">
           <img src="/assets/images/powerbox1_0.jpg">
@@ -55,7 +54,7 @@
           </span>
         </div>
         <div class="content">
-          <p>{{ news['data']['attributes']['head'] }}</p><br/>
+          <p>{{ news['data']['attributes']['head'] }}</p><br />
           <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
               <img src="/assets/images/powerbox1_0.jpg">
@@ -88,20 +87,20 @@
   <section class="mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
     {% if body[1] %}
     <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5">
-        <div class="content px-5 md:px-0">
-          <div class="picture float-right mb-2 w-full overflow-hidden">
-            {% if number_of_images > 2 %}
-            <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[2]['attributes']['url'] }}">
-            {% endif %}
-          </div>
-          {{ body[1]|markdown|safe }}
+      <div class="content px-5 md:px-0">
+        <div class="picture float-right mb-2 w-full overflow-hidden">
+          {% if number_of_images > 2 %}
+          <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[2]['attributes']['url'] }}">
+          {% endif %}
         </div>
-        <div class="comment-btn my-9 flex justify-center md:justify-end">
-          <button
-            class="modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
-            <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
-          </button>
-        </div>
+        {{ body[1]|markdown|safe }}
+      </div>
+      <div class="comment-btn my-9 flex justify-center md:justify-end">
+        <button
+          class="modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
+          <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
+        </button>
+      </div>
     </div>
     {% endif %}
     <div class="relative m-ht hidden md:block w-full lg:w-1/2 xl:w-2/5">
@@ -113,7 +112,8 @@
           {% for item in regular %}
           <a class="mini-card relative flex pb-4" href="{{ url_for('news.news_article', id=item['id']) }}">
             <div class="relative overflow-hidden w-full md:w-2/5">
-              <img class="img-absolute-cover img-hover-scale" src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
+              <img class="img-absolute-cover img-hover-scale"
+                src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             </div>
             <div class="relative w-full md:w-3/5">
               <div class="w-full text-gray-600 px-4 pb-3">
@@ -153,20 +153,15 @@
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {% for item in same_category %}
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
-            <img
-              class="img-absolute-cover img-hover-scale"
-              src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}"
-              alt="Image"
-            >
+            <img class="img-absolute-cover img-hover-scale"
+              src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">
                 {{ item['attributes']['category'] }}
               </span>
             </div>
-            <a
-              class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('news.news_article', id=item['id']) }}"
-            >
+            <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
+              href="{{ url_for('news.news_article', id=item['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">{{ item['attributes']['title'] }}</h2>
               <div class="card-time flex items-center">
                 <span class="mr-4">{{ item['attributes']["createdAt"]|date }}</span>

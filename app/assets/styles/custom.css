@@ -1,4 +1,38 @@
 /* header  */
+.custom-navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.currency{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.currency-caption{
+    color: #0090cb !important;
+    text-transform: uppercase;
+}
+.currency-icon{
+    font-size: 2.4rem;
+    margin-right: 6px;
+}
+
+.currency li{
+    display: flex;
+    align-items: center !important;
+    margin: 0 12px;
+}
+
+.mobile-currency{
+    display: none;
+ 
+}
+
 .header-slide{
     width: 100%;
     height: 100%;
@@ -34,6 +68,8 @@
 /* news */
 .news-grid .news-pub, .news-grid .news-card{
     height: 320px !important;
+    width: 95%;
+    margin-bottom: 16px;
     object-fit: cover;
 }
 
@@ -49,4 +85,8 @@
     object-fit: cover !important;
     justify-content: center !important;
     text-align: center !important;
+}
+
+.slider-element .slick-dots li.slick-active button:before {
+    display: none;
 }

@@ -1,0 +1,105 @@
+/*
+====================================
+Large Screen - Others
+====================================
+*/
+@media screen and (min-width: 1400px)    {
+
+
+
+
+
+
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+
+
+
+}
+
+@media screen and (max-width: 1199px) {
+  
+
+}
+
+/*
+====================================
+Medium Screen - Others
+====================================
+*/
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+
+
+  
+}
+/*
+====================================
+Small Screen - Tablate
+====================================
+*/
+
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+  
+}
+
+/*
+====================================
+Small Screen - Mobile
+====================================
+*/
+@media screen and (min-width: 576px) and (max-width: 767px) {	/* Hero */
+    .currency{
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 614px) and (max-width: 767px) {
+
+    .currency{
+        display: none;
+    }
+    .mobile-currency{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-currency .currency-caption{
+        margin-right: 16px;
+    }
+
+}
+
+/*
+====================================
+Xtra Small Screen - Small Mobile
+====================================
+*/
+@media screen and (max-width: 576px) {
+.custom-navbar{
+    display: none;
+}
+   .currency{
+       display: none;
+   }
+
+   .mobile-currency{
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       align-items: center;
+       width: 100%;
+   }
+
+   .mobile-currency li{
+       display: flex;
+       align-items: center;
+   }
+}
+
