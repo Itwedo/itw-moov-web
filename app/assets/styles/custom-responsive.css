@@ -113,5 +113,9 @@ Xtra Small Screen - Small Mobile
     padding: 0 6px;
 
    }
+
+   .global-margin{
+    margin:0 ;
+}
 }
 

@@ -59,6 +59,12 @@
 
 /* pub */
 #home-pub{
+    object-fit: cover;
+    margin: 0 80px;
+
+
+}
+#home-pub img{
     width: 100%;
 }
 .pub-section{
@@ -67,6 +73,9 @@
     object-fit: cover;
 }
 
+.global-margin{
+    margin:0 80px;
+}
 /* news */
 .news-grid .news-pub, .news-grid .news-card{
     height: 320px !important;

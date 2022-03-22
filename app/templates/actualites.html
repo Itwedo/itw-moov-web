@@ -13,7 +13,7 @@
         <div class="breadcrumb flex justify-center md:justify-start">
           <ul class="list-none flex flex-nowrap flex-column">
             <li class="breadcrumb-item">
-              <a href="{{ url_for('home.home') }}">Accueil</a>
+              <a href="{{ url_for('home.home') }}">Accueil </a>
             </li>
             <li class="breadcrumb-item">
               <a href="{{ url_for('news.news') }}">Actualités</a>
@@ -31,13 +31,15 @@
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
             {% if result['data'][0]['attributes']['images']['data'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-              src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
+              src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
+              alt="Image">
             {% else %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
               alt="Image">
             {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ result["data"][0]["attributes"]["category"] }}</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
+                result["data"][0]["attributes"]["category"] }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
               href="{{ url_for('news.news_article', id=result['data'][0]['id']) }}">
@@ -69,7 +71,8 @@
               alt="Image">
             {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"] }}</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"]
+                }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
               href="{{ url_for('news.news_article', id=element['id']) }}">
@@ -110,7 +113,8 @@
               alt="Image">
             {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"] }}</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"]
+                }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
               href="{{ url_for('news.news_article', id=element['id']) }}">
@@ -133,7 +137,7 @@
         </div>
         {% include 'includes/pagination.html' %}
       </div>
-      <div class="py-5 w-full lg:w-1/3">
+      <div class=" py-5 w-full lg:w-1/3">
         <div class="news-pub news-side relative overflow-hidden mx-auto my-7 w-full">
           <img src="/assets/images/powerbox1_0.jpg">
         </div>
@@ -148,8 +152,8 @@
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
                 {% else %}
-                <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
-                  alt="Image">
+                <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+                  src="/assets/imagess/void.png" alt="Image">
                 {% endif %}
               </div>
               <div class="relative w-full md:w-3/5">
