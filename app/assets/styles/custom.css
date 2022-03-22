@@ -85,19 +85,33 @@
 }
 
 
-.actus-grid .news-card{
+.actus-grid .news-card, .actus-grid .news-pub{
+   
     height: 320px !important;
+    object-fit: cover;
 }
 .actus-grid .news-pub h2, .actus-grid .news-card h2{
     font-size: 18px;
 }
 .actus-grid .img-absolute-cover{
     height: 100%;
+    object-fit: cover !important;
+
 }
 
-.actus-grid-side .mini-card .img-absolute-cover{
+.actus-grid-side .mini-card .img-absolute-cover {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+}
+
+.actus-grid .news-pub {
+    width: 100%;
+    
+padding: 16px 0;
+
+    object-fit: contain;
+    background: #fff;
 }
 .actus-grid-side .mini-card h3{
     font-size: 18px;
