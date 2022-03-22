@@ -14,8 +14,10 @@
 }
 
 .currency-caption{
-    color: #0090cb !important;
+    color: #fff !important;
+    padding: 8px 20px;
     text-transform: uppercase;
+    background: #0090cb;
 }
 .currency-icon{
     font-size: 2.4rem;

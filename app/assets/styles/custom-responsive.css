@@ -41,7 +41,9 @@ Small Screen - Tablate
 
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
-
+    .currency li{
+        font-size: 10px;
+    }
   
 }
 
@@ -74,6 +76,11 @@ Small Screen - Mobile
         margin-right: 16px;
     }
 
+    .mobile-currency .currency-values{
+        padding: 0 6px;
+    
+       }
+
 }
 
 /*
@@ -92,14 +99,19 @@ Xtra Small Screen - Small Mobile
    .mobile-currency{
        display: flex;
        flex-direction: row;
-       justify-content: space-around;
+       justify-content: space-between;
        align-items: center;
        width: 100%;
+
    }
 
    .mobile-currency li{
        display: flex;
        align-items: center;
+   }
+   .mobile-currency .currency-values{
+    padding: 0 6px;
+
    }
 }
 
