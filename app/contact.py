@@ -11,7 +11,7 @@ from wtforms import StringField, TextAreaField, SubmitField
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-from .ads import get_ads
+from .base import get_ads, get_currency
 from .config import *
 
 import smtplib
@@ -31,6 +31,7 @@ class ContactForm(FlaskForm):
 @app.route("/contact.html", methods=["GET", "POST"])
 def contact():
     ads = get_ads()
+    currency = get_currency()
     form = ContactForm()
     if request.method == "POST":
         data = form.data
@@ -67,5 +68,9 @@ def contact():
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
         return redirect("/contact.html")
     return render_template(
-        "contact.html", form=form, CMS_URL=STRAPI_PUBLIC_URL, ads=ads
+        "contact.html",
+        form=form,
+        CMS_URL=STRAPI_PUBLIC_URL,
+        ads=ads,
+        currency=currency,
     )

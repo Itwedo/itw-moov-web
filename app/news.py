@@ -7,7 +7,7 @@ from flask import (
 )
 from .config import *
 from .utils import cut_body
-from .ads import get_ads
+from .base import get_ads, get_currency
 
 import requests
 
@@ -18,6 +18,7 @@ app = Blueprint("news", __name__, url_prefix="/actualites")
 @app.route("/")
 def news():
     ads = get_ads()
+    currency = get_currency()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -36,12 +37,14 @@ def news():
         page=request.args.get("page", 1),
         CMS_URL=STRAPI_PUBLIC_URL,
         ads=ads,
+        currency=currency,
     )
 
 
 @app.route("/<id>")
 def news_article(id):
     ads = get_ads()
+    currency = get_currency()
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": "images"},
@@ -102,4 +105,5 @@ def news_article(id):
         regular=regular,
         CMS_URL=STRAPI_PUBLIC_URL,
         ads=ads,
+        currency=currency,
     )

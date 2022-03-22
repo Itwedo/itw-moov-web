@@ -130,9 +130,9 @@
           <li class="robotoslab font-bold currency-caption">Cours de change</li>
           <div class="flex flex-row justify-between">
 
-            <li><span class="currency-icon">€</span>4 399,93 AR</li>
+            <li><span class="currency-icon">€</span>{{currency['EUR']}} AR</li>
             <li>|</li>
-            <li><span class="currency-icon">$</span>3 987,83 AR</li>
+            <li><span class="currency-icon">$</span>{{currency['USD']}} AR</li>
           </div>
         </ul>
       </div>
@@ -147,13 +147,13 @@
         <div class="header-pub">
           <div
             class="header-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-
+            
             <div class="pub-slide block-slide relative overflow-hidden">
-              <img src="{{ CMS_URL }}{{ ads['header_large_leaderboard'] }}" alt="Moov publicité"
+              <img src="{{ CMS_URL }}{{ ads['header_large_leaderboard']}}" alt="Moov publicité"
                 id="header_large_leaderboard"
                 class="header-slide-img img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto">
             </div>
-
+            
             <div class="pub-slide block-slide relative overflow-hidden">
               <img src="/assets/images/partenaire-4_0.png" alt="Moov publicité" id="header_large_leaderboard"
                 class="header-slide-img img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto">
@@ -211,8 +211,8 @@
             Vie pratique<span class="menu-hover-line bg-pink-300"></span>
           </a>
           <div class="dropdown-content">
-            <a href="#" class="menu-item horizontal">Pharmacies de garde</a>
-            <a href="#" class="menu-item horizontal">Cours de change</a>
+            <a href="{{url_for('drugstores.drugstores')}}" class="menu-item horizontal">Pharmacies de garde</a>
+            <a href="{{url_for('forex.exchange_rates')}}" class="menu-item horizontal">Cours de change</a>
           </div>
         </li>
         <li class="mx-3 dropdown">

@@ -10,7 +10,7 @@ from flask import (
     send_from_directory,
 )
 
-from .ads import get_ads
+from .base import get_ads, get_currency
 from .config import *
 from .utils import cut_body
 
@@ -24,6 +24,7 @@ app = Blueprint("preview", __name__, url_prefix="/preview")
 def preview_page(slug):
     """Given a slug, fetch and display page"""
     ads = get_ads()
+    currency = get_currency()
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -90,4 +91,5 @@ def preview_page(slug):
         regular=regular,
         CMS_URL=STRAPI_PUBLIC_URL,
         ads=ads,
+        currency=currency,
     )

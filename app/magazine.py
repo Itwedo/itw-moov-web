@@ -6,7 +6,7 @@ from flask import (
     send_from_directory,
 )
 
-from .ads import get_ads
+from .base import get_ads, get_currency
 from .config import *
 
 import requests
@@ -19,6 +19,7 @@ app = Blueprint("magazine", __name__, url_prefix="/magazine")
 def magazine():
     # 18/page
     ads = get_ads()
+    currency = get_currency()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -37,4 +38,5 @@ def magazine():
         page=request.args.get("page", 1),
         CMS_URL=STRAPI_PUBLIC_URL,
         ads=ads,
+        currency=currency,
     )

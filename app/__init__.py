@@ -8,7 +8,7 @@ from flask import (
 )
 from pathlib import Path
 from .config import *
-from .ads import get_ads
+from .base import get_ads, get_currency
 from .contact import app as contact
 from .drugstores import app as drugstores
 from .forex import app as forex
@@ -73,21 +73,34 @@ def _markdown(s):
 @app.route("/mention.html")
 def mention():
     ads = get_ads()
-    return render_template("mention.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads)
+    currency = get_currency()
+    return render_template(
+        "mention.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads, currency=currency
+    )
 
 
 @app.route("/coming_soon.html")
 def coming_soon():
     ads = get_ads()
+    currency = get_currency()
     return render_template(
-        "coming_soon.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads
+        "coming_soon.html",
+        CMS_URL=STRAPI_PUBLIC_URL,
+        ads=ads,
+        currency=currency(),
     )
 
 
 @app.errorhandler(404)
 def not_found(error):
     ads = get_ads()
-    return render_template("404.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads), 404
+    currency = get_currency()
+    return (
+        render_template(
+            "404.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads, currency=currency
+        ),
+        404,
+    )
 
 
 @app.route("/assets/<path:filename>")

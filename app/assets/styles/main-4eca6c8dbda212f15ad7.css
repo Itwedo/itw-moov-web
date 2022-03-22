@@ -25,7 +25,9 @@ table {
     text-indent: 0
 }
 
-button, input, textarea {
+button,
+input,
+textarea {
     font-family: inherit;
     font-size: 100%;
     line-height: 1.15;
@@ -36,11 +38,22 @@ button {
     text-transform: none
 }
 
-[type=button], [type=submit], button {
+[type=button],
+[type=submit],
+button {
     -webkit-appearance: button
 }
 
-dd, dl, h1, h2, h3, h4, h5, h6, hr, p {
+dd,
+dl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p {
     margin: 0
 }
 
@@ -49,7 +62,8 @@ button {
     background-image: none
 }
 
-ol, ul {
+ol,
+ul {
     list-style: none;
     margin: 0;
     padding: 0
@@ -65,7 +79,9 @@ body {
     line-height: inherit
 }
 
-*, :after, :before {
+*,
+ :after,
+ :before {
     border: 0 solid;
     -webkit-box-sizing: border-box;
     box-sizing: border-box
@@ -83,27 +99,33 @@ textarea {
     resize: vertical
 }
 
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
     color: #9ca3af
 }
 
-input::-moz-placeholder, textarea::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
     color: #9ca3af
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     color: #9ca3af
 }
 
-input::-ms-input-placeholder, textarea::-ms-input-placeholder {
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
     color: #9ca3af
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #9ca3af
 }
 
-[role=button], button {
+[role=button],
+button {
     cursor: pointer
 }
 
@@ -111,7 +133,12 @@ table {
     border-collapse: collapse
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-size: inherit;
     font-weight: inherit
 }
@@ -121,18 +148,23 @@ a {
     text-decoration: inherit
 }
 
-button, input, textarea {
+button,
+input,
+textarea {
     color: inherit;
     line-height: inherit;
     padding: 0
 }
 
-img, svg, video {
+img,
+svg,
+video {
     display: block;
     vertical-align: middle
 }
 
-img, video {
+img,
+video {
     height: auto;
     max-width: 100%
 }
@@ -141,12 +173,19 @@ img, video {
     display: none
 }
 
-*, :after, :before {
+*,
+ :after,
+ :before {
     --tw-border-opacity: 1;
     border-color: rgba(229, 231, 235, var(--tw-border-opacity))
 }
 
-[type=email], [type=tel], [type=text], [type=time], [type=url], textarea {
+[type=email],
+[type=tel],
+[type=text],
+[type=time],
+[type=url],
+textarea {
     --tw-shadow: 0 0 #0000;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -160,7 +199,12 @@ img, video {
     padding: .5rem .75rem
 }
 
-[type=email]:focus, [type=tel]:focus, [type=text]:focus, [type=time]:focus, [type=url]:focus, textarea:focus {
+[type=email]:focus,
+[type=tel]:focus,
+[type=text]:focus,
+[type=time]:focus,
+[type=url]:focus,
+textarea:focus {
     --tw-ring-inset: var(--tw-empty, );
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: #fff;
@@ -174,27 +218,32 @@ img, video {
     outline-offset: 2px
 }
 
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
     color: #6b7280;
     opacity: 1
 }
 
-input::-moz-placeholder, textarea::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
     color: #6b7280;
     opacity: 1
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     color: #6b7280;
     opacity: 1
 }
 
-input::-ms-input-placeholder, textarea::-ms-input-placeholder {
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
     color: #6b7280;
     opacity: 1
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #6b7280;
     opacity: 1
 }
@@ -705,7 +754,8 @@ input::placeholder, textarea::placeholder {
 }
 
 @keyframes ping {
-    75%, to {
+    75%,
+    to {
         opacity: 0;
         -webkit-transform: scale(2);
         transform: scale(2)
@@ -719,13 +769,13 @@ input::placeholder, textarea::placeholder {
 }
 
 @keyframes bounce {
-    0%, to {
+    0%,
+    to {
         -webkit-animation-timing-function: cubic-bezier(.8, 0, 1, 1);
         animation-timing-function: cubic-bezier(.8, 0, 1, 1);
         -webkit-transform: translateY(-25%);
         transform: translateY(-25%)
     }
-
     50% {
         -webkit-animation-timing-function: cubic-bezier(0, 0, .2, 1);
         animation-timing-function: cubic-bezier(0, 0, .2, 1);
@@ -761,7 +811,8 @@ input::placeholder, textarea::placeholder {
     flex-direction: row
 }
 
-.flex-col, .flex-row {
+.flex-col,
+.flex-row {
     -webkit-box-direction: normal
 }
 
@@ -1382,7 +1433,9 @@ input::placeholder, textarea::placeholder {
     opacity: 1
 }
 
-*, :after, :before {
+*,
+ :after,
+ :before {
     --tw-shadow: 0 0 #0000
 }
 
@@ -1390,7 +1443,8 @@ input::placeholder, textarea::placeholder {
     --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
 }
 
-.shadow-lg, .shadow-md {
+.shadow-lg,
+.shadow-md {
     -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
@@ -1405,7 +1459,9 @@ input::placeholder, textarea::placeholder {
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-*, :after, :before {
+*,
+ :after,
+ :before {
     --tw-ring-inset: var(--tw-empty, );
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: #fff;
@@ -1451,12 +1507,19 @@ body {
     font-size: 1.4rem
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: Abril Fatface, Arial, sans-serif;
     margin-bottom: inherit
 }
 
-a, a:link, a:visited {
+a,
+a:link,
+a:visited {
     cursor: pointer;
     text-decoration: none;
     -webkit-transition: .3s;
@@ -1504,7 +1567,9 @@ a:hover {
     z-index: -1
 }
 
-*, :after, :before {
+*,
+ :after,
+ :before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
     margin: 0;
@@ -1515,7 +1580,8 @@ html {
     font-size: 62.5%
 }
 
-body, html {
+body,
+html {
     max-width: 100%;
     overflow-x: hidden
 }
@@ -1577,7 +1643,8 @@ body {
     object-fit: cover
 }
 
-.img-absolute-contain, .img-absolute-cover {
+.img-absolute-contain,
+.img-absolute-cover {
     --tw-translate-x: 0;
     --tw-translate-y: 0;
     --tw-rotate: 0;
@@ -1641,7 +1708,8 @@ body {
     transform: rotate(0)
 }
 
-#side-menu .main-menu-list li.open .menu-arrow img, #side-menu .main-menu-list li.open .sub-menu {
+#side-menu .main-menu-list li.open .menu-arrow img,
+#side-menu .main-menu-list li.open .sub-menu {
     -webkit-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out
@@ -1663,7 +1731,8 @@ body {
     color: #0090cb
 }
 
-#side-menu .main-menu-list .menu-arrow img, #side-menu .main-menu-list .sub-menu {
+#side-menu .main-menu-list .menu-arrow img,
+#side-menu .main-menu-list .sub-menu {
     -webkit-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out
@@ -1812,53 +1881,44 @@ body {
     .header-pub {
         width: 100%
     }
-
     @media (min-width:480px) {
         .header-pub {
             max-width: 480px
         }
     }
-
     @media (min-width:640px) {
         .header-pub {
             max-width: 640px
         }
     }
-
     @media (min-width:768px) {
         .header-pub {
             max-width: 768px
         }
     }
-
     @media (min-width:1024px) {
         .header-pub {
             max-width: 1024px
         }
     }
-
     @media (min-width:1280px) {
         .header-pub {
             max-width: 1280px
         }
     }
-
     @media (min-width:1536px) {
         .header-pub {
             max-width: 1536px
         }
     }
-
     @media (min-width:1920px) {
         .header-pub {
             max-width: 1920px
         }
     }
-
     .header-pub {
         width: 60%
     }
-
     .header-pub img {
         --tw-translate-x: 0;
         --tw-translate-y: 0;
@@ -2004,7 +2064,8 @@ body {
     transition-timing-function: cubic-bezier(.4, 0, .2, 1)
 }
 
-.sj-slide.no-arrows .slick-arrow, .sj-slide.no-dots .slick-dots {
+.sj-slide.no-arrows .slick-arrow,
+.sj-slide.no-dots .slick-dots {
     display: none !important
 }
 
@@ -2081,7 +2142,8 @@ body {
     width: 100%
 }
 
-.pagination, .pagination ul li {
+.pagination,
+.pagination ul li {
     position: relative
 }
 
@@ -2117,7 +2179,8 @@ body {
     margin-bottom: 3rem
 }
 
-.side-mini-card-header button.active, .side-mini-card-header button:hover {
+.side-mini-card-header button.active,
+.side-mini-card-header button:hover {
     color: #0090cb
 }
 
@@ -2231,12 +2294,37 @@ body {
     word-break: break-all
 }
 
+.pharma-table .flex-row-2 {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-bottom: 1px solid #d9d9d9;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1.5rem .5rem;
+    text-align: center;
+    width: 33%;
+    word-break: break-all
+}
+
 .content-wysiwyg {
     max-width: 90rem;
     padding: 1.5rem
 }
 
-.content-wysiwyg h2, .content-wysiwyg h3, .content-wysiwyg h4, .content-wysiwyg h5, .content-wysiwyg h6 {
+.content-wysiwyg h2,
+.content-wysiwyg h3,
+.content-wysiwyg h4,
+.content-wysiwyg h5,
+.content-wysiwyg h6 {
     color: #0090cb;
     font-family: Roboto Slab, Arial, sans-serif;
     font-size: 2.5rem;
@@ -2325,7 +2413,8 @@ body {
     }
 }
 
-.block-slide .content-slide .link a, .cat-pasti span {
+.block-slide .content-slide .link a,
+.cat-pasti span {
     font-family: Roboto Slab, Arial, sans-serif
 }
 
@@ -2614,7 +2703,8 @@ body {
     max-height: 70rem
 }
 
-.mini-card-v2 .mini-card, .mini-card-v3 .mini-card {
+.mini-card-v2 .mini-card,
+.mini-card-v3 .mini-card {
     --tw-border-opacity: 1;
     border-bottom-width: 2px;
     border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -2623,11 +2713,13 @@ body {
     padding-top: 1.25rem
 }
 
-.mini-card-v2 .mini-card:last-child, .mini-card-v3 .mini-card:last-child {
+.mini-card-v2 .mini-card:last-child,
+.mini-card-v3 .mini-card:last-child {
     border: none
 }
 
-.mini-card-v2 .mini-card .card-time, .mini-card-v3 .mini-card .card-time {
+.mini-card-v2 .mini-card .card-time,
+.mini-card-v3 .mini-card .card-time {
     border-width: 0;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -2660,12 +2752,14 @@ body {
     }
 }
 
-.comment-btn a, .comment-btn button {
+.comment-btn a,
+.comment-btn button {
     border-color: #0090cb;
     color: #0090cb
 }
 
-.comment-btn a:hover, .comment-btn button:hover {
+.comment-btn a:hover,
+.comment-btn button:hover {
     background: #0090cb;
     color: #fff
 }
@@ -2717,7 +2811,8 @@ body {
     padding: 2.25rem 1rem
 }
 
-.contact-form .input-form, .contact-form .textarea-form {
+.contact-form .input-form,
+.contact-form .textarea-form {
     --tw-text-opacity: 1;
     border: 1px solid #fff;
     border-radius: 3rem;
@@ -2728,23 +2823,28 @@ body {
     width: 100%
 }
 
-.contact-form .input-form::-webkit-input-placeholder, .contact-form .textarea-form::-webkit-input-placeholder {
+.contact-form .input-form::-webkit-input-placeholder,
+.contact-form .textarea-form::-webkit-input-placeholder {
     color: #fff
 }
 
-.contact-form .input-form::-moz-placeholder, .contact-form .textarea-form::-moz-placeholder {
+.contact-form .input-form::-moz-placeholder,
+.contact-form .textarea-form::-moz-placeholder {
     color: #fff
 }
 
-.contact-form .input-form:-ms-input-placeholder, .contact-form .textarea-form:-ms-input-placeholder {
+.contact-form .input-form:-ms-input-placeholder,
+.contact-form .textarea-form:-ms-input-placeholder {
     color: #fff
 }
 
-.contact-form .input-form::-ms-input-placeholder, .contact-form .textarea-form::-ms-input-placeholder {
+.contact-form .input-form::-ms-input-placeholder,
+.contact-form .textarea-form::-ms-input-placeholder {
     color: #fff
 }
 
-.contact-form .input-form::placeholder, .contact-form .textarea-form::placeholder {
+.contact-form .input-form::placeholder,
+.contact-form .textarea-form::placeholder {
     color: #fff
 }
 
@@ -2752,55 +2852,44 @@ body {
     .sm\:block {
         display: block
     }
-
     .sm\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
-
     .sm\:rounded-xl {
         border-radius: .75rem
     }
-
     .sm\:px-5 {
         padding-left: 1.25rem;
         padding-right: 1.25rem
     }
-
     .sm\:px-6 {
         padding-left: 1.5rem;
         padding-right: 1.5rem
     }
-
     .sm\:px-8 {
         padding-left: 2rem;
         padding-right: 2rem
     }
-
     .sm\:py-8 {
         padding-bottom: 2rem;
         padding-top: 2rem
     }
-
     .sm\:text-2xl {
         font-size: 1.5rem;
         line-height: 2rem
     }
-
     .sm\:text-3xl {
         font-size: 1.875rem;
         line-height: 2.25rem
     }
-
     .sm\:text-4xl {
         font-size: 2.25rem;
         line-height: 2.5rem
     }
-
     .sm\:text-5xl {
         font-size: 3rem;
         line-height: 1
     }
-
     .sm\:text-7xl {
         font-size: 4.5rem;
         line-height: 1
@@ -2811,251 +2900,199 @@ body {
     .md\:float-right {
         float: right
     }
-
     .md\:mx-0 {
         margin-left: 0;
         margin-right: 0
     }
-
     .md\:mx-2 {
         margin-left: .5rem;
         margin-right: .5rem
     }
-
     .md\:mx-20 {
         margin-left: 5rem;
         margin-right: 5rem
     }
-
     .md\:mx-auto {
         margin-left: auto;
         margin-right: auto
     }
-
     .md\:-mt-16 {
         margin-top: -4rem
     }
-
     .md\:mr-5 {
         margin-right: 1.25rem
     }
-
     .md\:mr-10 {
         margin-right: 2.5rem
     }
-
     .md\:mr-12 {
         margin-right: 3rem
     }
-
     .md\:mb-16 {
         margin-bottom: 4rem
     }
-
     .md\:mb-28 {
         margin-bottom: 7rem
     }
-
     .md\:ml-0 {
         margin-left: 0
     }
-
     .md\:block {
         display: block
     }
-
     .md\:flex {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex
     }
-
     .md\:hidden {
         display: none
     }
-
     .md\:h-32 {
         height: 8rem
     }
-
     .md\:h-40 {
         height: 10rem
     }
-
     .md\:w-1\/2 {
         width: 50%
     }
-
     .md\:w-1\/3 {
         width: 33.333333%
     }
-
     .md\:w-2\/3 {
         width: 66.666667%
     }
-
     .md\:w-2\/5 {
         width: 40%
     }
-
     .md\:w-3\/5 {
         width: 60%
     }
-
     .md\:w-full {
         width: 100%
     }
-
     .md\:max-w-6xl {
         max-width: 72rem
     }
-
     .md\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
-
     .md\:grid-cols-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr))
     }
-
     .md\:grid-cols-4 {
         grid-template-columns: repeat(4, minmax(0, 1fr))
     }
-
     .md\:flex-row {
         -webkit-box-orient: horizontal;
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row
     }
-
-    .md\:flex-col, .md\:flex-row {
+    .md\:flex-col,
+    .md\:flex-row {
         -webkit-box-direction: normal
     }
-
     .md\:flex-col {
         -webkit-box-orient: vertical;
         -webkit-flex-direction: column;
         -ms-flex-direction: column;
         flex-direction: column
     }
-
     .md\:flex-wrap {
         -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap
     }
-
     .md\:flex-nowrap {
         -webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap
     }
-
     .md\:justify-start {
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         -webkit-justify-content: flex-start;
         justify-content: flex-start
     }
-
     .md\:justify-end {
         -webkit-box-pack: end;
         -ms-flex-pack: end;
         -webkit-justify-content: flex-end;
         justify-content: flex-end
     }
-
     .md\:justify-center {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         -webkit-justify-content: center;
         justify-content: center
     }
-
     .md\:gap-8 {
         gap: 2rem
     }
-
     .md\:px-0 {
         padding-left: 0;
         padding-right: 0
     }
-
     .md\:px-10 {
         padding-left: 2.5rem;
         padding-right: 2.5rem
     }
-
     .md\:px-12 {
         padding-left: 3rem;
         padding-right: 3rem
     }
-
     .md\:px-16 {
         padding-left: 4rem;
         padding-right: 4rem
     }
-
     .md\:py-12 {
         padding-bottom: 3rem;
         padding-top: 3rem
     }
-
     .md\:py-24 {
         padding-bottom: 6rem;
         padding-top: 6rem
     }
-
     .md\:pt-0 {
         padding-top: 0
     }
-
     .md\:pt-24 {
         padding-top: 6rem
     }
-
     .md\:pr-12 {
         padding-right: 3rem
     }
-
     .md\:pl-4 {
         padding-left: 1rem
     }
-
     .md\:pl-5 {
         padding-left: 1.25rem
     }
-
     .md\:pl-16 {
         padding-left: 4rem
     }
-
     .md\:text-left {
         text-align: left
     }
-
     .md\:text-2xl {
         font-size: 1.5rem;
         line-height: 2rem
     }
-
     .md\:text-5xl {
         font-size: 3rem;
         line-height: 1
     }
-
     .md\:text-6xl {
         font-size: 3.75rem;
         line-height: 1
     }
-
     .md\:text-7xl {
         font-size: 4.5rem;
         line-height: 1
     }
-
     .md\:text-8xl {
         font-size: 6rem;
         line-height: 1
@@ -3066,70 +3103,54 @@ body {
     .lg\:top-0 {
         top: 0
     }
-
     .lg\:mr-0 {
         margin-right: 0
     }
-
     .lg\:mr-14 {
         margin-right: 3.5rem
     }
-
     .lg\:ml-auto {
         margin-left: auto
     }
-
     .lg\:block {
         display: block
     }
-
     .lg\:flex {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex
     }
-
     .lg\:hidden {
         display: none
     }
-
     .lg\:h-full {
         height: 100%
     }
-
     .lg\:w-1\/2 {
         width: 50%
     }
-
     .lg\:w-1\/3 {
         width: 33.333333%
     }
-
     .lg\:w-2\/3 {
         width: 66.666667%
     }
-
     .lg\:w-2\/5 {
         width: 40%
     }
-
     .lg\:w-3\/5 {
         width: 60%
     }
-
     .lg\:w-full {
         width: 100%
     }
-
     .lg\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
-
     .lg\:grid-cols-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr))
     }
-
     .lg\:flex-col {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
@@ -3137,31 +3158,25 @@ body {
         -ms-flex-direction: column;
         flex-direction: column
     }
-
     .lg\:justify-start {
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         -webkit-justify-content: flex-start;
         justify-content: flex-start
     }
-
     .lg\:pr-0 {
         padding-right: 0
     }
-
     .lg\:pr-24 {
         padding-right: 6rem
     }
-
     .lg\:pl-10 {
         padding-left: 2.5rem
     }
-
     .lg\:text-3xl {
         font-size: 1.875rem;
         line-height: 2.25rem
     }
-
     .lg\:text-7xl {
         font-size: 4.5rem;
         line-height: 1
@@ -3172,52 +3187,40 @@ body {
     .xl\:mr-10 {
         margin-right: 2.5rem
     }
-
     .xl\:mb-32 {
         margin-bottom: 8rem
     }
-
     .xl\:h-auto {
         height: auto
     }
-
     .xl\:w-auto {
         width: auto
     }
-
     .xl\:w-1\/3 {
         width: 33.333333%
     }
-
     .xl\:w-2\/3 {
         width: 66.666667%
     }
-
     .xl\:w-2\/5 {
         width: 40%
     }
-
     .xl\:w-3\/5 {
         width: 60%
     }
-
     .xl\:grid-cols-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr))
     }
-
     .xl\:grid-cols-4 {
         grid-template-columns: repeat(4, minmax(0, 1fr))
     }
-
     .xl\:pl-12 {
         padding-left: 3rem
     }
-
     .xl\:text-8xl {
         font-size: 6rem;
         line-height: 1
     }
-
     .xl\:text-9xl {
         font-size: 8rem;
         line-height: 1
@@ -3228,74 +3231,61 @@ body {
     .\32xl\:container {
         width: 100%
     }
-
     @media (min-width:480px) {
         .\32xl\:container {
             max-width: 480px
         }
     }
-
     @media (min-width:640px) {
         .\32xl\:container {
             max-width: 640px
         }
     }
-
     @media (min-width:768px) {
         .\32xl\:container {
             max-width: 768px
         }
     }
-
     @media (min-width:1024px) {
         .\32xl\:container {
             max-width: 1024px
         }
     }
-
     @media (min-width:1280px) {
         .\32xl\:container {
             max-width: 1280px
         }
     }
-
     @media (min-width:1536px) {
         .\32xl\:container {
             max-width: 1536px
         }
     }
-
     @media (min-width:1920px) {
         .\32xl\:container {
             max-width: 1920px
         }
     }
-
     .\32xl\:h-40 {
         height: 10rem
     }
-
     .\32xl\:gap-8 {
         gap: 2rem
     }
-
     .\32xl\:px-10 {
         padding-left: 2.5rem;
         padding-right: 2.5rem
     }
-
     .\32xl\:px-36 {
         padding-left: 9rem
     }
-
-    .\32xl\:pr-36, .\32xl\:px-36 {
+    .\32xl\:pr-36,
+    .\32xl\:px-36 {
         padding-right: 9rem
     }
-
     .\32xl\:pl-20 {
         padding-left: 5rem
     }
-
     .\32xl\:pl-36 {
         padding-left: 9rem
     }
@@ -3305,78 +3295,64 @@ body {
     .\33xl\:container {
         width: 100%
     }
-
     @media (min-width:480px) {
         .\33xl\:container {
             max-width: 480px
         }
     }
-
     @media (min-width:640px) {
         .\33xl\:container {
             max-width: 640px
         }
     }
-
     @media (min-width:768px) {
         .\33xl\:container {
             max-width: 768px
         }
     }
-
     @media (min-width:1024px) {
         .\33xl\:container {
             max-width: 1024px
         }
     }
-
     @media (min-width:1280px) {
         .\33xl\:container {
             max-width: 1280px
         }
     }
-
     @media (min-width:1536px) {
         .\33xl\:container {
             max-width: 1536px
         }
     }
-
     @media (min-width:1920px) {
         .\33xl\:container {
             max-width: 1920px
         }
     }
-
     .\33xl\:mr-20 {
         margin-right: 5rem
     }
-
     .\33xl\:h-48 {
         height: 12rem
     }
-
     .\33xl\:gap-10 {
         gap: 2.5rem
     }
-
     .\33xl\:px-10 {
         padding-left: 2.5rem;
         padding-right: 2.5rem
     }
-
     .\33xl\:px-48 {
         padding-left: 12rem
     }
-
-    .\33xl\:pr-48, .\33xl\:px-48 {
+    .\33xl\:pr-48,
+    .\33xl\:px-48 {
         padding-right: 12rem
     }
-
     .\33xl\:pl-28 {
         padding-left: 7rem
     }
-
     .\33xl\:pl-48 {
         padding-left: 12rem
     }
@@ -3394,7 +3370,8 @@ body {
     src: url(cbb8f721bed1f83d8639.eot?#iefix) format("embedded-opentype"), url(624002425f3ac9b50279.woff) format("woff"), url(144cc10895443840bf41.ttf) format("truetype"), url(c52ab3996729bb498858.svg#slick) format("svg")
 }
 
-.slick-next, .slick-prev {
+.slick-next,
+.slick-prev {
     background: transparent;
     border: none;
     color: transparent;
@@ -3413,21 +3390,29 @@ body {
     width: 20px
 }
 
-.slick-next:focus, .slick-next:hover, .slick-prev:focus, .slick-prev:hover {
+.slick-next:focus,
+.slick-next:hover,
+.slick-prev:focus,
+.slick-prev:hover {
     background: transparent;
     color: transparent;
     outline: none
 }
 
-.slick-next:focus:before, .slick-next:hover:before, .slick-prev:focus:before, .slick-prev:hover:before {
+.slick-next:focus:before,
+.slick-next:hover:before,
+.slick-prev:focus:before,
+.slick-prev:hover:before {
     opacity: 1
 }
 
-.slick-next.slick-disabled:before, .slick-prev.slick-disabled:before {
+.slick-next.slick-disabled:before,
+.slick-prev.slick-disabled:before {
     opacity: .25
 }
 
-.slick-next:before, .slick-prev:before {
+.slick-next:before,
+.slick-prev:before {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #fff;
@@ -3475,7 +3460,8 @@ body {
     position: relative
 }
 
-.slick-dots li, .slick-dots li button {
+.slick-dots li,
+.slick-dots li button {
     cursor: pointer;
     height: 20px;
     width: 20px
@@ -3492,11 +3478,13 @@ body {
     padding: 5px
 }
 
-.slick-dots li button:focus, .slick-dots li button:hover {
+.slick-dots li button:focus,
+.slick-dots li button:hover {
     outline: none
 }
 
-.slick-dots li button:focus:before, .slick-dots li button:hover:before {
+.slick-dots li button:focus:before,
+.slick-dots li button:hover:before {
     opacity: 1
 }
 
@@ -3535,7 +3523,8 @@ body {
     user-select: none
 }
 
-.slick-list, .slick-slider {
+.slick-list,
+.slick-slider {
     display: block;
     position: relative
 }
@@ -3550,7 +3539,8 @@ body {
     outline: none
 }
 
-.slick-slider .slick-list, .slick-slider .slick-track {
+.slick-slider .slick-list,
+.slick-slider .slick-track {
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0)
@@ -3565,7 +3555,8 @@ body {
     top: 0
 }
 
-.slick-track:after, .slick-track:before {
+.slick-track:after,
+.slick-track:before {
     content: "";
     display: table
 }
@@ -3609,4 +3600,10 @@ body {
 
 .slick-arrow.slick-hidden {
     display: none
+}
+
+.select {
+    min-width: 100px;
+    min-height: 50px;
+    font-size: 16px;
 }
