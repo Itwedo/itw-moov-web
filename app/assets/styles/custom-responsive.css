@@ -116,6 +116,16 @@ Xtra Small Screen - Small Mobile
 
    .global-margin{
     margin:0 ;
+    
+}
+
+ .actus-grid .news-card{
+    height: 280px !important;
+
+}
+
+.actus-grid .news-pub h2, .actus-grid .news-card h2{
+    font-size: 14px;
 }
 }
 

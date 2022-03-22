@@ -84,8 +84,24 @@
     object-fit: cover;
 }
 
+
+.actus-grid .news-card{
+    height: 320px !important;
+}
+.actus-grid .news-pub h2, .actus-grid .news-card h2{
+    font-size: 18px;
+}
 .actus-grid .img-absolute-cover{
     height: 100%;
+}
+
+.actus-grid-side .mini-card .img-absolute-cover{
+    width: 100%;
+    height: 100%;
+}
+.actus-grid-side .mini-card h3{
+    font-size: 18px;
+
 }
 
 .big-news-card{

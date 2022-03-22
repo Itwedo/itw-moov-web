@@ -29,12 +29,12 @@
         </div>
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
-            {% if result['data'][0]['attributes']['images']['data'] %}
+            {% if result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
               alt="Image">
             {% else %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
               alt="Image">
             {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
@@ -63,11 +63,11 @@
           </div>
           {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'] %}
+            {% if element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {% else %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
               alt="Image">
             {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
@@ -105,11 +105,11 @@
           </div>
           {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'] %}
+            {% if element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {% else %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
               alt="Image">
             {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
@@ -137,7 +137,7 @@
         </div>
         {% include 'includes/pagination.html' %}
       </div>
-      <div class=" py-5 w-full lg:w-1/3">
+      <div class="actus-grid-side py-5 w-full lg:w-1/3">
         <div class="news-pub news-side relative overflow-hidden mx-auto my-7 w-full">
           <img src="/assets/images/powerbox1_0.jpg">
         </div>
@@ -148,12 +148,12 @@
             {% for news in result["data"] %}
             <a class="mini-card relative flex pb-4" href={{ url_for('news.news_article', id=news["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
-                {% if news['attributes']['images']['data'] %}
+                {% if news['attributes']['images']['data'][0]['attributes']['width'] %}
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
                 {% else %}
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-                  src="/assets/imagess/void.png" alt="Image">
+                  src="/assets/images/Apercu.png" alt="Image">
                 {% endif %}
               </div>
               <div class="relative w-full md:w-3/5">
