@@ -5,22 +5,59 @@ Large Screen - Others
 */
 @media screen and (min-width: 1400px)    {
 
+    .header-headline{
+        width: 41vw;
+        padding-top: 200px;
+        text-align: start !important;
+       align-items: start;
+    }
 
+    .group-content{
+        position: relative;
+        width: 440px;
+        margin: auto 0;
+      
+        text-align: start;
+        left: 0;
+    }
 
-
-
+   
 
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1399px) {
+   
+    .header-headline{
+        width: 41vw;
+        padding-top: 200px;
+        text-align: start !important;
+       align-items: start;
+    }
 
-
+    .group-content{
+        position: relative;
+        width: 440px;
+        margin: auto 0;
+        
+        text-align: start;
+        left: 0;
+    }
 
 }
 
 @media screen and (max-width: 1199px) {
-  
-
+    
+    .header-headline{
+        width: 41vw;
+       
+        padding-left: 68px;
+       align-items: center;
+    }
+    .group-content{
+        position: relative;
+        margin: auto 0;
+        margin-left: 80px;
+    }
 }
 
 /*
@@ -28,10 +65,12 @@ Large Screen - Others
 Medium Screen - Others
 ====================================
 */
-@media screen and (min-width: 992px) and (max-width: 1200px) {
+@media screen and (min-width: 992px) and (max-width: 1000px) {
 
-
-  
+    .header-headline{
+        width: 100%;
+       
+    }
 }
 /*
 ====================================
@@ -44,6 +83,10 @@ Small Screen - Tablate
     .currency li{
         font-size: 10px;
     }
+    .header-headline{
+        width: 100%;
+       
+    }
   
 }
 
@@ -53,6 +96,10 @@ Small Screen - Mobile
 ====================================
 */
 @media screen and (min-width: 576px) and (max-width: 767px) {	/* Hero */
+    .header-headline{
+        width: 100%;
+       
+    }
     .currency{
         display: none;
     }
@@ -60,7 +107,15 @@ Small Screen - Mobile
 }
 
 @media screen and (min-width: 614px) and (max-width: 767px) {
-
+    .header-headline{
+        width: 100%;
+       
+    }
+    .group-content{
+        position: relative;
+        margin: auto 0;
+        
+    }
     .currency{
         display: none;
     }
@@ -89,6 +144,16 @@ Xtra Small Screen - Small Mobile
 ====================================
 */
 @media screen and (max-width: 576px) {
+
+    .group-content{
+        position: relative;
+        margin: auto 0;
+        
+    }
+    .header-headline{
+        width: 100%;
+        
+    }
 .custom-navbar{
     display: none;
 }

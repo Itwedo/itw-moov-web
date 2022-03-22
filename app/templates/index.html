@@ -15,15 +15,15 @@
         <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
           alt="Image">
         {% endif %}
-        <a class="content-slide absolute bottom-0 left-0 text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm h-auto lg:top-0 lg:bottom-unset lg:h-full w-full lg:w-2/5"
+        <a class="header-headline content-slide absolute bottom-0 left-0 text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm h-auto lg:top-0 lg:bottom-unset lg:h-full w-full lg:w-2/5"
           href="{{ url_for('news.news_article', id=item['id']) }}">
           <div class="group-content">
             <div class="cat-pasti">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">
+              <span class="text-2xl px-3 py-3 my-3  inline-block sm:text-3xl">
                 À la une
               </span>
             </div>
-            <h2 class="text-5xl text-bold mb-4 lg:text-7xl xl:text-8xl">
+            <h2 class="text-5xl text-bold mb-4  lg:text-7xl xl:text-8xl">
               {{ item["title"] }}
             </h2>
             <div class="card-time">
@@ -68,7 +68,7 @@
       </div>
       <div class=" relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
-          {% if data["magazine"][0]['attributes']['images']['data'][0]['attributes']['width'] %}
+          {% if data['magazine'] and data['magazine'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
           <img class="img-absolute-cover img-hover-scale"
             src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url'] }}">
           {% else %}
@@ -111,7 +111,7 @@
     <div class="pt-12 pb-12 bg-gray-100 px-2 md:px-10">
       <div class="news-grid grid gap-4 2xl:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div class="news-pub relative overflow-hidden w-full v1 hidden lg:flex">
-          <img src="{{ CMS_URL }}{{ ads['home_vertical_rectangle_1'] }}" alt="Moov publicité"
+          <img src="{{ CMS_URL }}{{ ads['home_vertical_rectangle_1'][0] }}" alt="Moov publicité"
             id="header_vertical_rectangle_1">
         </div>
         {% for item in data["news"][:6] %}
@@ -139,14 +139,14 @@
         </div>
         {% endfor %}
         <div class="news-pub flex relative overflow-hidden w-full v1">
-          <img src="{{ CMS_URL }}{{ ads['home_vertical_rectangle_2'] }}" alt="Moov publicité"
+          <img src="{{ CMS_URL }}{{ ads['home_vertical_rectangle_2'][0] }}" alt="Moov publicité"
             id="header_vertical_rectangle_2">
         </div>
       </div>
     </div>
   </section>
   <section class=" mx-auto py-12 3xl:container 2xl:px-36 3xl:px-48" id="home-pub">
-    <img src="{{ CMS_URL }}{{ ads['home_hugeboard'] }}" alt="Moov publicité" id="home_hugeboard" class=" pub-section" />
+    <img src="{{ CMS_URL }}{{ ads['home_hugeboard'][0] }}" alt="Moov publicité" id="home_hugeboard" class=" pub-section" />
 
   </section>
   <section class="global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">

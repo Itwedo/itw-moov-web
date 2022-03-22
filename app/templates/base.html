@@ -147,17 +147,13 @@
         <div class="header-pub">
           <div
             class="header-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-
+            {% for image in ads['header_large_leaderboard'] %}
             <div class="pub-slide block-slide relative overflow-hidden">
-              <img src="{{ CMS_URL }}{{ ads['header_large_leaderboard']}}" alt="Moov publicité"
+              <img src="{{ CMS_URL }}{{image}}" alt="Moov publicité"
                 id="header_large_leaderboard"
                 class="header-slide-img img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto">
             </div>
-
-            <div class="pub-slide block-slide relative overflow-hidden">
-              <img src="/assets/images/partenaire-4_0.png" alt="Moov publicité" id="header_large_leaderboard"
-                class="header-slide-img img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto">
-            </div>
+            {% endfor %}
 
           </div>
 
@@ -207,7 +203,7 @@
 
         <li class="mx-3 dropdown">
 
-          <a class="menu-item horizontal" href="{{ url_for('drugstores.drugstores') }}">
+          <a class="menu-item horizontal" href="#">
             Vie pratique<span class="menu-hover-line bg-pink-300"></span>
           </a>
           <div class="dropdown-content">

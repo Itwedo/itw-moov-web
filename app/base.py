@@ -9,19 +9,14 @@ def get_ads():
         params={"populate": "image"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    # response_ads = dict()
-    # for ad in ads.json()["data"]:
-    #     images = list()
-    #     for image in ad["attributes"]["image"]["data"]:
-    #         images.append(image["attributes"]["url"])
-    #     response_ads[ad["attributes"]["location"]] = images
-    ads = {
-        ad["attributes"]["location"]: ad["attributes"]["image"]["data"][
-            "attributes"
-        ]["url"]
-        for ad in ads.json()["data"]
-    }
-    return ads
+    response_ads = dict()
+    for ad in ads.json()["data"]:
+        images = list()
+        for image in ad["attributes"]["image"]["data"]:
+            images.append(image["attributes"]["url"])
+        response_ads[ad["attributes"]["location"]] = images
+
+    return response_ads
 
 
 def get_currency():
