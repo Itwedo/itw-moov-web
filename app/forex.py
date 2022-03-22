@@ -7,7 +7,7 @@ from flask import (
 )
 from datetime import datetime, date, timedelta
 from .config import *
-from .ads import get_ads
+from .base import get_ads, get_currency
 
 import requests
 
@@ -18,6 +18,7 @@ app = Blueprint("forex", __name__, url_prefix="/taux-de-change")
 @app.route("/")
 def exchange_rates():
     ads = get_ads()
+    currency = get_currency()
     seven_date = [
         (date.today() - timedelta(i)).strftime("%Y-%m-%d") for i in range(8)
     ]
@@ -34,6 +35,7 @@ def exchange_rates():
         date=date.today().strftime("%d/%m/%Y"),
         CMS_URL=STRAPI_PUBLIC_URL,
         ads=ads,
+        currency=currency,
     )
 
 
