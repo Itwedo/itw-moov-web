@@ -8,11 +8,11 @@
     <div class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows">
       {% for item in data["spotlights"] %}
       <div class="block-slide relative overflow-hidden">
-        {% if item["images"] %}
+        {% if item["images"][0]['attributes']['width'] %}
         <img class="slide-img-item img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
           src="{{ CMS_URL }}{{ item['images'][0]['attributes']['url'] }}" alt="Image">
         {% else %}
-        <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+        <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
           alt="Image">
         {% endif %}
         <a class="content-slide absolute bottom-0 left-0 text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm h-auto lg:top-0 lg:bottom-unset lg:h-full w-full lg:w-2/5"
@@ -68,11 +68,11 @@
       </div>
       <div class=" relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
-          {% if data["magazine"] %}
+          {% if data["magazine"][0]['attributes']['images']['data'][0]['attributes']['width'] %}
           <img class="img-absolute-cover img-hover-scale"
             src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url'] }}">
           {% else %}
-          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/void.png"
+          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
             alt="Image">
           {% endif %}
           <div class="cat-pasti absolute top-8 left-0">
@@ -116,11 +116,11 @@
         </div>
         {% for item in data["news"][:6] %}
         <div class="news-card relative overflow-hidden w-full">
-          {% if item["attributes"]["images"]["data"] %}
+          {% if item["attributes"]["images"]["data"][0]["attributes"]["width"] %}
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
           {% else %}
-          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/imagess/void.png"
+          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
             alt="Image">
           {% endif %}
           <div class="cat-pasti absolute top-8 left-0">
@@ -159,11 +159,11 @@
           {{ data["spotlights"][0]["title"] }}
         </h2>
         <div class="big-news-card news-card news-card-lg relative overflow-hidden w-full">
-          {% if data["spotlights"][0]["images"] %}
+          {% if data["spotlights"][0]["images"][0]["attributes"]["width"] %}
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             data["spotlights"][0]["images"][0]["attributes"]["url"] }}>
           {% else %}
-          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/void.png"
+          <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
             alt="Image">
           {% endif %}
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
@@ -192,12 +192,12 @@
             {% for item in data["news"] %}
             <a class="mini-card relative flex pb-4" href={{ url_for('news.news_article', id=item["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
-                {% if item["attributes"]["images"]["data"] %}
+                {% if item["attributes"]["images"]["data"][0]["attributes"]["width"] %}
                 <img class="mini-img-cover img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
                   item["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
                 {% else %}
                 <img class=" img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-                  src="/assets/imagess/void.png" alt="Image">
+                  src="/assets/imagess/Apercu.png" alt="Image">
                 {% endif %}
               </div>
               <div class="relative w-full md:w-3/5">
