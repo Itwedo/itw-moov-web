@@ -1,0 +1,172 @@
+{% extends 'base.html' %} {% block title %}Taux de change{% endblock %} {% block content %}
+<main>
+    <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
+        <div class="container mx-auto">
+            <h1 class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100">
+                Cours de change
+            </h1>
+
+        </div>
+        <div class="container mx-auto">
+            <div class="flex flex-wrap flex-col-reverse md:flex-row">
+                <div class="w-full md:w-2/3">
+                    <div class="text-3xl mt-12">
+                        <label for="selected_date"> Cours des devises en date du : </label>
+                        <select class="select" id="selected_date" >
+                            {% for d in seven_date%}
+                            <option  value= {{d}}>{{d}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    
+                    <div class="pharma-table px-0 sm:px-5">
+                        <div class="table-container robotoslab text-xl md:text-2xl" role="table">
+                            <div class="flex-table header" role="rowgroup">
+                                <div class="flex-row flex-row-2 first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl" role="columnheader"><span class="block">Date</span></div>
+                                <div class="flex-row flex-row-2 first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl" role="columnheader"><span class="block">Devise</span></div>
+                                <div class="flex-row flex-row-2 first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl" role="columnheader"><span class="block">Valeur</span></div>
+                            </div>
+                            <div class="body" id="table-elements">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl mt-12">
+                        <h2 class="inline-block text-3xl text-black py-2 px-5 border-b-2 border-gray-100">
+                            Evolution des changes
+                        </h2>
+                    </div>
+                    
+                    <canvas class="mt-10" id="myChart" style="width:100%;max-width:700px"></canvas>
+                </div>
+                <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
+                    <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full"><img src="/assets/images/powerbox1_0.jpg"></div>
+                    <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full"><img src="/assets/images/morateamb.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %} {% block javascript %}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+    var table = (selected_date) => {
+        var result=JSON.parse('{{result | tojson}}');
+        all_html_output="";
+        result.forEach(element => {
+            
+            if (element.date === selected_date) {
+                all_html_output+=makeHtml(element);
+            }
+            
+        }
+        );
+        document.getElementById('table-elements').innerHTML = all_html_output;
+
+        function makeHtml(data) {
+            var html_output = "<div class='flex-table row' role='rowgroup'>";
+            html_output += "<div class='flex-row-2 first' role='cell'>";
+            html_output += "<div class='info'>" + data.date + "</div></div>";
+            html_output += "<div class='flex-row-2 first' role='cell'>";
+            html_output += "<div class='info'>" + data.currency + "</div></div>";
+            html_output += "<div class='flex-row-2 first' role='cell'>";
+            html_output += "<div class='info'>" + data.value + "</div></div></div>";
+            return html_output;
+
+        }
+    }
+    
+    var today = new Date().toISOString().substring(0, 10);
+    table(today);
+
+    $(document).ready(function() {
+        $('#selected_date').on('change', function() {
+            table(this.value);
+        });
+    });
+</script>
+<script>
+    
+    var defYValues=(dates,result,curr)=>{
+        var yValues=new Array();
+        dates.forEach(d=>{
+            result.forEach(r=>{
+                if (r.date===d && r.currency===curr){
+                    yValues.push(r.value);
+                }
+            })
+        })
+        return yValues;
+    }
+    
+    var display_chart=(curr=>{
+        var dates=JSON.parse('{{seven_date | tojson}}').reverse();
+        var result=JSON.parse('{{result | tojson}}');
+        var eurValues=defYValues(dates,result,"EUR")
+        var usdValues=defYValues(dates,result,"USD")
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: dates,
+                datasets: [
+                {
+                    label:"EUR",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "#95f8ff",
+                    borderColor: "#6ffbc6",
+                    data: eurValues
+                },
+                {
+                    label:"USD",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "#95f8ff",
+                    borderColor: "#0090cb",
+                    data: usdValues
+
+                }
+                ]
+            },
+            options: {
+                legend: {
+                    display: true,  },
+                scales: {
+                yAxes: [{
+                    ticks:{
+                            min:3500 , 
+                            max:4900
+                    },
+                    
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Montant en Ariary'
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Dates'
+                    }
+                }],
+                
+                },
+                
+                title:{
+                    display:true,
+                    text:'Cours de change (EUR/USD)',
+                    position:'bottom'
+                }
+
+                
+            }
+            });
+    });
+
+    display_chart('EUR');
+    
+    
+</script>
+{% endblock %}
