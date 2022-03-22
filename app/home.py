@@ -101,7 +101,7 @@ def home():
             if item["attributes"]["images"]["data"]
         ],
     }
-
+    print(data["spotlights"])
     return render_template(
         "index.html",
         data=data,
