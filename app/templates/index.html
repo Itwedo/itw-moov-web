@@ -69,8 +69,9 @@
       <div class=" relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
           {% if data['magazine'] and data['magazine'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
-          <img class="img-absolute-cover img-hover-scale"
-            src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url'] }}">
+          <img class="img-absolute-cover img-hover-scale" src="/assets/images/caleb-george-iVXfOilGYHA-unsplash.jpg">
+          <!-- <img class="img-absolute-cover img-hover-scale"
+            src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"> -->
           {% else %}
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
             alt="Image">
@@ -126,9 +127,9 @@
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ item["attributes"]["category"] }}</span>
           </div>
-          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
+          <a class="overlay absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
             href={{ url_for('news.news_article', id=item["id"]) }}>
-            <h2 class="text-2xl mb-3 sm:text-4xl">{{ item["attributes"]["title"] }}</h2>
+            <h2 class=" text-2xl mb-3 sm:text-4xl">{{ item["attributes"]["title"] }}</h2>
             <div class="card-time flex items-center text-xl">
               <span class="mr-4">{{ item["attributes"]["createdAt"]|date }}</span>
               <span class="mr-4">{{ item["attributes"]["createdAt"]|time }}</span>
@@ -141,12 +142,13 @@
         <div class="news-pub flex relative overflow-hidden w-full v1">
           <img src="{{ CMS_URL }}{{ ads['home_vertical_rectangle_2'][0] }}" alt="Moov publicité"
             id="header_vertical_rectangle_2">
+
         </div>
       </div>
     </div>
   </section>
   <section class=" mx-auto py-12 3xl:container 2xl:px-36 3xl:px-48" id="home-pub">
-    <img src="{{ CMS_URL }}{{ ads['home_hugeboard'][0] }}" alt="Moov publicité" id="home_hugeboard" class=" pub-section" />
+    <img src="/assets/images/Banner.png" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
 
   </section>
   <section class="global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">
@@ -166,7 +168,7 @@
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
             alt="Image">
           {% endif %}
-          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
+          <a class=" absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
             href={{ url_for('news.news_article', id=data["spotlights"][0]["id"]) }}>
             <div class="cat-pasti">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">News</span>

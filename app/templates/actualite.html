@@ -53,16 +53,38 @@
             <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130
           </span>
         </div>
-        <div class="content">
+        <div class="content news-content">
           <p>{{ news['data']['attributes']['head'] }}</p><br />
-          <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
+
+          <div class="article-pub">
+            <div
+              class=" slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+
+              <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+                <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
+                  <img src="/assets/images/powerbox1_0.jpg">
+                </div>
+
+              </div>
+              <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+                <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
+                  <img src="/assets/images/morateamb.jpg">
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+          <!-- <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
+            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
               <img src="/assets/images/powerbox1_0.jpg">
             </div>
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
               <img src="/assets/images/morateamb.jpg">
             </div>
-          </div>
+          </div> -->
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
@@ -117,7 +139,7 @@
                 src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
               {%else%}
               <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-              alt="Image">
+                alt="Image">
               {%endif%}
             </div>
             <div class="relative w-full md:w-3/5">
