@@ -60,7 +60,7 @@
     </section>
 </main>
 {% endblock %} {% block javascript %}
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -95,7 +95,7 @@
     table(today);
 
     $(document).ready(function () {
-        $('#selected_date').on('change', function () {
+        $('.select').on('change', function () {
             table(this.value);
         });
     });
