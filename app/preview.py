@@ -10,9 +10,8 @@ from flask import (
     send_from_directory,
 )
 
-from .base import get_ads, get_currency
 from .config import *
-from .utils import cut_body
+from .utils import cut_body, get_ads, get_currency
 
 import requests
 

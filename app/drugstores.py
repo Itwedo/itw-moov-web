@@ -7,7 +7,7 @@ from flask import (
 )
 from datetime import datetime, date
 from .config import *
-from .base import get_ads, get_currency
+from .utils import get_ads, get_currency
 
 import requests
 

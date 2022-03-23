@@ -6,8 +6,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
-from .utils import cut_body
-from .base import get_ads, get_currency
+from .utils import cut_body, get_ads, get_currency
 
 import requests
 
