@@ -116,9 +116,9 @@
     background: #fff;
 }
 
-.overlay{
+/* .overlay{
     min-height: 180px;
-}
+} */
 
 .news-content{
     text-align: justify;
@@ -148,3 +148,7 @@
 }
 
 
+.article-feature-img img{
+    object-position: top;
+    object-fit: cover;
+}
