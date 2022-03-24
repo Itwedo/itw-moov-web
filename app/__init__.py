@@ -45,7 +45,7 @@ dictConfig({
         "error_file": {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "default",
-            "filename": LOG_FILE,,
+            "filename": LOG_FILE,
             "maxBytes": 10000,
             "backupCount": 10,
             "delay": True,
