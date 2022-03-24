@@ -2,6 +2,8 @@ import configparser
 import os
 
 __all__ = [
+    "DEBUG",
+    "LOG_FILE",
     "CONTACT_EMAIL_USER",
     "CONTACT_EMAIL_PASSWORD",
     "CONTACT_SMTP_SERVER",
@@ -13,6 +15,16 @@ __all__ = [
 
 config = configparser.ConfigParser()
 config.read("/etc/moov-website/config.ini")
+
+
+try:
+    misc_config = config["MISC"]
+except KeyError:
+    DEBUG = False
+    LOG_FILE = "/var/log/moov/moov-proto.log"
+else:
+    DEBUG = eval(misc_config["DEBUG"])
+    LOG_FILE = misc_config['LOG_FILE']
 
 
 try:

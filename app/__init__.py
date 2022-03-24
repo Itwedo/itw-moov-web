@@ -45,7 +45,7 @@ dictConfig({
         "error_file": {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "default",
-            "filename": "/var/log/moov/moov-proto.log",
+            "filename": LOG_FILE,,
             "maxBytes": 10000,
             "backupCount": 10,
             "delay": True,
@@ -53,7 +53,7 @@ dictConfig({
         "access_file": {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "access",
-            "filename": "/var/log/moov/moov-proto.log",
+            "filename": LOG_FILE,
             "maxBytes": 10000,
             "backupCount": 10,
             "delay": True,
@@ -61,19 +61,19 @@ dictConfig({
     },
     "loggers": {
         "gunicorn.error": {
-            "handlers": ["console"] if debug else ["console", "error_file"],
+            "handlers": ["console"] if DEBUG else ["error_file"],
             "level": "INFO",
             "propagate": False,
         },
         "gunicorn.access": {
-            "handlers": ["console"] if debug else ["console", "access_file"],
+            "handlers": ["console"] if DEBUG else ["access_file"],
             "level": "INFO",
             "propagate": False,
         }
     },
     "root": {
         "level": "DEBUG",
-        "handlers": ["console"],
+        "handlers": ["console"] if DEBUG else ["error_file"],
     }
 })
 
