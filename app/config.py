@@ -1,6 +1,4 @@
-from logging.handlers import TimedRotatingFileHandler
 import configparser
-import logging
 import os
 
 __all__ = [
@@ -50,3 +48,4 @@ else:
     STRAPI_API_AUTH_TOKEN = {
         "Authorization": f"Bearer {cms_config['STRAPI_API_AUTH_TOKEN']}"
     }
+

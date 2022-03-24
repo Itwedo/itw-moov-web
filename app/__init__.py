@@ -6,8 +6,10 @@ from flask import (
     render_template,
     send_from_directory,
 )
+from logging.config import dictConfig
 from pathlib import Path
 from .config import *
+
 from .utils import get_ads, get_currency
 from .contact import app as contact
 from .drugstores import app as drugstores
@@ -22,6 +24,60 @@ import requests
 import markdown2
 
 
+dictConfig({
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "default": {
+            "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
+        },
+        "access": {
+            "format": "%(message)s",
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+            "stream": "ext://sys.stdout",
+        },
+        "error_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "formatter": "default",
+            "filename": "/var/log/moov/moov-proto.log",
+            "maxBytes": 10000,
+            "backupCount": 10,
+            "delay": True,
+        },
+        "access_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "formatter": "access",
+            "filename": "/var/log/moov/moov-proto.log",
+            "maxBytes": 10000,
+            "backupCount": 10,
+            "delay": True,
+        }
+    },
+    "loggers": {
+        "gunicorn.error": {
+            "handlers": ["console"] if debug else ["console", "error_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "gunicorn.access": {
+            "handlers": ["console"] if debug else ["console", "access_file"],
+            "level": "INFO",
+            "propagate": False,
+        }
+    },
+    "root": {
+        "level": "DEBUG",
+        "handlers": ["console"],
+    }
+})
+
+
 app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY=b"\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G"
@@ -34,6 +90,7 @@ app.register_blueprint(magazine)
 app.register_blueprint(news)
 app.register_blueprint(preview)
 app.register_blueprint(search)
+
 
 
 @app.template_filter("date")
