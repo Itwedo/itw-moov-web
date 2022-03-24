@@ -7,7 +7,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
-from .base import get_ads, get_currency
+from .utils import get_ads, get_currency
 
 import requests
 

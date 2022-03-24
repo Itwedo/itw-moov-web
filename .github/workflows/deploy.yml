@@ -4,12 +4,10 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
-
+    
     - name: Copy repository contents via scp
       uses: appleboy/scp-action@master
       env:
