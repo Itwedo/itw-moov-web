@@ -31,7 +31,6 @@ def search():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -49,7 +48,7 @@ def search():
             actualites["data"].append(data)
 
     return render_template(
-        "recherche.html",
+        "search.html",
         result=result.json(),
         actualites=actualites,
         query=request.args.get("query", ""),
