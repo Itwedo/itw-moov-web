@@ -184,6 +184,16 @@ Xtra Small Screen - Small Mobile
     .custom-navbar{
         display: none;
     }
+
+    .header-slide{
+        height: 15vh;
+
+    }
+    .pub-slide{
+        margin: 0;
+        justify-content: center;
+        object-fit: contain !important;
+    }
    
     .currency{
        display: none;
@@ -254,6 +264,9 @@ Xtra Small Screen - Small Mobile
         height: 100%;
     }
 
+    .picture{
+        margin: 0 0 16px 0;
+    }
 
   
 

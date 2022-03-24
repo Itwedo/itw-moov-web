@@ -30,7 +30,7 @@
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
             {% if result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" style="border: 1px "
               src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
               alt="Image">
             {% else %}

@@ -18,6 +18,7 @@
     padding: 8px 20px;
     text-transform: uppercase;
     background: #0090cb;
+    height: 100%;
 }
 .currency-icon{
     font-size: 2.4rem;
@@ -42,6 +43,8 @@
     height: 100%;
 
 }
+
+
 
 .pub-slide{
     height: 15vh;
@@ -71,7 +74,7 @@
 }
 .pub-section{
     width: 100%;
-    height: 3   20px;
+    height: 320px;
     object-fit: cover;
 }
 
@@ -79,18 +82,38 @@
     margin:0 80px;
 }
 /* news */
-.news-grid .news-pub, .news-grid .news-card{
+ .news-grid .news-card{
     height: 380px !important;
     width: 95%;
     margin-bottom: 16px;
     object-fit: cover;
 }
 
+.news-grid .news-pub{
+    height: 380px !important;
+    width: 95%;
+    margin-bottom: 16px;
+    object-fit: contain;
+    background: #fff;
 
+}
+
+.news-grid .news-pub img{
+    height: 100% !important;
+    
+    margin-bottom: 16px;
+    object-fit: contain;
+
+}
 .actus-grid .news-card, .actus-grid .news-pub{
      width: 100%;
     height: 320px !important;
-    object-fit: contain;
+    
+}
+.actus-grid .news-card img{
+     width: 100%;
+    height: 100% !important;
+    object-fit: cover;
 }
 
 .actus-grid .news-card h2{
@@ -99,8 +122,10 @@
 
 
  .img-absolute-cover{
+     width: 100%;
     height: 100%;
     object-fit: cover !important;
+    object-position:center;
 }
 
 .actus-grid-side .mini-card .img-absolute-cover {
@@ -148,7 +173,7 @@
 }
 
 
-.article-feature-img img{
+.article-feature-img img, .slide-img-item{
     object-position: top;
     object-fit: cover;
 }
@@ -161,4 +186,9 @@ currency
     background:  rgb(235, 233, 233);
     border-radius: 5px;
     padding: 0 5px;
+}
+
+/* article */
+.picture{
+    margin: 0 0 0 24px;
 }
