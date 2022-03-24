@@ -35,7 +35,7 @@ def get_currency():
         },
     )
     result = {
-        i["attributes"]["currency"]: round(1 / i["attributes"]["rate"])
+        i["attributes"]["currency"]: round(i["attributes"]["value"], 2)
         for i in response.json()["data"]
     }
 

@@ -8,7 +8,7 @@ from flask import (
 )
 from pathlib import Path
 from .config import *
-from .base import get_ads, get_currency
+from .utils import get_ads, get_currency
 from .contact import app as contact
 from .drugstores import app as drugstores
 from .forex import app as forex

@@ -62,7 +62,7 @@ def get_paginated_curency(date_list, page, result_list):
             {
                 "date": i["attributes"]["date"],
                 "currency": i["attributes"]["currency"],
-                "value": round(1 / i["attributes"]["rate"]),
+                "value": round(i["attributes"]["value"], 2),
             }
         )
     return (
