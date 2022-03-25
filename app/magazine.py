@@ -62,7 +62,7 @@ def magazine():
 
 
 @app.route("/<category>")
-def category_magines(category):
+def category_magazines(category):
     ads = get_ads()
     currency = get_currency()
     result = requests.get(
@@ -78,7 +78,6 @@ def category_magines(category):
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    print(result.json())
 
     return render_template(
         "category.html",
