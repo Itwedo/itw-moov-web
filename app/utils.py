@@ -5,19 +5,36 @@ from .config import *
 import requests
 
 
-def get_ads():
+def get_ads_by_location(location):
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
-        params={"populate": "image"},
+        params={"populate": "image", "filters[location][$eq]": location},
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    response_ads = dict()
-    for ad in ads.json()["data"]:
-        images = list()
-        for image in ad["attributes"]["image"]["data"]:
-            images.append(image["attributes"]["url"])
-        response_ads[ad["attributes"]["location"]] = images
 
+    list_ads = list()
+    for ad in ads.json()["data"]:
+
+        list_ads.append(
+            {
+                "image": ad["attributes"]["image"]["data"][0]["attributes"][
+                    "url"
+                ],
+                "url": ad["attributes"]["destinationUrl"],
+            }
+        )
+
+    return list_ads
+
+
+def get_ads():
+
+    response_ads = dict()
+    response_ads["top_bar"] = get_ads_by_location("TopBar")
+    response_ads["side_bar"] = get_ads_by_location("SideBar")
+    response_ads["banner"] = get_ads_by_location("Banner")
+    response_ads["with_article"] = get_ads_by_location("WithArticle")
+    print(response_ads)
     return response_ads
 
 
