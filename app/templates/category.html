@@ -62,7 +62,9 @@
             </a>
           </div>
           <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex">
-            <img class="img-absolute-contain" src="/assets/images/DLwaMuJWsAAkY45@2x.jpg">
+            <a href="{{ads['with_article'][0]['url']}}" target="_blank">
+              <img class="img-absolute-contain" src="{{CMS_URL}}{{ads['with_article'][0]['image']}}" alt="Moov publicité">
+            </a>    
           </div>
           {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
@@ -96,15 +98,17 @@
           </div>
           {% endfor %}
           <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex">
-            <img class="img-absolute-contain" src="/assets/images/DLwaMuJWsAAkY45@2x.jpg">
+            <a href="{{ads['with_article'][1]['url']}}" target="_blank">
+              <img class="img-absolute-contain" src="{{CMS_URL}}{{ads['with_article'][1]['image']}}">
+            </a>
           </div>
           <div class="col-span-2 flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
+            {% for ad in ads['side_bar']%}
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
-              <img src="/assets/images/powerbox1_0.jpg">
+              <a href="ad['url']"></a>
+              <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité">
             </div>
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
-              <img src="/assets/images/morateamb.jpg">
-            </div>
+            {%endfor%}
           </div>
           {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
@@ -142,7 +146,9 @@
       </div>
       <div class="actus-grid-side py-5 w-full lg:w-1/3">
         <div class="news-pub news-side relative overflow-hidden mx-auto my-7 w-full">
-          <img src="/assets/images/powerbox1_0.jpg">
+          <a href="{{ads['side_bar'][0]['url']}}" target="_blank">
+            <img src="{{CMS_URL}}{{ads['side_bar'][0]['image']}}" alt="Moov publicité">
+          </a>
         </div>
         <div class="relative bg-white shadow-md py-10 px-5 mt-12 mr-0 ml-0 mb-7 md:ml-0">
           <h2 class="block border-b-2 robotoslab text-5xl font-normal text-gray-600 pb-4 text-center md:text-left">Les
@@ -185,7 +191,9 @@
           </div>
         </div>
         <div class="news-pub news-side relative overflow-hidden mx-auto my-7 w-full">
-          <img src="/assets/images/morateamb.jpg">
+          <a href="{{ads['side_bar'][1]['url']}}" target="_blank">
+            <img src="{{CMS_URL}}{{ads['side_bar'][1]['image']}}" alt="Moov publicité">
+          </a>
         </div>
       </div>
     </div>
