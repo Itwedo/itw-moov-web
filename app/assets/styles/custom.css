@@ -47,6 +47,7 @@
 }
 
 
+
 /* menu */
 .main-menu-list .menu-item{
     text-align: left;
@@ -129,6 +130,7 @@
 }
 /* news */
 
+
  .news-grid .news-card{
     height: 380px !important;
     margin-bottom: 16px;
@@ -180,7 +182,17 @@
 }
 
 
+/* .cat-vignette {
+    height: 210px !important;
+}
+.cat-vignette img{
+    height: 210px !important;
+    object-fit: cover !important;
+} */
 
+/* .cat-content-descri{
+    height: 210px;
+} */
 .cat-content-descri p{
     overflow: hidden;
      display: -webkit-box;

@@ -148,8 +148,25 @@
     </div>
   </section>
   <section class=" mx-auto py-12 3xl:container 2xl:px-36 3xl:px-48" id="home-pub">
-    <img src="{{ CMS_URL }}{{ ads['home_hugeboard'][0] }}" alt="Moov publicité" id="home_hugeboard"
-      class="pub-section" />
+
+    <div
+      class="pub-section-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+      <!-- {% for image in ads['header_large_leaderboard'] %} -->
+      <div class="pub-slide block-slide relative overflow-hidden">
+        <img src="/assets/images/206504526_4371917949494124_5011724154299493509_n.png" alt="Moov publicité"
+          id="home_hugeboard" class="pub-section" />
+
+      </div>
+      <div class="pub-slide block-slide relative overflow-hidden">
+        <img src="/assets/images/170697908_1059188741237791_1130985662165123693_n@2x.jpg" alt="Moov publicité"
+          class="pub-section" />
+
+      </div>
+      <!-- {% endfor %} -->
+
+    </div>
+
+
 
   </section>
   <section class="global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">
