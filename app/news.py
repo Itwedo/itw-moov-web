@@ -23,7 +23,7 @@ def news():
         params={
             "populate": "images",
             "sort": "id:desc",
-            "pagination[pageSize]": 10,
+            "pagination[pageSize]": 9,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
