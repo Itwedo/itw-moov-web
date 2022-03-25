@@ -53,10 +53,15 @@
           </div>
         </div>
         <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
-          <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full"><img
-              src="/assets/images/powerbox1_0.jpg"></div>
-          <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full"><img
-              src="/assets/images/morateamb.jpg"></div>
+          
+
+              {%for ad in ads['side_bar']%}
+              <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
+                  <a href="{{ad['url']}}" target="_blank"></a>
+                  <img src="{{CMS_URL}}{{ad['image']}}">
+              </div>
+             
+              {%endfor%}
         </div>
       </div>
     </div>
