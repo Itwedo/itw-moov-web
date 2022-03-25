@@ -124,18 +124,16 @@
   <section class="container mx-auto py-12 2xl:px-36 3xl:px-48">
     <div
       class="pub-section-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-      <!-- {% for image in ads['header_large_leaderboard'] %} -->
+      {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
-        <img src="/assets/images/206504526_4371917949494124_5011724154299493509_n.png" alt="Moov publicité"
+        <a href="{{ ad['url'] }}" target="_blank">
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité"
           id="home_hugeboard" class="pub-section" />
-
+        </a>
       </div>
-      <div class="pub-slide block-slide relative overflow-hidden">
-        <img src="/assets/images/170697908_1059188741237791_1130985662165123693_n@2x.jpg" alt="Moov publicité"
-          class="pub-section" />
-
-      </div>
-      <!-- {% endfor %} -->
+        
+        
+      {% endfor %}
 
     </div>
     <!-- <img class="w-auto" src="/assets/images/170697908_1059188741237791_1130985662165123693_n@2x.jpg" alt="banner"> -->

@@ -149,8 +149,10 @@
             class="header-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
             {% for ad in ads['top_bar'] %}
             <div class="pub-slide block-slide relative overflow-hidden">
-              <img src="{{ CMS_URL }}{{ad['image']}}" alt="Moov publicité" id="header_large_leaderboard"
+              <a href="{{ad['url']}}" target="_blank">
+                <img src="{{ CMS_URL }}{{ad['image']}}" alt="Moov publicité" id="header_large_leaderboard"
                 class="header-slide-img img-absolute-cover  xl:w-auto h-full xl:h-auto">
+              </a>
             </div>
             {% endfor %}
 
