@@ -34,7 +34,6 @@ def get_ads():
     response_ads["side_bar"] = get_ads_by_location("SideBar")
     response_ads["banner"] = get_ads_by_location("Banner")
     response_ads["with_article"] = get_ads_by_location("WithArticle")
-    print(response_ads)
     return response_ads
 
 
