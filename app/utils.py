@@ -5,6 +5,25 @@ from .config import *
 import requests
 
 
+def generate_dates_interval(ref_date=None, days=7, forward=False):
+    """Generates all dates, between `ref_date`
+    and `days` days backward. Flag allows to go forward
+    if needed.
+    Results in a sorted array of `days` days"""
+    result = []
+    if not ref_date:
+        ref_date = date.today()
+    result.append(ref_date)
+    count = 1
+    while count < days:
+        if forward:
+            result.append(ref_date + timedelta(count))
+        else:
+            result = [ref_date - timedelta(count)] + result
+        count += 1
+    return result
+
+
 def get_ads_by_location(location):
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
@@ -12,7 +31,7 @@ def get_ads_by_location(location):
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
-    list_ads = list()
+    list_ads = []
     for ad in ads.json()["data"]:
 
         list_ads.append(
@@ -28,8 +47,7 @@ def get_ads_by_location(location):
 
 
 def get_ads():
-
-    response_ads = dict()
+    response_ads = {}
     response_ads["top_bar"] = get_ads_by_location("TopBar")
     response_ads["side_bar"] = get_ads_by_location("SideBar")
     response_ads["banner"] = get_ads_by_location("Banner")
@@ -38,23 +56,27 @@ def get_ads():
 
 
 def get_currency():
-    today = date.today().strftime("%Y-%m-%d")
+    """Actually, this should be renamed as get_latest_currency"""
+    dates = generate_dates_interval()
+    currencies = ["USD", "EUR"]
+    result = {currency: 0 for currency in currencies}
     response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
         headers=STRAPI_API_AUTH_TOKEN,
         params={
-            "filters[date][$eq]": today,
-            "filters[currency][$in]": [
-                "USD",
-                "EUR",
-            ],
+            "sort": "date:asc",
+            "filters[date][$in]": map(lambda x: x.strftime("%Y-%m-%d"), dates),
+            "filters[currency][$in]": currencies,
         },
     )
-    result = {
-        i["attributes"]["currency"]: round(i["attributes"]["value"], 2)
-        for i in response.json()["data"]
-    }
-
+    data = response.json()["data"]
+    if data:
+        for currency in currencies:
+            infos = list(
+                filter(lambda x: x["attributes"]["currency"] == currency, data)
+            )
+            if infos:
+                result[currency] = round(infos[-1]["attributes"]["value"], 2)
     return result
 
 
