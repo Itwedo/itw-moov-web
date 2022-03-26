@@ -31,13 +31,13 @@ def config(action):
     config = configparser.ConfigParser()
     config.optionxform = lambda option: option.upper()
     if action == "generate":
-        sub.call(shlex.split("sudo mkdir /etc/moov-website"))
-        if not os.path.isfile("/etc/moov-website/config.ini"):
-            sub.call(shlex.split("sudo mkdir /etc/moov-website"))
+        sub.call(shlex.split("sudo mkdir /etc/moov"))
+        if not os.path.isfile("/etc/moov/config.ini"):
+            sub.call(shlex.split("sudo mkdir /etc/moov"))
         click.echo(
             (
                 "Copy the following configuration "
-                "in /etc/moov-website/config.ini "
+                "in /etc/moov/config.ini "
                 "and customize it\n"
             )
         )
@@ -52,5 +52,5 @@ def config(action):
         config.set("CMS", "STRAPI_API_AUTH_TOKEN", "cms_generated_token")
         config.write(sys.stdout)
     elif action == "show":
-        config.read("/etc/moov-website/config.ini")
+        config.read("/etc/moov/config.ini")
         click.echo(config)

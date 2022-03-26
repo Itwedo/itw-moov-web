@@ -35,15 +35,15 @@ moov-proto$ source .env/bin/activate
 (.env)moov-proto$ pip install moov-website-x.y.z.tar.gz
 ```
 
-The package is now installed as `moov-website` in your environment and provides a management command`moov`
+The package is now installed as `moov-website` in your environment and provides a management command `moov-website`
 
 ### Configuration
 
-This app requires a configuraiton file located in `/etc/moov-website/config.ini` .
-With the `moov` command, you can actually initalize this file:
+This app requires a configuraiton file located in `/etc/moov/config.ini` .
+With the `moov-website` command, you can actually initalize this file:
 
 ```
-(.env)moov-proto$ moov config generate
+(.env)moov-proto$ moov-website config generate
 ```
 
 ### Launching
@@ -51,7 +51,7 @@ With the `moov` command, you can actually initalize this file:
 Dev mode
 
 ```
-(.env)moov-proto$ moov run
+(.env)moov-proto$ moov-website run
 ```
 
 Production mode

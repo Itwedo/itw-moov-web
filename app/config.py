@@ -24,7 +24,7 @@ except KeyError:
     LOG_FILE = "/var/log/moov/moov-proto.log"
 else:
     DEBUG = eval(misc_config["DEBUG"])
-    LOG_FILE = misc_config['LOG_FILE']
+    LOG_FILE = misc_config['WEBSITE_LOG_FILE']
 
 
 try:
