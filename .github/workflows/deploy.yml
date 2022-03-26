@@ -30,4 +30,4 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
       with:
-        script: whoami && pwd
+        script: /home/ubuntu/.nvm/versions/node/v14.17.3/bin/pm2 restart moov-proto
