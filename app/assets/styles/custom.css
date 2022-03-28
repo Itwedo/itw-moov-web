@@ -141,6 +141,7 @@
     height: 380px !important;
     margin-bottom: 16px;
     object-fit: contain;
+    justify-content: center;
     background: #fff;
 
 }
