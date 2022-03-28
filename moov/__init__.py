@@ -10,7 +10,7 @@ from logging.config import dictConfig
 from pathlib import Path
 from .config import *
 
-from .utils import get_ads, get_currency
+from .utils import use_template
 from .contact import app as contact
 from .drugstores import app as drugstores
 from .forex import app as forex
@@ -128,36 +128,21 @@ def _markdown(s):
 
 
 @app.route("/mention.html")
+@use_template()
 def mention():
-    ads = get_ads()
-    currency = get_currency()
-    return render_template(
-        "mention.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads, currency=currency
-    )
+    return
 
 
 @app.route("/coming_soon.html")
+@use_template()
 def coming_soon():
-    ads = get_ads()
-    currency = get_currency()
-    return render_template(
-        "coming_soon.html",
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency(),
-    )
+    return
 
 
 @app.errorhandler(404)
+@use_template('404.html')
 def not_found(error):
-    ads = get_ads()
-    currency = get_currency()
-    return (
-        render_template(
-            "404.html", CMS_URL=STRAPI_PUBLIC_URL, ads=ads, currency=currency
-        ),
-        404,
-    )
+    return
 
 
 @app.route("/assets/<path:filename>")

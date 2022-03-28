@@ -147,7 +147,7 @@
         <div class="header-pub">
           <div
             class="header-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-            {% for ad in ads['top_bar'] %}
+            {% for ad in ads.get('top_bar', []) %}
             <div class="pub-slide block-slide relative overflow-hidden">
               <a href="{{ad['url']}}" target="_blank">
                 <img src="{{ CMS_URL }}{{ad['image']}}" alt="Moov publicité" id="header_large_leaderboard"

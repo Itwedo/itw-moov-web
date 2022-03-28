@@ -11,8 +11,8 @@ from wtforms import StringField, TextAreaField, SubmitField
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-from .utils import get_ads, get_currency
 from .config import *
+from .utils import get_ads, get_currency
 
 import smtplib
 import requests

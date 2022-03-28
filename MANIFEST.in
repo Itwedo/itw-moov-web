@@ -1,2 +1,2 @@
-graft app/assets
-graft app/templates
+recursive-include moov/assets *
+recursive-include moov/templates *

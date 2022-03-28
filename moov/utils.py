@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
+from flask import render_template, request
+from functools import wraps
 from .config import *
 
 import requests
@@ -96,3 +98,24 @@ def cut_body(text):
         "".join([str(tag) for tag in first_part]),
         "".join([str(tag) for tag in second_part]),
     )
+
+
+def use_template(template=None):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            template_name = template
+            if template_name is None:
+                endpoint = request.endpoint
+                if not endpoint.endswith('.html'):
+                    endpoint = f'{endpoint}.html'
+                template_name = endpoint
+            ctx = f(*args, **kwargs)
+            if not ctx:
+                ctx = {}
+            ctx["ads"] = {}
+            ctx["currency"] = get_currency()
+            ctx["CMS_URL"] = STRAPI_PUBLIC_URL
+            return render_template(template_name, **ctx)
+        return decorated_function
+    return decorator
