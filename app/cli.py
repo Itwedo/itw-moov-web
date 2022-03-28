@@ -24,33 +24,3 @@ def cmd():
 def run(hostname, port):
     app.run(host=hostname, port=port, debug=True)
 
-
-@cmd.command()
-@click.argument("action", type=click.Choice(["generate", "show"]))
-def config(action):
-    config = configparser.ConfigParser()
-    config.optionxform = lambda option: option.upper()
-    if action == "generate":
-        sub.call(shlex.split("sudo mkdir /etc/moov"))
-        if not os.path.isfile("/etc/moov/config.ini"):
-            sub.call(shlex.split("sudo mkdir /etc/moov"))
-        click.echo(
-            (
-                "Copy the following configuration "
-                "in /etc/moov/config.ini "
-                "and customize it\n"
-            )
-        )
-        config.add_section("CONTACT")
-        config.add_section("CMS")
-        config.set("CONTACT", "CONTACT_EMAIL_USER", "someone@some.domain")
-        config.set("CONTACT", "CONTACT_EMAIL_PASSWORD", "xxxxxxxxxxxx")
-        config.set("CONTACT", "CONTACT_SMTP_SERVER", "example.mail.server")
-        config.set("CONTACT", "CONTACT_SMTP_PORT", "465")
-        config.set("CMS", "STRAPI_PUBLIC_URL", "http://localhost:2337")
-        config.set("CMS", "STRAPI_API_URL", "http://localhost:2337/api")
-        config.set("CMS", "STRAPI_API_AUTH_TOKEN", "cms_generated_token")
-        config.write(sys.stdout)
-    elif action == "show":
-        config.read("/etc/moov/config.ini")
-        click.echo(config)
