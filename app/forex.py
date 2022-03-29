@@ -22,15 +22,21 @@ def exchange_rates():
     seven_date = [
         (date.today() - timedelta(i)).strftime("%Y-%m-%d") for i in range(8)
     ]
-    page_count, result = get_paginated_curency(seven_date, 0, list())
+    page_count, result, existant_dates = get_paginated_curency(
+        seven_date, 0, list(), list()
+    )
     if page_count > 1:
         for page in range(1, page_count):
-            page_count, paginated_result = get_paginated_curency(
-                seven_date, page + 1, result
+            (
+                page_count,
+                paginated_result,
+                existant_dates,
+            ) = get_paginated_curency(
+                seven_date, page + 1, result, existant_dates
             )
     return render_template(
         "exchange_rate.html",
-        seven_date=seven_date,
+        seven_date=existant_dates,
         result=result,
         date=date.today().strftime("%d/%m/%Y"),
         CMS_URL=STRAPI_PUBLIC_URL,
@@ -39,7 +45,7 @@ def exchange_rates():
     )
 
 
-def get_paginated_curency(date_list, page, result_list):
+def get_paginated_curency(date_list, page, result_list, existant_dates):
 
     paginated_response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
@@ -57,6 +63,7 @@ def get_paginated_curency(date_list, page, result_list):
             "pagination[page]": page,
         },
     )
+
     for i in paginated_response.json()["data"]:
         result_list.append(
             {
@@ -65,7 +72,10 @@ def get_paginated_curency(date_list, page, result_list):
                 "value": round(i["attributes"]["value"], 2),
             }
         )
+        if i["attributes"]["date"] not in existant_dates:
+            existant_dates.append(i["attributes"]["date"])
     return (
         paginated_response.json()["meta"]["pagination"]["pageCount"],
         result_list,
+        existant_dates,
     )
