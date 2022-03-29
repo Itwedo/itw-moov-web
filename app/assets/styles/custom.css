@@ -240,7 +240,7 @@
 
 
 .article-feature-img img, .slide-img-item{
-    object-position: top;
+    object-position: center;
     object-fit: cover;
 }
 
@@ -251,7 +251,7 @@
     z-index: 5;
 }
 
-.overlay{
+.article-overlay{
     position: absolute;
     width: 100%;
     height: 100%;

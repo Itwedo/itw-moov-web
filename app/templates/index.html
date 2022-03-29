@@ -7,7 +7,7 @@
   <section class="mx-auto 3xl:container">
     <div class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows">
       {% for item in data["spotlights"] %}
-      <div class="block-slide relative overflow-hidden">
+      <div class="home-block-slide block-slide relative overflow-hidden">
         {% if item["images"][0]['attributes']['width'] %}
         <img class="slide-img-item img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
           src="{{ CMS_URL }}{{ item['images'][0]['attributes']['url'] }}" alt="Image">
@@ -112,16 +112,17 @@
     <div class="pt-12 pb-12 bg-gray-100 px-2 md:px-10">
       <div class="news-grid grid gap-4 2xl:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div class="news-pub relative overflow-hidden w-full v1 hidden lg:flex">
-	  {% if ads['with_article'] %}
+          {% if ads['with_article'] %}
           <a href="{{ ads['with_article'][1]['url'] }}" target="_blank">
             <img src="{{ CMS_URL }}{{ ads['with_article'][1]['image'] }}" alt="Moov publicité"
-            id="header_vertical_rectangle_1">
+              id="header_vertical_rectangle_1">
           </a>
-	  {% else %}
-	  <a href="#" target="_blank">
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png" alt="Moov publicité" id="header_vertical_rectangle_1">
+          {% else %}
+          <a href="#" target="_blank">
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
+              alt="Moov publicité" id="header_vertical_rectangle_1">
           </a>
-	  {% endif %}
+          {% endif %}
         </div>
         {% for item in data["news"][:6] %}
         <div class="news-card relative overflow-hidden w-full">
@@ -148,16 +149,17 @@
         </div>
         {% endfor %}
         <div class="news-pub flex relative overflow-hidden w-full v1">
-	  {% if ads['with_article'] %}
+          {% if ads['with_article'] %}
           <a href="ads['with_article'][0]['url']" target="_blank">
             <img src="{{ CMS_URL }}{{ ads['with_article'][0]['image'] }}" alt="Moov publicité"
-            id="header_vertical_rectangle_2">
+              id="header_vertical_rectangle_2">
           </a>
           {% else %}
-	  <a href="#" target="_blank">
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png" alt="Moov publicité" id="header_vertical_rectangle_1">
+          <a href="#" target="_blank">
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
+              alt="Moov publicité" id="header_vertical_rectangle_1">
           </a>
-	  {% endif %}
+          {% endif %}
 
         </div>
       </div>
@@ -170,11 +172,10 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ CMS_URL }}{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité"
-          id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
         </a>
       </div>
-      
+
       {% endfor %}
 
     </div>

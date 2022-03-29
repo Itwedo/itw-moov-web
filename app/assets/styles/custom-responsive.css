@@ -25,6 +25,9 @@ Large Screen - Others
         display: none;
         }
 
+        .home-block-slide{
+            min-height: 640px !important;
+        }
   
 
 }
@@ -100,7 +103,7 @@ Medium Screen - Others
             z-index: 5;
         }
     
-        .overlay{
+        .article-overlay{
            display: none;
         }
        
@@ -137,7 +140,7 @@ Small Screen - Tablate
         z-index: 5;
     }
 
-    .overlay{
+    .article-overlay{
        display: none;
     }
 }
@@ -206,7 +209,7 @@ Small Screen - Mobile
         z-index: 5;
     }
 
-    .overlay{
+    .article-overlay{
        display: none;
     }
    
@@ -355,7 +358,7 @@ Xtra Small Screen - Small Mobile
         z-index: 5;
     }
 
-    .overlay{
+    .oarticle-overlay{
        display: none;
     }
 
