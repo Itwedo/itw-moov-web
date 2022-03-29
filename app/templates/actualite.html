@@ -100,6 +100,7 @@
           <div class="article-overlay">
             
           </div>
+          <a href="#body2" class="z-50 absolute bottom-0 right-4 font-light text-blue-500 hover:underline" >Lire la suite</a>
           {{ body[2]|markdown|safe }}
           
           
@@ -124,7 +125,7 @@
   </section>
   <section class="global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
     {% if body[1] %}
-    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5">
+    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5" id="body2">
       <div class="content px-5 md:px-0">
         <div class="picture float-right mb-2 w-full overflow-hidden" style="border: 1px solid red;">
           {% if number_of_images > 2 %}
