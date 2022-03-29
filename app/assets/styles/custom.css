@@ -201,11 +201,7 @@
      -webkit-box-orient: vertical;
 }
 
-input {
-    opacity: 0;
-    position: absolute;
-    pointer-events: none;
-  }
+
 .actus-grid .news-pub {
     width: 100%;
     padding: 16px 0;
@@ -245,6 +241,21 @@ input {
 .article-feature-img img, .slide-img-item{
     object-position: top;
     object-fit: cover;
+}
+
+.current-article{
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, white,transparent, transparent);
+    z-index: 10;
 }
 
 /* 

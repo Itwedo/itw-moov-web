@@ -54,7 +54,9 @@ Large Screen - Others
 
 }
 
-@media screen and (max-width: 1199px) {
+
+
+@media screen   and (max-width: 1199px) {
     
     .header-headline{
         width: 41vw;
@@ -72,6 +74,7 @@ Large Screen - Others
         display: none;
         }
   
+      
 }
 
 /*
@@ -89,6 +92,18 @@ Medium Screen - Others
     .article-pub {
         display: none;
         }
+
+        .current-article{
+            position: relative;
+            height:100%;
+            overflow: hidden;
+            z-index: 5;
+        }
+    
+        .overlay{
+           display: none;
+        }
+       
 }
 /*
 ====================================
@@ -113,6 +128,17 @@ Small Screen - Tablate
     
     .main-menu-list .menu-item,.main-menu-list .block{
         font-size: 15px;    
+    }
+
+    .current-article{
+        position: relative;
+        height:100%;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .overlay{
+       display: none;
     }
 }
 
@@ -171,6 +197,17 @@ Small Screen - Mobile
 
     .article-pub{
         display: block;
+    }
+
+    .current-article{
+        position: relative;
+        height:100%;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .overlay{
+       display: none;
     }
    
 }
@@ -305,6 +342,18 @@ Xtra Small Screen - Small Mobile
         height: 160px;
         justify-content: center;
         object-fit: contain !important;
+    }
+
+
+    .current-article{
+        position: relative;
+        height:100%;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .overlay{
+       display: none;
     }
 
 }
