@@ -254,8 +254,8 @@
 .article-overlay{
     position: absolute;
     width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to top, white,transparent, transparent);
+    height: 30%;
+    background-image: linear-gradient(to top,white,white, white,transparent);
     z-index: 10;
 }
 
