@@ -183,17 +183,18 @@
 }
 
 
-/* .cat-vignette {
-    height: 210px !important;
+.cat-mini-card{
+    height: 220px;
 }
-.cat-vignette img{
-    height: 210px !important;
-    object-fit: cover !important;
-} */
 
-/* .cat-content-descri{
-    height: 210px;
-} */
+.cat-content-descri h3{
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .cat-content-descri p{
     overflow: hidden;
      display: -webkit-box;

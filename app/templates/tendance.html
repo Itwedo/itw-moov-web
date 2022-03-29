@@ -74,7 +74,7 @@
               <h3 class="text-3xl mb-3  text-gray-800 md:text-5xl leading-snug">
                 {{ news["attributes"]["title"] }}
               </h3>
-              <p class="text-xl text-justify md:text-2xl leading-snug ">{{ news["attributes"]["head"] }}</p>
+              <p class="text-xl  md:text-2xl leading-snug ">{{ news["attributes"]["head"] }}</p>
             </div>
           </div>
         </a>
@@ -127,12 +127,11 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité"
-          id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
         </a>
       </div>
-        
-        
+
+
       {% endfor %}
 
     </div>
@@ -173,7 +172,7 @@
               </h3>
 
 
-              <p class="text-xl text-justify md:text-2xl leading-snug cat-heading-text">
+              <p class="text-xl  md:text-2xl leading-snug cat-heading-text">
                 {{ news["attributes"]["head"] }}
               </p>
 

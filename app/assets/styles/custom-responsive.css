@@ -323,6 +323,7 @@ Xtra Small Screen - Small Mobile
 
     .header-pub{
         height: 15vh;
+        
     }
     
     .header-slide{
@@ -330,6 +331,8 @@ Xtra Small Screen - Small Mobile
         height: 100%;
     
     }
+
+    
 
     .pub-section{
         width: 100%;
@@ -356,5 +359,20 @@ Xtra Small Screen - Small Mobile
        display: none;
     }
 
+
+    /* tendance */
+    .cat-mini-card{
+        height: 210px;
+    }
+    .cat-content-descri h3{
+        font-size: 16px;
+    }
+
+    .cat-content-descri .card-time{
+        font-size: 13px;
+    }
+    .cat-content-descri .cat-pasti span {
+        font-size: 16px;
+    }
 }
 
