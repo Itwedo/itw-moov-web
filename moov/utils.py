@@ -126,7 +126,7 @@ def use_template(template=None):
             ctx = f(*args, **kwargs)
             if not ctx:
                 ctx = {}
-            ctx["ads"] = {}
+            ctx["ads"] = get_ads()
             ctx["currency"] = get_currency()
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
             return render_template(template_name, **ctx)
