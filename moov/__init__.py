@@ -24,58 +24,60 @@ import requests
 import markdown2
 
 
-dictConfig({
-    "version": 1,
-    "disable_existing_loggers": True,
-    "formatters": {
-        "default": {
-            "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
+dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": True,
+        "formatters": {
+            "default": {
+                "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
+            },
+            "access": {
+                "format": "%(message)s",
+            },
         },
-        "access": {
-            "format": "%(message)s",
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "default",
-            "stream": "ext://sys.stdout",
+        "handlers": {
+            "console": {
+                "level": "INFO",
+                "class": "logging.StreamHandler",
+                "formatter": "default",
+                "stream": "ext://sys.stdout",
+            },
+            "error_file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "formatter": "default",
+                "filename": LOG_FILE,
+                "maxBytes": 10000,
+                "backupCount": 10,
+                "delay": True,
+            },
+            "access_file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "formatter": "access",
+                "filename": LOG_FILE,
+                "maxBytes": 10000,
+                "backupCount": 10,
+                "delay": True,
+            },
         },
-        "error_file": {
-            "class": "logging.handlers.RotatingFileHandler",
-            "formatter": "default",
-            "filename": LOG_FILE,
-            "maxBytes": 10000,
-            "backupCount": 10,
-            "delay": True,
+        "loggers": {
+            "gunicorn.error": {
+                "handlers": ["console"] if DEBUG else ["error_file"],
+                "level": "INFO",
+                "propagate": False,
+            },
+            "gunicorn.access": {
+                "handlers": ["console"] if DEBUG else ["access_file"],
+                "level": "INFO",
+                "propagate": False,
+            },
         },
-        "access_file": {
-            "class": "logging.handlers.RotatingFileHandler",
-            "formatter": "access",
-            "filename": LOG_FILE,
-            "maxBytes": 10000,
-            "backupCount": 10,
-            "delay": True,
-        }
-    },
-    "loggers": {
-        "gunicorn.error": {
+        "root": {
+            "level": "DEBUG",
             "handlers": ["console"] if DEBUG else ["error_file"],
-            "level": "INFO",
-            "propagate": False,
         },
-        "gunicorn.access": {
-            "handlers": ["console"] if DEBUG else ["access_file"],
-            "level": "INFO",
-            "propagate": False,
-        }
-    },
-    "root": {
-        "level": "DEBUG",
-        "handlers": ["console"] if DEBUG else ["error_file"],
     }
-})
+)
 
 
 app = Flask(__name__)
@@ -90,7 +92,6 @@ app.register_blueprint(magazine)
 app.register_blueprint(news)
 app.register_blueprint(preview)
 app.register_blueprint(search)
-
 
 
 @app.template_filter("date")

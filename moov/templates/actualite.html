@@ -8,7 +8,7 @@
 <main>
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden">
-      {% if images[0]['attributes']['width']%}
+      {% if images and images[0]['attributes']['width']%}
       <img class="img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image">
       {% else %}
       <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
@@ -30,15 +30,18 @@
         class="hidden flex-wrap flex-row justify-end w-full md:flex lg:flex-col lg:justify-start lg:w-1/3 py-10 2xl:pl-36 3xl:pl-48">
         {% for ad in ads['side_bar'][:2]%}
         <div
-          class="news-pub news-side flex flex-wrap relative overflow-hidden my-7 items-end justify-end ml-auto mr-0 w-1/2 lg:w-full">  
+          class="news-pub news-side flex flex-wrap relative overflow-hidden my-7 items-end justify-end ml-auto mr-0 w-1/2 lg:w-full">
           <a href="{{ad['url']}}" target="_blank">
             <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité">
           </a>
         </div>
         {%endfor%}
-        
+
       </div>
-      <div class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48">
+      <div
+        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article">
+
+        <div class="article-overlay"></div>
         <div class="cat-pasti">
           <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news['data']['attributes']['category'] }}</span>
         </div>
@@ -55,7 +58,7 @@
           </span>
         </div>
         <div class="content news-content">
-          <p>{{ news['data']['attributes']['head'] }}</p><br />
+          <p>{{ news['data']['attributes']['head'] }}</p> <br />
 
           <div class="article-pub">
             <div
@@ -63,7 +66,8 @@
               {% for ad in ads['side_bar'][:2]%}
               <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
                 <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
-                  <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"></a>
+                  <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}"
+                      alt="Moov publicité"></a>
                 </div>
 
               </div>
@@ -88,10 +92,19 @@
           {% if not body[1] %}
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
-              class="modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
+              class="hidden modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
               <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
             </button>
           </div>
+          {%else%}
+          <div class="article-overlay">
+
+          </div>
+          <a href="#body2" class="z-50 absolute bottom-0 right-4 font-light text-blue-500 hover:underline">Lire la
+            suite</a>
+          {{ body[2]|markdown|safe }}
+
+
           {% endif %}
         </div>
       </div>
@@ -100,23 +113,22 @@
   <section class=" global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <!-- <img class="w-auto pub-section" src="/assets/images/206504526_4371917949494124_5011724154299493509_n@2x.jpg"
       alt="banner"> -->
-      <div
+    <div
       class="pub-section-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité"
-          id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
         </a>
-      </div>   
+      </div>
       {% endfor %}
     </div>
   </section>
   <section class="global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
     {% if body[1] %}
-    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5">
-      <div class="content px-5 md:px-0">
-        <div class="picture float-right mb-2 w-full overflow-hidden" style="border: 1px solid red;">
+    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5" id="body2">
+      <div class="content text-justify px-5 md:px-0">
+        <div class="picture float-right mb-2 w-full overflow-hidden">
           {% if number_of_images > 2 %}
           <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[2]['attributes']['url'] }}">
           {% endif %}
@@ -125,7 +137,7 @@
       </div>
       <div class="comment-btn my-9 flex justify-center md:justify-end">
         <button
-          class="modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
+          class="hidden modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
           <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
         </button>
       </div>
@@ -172,13 +184,13 @@
           <img class="h-20 mx-5 py-5" src="/assets/images/arrow-down.svg">
         </div>
       </div>
-        </div>
+    </div>
     {% endif %}
   </section>
   <section class="pt-7 md:pt-24">
     <div class="mx-auto overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
       <div class="mx-auto section-title-v1 mb-14">
-        <h2 class="text-7xl text-center px-12 bg-white my-0">Articles Similaires</h2>
+        <h2 class="text-7xl text-center px-12 bg-white my-0">Articles Similaires </h2>
       </div>
     </div>
     <div class="bg-black py-16 px-5 md:py-24 3xl:px-10 mx-auto 3xl:container">

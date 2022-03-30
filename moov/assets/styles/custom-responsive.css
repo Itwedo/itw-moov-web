@@ -25,6 +25,9 @@ Large Screen - Others
         display: none;
         }
 
+        .home-block-slide{
+            min-height: 640px !important;
+        }
   
 
 }
@@ -54,7 +57,9 @@ Large Screen - Others
 
 }
 
-@media screen and (max-width: 1199px) {
+
+
+@media screen   and (max-width: 1199px) {
     
     .header-headline{
         width: 41vw;
@@ -72,6 +77,7 @@ Large Screen - Others
         display: none;
         }
   
+      
 }
 
 /*
@@ -89,6 +95,18 @@ Medium Screen - Others
     .article-pub {
         display: none;
         }
+
+        .current-article{
+            position: relative;
+            height:100%;
+            overflow: hidden;
+            z-index: 5;
+        }
+    
+        .article-overlay{
+           display: none;
+        }
+       
 }
 /*
 ====================================
@@ -113,6 +131,17 @@ Small Screen - Tablate
     
     .main-menu-list .menu-item,.main-menu-list .block{
         font-size: 15px;    
+    }
+
+    .current-article{
+        position: relative;
+        height:100%;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .article-overlay{
+       display: none;
     }
 }
 
@@ -171,6 +200,17 @@ Small Screen - Mobile
 
     .article-pub{
         display: block;
+    }
+
+    .current-article{
+        position: relative;
+        height:100%;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .article-overlay{
+       display: none;
     }
    
 }
@@ -286,6 +326,7 @@ Xtra Small Screen - Small Mobile
 
     .header-pub{
         height: 15vh;
+        
     }
     
     .header-slide{
@@ -293,6 +334,8 @@ Xtra Small Screen - Small Mobile
         height: 100%;
     
     }
+
+    
 
     .pub-section{
         width: 100%;
@@ -307,5 +350,32 @@ Xtra Small Screen - Small Mobile
         object-fit: contain !important;
     }
 
+
+    .current-article{
+        position: relative;
+        height:100%;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .article-overlay{
+       display: none;
+    }
+
+
+    /* tendance */
+    .cat-mini-card{
+        height: 210px;
+    }
+    .cat-content-descri h3{
+        font-size: 16px;
+    }
+
+    .cat-content-descri .card-time{
+        font-size: 13px;
+    }
+    .cat-content-descri .cat-pasti span {
+        font-size: 16px;
+    }
 }
 
