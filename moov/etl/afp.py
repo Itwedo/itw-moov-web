@@ -9,7 +9,7 @@ from .. import config
 class Connector(object):
     def __init__(self, url):
         self.url = url
-        self.source = self.__get_source__()
+        self.source = None
         self.feed = []
 
     def __get_source__(self):
@@ -21,6 +21,7 @@ class Connector(object):
             return None
 
     def get_feed(self):
+        self.source = self.__get_source__()
         with self.source as source:
             category = source.html.find('description', first=True).text
             category = category.title().replace('é', 'e')

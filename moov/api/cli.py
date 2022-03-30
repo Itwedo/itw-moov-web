@@ -103,7 +103,7 @@ def filter_articles(minchars):
 @cmd.command()
 @click.argument('url')
 def get_afp_feed(url):
-    obj = afp.connector.Connector(url)
+    obj = afp.Connector(url)
     feed = obj.get_feed()
     with click.progressbar(obj.feed, length=len(obj.feed)) as bar:
         for info in bar:
@@ -119,7 +119,7 @@ def update_currency_exchange():
 @cmd.command()
 @click.argument('filepath', type=click.Path(exists=True))
 def parse_drugstores_list(filepath):
-    obj = drugstore.connector.Connector(filepath)
+    obj = drugstore.Connector(filepath)
     obj.parse_file()
     with click.progressbar(obj.data, length=len(obj.data)) as bar:
         for info in bar:
