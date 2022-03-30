@@ -1,2 +1,2 @@
-recursive-include moov/assets *
-recursive-include moov/templates *
+include moov/assets/*
+include moov/templates/*
