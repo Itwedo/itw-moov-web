@@ -6,7 +6,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
-from .utils import cut_body, get_ads, get_currency
+from .utils import cut_body, use_template
 
 import requests
 
@@ -15,9 +15,8 @@ app = Blueprint("news", __name__, url_prefix="/actualites")
 
 
 @app.route("/")
+@use_template("actualites.html")
 def news():
-    ads = get_ads()
-    currency = get_currency()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -29,21 +28,15 @@ def news():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
-    return render_template(
-        "actualites.html",
-        result=result.json(),
-        page=request.args.get("page", 1),
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {
+        'result': result.json(),
+        'page': request.args.get("page", 1)
+    }
 
 
 @app.route("/<id>")
+@use_template("actualite.html")
 def news_article(id):
-    ads = get_ads()
-    currency = get_currency()
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": "images"},
@@ -94,15 +87,11 @@ def news_article(id):
             if element["id"] != id and element["attributes"]["images"]["data"]
         ][:20]
 
-    return render_template(
-        "actualite.html",
-        news=news,
-        images=images,
-        number_of_images=number_of_images,
-        body=body,
-        same_category=same_category,
-        regular=regular,
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {
+        'news': news,
+        'images': images,
+        'number_of_images': number_of_images,
+        'body': body,
+        'same_category': same_category,
+        'regular': regular
+    }

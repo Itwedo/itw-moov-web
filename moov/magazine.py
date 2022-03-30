@@ -6,7 +6,7 @@ from flask import (
     send_from_directory,
 )
 
-from .utils import get_ads, get_currency
+from .utils import use_template
 from .config import *
 
 import requests
@@ -35,10 +35,9 @@ app = Blueprint("magazine", __name__, url_prefix="/magazine")
 
 
 @app.route("/")
+@use_template("tendance.html")
 def magazine():
     # 18/page
-    ads = get_ads()
-    currency = get_currency()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -50,21 +49,12 @@ def magazine():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
-    return render_template(
-        "tendance.html",
-        result=result.json(),
-        page=request.args.get("page", 1),
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {'result': result.json(), 'page': request.args.get("page", 1)}
 
 
 @app.route("/<category>")
+@use_template("category.html")
 def category_magazines(category):
-    ads = get_ads()
-    currency = get_currency()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -78,13 +68,8 @@ def category_magazines(category):
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-
-    return render_template(
-        "category.html",
-        category=get_category[category]["display"],
-        result=result.json(),
-        page=request.args.get("page", 1),
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {
+        'category': get_category[category]["display"],
+        'result': result.json(),
+        'page': request.args.get("page", 1),
+    }

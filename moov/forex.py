@@ -7,7 +7,7 @@ from flask import (
 )
 from datetime import datetime, date, timedelta
 from .config import *
-from .utils import get_ads, get_currency
+from .utils import use_template
 
 import requests
 
@@ -16,9 +16,8 @@ app = Blueprint("forex", __name__, url_prefix="/taux-de-change")
 
 
 @app.route("/")
+@use_template("exchange_rate.html")
 def exchange_rates():
-    ads = get_ads()
-    currency = get_currency()
     seven_date = [
         (date.today() - timedelta(i)).strftime("%Y-%m-%d") for i in range(8)
     ]
@@ -34,19 +33,14 @@ def exchange_rates():
             ) = get_paginated_curency(
                 seven_date, page + 1, result, existant_dates
             )
-    return render_template(
-        "exchange_rate.html",
-        seven_date=existant_dates,
-        result=result,
-        date=date.today().strftime("%d/%m/%Y"),
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {
+        'seven_date': existant_dates,
+        'result': result,
+        'date': date.today().strftime("%d/%m/%Y"),
+    }
 
 
 def get_paginated_curency(date_list, page, result_list, existant_dates):
-
     paginated_response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
         headers=STRAPI_API_AUTH_TOKEN,

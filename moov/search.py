@@ -7,7 +7,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
-from .utils import get_ads, get_currency
+from .utils import use_template
 
 import requests
 
@@ -16,9 +16,8 @@ app = Blueprint("search", __name__, url_prefix="/recherche")
 
 
 @app.route("/")
+@use_template("search.html")
 def search():
-    ads = get_ads()
-    currency = get_currency()
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -47,13 +46,9 @@ def search():
         if data["attributes"]["images"]["data"] is not None:
             actualites["data"].append(data)
 
-    return render_template(
-        "search.html",
-        result=result.json(),
-        actualites=actualites,
-        query=request.args.get("query", ""),
-        page=request.args.get("page", 1),
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {
+        'result': result.json(),
+        'actualites': actualites,
+        'query': request.args.get("query", ""),
+        'page': request.args.get("page", 1),
+    }

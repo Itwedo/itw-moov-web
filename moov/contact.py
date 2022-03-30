@@ -12,7 +12,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 from .config import *
-from .utils import get_ads, get_currency
+from .utils import use_template
 
 import smtplib
 import requests
@@ -29,9 +29,8 @@ class ContactForm(FlaskForm):
 
 
 @app.route("/contact.html", methods=["GET", "POST"])
+@use_template()
 def contact():
-    ads = get_ads()
-    currency = get_currency()
     form = ContactForm()
     if request.method == "POST":
         data = form.data
@@ -67,10 +66,4 @@ def contact():
         #     server.login(EMAIL_USER, EMAIL_PASSWORD)
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
         return redirect("/contact.html")
-    return render_template(
-        "contact.html",
-        form=form,
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {'form': form }

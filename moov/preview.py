@@ -11,7 +11,7 @@ from flask import (
 )
 
 from .config import *
-from .utils import cut_body, get_ads, get_currency
+from .utils import cut_body, use_template
 
 import requests
 
@@ -20,10 +20,9 @@ app = Blueprint("preview", __name__, url_prefix="/preview")
 
 
 @app.route("/actualites/<string:slug>", methods=["GET", "POST"])
+@use_template("actualite.html")
 def preview_page(slug):
     """Given a slug, fetch and display page"""
-    ads = get_ads()
-    currency = get_currency()
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -80,15 +79,11 @@ def preview_page(slug):
             if element["id"] != id and element["attributes"]["images"]["data"]
         ][:20]
 
-    return render_template(
-        "actualite.html",
-        news={"data": article},
-        images=images,
-        number_of_images=number_of_images,
-        body=body,
-        same_category=same_category,
-        regular=regular,
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {
+        'news': {"data": article},
+        'images': images,
+        'number_of_images': number_of_images,
+        'body': body,
+        'same_category': same_category,
+        'regular': regular,
+    }

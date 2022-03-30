@@ -7,7 +7,7 @@ from flask import (
 )
 from datetime import datetime, date
 from .config import *
-from .utils import get_ads, get_currency
+from .utils import use_template
 
 import requests
 
@@ -16,9 +16,8 @@ app = Blueprint("drugstores", __name__, url_prefix="/pharmacies")
 
 
 @app.route("/")
+@use_template("pharmacie.html")
 def drugstores():
-    ads = get_ads()
-    currency = get_currency()
     today = date.today().strftime("%Y-%m-%d")
     todays_month = today.split("-")[1]
     response = requests.get(
@@ -38,12 +37,4 @@ def drugstores():
     stop = datetime.strptime(
         result[0]["attributes"]["stop"], "%Y-%m-%d"
     ).strftime("%d/%m/%Y")
-    return render_template(
-        "pharmacie.html",
-        start=start,
-        stop=stop,
-        result=result,
-        CMS_URL=STRAPI_PUBLIC_URL,
-        ads=ads,
-        currency=currency,
-    )
+    return {'start': start, 'stop': stop, 'result': result}
