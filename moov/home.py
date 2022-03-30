@@ -7,7 +7,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
-from .utils import get_ads, get_currency
+from .utils import use_template
 
 import requests
 
@@ -16,9 +16,8 @@ app = Blueprint("home", __name__, url_prefix="/")
 
 
 @app.route("/")
+@use_template("index.html")
 def home():
-    ads = get_ads()
-    currency = get_currency()
     spotlights = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -101,10 +100,4 @@ def home():
             if item["attributes"]["images"]["data"]
         ],
     }
-    return render_template(
-        "index.html",
-        data=data,
-        ads=ads,
-        CMS_URL=STRAPI_PUBLIC_URL,
-        currency=currency,
-    )
+    return {'data': data}
