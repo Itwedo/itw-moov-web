@@ -180,12 +180,12 @@
             Actualités<span class="menu-hover-line bg-red-400"></span>
           </a>
           <div class="dropdown-content">
-            <a href="#" class="menu-item horizontal">Vaovao</a>
-            <a href="#" class="menu-item horizontal">Nationale</a>
-            <a href="#" class="menu-item horizontal">Nationale</a>
-            <a href="#" class="menu-item horizontal">Economie</a>
-            <a href="#" class="menu-item horizontal">Sports</a>
-            <a href="#" class="menu-item horizontal">Culture</a>
+            <a href="{{url_for('news.category_actuality',category='vaovao')}}" class="menu-item horizontal">Vaovao</a>
+            <a href="{{url_for('news.category_actuality',category='nationale')}}" class="menu-item horizontal">Nationale</a>
+            <a href="{{url_for('news.category_actuality',category='internationale')}}" class="menu-item horizontal">Interationale</a>
+            <a href="{{url_for('news.category_actuality',category='economie')}}" class="menu-item horizontal">Economie</a>
+            <a href="{{url_for('news.category_actuality',category='sports')}}" class="menu-item horizontal">Sports</a>
+            <a href="{{url_for('news.category_actuality',category='culture')}}" class="menu-item horizontal">Culture</a>
           </div>
         </li>
         <li class="mx-3 dropdown">
@@ -193,13 +193,13 @@
             Tendances Moov<span class="menu-hover-line bg-blue-400"></span>
           </a>
           <div class="dropdown-content">
-            <a href="#" class="menu-item horizontal">Gastronomie</a>
-            <a href="#" class="menu-item horizontal">Tourisme & Voyage</a>
-            <a href="#" class="menu-item horizontal">Education & Emploi</a>
-            <a href="#" class="menu-item horizontal">Santé & Bien-Etre</a>
-            <a href="#" class="menu-item horizontal">Maison & Jardin</a>
-            <a href="#" class="menu-item horizontal">Auto-Moto</a>
-            <a href="#" class="menu-item horizontal">Famille</a>
+            <a href="{{ url_for('magazine.category_magazines', category='gastronomie') }}" class="menu-item horizontal">Gastronomie</a>
+            <a href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}" class="menu-item horizontal">Tourisme & Voyage</a>
+            <a href="{{ url_for('magazine.category_magazines', category='education-emploi') }}" class="menu-item horizontal">Education & Emploi</a>
+            <a href="{{ url_for('magazine.category_magazines', category='sante-bien-etre') }}" class="menu-item horizontal">Santé & Bien-Etre</a>
+            <a href="{{ url_for('magazine.category_magazines', category='maison-jardin') }}" class="menu-item horizontal">Maison & Jardin</a>
+            <a href="{{ url_for('magazine.category_magazines', category='auto-moto') }}" class="menu-item horizontal">Auto-Moto</a>
+            <a href="{{ url_for('magazine.category_magazines', category='famille') }}" class="menu-item horizontal">Famille</a>
           </div>
         </li>
 
@@ -324,13 +324,13 @@
     <div class="flex items-center">
       <ul class="top-menu list-none inline-flex flex-wrap flex-col items-center justify-center pb-7 w-auto mx-auto">
         <li class="h-14 px-4 py-2 border-b-2 border-gray-100 text-center w-full">
-          <a class="robotoslab font-bold hover:text-black" href="#">Telma TV</a>
+          <a class="robotoslab font-bold hover:text-black" href="https://telma.tv">Telma TV</a>
         </li>
         <li class="h-14 px-4 py-2 border-b-2 border-gray-100 text-center w-full">
-          <a class="robotoslab font-bold hover:text-black" href="#">Mbalik</a>
+          <a class="robotoslab font-bold hover:text-black" href="https://mbalik.telma.mg">Mbalik</a>
         </li>
         <li class="h-14 px-4 py-2 border-b-2 border-gray-100 text-center w-full">
-          <a class="robotoslab font-bold hover:text-black" href="#">Telma.mg</a>
+          <a class="robotoslab font-bold hover:text-black" href="https://telma.mg">Telma.mg</a>
         </li>
         <!-- <li class="h-14 px-4 py-2 text-center w-full">
           <a class="inline-flex items-center flex-nowrap robotoslab font-bold text-gray-600 hover:text-black" href="#">
@@ -351,22 +351,22 @@
             </div>
             <ul class="sub-menu hidden  robotoslab text-bold h-1 opacity-0 z-0" id="default_active">
               <li>
-                <a href="#" class="block pl-7 py-2">Vaovao</a>
+                <a href="{{url_for('news.category_actuality',category='vaovao')}}" class="block pl-7 py-2">Vaovao</a>
               </li>
               <li>
-                <a href="#" class="block pl-7 py-2">Nationale</a>
+                <a href="{{url_for('news.category_actuality',category='nationale')}}" class="block pl-7 py-2">Nationale</a>
               </li>
               <li>
-                <a href="#" class="block pl-7 py-2">Internationale</a>
+                <a href="{{url_for('news.category_actuality',category='internationale')}}" class="block pl-7 py-2">Internationale</a>
               </li>
               <li>
-                <a href="#" class="block pl-7 py-2">Economie</a>
+                <a href="{{url_for('news.category_actuality',category='economie')}}" class="block pl-7 py-2">Economie</a>
               </li>
               <li>
-                <a href="#" class="block pl-7 py-2">Sports</a>
+                <a href="{{url_for('news.category_actuality',category='sports')}}" class="block pl-7 py-2">Sports</a>
               </li>
               <li>
-                <a href="#" class="block pl-7 py-2">Culture</a>
+                <a href="{{url_for('news.category_actuality',category='culture')}}" class="block pl-7 py-2">Culture</a>
               </li>
             </ul>
           </li>
@@ -380,14 +380,14 @@
             </div>
 
             <ul class="sub-menu hidden  robotoslab text-bold h-1 opacity-0 z-0">
-              <li><a href=" #" class="block pl-7 py-2">Gastronomie</a>
+              <li><a href="{{ url_for('magazine.category_magazines', category='gastronomie') }}" class="block pl-7 py-2">Gastronomie</a>
               </li>
-              <li><a href="#" class="block pl-7 py-2">Tourisme & Voyage</a></li>
-              <li><a href="#" class="block pl-7 py-2">Education & Emploi</a></li>
-              <li><a href="#" class="block pl-7 py-2">Santé & Bien-Etre</a></li>
-              <li><a href="#" class="block pl-7 py-2">Maison & Jardin</a></li>
-              <li><a href="#" class="block pl-7 py-2">Auto-Moto</a></li>
-              <li><a href="#" class="block pl-7 py-2">Famille</a></li>
+              <li><a href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}" class="block pl-7 py-2">Tourisme & Voyage</a></li>
+              <li><a href="{{ url_for('magazine.category_magazines', category='education-emploi') }}" class="block pl-7 py-2">Education & Emploi</a></li>
+              <li><a href="{{ url_for('magazine.category_magazines', category='sante-bien-etre') }}" class="block pl-7 py-2">Santé & Bien-Etre</a></li>
+              <li><a href="{{ url_for('magazine.category_magazines', category='maison-jardin') }}" class="block pl-7 py-2">Maison & Jardin</a></li>
+              <li><a href="{{ url_for('magazine.category_magazines', category='auto-moto') }}" class="block pl-7 py-2">Auto-Moto</a></li>
+              <li><a href="{{ url_for('magazine.category_magazines', category='famille') }}" class="block pl-7 py-2">Famille</a></li>
             </ul>
           </li>
 

@@ -27,7 +27,7 @@
 	    <p>Aucun résultat trouvé</p>
 	    {% endif %}
             {% for news in result["data"] %}
-            <a class="mini-card relative flex" href={{ url_for('news.news_article', id=news["id"]) }}>
+            <a class="mini-card relative flex" href={{ url_for('article.news_article', id=news["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-1/3">
                 {% if news["attributes"]["images"]["data"] %}
                 <img
@@ -73,7 +73,7 @@
                   récents</button>
               </div>
               {% for news in actualites["data"] %}
-              <a class="mini-card relative flex pb-4" href={{ url_for('news.news_article', id=news["id"]) }}>
+              <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"]) }}>
                 <div class="relative overflow-hidden w-full md:w-2/5">
                   {%if news["attributes"]["images"]["data"] %}
                   <img

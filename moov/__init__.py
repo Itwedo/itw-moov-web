@@ -19,6 +19,7 @@ from .magazine import app as magazine
 from .news import app as news
 from .preview import app as preview
 from .search import app as search
+from .article import app as article
 
 import requests
 import markdown2
@@ -92,6 +93,7 @@ app.register_blueprint(magazine)
 app.register_blueprint(news)
 app.register_blueprint(preview)
 app.register_blueprint(search)
+app.register_blueprint(article)
 
 
 @app.template_filter("date")
@@ -141,7 +143,7 @@ def coming_soon():
 
 
 @app.errorhandler(404)
-@use_template('404.html')
+@use_template("404.html")
 def not_found(error):
     return
 
