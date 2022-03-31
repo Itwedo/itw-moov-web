@@ -49,7 +49,7 @@ def magazine():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    return {'result': result.json(), 'page': request.args.get("page", 1)}
+    return {"result": result.json(), "page": request.args.get("page", 1)}
 
 
 @app.route("/<category>")
@@ -62,14 +62,15 @@ def category_magazines(category):
             "sort": "id:desc",
             "filters[Type][$eq]": "Tendance",
             "filters[category][$in]": get_category[category]["content"],
-            "pagination[pageSize]": 10,
+            "pagination[pageSize]": 9,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
     return {
-        'category': get_category[category]["display"],
-        'result': result.json(),
-        'page': request.args.get("page", 1),
+        "category": get_category[category]["display"],
+        "result": result.json(),
+        "page": request.args.get("page", 1),
+        "type": "Tendances",
     }
