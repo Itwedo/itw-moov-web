@@ -13,6 +13,20 @@ import requests
 
 app = Blueprint("news", __name__, url_prefix="/actualites")
 
+get_category = {
+    "vaovao": {"content": "Vaovao", "display": "Vaovao"},
+    "nationale": {"content": "Nationale", "display": "Nationale"},
+    "internationale": {
+        "content": "Internationale",
+        "display": "Internationale",
+    },
+    "economie": {"content": "Economie", "display": "Economie"},
+    "sport": {"content": "Sports", "display": "Sports"},
+    "culture": {"content": "Culture", "display": "Culture"},
+    "gasy-winner": {"content": "GasyWinner", "display": "Gasy Winner"},
+    "sante-medecine": {"content": "sante", "display": "Medecine et santé"},
+}
+
 
 @app.route("/")
 @use_template("actualites.html")
@@ -28,10 +42,7 @@ def news():
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
-    return {
-        'result': result.json(),
-        'page': request.args.get("page", 1)
-    }
+    return {"result": result.json(), "page": request.args.get("page", 1)}
 
 
 @app.route("/<id>")
@@ -88,10 +99,35 @@ def news_article(id):
         ][:20]
 
     return {
-        'news': news,
-        'images': images,
-        'number_of_images': number_of_images,
-        'body': body,
-        'same_category': same_category,
-        'regular': regular
+        "news": news,
+        "images": images,
+        "number_of_images": number_of_images,
+        "body": body,
+        "same_category": same_category,
+        "regular": regular,
+    }
+
+
+@app.route("/<category>")
+@use_template("category.html")
+def category_actuality(category):
+    result = requests.get(
+        url=f"{STRAPI_API_URL}/actualites",
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[category][$eq]": get_category[category]["content"],
+            "pagination[pageSize]": 9,
+            "pagination[page]": request.args.get("page", 1),
+            "pagination[withCount]": 1,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    print("result")
+    print(result.json()["data"][0])
+    return {
+        "category": get_category[category]["display"],
+        "result": result.json(),
+        "page": request.args.get("page", 1),
+        "type": "Actualités",
     }
