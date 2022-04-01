@@ -58,10 +58,9 @@ jobs:
           target: "/home/ubuntu/moov-proto"
       - name: Restart PM2 service
         uses: appleboy/ssh-action@master
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
         with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
           script: /home/ubuntu/.nvm/versions/node/v14.17.3/bin/pm2 restart moov-proto && /home/ubuntu/.nvm/versions/node/v14.17.3/bin/pm2 list
