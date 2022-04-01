@@ -63,4 +63,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: /home/ubuntu/.nvm/versions/node/v14.17.3/bin/pm2 restart moov-proto && /home/ubuntu/.nvm/versions/node/v14.17.3/bin/pm2 list
+          script: ls -lah
