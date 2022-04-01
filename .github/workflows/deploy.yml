@@ -56,10 +56,6 @@ jobs:
         with:
           source: "."
           target: "/home/ubuntu/moov-proto"
-  restart:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
       - name: Restart PM2 service
         uses: appleboy/ssh-action@master
         env:
@@ -68,4 +64,4 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
         with:
-          script: pm2 restart moov-proto && pm2 list
+          script: /home/ubuntu/.nvm/versions/node/v14.17.3/bin/ restart moov-proto && /home/ubuntu/.nvm/versions/node/v14.17.3/bin/ list
