@@ -63,4 +63,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: ls -lah
+          script: .nvm/versions/node/v14.17.3/bin/pm2 list
