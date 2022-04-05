@@ -97,7 +97,7 @@
     height: 100%;
     min-height: 15vh;
     justify-content: center;
-    object-fit: contain !important;
+    object-fit: cover !important;
 }
 
 #header_large_leaderboard {

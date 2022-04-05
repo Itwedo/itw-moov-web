@@ -28,8 +28,8 @@ class ContactForm(FlaskForm):
     submit = SubmitField("Envoyer")
 
 
-@app.route("/contact.html", methods=["GET", "POST"])
-@use_template()
+@app.route("/contact", methods=["GET", "POST"])
+@use_template("contact.html")
 def contact():
     form = ContactForm()
     if request.method == "POST":
@@ -66,4 +66,4 @@ def contact():
         #     server.login(EMAIL_USER, EMAIL_PASSWORD)
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
         return redirect("/contact.html")
-    return {'form': form }
+    return {"form": form}

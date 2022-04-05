@@ -29,7 +29,7 @@
         </div>
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
-            {% if result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
+            {% if result['data'][0]['attributes']['images']['data'] and result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" style="border: 1px "
               src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
               alt="Image">
@@ -65,7 +65,7 @@
           </div>
           {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'][0]['attributes']['width'] %}
+            {% if element['attributes']['images']['data'] and element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {% else %}
@@ -111,7 +111,7 @@
           </div>
           {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'][0]['attributes']['width'] %}
+            {% if element['attributes']['images']['data'] and element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {% else %}
@@ -157,7 +157,7 @@
             {% for news in result["data"] %}
             <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
-                {% if news['attributes']['images']['data'][0]['attributes']['width'] %}
+                {% if news['attributes']['images']['data'] and news['attributes']['images']['data'][0]['attributes']['width'] %}
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
                 {% else %}

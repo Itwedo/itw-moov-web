@@ -356,6 +356,11 @@ Xtra Small Screen - Small Mobile
     }
 
 
+    .header-slide-img {
+        height: 15vh !important;
+    }
+
+
 
     .pub-section {
         width: 100%;
@@ -369,6 +374,10 @@ Xtra Small Screen - Small Mobile
         height: 160px;
         justify-content: center;
         object-fit: contain !important;
+    }
+
+    .pub-slide img {
+        object-fit: cover !important;
     }
 
 
