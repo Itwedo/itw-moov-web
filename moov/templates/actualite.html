@@ -58,7 +58,7 @@
           </span>
         </div>
         <div class="content news-content">
-          <p>{{ news['data']['attributes']['head'] }}</p> <br />
+          <p class="text-2xl robotoslab text-left">{{ news['data']['attributes']['head'] }}</p> <br />
 
           <div class="article-pub">
             <div
@@ -100,8 +100,8 @@
           <div class="article-overlay">
 
           </div>
-          <a href="#body2" class="z-50 absolute bottom-0 right-4 font-light text-blue-500 hover:underline">Lire la
-            suite</a>
+          <a href="#body2" class="z-50 absolute bottom-0 right-4 font-normal text-blue-600 hover:underline">Lire la
+            suite </a>
           {{ body[2]|markdown|safe }}
 
 
@@ -152,7 +152,7 @@
           {% for item in regular %}
           <a class="mini-card relative flex pb-4" href="{{ url_for('article.news_article', id=item['id']) }}">
             <div class="relative overflow-hidden w-full md:w-2/5">
-              {%if item['attributes']['images']['data'][0]['attributes']['width']%}
+              {%if item['attributes']['images']['data'] and item['attributes']['images']['data'][0]['attributes']['width']%}
               <img class="img-absolute-cover img-hover-scale"
                 src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
               {%else%}
@@ -199,7 +199,7 @@
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {% for item in same_category %}
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
-            {%if item['attributes']['images']['data'][0]['attributes']['width']%}
+            {%if item['attributes']['images']['data'] and item['attributes']['images']['data'][0]['attributes']['width']%}
             <img class="img-absolute-cover img-hover-scale"
               src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {%else%}

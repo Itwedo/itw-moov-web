@@ -120,8 +120,8 @@ def use_template(template=None):
             template_name = template
             if template_name is None:
                 endpoint = request.endpoint
-                if not endpoint.endswith('.html'):
-                    endpoint = f'{endpoint}.html'
+                if not endpoint.endswith(".html"):
+                    endpoint = f"{endpoint}.html"
                 template_name = endpoint
             ctx = f(*args, **kwargs)
             if not ctx:
@@ -129,6 +129,18 @@ def use_template(template=None):
             ctx["ads"] = get_ads()
             ctx["currency"] = get_currency()
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
+            ctx["actualities"] = [
+                {"display": "Vaovao", "slug": "vaovao"},
+                {"display": "Nationale", "slug": "nationale"},
+                {"display": "Internationale", "slug": "internationale"},
+                {"display": "Medecine & Santé", "slug": "sante-medecine"},
+                {"display": "People", "slug": "people"},
+            ]
+            ctx["magazines"] = [
+                {"display": "Tourisme & Voyage", "slug": "tourisme-voyage"}
+            ]
             return render_template(template_name, **ctx)
+
         return decorated_function
+
     return decorator

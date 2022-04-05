@@ -17,14 +17,15 @@ get_category = {
     "vaovao": {"content": "Vaovao", "display": "Vaovao"},
     "nationale": {"content": "Nationale", "display": "Nationale"},
     "internationale": {
-        "content": "Internationale",
+        "content": "Monde",
         "display": "Internationale",
     },
     "economie": {"content": "Economie", "display": "Economie"},
     "sport": {"content": "Sports", "display": "Sports"},
     "culture": {"content": "Culture", "display": "Culture"},
     "gasy-winner": {"content": "GasyWinner", "display": "Gasy Winner"},
-    "sante-medecine": {"content": "sante", "display": "Medecine et santé"},
+    "sante-medecine": {"content": "Sante", "display": "Medecine et santé"},
+    "people": {"content": "People", "display": "People"},
 }
 
 
