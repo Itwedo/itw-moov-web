@@ -30,6 +30,7 @@ def news_article(id):
         response.json()["data"]["attributes"]["title"],
         response.json()["data"]["attributes"]["head"],
         response.json()["data"]["attributes"]["body"],
+        number_of_images,
     )
 
     same_category = requests.get(

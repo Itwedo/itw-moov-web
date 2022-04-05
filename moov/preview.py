@@ -46,6 +46,7 @@ def preview_page(slug):
         article["attributes"]["title"],
         article["attributes"]["head"],
         article["attributes"]["body"],
+        number_of_images,
     )
 
     same_category = requests.get(
