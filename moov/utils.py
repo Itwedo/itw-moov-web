@@ -82,9 +82,9 @@ def get_currency():
     return result
 
 
-def cut_body(text):
+def cut_body(title, head, text):
     """Divides an article in two parts if length exceeds 700 chars"""
-    FIRST_LIMIT_CHAR = 700
+    FIRST_LIMIT_CHAR = 680
 
     if BeautifulSoup(text, "html.parser").find():
         text = BeautifulSoup(text, "html.parser")
@@ -98,14 +98,24 @@ def cut_body(text):
     for child in text:
         if str(child) != "\n" and child != "":
             if (
-                len("".join([str(tag) for tag in first_part]))
+                len(title)
+                + len(head)
+                + len("".join([str(tag) for tag in first_part]))
                 >= FIRST_LIMIT_CHAR
             ):
                 second_part.append(child)
             else:
                 first_part.append(child)
     if second_part:
-        medium = second_part[0]
+        medium = second_part[0] + second_part[1]
+    print(
+        "total des trucs"
+        + str(
+            len(title)
+            + len(head)
+            + len("".join([str(tag) for tag in first_part]))
+        )
+    )
     return (
         separator.join([str(tag) for tag in first_part]),
         separator.join([str(tag) for tag in second_part]),

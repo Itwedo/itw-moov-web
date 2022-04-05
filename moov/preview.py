@@ -42,7 +42,11 @@ def preview_page(slug):
     else:
         number_of_images = 0
 
-    body = cut_body(article["attributes"]["body"])
+    body = cut_body(
+        article["attributes"]["title"],
+        article["attributes"]["head"],
+        article["attributes"]["body"],
+    )
 
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
@@ -80,10 +84,10 @@ def preview_page(slug):
         ][:20]
 
     return {
-        'news': {"data": article},
-        'images': images,
-        'number_of_images': number_of_images,
-        'body': body,
-        'same_category': same_category,
-        'regular': regular,
+        "news": {"data": article},
+        "images": images,
+        "number_of_images": number_of_images,
+        "body": body,
+        "same_category": same_category,
+        "regular": regular,
     }
