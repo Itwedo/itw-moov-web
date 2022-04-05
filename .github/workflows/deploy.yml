@@ -55,12 +55,4 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
         with:
           source: "."
-          target: "/home/ubuntu/moov-proto"
-      - name: Restart PM2 service
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.SSHKEY }}
-          script: /usr/local/bin/reload_moov_proto
+          target: "/home/ubuntu/moov-web"
