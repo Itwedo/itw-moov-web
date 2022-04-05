@@ -65,7 +65,7 @@
             <div class="w-full text-gray-600 px-4 pb-3">
               <div class="flex flex-wrap justify-between items-center">
                 <div class="cat-pasti">
-                  <span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span>
+                  <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
                 </div>
                 <div class="card-time">
                   <span class="mr-4 text-2xl">{{ news["attributes"]["createdAt"]|date }}</span>
@@ -161,7 +161,7 @@
             <div class="w-full text-gray-600 px-4 pb-3">
               <div class="flex flex-wrap justify-between items-center">
                 <div class="cat-pasti">
-                  <span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span>
+                  <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
                 </div>
                 <div class="card-time">
                   <span class="mr-4 text-2xl">{{ news["attributes"]["createdAt"]|date }}</span>
