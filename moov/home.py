@@ -78,6 +78,7 @@ def home():
                 "createdAt": item["attributes"]["createdAt"],
                 "head": item["attributes"]["head"],
                 "images": item["attributes"]["images"]["data"],
+                "category":item["attributes"]["category"]
             }
             for item in spotlights.json()["data"]
         ],

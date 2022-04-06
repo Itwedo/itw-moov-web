@@ -23,7 +23,7 @@
           <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
           {%endif%}
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-3xl px-3 py-3 my-3 inline-block">Finance</span>
+            <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
             href={{ url_for('article.news_article', id=news["id"]) }}>
@@ -101,7 +101,7 @@
           <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
           {%endif%}
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-3xl px-3 py-3 my-3 inline-block">Finance</span>
+            <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"]}}</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
             href={{ url_for('article.news_article', id=news["id"]) }}>
@@ -202,7 +202,7 @@
           <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
           {%endif%}
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-3xl px-3 py-3 my-3 inline-block">Finance</span>
+            <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"]}}</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
             href={{ url_for('article.news_article', id=news["id"]) }}>
