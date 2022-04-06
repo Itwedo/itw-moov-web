@@ -252,10 +252,16 @@
 }
 
 
+
 .article-feature-img img,
 .slide-img-item {
     object-position: center;
     object-fit: cover;
+}
+
+.heading-card-time {
+    font-size: 16px !important;
+    margin: 16px 0 !important;
 }
 
 .current-article {
@@ -272,6 +278,19 @@
     height: 80px;
     background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
     z-index: 10;
+}
+
+.reading-text {
+    line-height: 1.8;
+}
+
+.read-more {
+    margin-top: 32px;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 30px;
+    background: #fff;
+
 }
 
 /* 

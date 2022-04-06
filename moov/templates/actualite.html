@@ -48,7 +48,7 @@
         <h1 class="text-5xl text-bold mb-4 lg:text-7xl xl:text-8xl">
           {{ news['data']['attributes']['title'] }}
         </h1>
-        <div class="card-time">
+        <div class="card-time  heading-card-time">
           <span class="mr-4">{{ news['data']['attributes']["createdAt"]|date }}</span>
           <span class="mr-4">{{ news['data']['attributes']["createdAt"]|time }}</span>
           <span class="mr-4">23/11/2021</span>
@@ -58,7 +58,7 @@
           </span>
         </div>
         <div class="content news-content">
-          <p>{{ news['data']['attributes']['head'] }}</p> <br />
+          <p class="text-3xl robotoslab text-left">{{ news['data']['attributes']['head'] }}</p> <br />
 
           <div class="article-pub">
             <div
@@ -88,7 +88,10 @@
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
             {% endif %}
           </div>
-          {{ body[0]|markdown|safe }}
+          <div class="reading-text">
+
+            {{ body[0]|markdown|safe }}
+          </div>
           {% if not body[1] %}
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
@@ -100,9 +103,19 @@
           <div class="article-overlay">
 
           </div>
-          <a href="#body2" class="z-50 absolute bottom-0 right-4 font-light text-blue-500 hover:underline">Lire la
-            suite</a>
-          {{ body[2]|markdown|safe }}
+          <div class="flex flex-row justify-center ">
+
+            <a href="#body2"
+              class="z-50 absolute bottom-0 font-normal text-blue-600 hover:underline text-center read-more">Lire la
+              suite </a>
+            <div class="reading-text">
+            </div>
+
+            <div class="reading-text">
+
+              {{ body[2]|markdown|safe }}
+            </div>
+          </div>
 
 
           {% endif %}
@@ -133,7 +146,10 @@
           <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[2]['attributes']['url'] }}">
           {% endif %}
         </div>
-        {{ body[1]|markdown|safe }}
+        <div class="reading-text">
+
+          {{ body[1]|markdown|safe }}
+        </div>
       </div>
       <div class="comment-btn my-9 flex justify-center md:justify-end">
         <button
@@ -152,7 +168,8 @@
           {% for item in regular %}
           <a class="mini-card relative flex pb-4" href="{{ url_for('article.news_article', id=item['id']) }}">
             <div class="relative overflow-hidden w-full md:w-2/5">
-              {%if item['attributes']['images']['data'] and item['attributes']['images']['data'][0]['attributes']['width']%}
+              {%if item['attributes']['images']['data'] and
+              item['attributes']['images']['data'][0]['attributes']['width']%}
               <img class="img-absolute-cover img-hover-scale"
                 src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
               {%else%}
@@ -199,7 +216,8 @@
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {% for item in same_category %}
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
-            {%if item['attributes']['images']['data'] and item['attributes']['images']['data'][0]['attributes']['width']%}
+            {%if item['attributes']['images']['data'] and
+            item['attributes']['images']['data'][0]['attributes']['width']%}
             <img class="img-absolute-cover img-hover-scale"
               src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {%else%}
