@@ -147,6 +147,11 @@ Small Screen - Tablate
     .article-overlay {
         display: none;
     }
+
+    .read-more {
+        display: none;
+    }
+
 }
 
 
@@ -220,6 +225,11 @@ Small Screen - Mobile
     .article-overlay {
         display: none;
     }
+
+    .read-more {
+        display: none;
+    }
+
 
 }
 
@@ -392,6 +402,10 @@ Xtra Small Screen - Small Mobile
         display: none;
     }
 
+
+    .read-more {
+        display: none;
+    }
 
     /* tendance */
     .cat-mini-card {
