@@ -85,9 +85,9 @@ def get_currency():
 def cut_body(title, head, text, images_number):
     """Divides an article in two parts if length exceeds 700 chars"""
     if images_number <= 1:
-        FIRST_LIMIT_CHAR = 680
+        FIRST_LIMIT_CHAR = 500
     else:
-        FIRST_LIMIT_CHAR = 450
+        FIRST_LIMIT_CHAR = 350
 
     if BeautifulSoup(text, "html.parser").find():
         text = BeautifulSoup(text, "html.parser")
