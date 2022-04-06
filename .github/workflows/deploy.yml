@@ -26,9 +26,9 @@ jobs:
         uses: appleboy/scp-action@master
         env:
           HOST: ${{ secrets.STAGING_HOST }}
-          USERNAME: ${{ secrets.STAGING_USERNAME }}
-          PORT: ${{ secrets.STAGING_PORT }}
-          KEY: ${{ secrets.STAGING_SSHKEY }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
         with:
           source: "dist/moov-*.tar.gz"
           target: "/home/moovuser"
@@ -36,9 +36,9 @@ jobs:
         uses: appleboy/ssh-action@master
         env:
           HOST: ${{ secrets.STAGING_HOST }}
-          USERNAME: ${{ secrets.STAGING_USERNAME }}
-          PORT: ${{ secrets.STAGING_PORT }}
-          KEY: ${{ secrets.STAGING_SSHKEY }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
         with:
           script: ls -lh
   dev_deploy:
