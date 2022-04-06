@@ -49,6 +49,8 @@ def news():
 @app.route("/<category>")
 @use_template("category.html")
 def category_actuality(category):
+    if category == "médecine-et-santé":
+        category = "sante-medecine"
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={

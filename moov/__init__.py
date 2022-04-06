@@ -20,6 +20,7 @@ from .news import app as news
 from .preview import app as preview
 from .search import app as search
 from .article import app as article
+from .redirection import app as redirection
 
 import requests
 import markdown2
@@ -85,6 +86,8 @@ app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY=b"\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G"
 )
+
+app.register_blueprint(redirection)
 app.register_blueprint(contact)
 app.register_blueprint(drugstores)
 app.register_blueprint(forex)
