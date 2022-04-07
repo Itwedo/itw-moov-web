@@ -30,8 +30,9 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
         with:
-          source: "dist/moov-*.tar.gz"
+          source: "dist/moov-web-0.1.1.tar.gz"
           target: "/var/www/moov-data"
+          strip_components: 1
       - name: Install package
         uses: appleboy/ssh-action@master
         env:
