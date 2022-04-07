@@ -41,7 +41,7 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
         with:
-          script: ls -lh
+          script: scp /var/www/moov-data/moov-web-0.1.1.tar.gz moovuser@51.38.114.42:.
   dev_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
