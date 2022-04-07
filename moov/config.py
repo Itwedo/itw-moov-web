@@ -14,14 +14,14 @@ __all__ = [
 ]
 
 config = configparser.ConfigParser()
-config.read("/etc/moov/config.ini")
+config.read("/opt/moov/moov-web.config")
 
 
 try:
     misc_config = config["MISC"]
 except KeyError:
     DEBUG = False
-    LOG_FILE = "/var/log/moov/moov-proto.log"
+    LOG_FILE = "/opt/moov/moov-web.log"
 else:
     DEBUG = eval(misc_config["DEBUG"])
     LOG_FILE = misc_config['WEBSITE_LOG_FILE']
