@@ -14,7 +14,7 @@ __all__ = [
 ]
 
 config = configparser.ConfigParser()
-config.read("/opt/moov/moov-web.config")
+config.read("/opt/moov/moov-web.conf")
 
 
 try:
