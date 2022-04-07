@@ -12,8 +12,7 @@ from .config import *
 
 from .utils import use_template
 from .contact import app as contact
-from .drugstores import app as drugstores
-from .forex import app as forex
+from .life import app as life
 from .home import app as home
 from .magazine import app as magazine
 from .news import app as news
@@ -89,8 +88,7 @@ app.config.from_mapping(
 
 app.register_blueprint(redirection)
 app.register_blueprint(contact)
-app.register_blueprint(drugstores)
-app.register_blueprint(forex)
+app.register_blueprint(life)
 app.register_blueprint(home)
 app.register_blueprint(magazine)
 app.register_blueprint(news)

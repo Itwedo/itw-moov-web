@@ -119,6 +119,41 @@ def cut_body(title, head, text, images_number):
     )
 
 
+def get_paginated_curency(date_list, page, result_list, existant_dates):
+    paginated_response = requests.get(
+        url=f"{STRAPI_API_URL}/exchangerates",
+        headers=STRAPI_API_AUTH_TOKEN,
+        params={
+            "filters[date][$in]": date_list,
+            "filters[currency][$in]": [
+                "USD",
+                "EUR",
+                "CAD",
+                "CHF",
+                "GBP",
+                "ZAR",
+            ],
+            "pagination[page]": page,
+        },
+    )
+
+    for i in paginated_response.json()["data"]:
+        result_list.append(
+            {
+                "date": i["attributes"]["date"],
+                "currency": i["attributes"]["currency"],
+                "value": round(i["attributes"]["value"], 2),
+            }
+        )
+        if i["attributes"]["date"] not in existant_dates:
+            existant_dates.append(i["attributes"]["date"])
+    return (
+        paginated_response.json()["meta"]["pagination"]["pageCount"],
+        result_list,
+        existant_dates,
+    )
+
+
 def use_template(template=None):
     def decorator(f):
         @wraps(f)
