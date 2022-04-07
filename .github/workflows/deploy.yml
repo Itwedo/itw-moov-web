@@ -31,7 +31,7 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
         with:
           source: "dist/moov-*.tar.gz"
-          target: "/home/moovuser"
+          target: "/var/www/moov-data"
       - name: Install package
         uses: appleboy/ssh-action@master
         env:
