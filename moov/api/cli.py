@@ -4,6 +4,7 @@
 from ..etl import drugstores
 from ..etl import forex
 from ..etl import afp
+from ..etl.legacy_extractor import resolve
 from ..config import *
 from .. import app
 
@@ -30,6 +31,11 @@ def cmd():
 @click.option("--port", default="8000", help="Port used to serve app.")
 def run(hostname, port):
     app.run(host=hostname, port=port, debug=True)
+
+
+@cmd.command()
+def export_drupal():
+    resolve.run()
 
 
 @cmd.command()
