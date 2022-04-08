@@ -5,6 +5,7 @@ from ..etl import drugstores
 from ..etl import forex
 from ..etl import afp
 from ..etl.legacy_extractor import resolve
+from ..etl import actualities
 from ..config import *
 from .. import app
 
@@ -171,3 +172,39 @@ def get_category():
             # magazines.append({row[2]: row[0]})
             magazines.append({"display": row[2], "slug": row[0]})
     print({"actuality": actualities, "magazine": magazines})
+
+
+@cmd.command()
+def import_actus():
+    obj = actualities.Connector()
+    with click.progressbar(obj.files, length=100) as bar:
+        for info in bar:
+            obj.post_articles_file(info)
+            print(info)
+            print(f"  {str(obj.count)} actualities inserted")
+
+
+@cmd.command()
+def delecte_actus():
+    for i in range(10):
+
+        result = requests.get(
+            url=f"{STRAPI_API_URL}/actualites",
+            params={
+                "filters[category][$eq]": "Vaovao",
+                "pagination[pageSize]": 100,
+                "sort": "id:asc",
+            },
+            headers=STRAPI_API_AUTH_TOKEN,
+        )
+
+        with click.progressbar(
+            result.json()["data"], length=len(result.json()["data"])
+        ) as bar:
+            for actu in bar:
+
+                result = requests.delete(
+                    url=f"{STRAPI_API_URL}/actualites/{actu['id']}",
+                    headers=STRAPI_API_AUTH_TOKEN,
+                )
+        print(i)
