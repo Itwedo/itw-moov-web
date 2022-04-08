@@ -2,6 +2,9 @@ from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from flask import render_template, request
 from functools import wraps
+from captcha.image import ImageCaptcha
+import string
+import random
 from .config import *
 
 import requests
@@ -172,16 +175,31 @@ def use_template(template=None):
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
             ctx["actualities"] = [
                 {"display": "Vaovao", "slug": "vaovao"},
-                {"display": "Nationale", "slug": "nationale"},
                 {"display": "Internationale", "slug": "internationale"},
                 {"display": "Medecine & Santé", "slug": "sante-medecine"},
                 {"display": "People", "slug": "people"},
             ]
-            ctx["magazines"] = [
-                {"display": "Tourisme & Voyage", "slug": "tourisme-voyage"}
-            ]
+            ctx["magazines"] = [{"display": "People", "slug": "people"}]
             return render_template(template_name, **ctx)
 
         return decorated_function
 
     return decorator
+
+
+def create_captcha():
+    captcha_text = "".join(
+        random.choices(string.ascii_uppercase + string.digits, k=5)
+    )
+    # Create an image instance of the given size
+    image = ImageCaptcha(width=280, height=45)
+
+    # Image captcha text
+    # captcha_text = 'GeeksforGeeks'
+
+    # generate the image of the given text
+    data = image.generate(captcha_text)
+
+    # write the image on the given file and save it
+    image.write(captcha_text, "moov/assets/images/captcha/CAPTCHA.png")
+    return captcha_text
