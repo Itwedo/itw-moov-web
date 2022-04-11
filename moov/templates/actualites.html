@@ -42,7 +42,7 @@
                 result["data"][0]["attributes"]["category"] }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=result['data'][0]['id']) }}">
+              href="{{ url_for('article.news_article', id=result['data'][0]['id'],slug=result['data'][0]['attributes']['slugId']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ result["data"][0]["attributes"]["title"] }}
               </h2>
@@ -77,7 +77,7 @@
                 }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=element['id']) }}">
+              href="{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ element["attributes"]["title"] }}
               </h2>
@@ -123,7 +123,7 @@
                 }}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=element['id']) }}">
+              href="{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ element["attributes"]["title"] }}
               </h2>
@@ -155,7 +155,7 @@
             derniers articles</h2>
           <div class="mini-card-v1 no-scrollbar">
             {% for news in result["data"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"]) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news['id'],slug=news['attributes']['slugId']) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 {% if news['attributes']['images']['data'] and news['attributes']['images']['data'][0]['attributes']['width'] %}
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"

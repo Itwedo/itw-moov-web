@@ -78,7 +78,8 @@ def home():
                 "createdAt": item["attributes"]["createdAt"],
                 "head": item["attributes"]["head"],
                 "images": item["attributes"]["images"]["data"],
-                "category":item["attributes"]["category"]
+                "category": item["attributes"]["category"],
+                "slugId": item["attributes"]["slugId"],
             }
             for item in spotlights.json()["data"]
         ],
@@ -101,4 +102,4 @@ def home():
             if item["attributes"]["images"]["data"]
         ],
     }
-    return {'data': data}
+    return {"data": data}
