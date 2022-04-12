@@ -23,7 +23,7 @@
                 {{ item["category"] }}
               </span>
             </div>
-            <h2 class="text-5xl text-bold mb-4  lg:text-7xl xl:text-8xl">
+            <h2 class="text-5xl text-bold mb-4  lg:text-7xl xl:text-8xl header-headline-caption">
               {{ item["title"] }}
             </h2>
             <div class="card-time">
@@ -201,7 +201,8 @@
             alt="Image">
           {% endif %}
           <a class=" absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-            href={{ url_for('article.news_article', id=data["spotlights"][0]["id"],slug=data["spotlights"][0]["slugId"]) }}>
+            href={{ url_for('article.news_article', id=data["spotlights"][0]["id"],slug=data["spotlights"][0]["slugId"])
+            }}>
             <div class="cat-pasti">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">News</span>
             </div>
@@ -224,7 +225,8 @@
         <div class="relative bg-white py-10 px-0 mt-12 mr-0 ml-2 md:px-10 md:mr-12 md:ml-0 ">
           <div class="mini-card-v1 no-scrollbar " id="news-slack">
             {% for item in data["news"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=item["id"],slug=item["attributes"]["slugId"]) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article',
+              id=item["id"],slug=item["attributes"]["slugId"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 {% if item["attributes"]["images"]["data"][0]["attributes"]["width"] %}
                 <img class="mini-img-cover img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{

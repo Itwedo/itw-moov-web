@@ -21,7 +21,7 @@
           </ul>
         </div>
         <div class="big-title flex items-center w-full pt-5 pb-9">
-          <h2 class="title text-8xl text-center md:text-left w-full md:w-1/2 xl:w-1/3 md:text-6xl">Actualités</h2>
+          <h2 class="title text-8xl text-center md:text-left w-full md:w-1/2 xl:w-1/3 md:text-6xl">Actualités </h2>
           <div class="line flex items-center hidden md:block w-1/2 xl:w-2/3">
             <div class="h-1 w-full bg-gray-400">
             </div>
@@ -29,7 +29,8 @@
         </div>
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
-            {% if result['data'][0]['attributes']['images']['data'] and result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
+            {% if result['data'][0]['attributes']['images']['data'] and
+            result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" style="border: 1px "
               src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
               alt="Image">
@@ -60,12 +61,14 @@
           </div>
           <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex">
             <a href="{{ads['with_article'][1]['url']}}" target="_blank">
-              <img class="img-absolute-contain" src="{{CMS_URL}}{{ads['with_article'][1]['image']}}" alt="Moov publicité">
-            </a>         
+              <img class="img-absolute-contain" src="{{CMS_URL}}{{ads['with_article'][1]['image']}}"
+                alt="Moov publicité">
+            </a>
           </div>
           {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'] and element['attributes']['images']['data'][0]['attributes']['width'] %}
+            {% if element['attributes']['images']['data'] and
+            element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {% else %}
@@ -98,7 +101,7 @@
             <a href="{{ads['with_article'][1]['url']}}" target="_blank">
               <img class="img-absolute-contain" src="{{CMS_URL}}{{ads['with_article'][1]['image']}}">
             </a>
-            
+
           </div>
           <div class="col-span-2 flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
             {% for ad in ads['side_bar']%}
@@ -107,11 +110,12 @@
               <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité">
             </div>
             {%endfor%}
-            
+
           </div>
           {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'] and element['attributes']['images']['data'][0]['attributes']['width'] %}
+            {% if element['attributes']['images']['data'] and
+            element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
             {% else %}
@@ -148,16 +152,18 @@
           <a href="{{ads['side_bar'][0]['url']}}" target="_blank">
             <img src="{{CMS_URL}}{{ads['side_bar'][0]['image']}}" alt="Moov publicité">
           </a>
-          
+
         </div>
         <div class="relative bg-white shadow-md py-10 px-5 mt-12 mr-0 ml-0 mb-7 md:ml-0">
           <h2 class="block border-b-2 robotoslab text-5xl font-normal text-gray-600 pb-4 text-center md:text-left">Les
             derniers articles</h2>
           <div class="mini-card-v1 no-scrollbar">
             {% for news in result["data"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news['id'],slug=news['attributes']['slugId']) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article',
+              id=news['id'],slug=news['attributes']['slugId']) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
-                {% if news['attributes']['images']['data'] and news['attributes']['images']['data'][0]['attributes']['width'] %}
+                {% if news['attributes']['images']['data'] and
+                news['attributes']['images']['data'][0]['attributes']['width'] %}
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
                 {% else %}
@@ -191,7 +197,7 @@
           </div>
         </div>
         <div class="news-pub news-side relative overflow-hidden mx-auto my-7 w-full">
-          
+
           <a href="{{ads['side_bar'][1]['url']}}" target="_blank">
             <img src="{{CMS_URL}}{{ads['side_bar'][1]['image']}}" alt="Moov publicité">
           </a>
