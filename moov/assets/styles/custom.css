@@ -232,9 +232,9 @@
 }
 
 
-.news-content {
+/* .news-content {
     text-align: justify;
-}
+} */
 
 .actus-grid-side .mini-card h3 {
     font-size: 18px;
@@ -247,6 +247,13 @@
 
 .mini-card-v1 {
     max-height: 58.8rem !important;
+}
+
+.mini-card-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .mini-img-cover {
