@@ -83,7 +83,11 @@ def filter_articles(minchars):
         response = requests.get(
             url=f"{STRAPI_API_URL}/actualites",
             headers=STRAPI_API_AUTH_TOKEN,
-            params={"pagination[start]": count, "pagination[limit]": 100},
+            params={
+                "populate": "images",
+                "pagination[start]": count,
+                "pagination[limit]": 100,
+            },
         )
         data = response.json()["data"]
         if not data:
@@ -100,6 +104,35 @@ def filter_articles(minchars):
                             f"{info['attributes']['publishedAt']}"
                         )
                     )
+                    result = requests.delete(
+                        url=f"{STRAPI_API_URL}/actualites/{info['id']}",
+                        headers=STRAPI_API_AUTH_TOKEN,
+                    )
+                elif (
+                    info["attributes"]["images"]["data"]
+                    and info["attributes"]["images"]["data"][0]["attributes"][
+                        "width"
+                    ]
+                ):
+                    if (
+                        info["attributes"]["images"]["data"][0]["attributes"][
+                            "width"
+                        ]
+                        < 500
+                    ):
+                        infos.append(
+                            (
+                                f"{info['id']}|"
+                                f"{info['attributes']['title']}|"
+                                f"{info['attributes']['createdAt']}|"
+                                f"{info['attributes']['updatedAt']}|"
+                                f"{info['attributes']['publishedAt']}"
+                            )
+                        )
+                        result = requests.delete(
+                            url=f"{STRAPI_API_URL}/actualites/{info['id']}",
+                            headers=STRAPI_API_AUTH_TOKEN,
+                        )
         count += 100
         click.echo(f"{len(infos)}/{count}")
     with open("/tmp/articles.csv", "w") as f:
