@@ -179,7 +179,7 @@ def use_template(template=None):
                 {"display": "Medecine & Santé", "slug": "sante-medecine"},
                 {"display": "People", "slug": "people"},
             ]
-            ctx["magazines"] = [{"display": "People", "slug": "people"}]
+            ctx["magazines"] = []
             return render_template(template_name, **ctx)
 
         return decorated_function
