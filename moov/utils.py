@@ -85,36 +85,79 @@ def get_currency():
     return result
 
 
+def get_heigh(text_type, text):
+    """
+    type : 'title' or 'head' or 'body'
+    """
+    types = {
+        "title": {"line": 18, "heigh": 60},
+        "head": {"line": 77, "heigh": 22},
+        "body": {"line": 110, "heigh": 25},
+    }
+    heigh = len(text) * types[text_type]["heigh"] / types[text_type]["line"]
+    if "<h2>" or "<h3>" in text:
+        heigh += types[text_type]["heigh"]
+    return heigh
+
+
 def cut_body(title, head, text, images_number):
     """Divides an article in two parts if length exceeds 700 chars"""
     if images_number <= 1:
-        FIRST_LIMIT_CHAR = 500
+        FIRST_LIMIT_CHAR = 200
+        FIRST_LIMIT_HEIGH = 500
     else:
-        FIRST_LIMIT_CHAR = 350
+        FIRST_LIMIT_CHAR = 150
+        FIRST_LIMIT_HEIGH = 250
 
     if BeautifulSoup(text, "html.parser").find():
         text = BeautifulSoup(text, "html.parser")
         separator = ""
+        text_backup = list()
+        print(len(text))
+        if len(text) <= 2:
+            for part in text:
+                if len(part) > 1:
+                    text_backup.append(part)
+
+            if len(text_backup) == 1:
+                text = (text_backup[0].text).split("\n")
+                separator = "\n"
+
     else:
         text = text.split("\n")
         separator = "\n"
     first_part = []
     second_part = []
     medium = ""
+
     for child in text:
         if str(child) != "\n" and child != "":
-            if (
-                len(title)
-                + len(head)
-                + len("".join([str(tag) for tag in first_part]))
-                >= FIRST_LIMIT_CHAR
+
+            # if (
+            #     len(title)
+            #     + len(head)
+            #     + len("".join([str(tag) for tag in first_part]))
+            #     >= FIRST_LIMIT_CHAR
+            # ):
+            if second_part:
+                second_part.append(child)
+            elif (
+                get_heigh("title", title)
+                + get_heigh("head", head)
+                + get_heigh("body", "".join([str(tag) for tag in first_part]))
+                + get_heigh("body", str(child))
+                >= FIRST_LIMIT_HEIGH
             ):
                 second_part.append(child)
             else:
                 first_part.append(child)
-    if second_part:
-        medium = second_part[0] + second_part[1]
 
+    if second_part:
+        medium = (
+            separator.join([str(second_part[0]), str(second_part[1])])
+            if len(second_part) >= 2
+            else str(second_part[0])
+        )
     return (
         separator.join([str(tag) for tag in first_part]),
         separator.join([str(tag) for tag in second_part]),
