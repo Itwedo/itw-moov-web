@@ -53,7 +53,7 @@ def home():
             "sort": "id:desc",
             "filters[spotlight][$eq]": "true",
             "filters[Type][$eq]": "Tendance",
-            "pagination[limit]": 1,
+            "pagination[limit]": 5,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -99,7 +99,7 @@ def home():
         "magazine": [
             item
             for item in magazine.json()["data"]
-            if item["attributes"]["images"]["data"]
+            if item["attributes"]["images"]["data"][0]["attributes"]["width"]
         ],
     }
     return {"data": data}
