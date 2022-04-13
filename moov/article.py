@@ -10,7 +10,7 @@ import requests
 app = Blueprint("article", __name__, url_prefix="/article")
 
 
-@app.route("/<id>_<slug>")
+@app.route("/<int:id>-<string:slug>")
 @use_template("actualite.html")
 def news_article(id, slug):
     response = requests.get(
