@@ -5,7 +5,8 @@
 {% block content %}
 <main>
   <section class="mx-auto 3xl:container">
-    <div class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows">
+    <div
+      class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows home-header">
       {% for item in data["spotlights"] %}
       <div class="home-block-slide block-slide relative overflow-hidden">
         {% if item["images"][0]['attributes']['width'] %}
@@ -69,7 +70,8 @@
       <div class=" relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
           {% if data['magazine'] and data['magazine'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
-          <img class="img-absolute-cover img-hover-scale" src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url']}}">
+          <img class="img-absolute-cover img-hover-scale"
+            src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url']}}">
 
           {% else %}
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"

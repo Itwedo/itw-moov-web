@@ -267,6 +267,13 @@
 }
 
 
+.slick-dots {
+    display: none !important;
+}
+
+.home-header .slick-dots {
+    display: block !important;
+}
 
 .article-feature-img img,
 .slide-img-item {
