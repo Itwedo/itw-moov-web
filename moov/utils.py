@@ -101,7 +101,15 @@ def get_heigh(text_type, text):
     heigh = len(text) * types[text_type]["heigh"] / types[text_type]["line"]
     if "<h2>" or "<h3>" in text:
         heigh += types[text_type]["heigh"]
+    if "https://moov-cms.sudo.mg" in text:
+        heigh += 500
     return heigh
+
+
+def image_body(text):
+    if "/uploads/" in text:
+        text = text.replace("/uploads", f"{STRAPI_PUBLIC_URL}uploads")
+    return text
 
 
 def cut_body(title, head, text, images_number):
@@ -117,7 +125,6 @@ def cut_body(title, head, text, images_number):
         text = BeautifulSoup(text, "html.parser")
         separator = ""
         text_backup = list()
-        print(len(text))
         if len(text) <= 2:
             for part in text:
                 if len(part) > 1:
@@ -135,6 +142,7 @@ def cut_body(title, head, text, images_number):
     medium = ""
 
     for child in text:
+        child = image_body(child)
         if str(child) != "\n" and child != "":
             if second_part:
                 second_part.append(child)
@@ -150,11 +158,14 @@ def cut_body(title, head, text, images_number):
                 first_part.append(child)
 
     if second_part:
-        medium = (
-            separator.join([str(second_part[0]), str(second_part[1])])
-            if len(second_part) >= 2
-            else str(second_part[0])
-        )
+        if f"{STRAPI_PUBLIC_URL}uploads" in second_part[0]:
+            medium = second_part[1] if len(second_part) >= 2 else ""
+        else:
+            medium = (
+                separator.join([str(second_part[0]), str(second_part[1])])
+                if len(second_part) >= 2
+                else str(second_part[0])
+            )
     return (
         separator.join([str(tag) for tag in first_part]),
         separator.join([str(tag) for tag in second_part]),
