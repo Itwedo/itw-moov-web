@@ -116,7 +116,7 @@ def cut_body(title, head, text, images_number):
     """Divides an article in two parts if length exceeds 700 chars"""
     if images_number <= 1:
         FIRST_LIMIT_CHAR = 200
-        FIRST_LIMIT_HEIGH = 500
+        FIRST_LIMIT_HEIGH = 540
     else:
         FIRST_LIMIT_CHAR = 150
         FIRST_LIMIT_HEIGH = 250
