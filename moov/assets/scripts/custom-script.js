@@ -15,15 +15,15 @@ $(".menu-item").click(function () {
 });
 
 
-let articleHeight = $(".current-article").offset().top + $(".current-article").height()
-let articlePart1Height = $(".text-part-1").offset().top + $(".text-part-1").height()
+// let articleHeight = $(".current-article").offset().top + $(".current-article").height()
+// let articlePart1Height = $(".text-part-1").offset().top + $(".text-part-1").height()
 
-let text = $(".text-part-1").text().trim()
-text = text.split(" ")
-let lastWds = text[text.length - 4] + " " + text[text.length - 3] + " " + text[text.length - 2] + " " + text[text.length - 1]
-let text2 = $(".text-part-2").text().trim()
-let apparition = text2.search(text[text.length - 1])
-text2 = text2.slice(apparition + (text[text.length - 1]).length, (text2.length))
+// let text = $(".text-part-1").text().trim()
+// text = text.split(" ")
+// let lastWds = text[text.length - 4] + " " + text[text.length - 3] + " " + text[text.length - 2] + " " + text[text.length - 1]
+// let text2 = $(".text-part-2").text().trim()
+// let apparition = text2.search(text[text.length - 1])
+// text2 = text2.slice(apparition + (text[text.length - 1]).length, (text2.length))
 
-$(".text-part-1").text($(".text-part-1").text().trim())
-$(".text-part-2").text(text2)
+// $(".text-part-1").text($(".text-part-1").text().trim())
+// $(".text-part-2").text(text2)
