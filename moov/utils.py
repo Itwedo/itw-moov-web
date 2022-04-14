@@ -54,9 +54,13 @@ def get_ads_by_location(location):
 def get_ads():
     response_ads = {}
     response_ads["top_bar"] = get_ads_by_location("TopBar")
-    response_ads["side_bar"] = get_ads_by_location("SideBar")
     response_ads["banner"] = get_ads_by_location("Banner")
     response_ads["with_article"] = get_ads_by_location("WithArticle")
+
+    side_bar = get_ads_by_location("SideBar")
+    first_len = round(len(side_bar) / 2)
+    response_ads["side_bar"] = [side_bar[:first_len], side_bar[first_len:]]
+
     return response_ads
 
 
@@ -132,13 +136,6 @@ def cut_body(title, head, text, images_number):
 
     for child in text:
         if str(child) != "\n" and child != "":
-
-            # if (
-            #     len(title)
-            #     + len(head)
-            #     + len("".join([str(tag) for tag in first_part]))
-            #     >= FIRST_LIMIT_CHAR
-            # ):
             if second_part:
                 second_part.append(child)
             elif (
@@ -236,11 +233,6 @@ def create_captcha():
     )
     # Create an image instance of the given size
     image = ImageCaptcha(width=280, height=45)
-
-    # Image captcha text
-    # captcha_text = 'GeeksforGeeks'
-
-    # generate the image of the given text
     data = image.generate(captcha_text)
 
     # write the image on the given file and save it
