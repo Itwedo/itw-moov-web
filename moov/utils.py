@@ -108,7 +108,7 @@ def get_heigh(text_type, text):
 
 def image_body(text):
     if "/uploads/" in text:
-        text = text.replace("/uploads", f"{STRAPI_PUBLIC_URL}uploads")
+        text = text.replace("/uploads", f"https://moov-cms.sudo.mg/uploads")
     return text
 
 
@@ -158,7 +158,7 @@ def cut_body(title, head, text, images_number):
                 first_part.append(child)
 
     if second_part:
-        if f"{STRAPI_PUBLIC_URL}uploads" in second_part[0]:
+        if f"https://moov-cms.sudo.mg/uploads" in second_part[0]:
             medium = second_part[1] if len(second_part) >= 2 else ""
         else:
             medium = (
