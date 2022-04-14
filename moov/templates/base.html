@@ -201,8 +201,7 @@
             <a href="{{ url_for('magazine.category_magazines', category=category['slug']) }}"
               class="menu-item horizontal">{{category["display"]}}</a>
             {%endfor%}
-            <a href="{{ url_for('magazine.magazine') }}"
-              class="menu-item horizontal">Tous</a>
+            <a href="{{ url_for('magazine.magazine') }}" class="menu-item horizontal">Tous</a>
           </div>
         </li>
 
@@ -248,60 +247,72 @@
     </div>
   </header>
   {% block content %}{% endblock %}
-  <footer class="pt-12 pb-14 px-5 bg-gray-100 mx-auto 3xl:container" id="main-footer">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div class="flex items-center flex-col justify-center m-ht">
-        <div class="inline-block text-4xl text-gray-600 border-b-2 border-gray-400 mb-7">Liens utiles</div>
-        <ul class="block">
-          <li>
-            <a class="text-gray-600 hover:text-black hover:underline"
-              href="{{ url_for('search.search') }}">Recherche</a>
-          </li>
-          <li>
+  <footer class="pt-12  bg-gray-100 " id="main-footer">
+    <div class="flex flex-col w-full">
+
+      <div class="flex  flex-col items-center border">
+        <a class="block px-7 py-7 mx-auto h-40" href="{{ url_for('home.home') }}">
+          <img class="h-20 w-auto" src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo" />
+        </a>
+
+        <div class="md:w-2/5 flex items-center flex-col md:flex-row  justify-between  divide-x">
+          <div>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news.news') }}">Actualités</a>
+          </div>
+          <span class="hidden md:block">|</span>
+          <div>
+            <a class=" text-gray-600 hover:text-black hover:underline" href="{{ url_for('magazine.magazine') }}">
+              Tendance Moov</a>
+          </div>
+          <span class="hidden md:block">|</span>
+
+
+          <div>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('life.drugstores') }}">Pharmacie
+              de garde</a>
+          </div>
+          <span class="hidden md:block">|</span>
+
+          <div>
             <a class="text-gray-600 hover:text-black hover:underline"
               href="{{ url_for('contact.contact') }}">Contact</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news.news') }}">Actualités</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-black hover:underline"
-              href="{{ url_for('life.drugstores') }}">Pharmacie</a>
-          </li>
-        </ul>
-      </div>
-      <div class="flex items-center flex-col m-ht">
-        <a class="block px-7 py-7 mx-auto h-40" href="{{ url_for('home.home') }}">
-          <img class="h-20 w-auto" src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo">
-        </a>
-        <a class="text-3xl text-center text-gray-600 hover:underline" href="{{ url_for('mention') }}">Mention Légales et
-          CGV</a>
-
-        <div class="text-gray-600 ">
-          MOOV © 2022 - Designed by <a href="http://codeandscale.com/fr/">Code & Scale</a>
+          </div>
         </div>
-      </div>
-      <div class="flex items-center justify-center m-ht">
 
-
-        <div class="flex justify-center flex-row">
+        <div class="flex flex-row justify-center  py-8">
           <a class="px-2 py-2" href="https://www.facebook.com/moovmadagascar">
-            <img class="footer-sociale-icon" src="/assets/images/FB.png" alt="Moov facebook">
+            <img class="footer-sociale-icon" src="/assets/images/facebook_.svg" alt="Moov facebook">
           </a>
-          <a class="px-2 py-2" href="#">
-            <img class="footer-sociale-icon" src="/assets/images/In.png" alt="Moov tweeter">
-          </a>
+
           <a class="px-2 py-2" href="https://twitter.com/moov_mg">
-            <img class="footer-sociale-icon" src="/assets/images/Tweet.png" alt="Moov tweeter">
+            <img class="footer-sociale-icon" src="/assets/images/twitter_.svg" alt="Moov tweeter">
           </a>
           <a class="px-2 py-2" href="#">
-            <img class="footer-sociale-icon" src="/assets/images/youtube.png" alt="Moov tweeter">
+            <img class="footer-sociale-icon" src="/assets/images/youtube_.svg" alt="Moov tweeter">
           </a>
           <a class="px-2 py-2" href="#">
-            <img class="footer-sociale-icon" src="/assets/images/tiktok.png" alt="Moov tweeter">
+            <img class="footer-sociale-icon" src="/assets/images/tiktok_.svg" alt="Moov tweeter">
           </a>
         </div>
+
       </div>
+      <div class="flex flex-col bg-black  px-32 py-10  ">
+
+        <div class="flex  flex-col items-center md:flex-row  justify-between  ">
+          <div class="text-white text-center ">
+            MOOV © 2022 - Designed by <a href="http://codeandscale.com/fr/">Code & Scale</a>
+          </div>
+          <div>
+
+            <a class=" text-center text-white hover:underline" href="{{ url_for('mention') }}">Mention Légales et
+              CGV</a>
+          </div>
+
+
+
+        </div>
+      </div>
+
     </div>
   </footer>
   {% block javascript %}{% endblock %}
@@ -462,7 +473,7 @@
         </div>
         <textarea class="px-4 py-9 mt-5 mb-5 text-2xl text-gray-700 w-full block rounded-3xl" rows="10"
           placeholder="Votre commentaire ...">
-</textarea>
+        </textarea>
         <div class="flex justify-center pt-2">
           <button class="btn bg-transparent rounded-lg border-2 border-3xl py-2 px-7 rounded-3xl">Publier</button>
         </div>
