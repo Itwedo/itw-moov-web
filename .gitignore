@@ -140,3 +140,5 @@ cython_debug/
 .vscode/
 ecosystem.config.js
 poetry.lock
+.idea
+.DS_Store
