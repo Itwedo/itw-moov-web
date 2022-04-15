@@ -55,6 +55,18 @@
                 </div>
                 <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
                     <div
+                        class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+                        {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
+                        <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+                        <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                            <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                                class="object-cover w-full"></a>
+                        </div>
+
+                        </div>
+                        {% endfor%}
+                    </div>
+                    <div
                         class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
                         {% for ad in ads['side_bar'][0]%}
                         <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
