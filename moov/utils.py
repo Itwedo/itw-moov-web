@@ -5,6 +5,7 @@ from functools import wraps
 from captcha.image import ImageCaptcha
 import string
 import random
+from pathlib import Path
 from .config import *
 
 import requests
@@ -240,6 +241,9 @@ def use_template(template=None):
 
 
 def create_captcha():
+    captcha_path = "/tmp/captcha"
+    Path(captcha_path).mkdir(exist_ok=True)
+    captcha_name = f"captcha{random.randint(0,100)}"
     captcha_text = "".join(
         random.choices(string.ascii_uppercase + string.digits, k=5)
     )
@@ -248,5 +252,8 @@ def create_captcha():
     data = image.generate(captcha_text)
 
     # write the image on the given file and save it
-    image.write(captcha_text, "moov/assets/images/captcha/CAPTCHA.png")
-    return captcha_text
+    image.write(captcha_text, f"{captcha_path}/{captcha_name}.png")
+    return {
+        "image": f"{captcha_path}/{captcha_name}.png",
+        "text": captcha_text,
+    }

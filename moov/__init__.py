@@ -152,3 +152,8 @@ def not_found(error):
 @app.route("/assets/<path:filename>")
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
+
+
+@app.route("/tmp/<path:filename>")
+def serve_tmp(filename):
+    return send_from_directory(Path() / "/tmp/", filename)
