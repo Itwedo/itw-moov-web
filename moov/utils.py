@@ -136,6 +136,7 @@ def cut_body(title, head, text, images_number):
 
     else:
         text = text.split("\n")
+        text[-1] = text[-1].replace("]]>", "")
         separator = "\n"
     first_part = []
     second_part = []
