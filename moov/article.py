@@ -26,12 +26,12 @@ def news_article(id, slug):
         number_of_images = 0
     body = news["data"]["attributes"]["body"]
     body = body.replace("- ", "# ").replace(" -", "")
-    body = cut_body(
-        response.json()["data"]["attributes"]["title"],
-        response.json()["data"]["attributes"]["head"],
-        response.json()["data"]["attributes"]["body"],
-        number_of_images,
-    )
+    # body = cut_body(
+    #     response.json()["data"]["attributes"]["title"],
+    #     response.json()["data"]["attributes"]["head"],
+    #     response.json()["data"]["attributes"]["body"],
+    #     number_of_images,
+    # )
 
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
