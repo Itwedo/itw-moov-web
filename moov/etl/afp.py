@@ -23,49 +23,54 @@ class Connector(object):
     def get_feed(self):
         self.source = self.__get_source__()
         with self.source as source:
-            category = source.html.find('description', first=True).text
-            category = category.title().replace('é', 'e')
+            category = source.html.find("description", first=True).text
+            category = category.title().replace("é", "e")
             items = source.html.find("item", first=False)
             for item in items:
                 title = item.find("title", first=True).text
                 pubDate = item.find("pubDate", first=True).text
                 guid = item.find("guid", first=True).text
                 description = item.find("description", first=True).text
-                media = item.find('content', first=True).attrs.get('url')
+                media = item.find("content", first=True).attrs.get("url")
                 row = {
                     "title": title,
                     "pubDate": pubDate,
                     "guid": guid,
                     "category": category,
                     "description": description,
-                    "media": media
+                    "media": media,
                 }
                 self.feed.append(row)
         return self.feed
 
     def insert_element(self, element):
-        image_url = element['media']
-        image_name = image_url.split('/')[-1]
+        image_url = element["media"]
+        image_name = image_url.split("/")[-1]
         image = requests.get(image_url, stream=True)
-        with open(f'/tmp/{image_name}', 'wb') as f:
+        with open(f"/tmp/{image_name}", "wb") as f:
             for chunk in image:
                 f.write(chunk)
-        with open(f'/tmp/{image_name}', 'rb') as f:
+        with open(f"/tmp/{image_name}", "rb") as f:
             response = requests.post(
                 url=f"{config.STRAPI_API_URL}/upload",
                 headers=config.STRAPI_API_AUTH_TOKEN,
                 files={
-                    'files': (image_name, f, 'image/jpeg'),
-                    'Content-Disposition': f'form-data; name="file"; filename={image_name}',
-                    'Content-Type': 'image/jpeg'
-                }
+                    "files": (image_name, f, "image/jpeg"),
+                    "Content-Disposition": f'form-data; name="file"; filename={image_name}',
+                    "Content-Type": "image/jpeg",
+                },
             )
         try:
             obj = response.json()[0]
         except Exception:
             obj = None
         head, body = element["description"].split("\n", 1)
-        body = body.replace("- ", "### ").replace(" -", "").replace("\n", "\n\n")
+        body = (
+            body.replace("- ", "### ")
+            .replace(" -", "")
+            .replace("\n", "\n\n")
+            .replace("]]>", "")
+        )
         article_data = {
             "title": element["title"],
             "head": head,
@@ -75,13 +80,11 @@ class Connector(object):
             "Type": "Actualite",
         }
         if obj:
-            article_data["images"] = obj['id']
+            article_data["images"] = obj["id"]
         response = requests.post(
             url=f"{config.STRAPI_API_URL}/actualites",
             headers=config.STRAPI_API_AUTH_TOKEN,
-            json={
-                "data": article_data
-            }
+            json={"data": article_data},
         )
 
     def insert(self):

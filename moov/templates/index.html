@@ -5,7 +5,8 @@
 {% block content %}
 <main>
   <section class="mx-auto 3xl:container">
-    <div class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows">
+    <div
+      class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows home-header">
       {% for item in data["spotlights"] %}
       <div class="home-block-slide block-slide relative overflow-hidden">
         {% if item["images"][0]['attributes']['width'] %}
@@ -16,14 +17,14 @@
           alt="Image">
         {% endif %}
         <a class="header-headline content-slide absolute bottom-0 left-0 text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm h-auto lg:top-0 lg:bottom-unset lg:h-full w-full lg:w-2/5"
-          href="{{ url_for('article.news_article', id=item['id']) }}">
+          href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}">
           <div class="group-content">
             <div class="cat-pasti">
               <span class="text-2xl px-3 py-3 my-3  inline-block sm:text-3xl">
-                À la une
+                {{ item["category"] }}
               </span>
             </div>
-            <h2 class="text-5xl text-bold mb-4  lg:text-7xl xl:text-8xl">
+            <h2 class="text-5xl text-bold mb-4  lg:text-7xl xl:text-8xl header-headline-caption">
               {{ item["title"] }}
             </h2>
             <div class="card-time">
@@ -50,7 +51,7 @@
             {% for item in data["flashes"] %}
             <div class="flex flex-wrap items-center border-b-2 py-5">
               <div class="text-xl w-3/4">
-                <a href="{{ url_for('article.news_article', id=item['id']) }}">
+                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}">
                   <p>{{ item["head"] }}</p>
                 </a>
               </div>
@@ -69,9 +70,9 @@
       <div class=" relative pl-0 pt-5 m-ht w-full md:pl-5 md:pt-0 md:w-3/5 2xl:pr-36 3xl:pr-48">
         <div class="news-card news-flash relative overflow-hidden w-full">
           {% if data['magazine'] and data['magazine'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/caleb-george-iVXfOilGYHA-unsplash.jpg">
-          <!-- <img class="img-absolute-cover img-hover-scale"
-            src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"> -->
+          <img class="img-absolute-cover img-hover-scale"
+            src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url']}}">
+
           {% else %}
           <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
             alt="Image">
@@ -85,7 +86,7 @@
             {% endif %}
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-            href="#">
+            href="{{ url_for('article.news_article', id=data['magazine'][0]['id'],slug=data['magazine'][0]['attributes']['slugId']) }}">
             {% if data["magazine"] %}
             <h2 class="text-2xl mb-3 sm:text-4xl">
               {{ data["magazine"][0]["attributes"]["title"] }}
@@ -137,7 +138,7 @@
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ item["attributes"]["category"] }}</span>
           </div>
           <a class="overlay absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-            href={{ url_for('article.news_article', id=item["id"]) }}>
+            href={{ url_for('article.news_article', id=item["id"],slug=item['attributes']['slugId']) }}>
             <h2 class=" text-2xl mb-3 sm:text-4xl">{{ item["attributes"]["title"] }}</h2>
             <div class="card-time flex items-center text-xl">
               <span class="mr-4">{{ item["attributes"]["createdAt"]|date }}</span>
@@ -201,7 +202,8 @@
             alt="Image">
           {% endif %}
           <a class=" absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-            href={{ url_for('article.news_article', id=data["spotlights"][0]["id"]) }}>
+            href={{ url_for('article.news_article', id=data["spotlights"][0]["id"],slug=data["spotlights"][0]["slugId"])
+            }}>
             <div class="cat-pasti">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">News</span>
             </div>
@@ -224,7 +226,8 @@
         <div class="relative bg-white py-10 px-0 mt-12 mr-0 ml-2 md:px-10 md:mr-12 md:ml-0 ">
           <div class="mini-card-v1 no-scrollbar " id="news-slack">
             {% for item in data["news"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=item["id"]) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article',
+              id=item["id"],slug=item["attributes"]["slugId"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 {% if item["attributes"]["images"]["data"][0]["attributes"]["width"] %}
                 <img class="mini-img-cover img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{

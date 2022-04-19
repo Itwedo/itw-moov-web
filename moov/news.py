@@ -17,14 +17,15 @@ get_category = {
     "vaovao": {"content": "Vaovao", "display": "Vaovao"},
     "nationale": {"content": "Nationale", "display": "Nationale"},
     "internationale": {
-        "content": "Internationale",
+        "content": "Monde",
         "display": "Internationale",
     },
     "economie": {"content": "Economie", "display": "Economie"},
     "sport": {"content": "Sports", "display": "Sports"},
     "culture": {"content": "Culture", "display": "Culture"},
     "gasy-winner": {"content": "GasyWinner", "display": "Gasy Winner"},
-    "sante-medecine": {"content": "sante", "display": "Medecine et santé"},
+    "sante-medecine": {"content": "Sante", "display": "Medecine et santé"},
+    "people": {"content": "People", "display": "People"},
 }
 
 
@@ -48,6 +49,8 @@ def news():
 @app.route("/<category>")
 @use_template("category.html")
 def category_actuality(category):
+    if category == "médecine-et-santé":
+        category = "sante-medecine"
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={

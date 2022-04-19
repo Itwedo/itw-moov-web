@@ -27,7 +27,7 @@
 	    <p>Aucun résultat trouvé</p>
 	    {% endif %}
             {% for news in result["data"] %}
-            <a class="mini-card relative flex" href={{ url_for('article.news_article', id=news["id"]) }}>
+            <a class="mini-card relative flex" href={{ url_for('article.news_article', id=news["id"],slug=news['attributes']['slugId']) }}>
               <div class="relative overflow-hidden w-full md:w-1/3">
                 {% if news["attributes"]["images"]["data"] %}
                 <img
@@ -42,7 +42,7 @@
                 <div class="w-full text-gray-600 px-4 pb-3">
                   <div class="flex flex-wrap justify-start items-center">
                     <div class="cat-pasti">
-                      <span class="text-3xl px-3 py-3 my-3 inline-block">À la une</span>
+                      <span class="text-3xl px-3 py-3 my-3 inline-block">{{news["attributes"]["category"]}}</span>
                     </div>
                     <div class="card-time">
                       <span class="mr-4 text-2xl">{{ news["attributes"]["createdAt"]|date }}</span>
@@ -73,9 +73,9 @@
                   récents</button>
               </div>
               {% for news in actualites["data"] %}
-              <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"]) }}>
+              <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"],slug=news['attributes']['slugId']) }}>
                 <div class="relative overflow-hidden w-full md:w-2/5">
-                  {%if news["attributes"]["images"]["data"] %}
+                  {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]  %}
                   <img
 		    class="img-absolute-cover img-hover-scale"
 		    src={{ CMS_URL }}{{ news["attributes"]["images"]["data"][0]["attributes"]["url"] }}

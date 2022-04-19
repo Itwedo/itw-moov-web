@@ -12,14 +12,14 @@ from .config import *
 
 from .utils import use_template
 from .contact import app as contact
-from .drugstores import app as drugstores
-from .forex import app as forex
+from .life import app as life
 from .home import app as home
 from .magazine import app as magazine
 from .news import app as news
 from .preview import app as preview
 from .search import app as search
 from .article import app as article
+from .redirection import app as redirection
 
 import requests
 import markdown2
@@ -85,9 +85,10 @@ app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY=b"\xd6\x04\xbdj\xfe\xed$c\x1e@\xad\x0f\x13,@G"
 )
+
+app.register_blueprint(redirection)
 app.register_blueprint(contact)
-app.register_blueprint(drugstores)
-app.register_blueprint(forex)
+app.register_blueprint(life)
 app.register_blueprint(home)
 app.register_blueprint(magazine)
 app.register_blueprint(news)
@@ -151,3 +152,8 @@ def not_found(error):
 @app.route("/assets/<path:filename>")
 def serve_assets(filename):
     return send_from_directory(Path() / "assets/", filename)
+
+
+@app.route("/tmp/<path:filename>")
+def serve_tmp(filename):
+    return send_from_directory(Path() / "/tmp/", filename)

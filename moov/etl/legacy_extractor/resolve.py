@@ -6,7 +6,7 @@ from datetime import datetime, date
 from tqdm import tqdm
 from rich import print
 from rich.traceback import install
-
+from pathlib import Path
 from .const import EXPORT_DIR
 from .models.drupal import (
     Comment as DrupalComment,
@@ -22,14 +22,16 @@ from .models.drupal import (
     FieldDataFieldPrice,
     FieldDataFieldReferenceMvola,
     Node,
-    Users, )
+    Users,
+)
 from .models.strapi import (
     Comment as StrapiComment,
     Actualites,
     Article,
     Forum,
     SmallAds,
-    User, )
+    User,
+)
 
 install(show_locals=False)
 
@@ -56,7 +58,8 @@ class Export:
         if len(self.row) == 0:
             return
 
-        _file = EXPORT_DIR / f"{self.name}.{self.page}.json"
+        _file = EXPORT_DIR / self.name / f"{self.name}.{self.page}.json"
+
         _file.touch()
         flaskbb_data = ['user']
 
@@ -76,7 +79,6 @@ class Export:
         self.page += 1
 
     def __call__(self, func):
-
         @wraps(func)
         def wraped(source_row):
             model = func(source_row)
@@ -101,7 +103,7 @@ export_comment = Export("comment", item_per_page=50)
 
 
 @export_forum
-def process_forum(node:Node):
+def process_forum(node: Node):
     user = node.get_user()
 
     return Forum(
@@ -109,7 +111,8 @@ def process_forum(node:Node):
         title=node.title,
         body=node.get_field(FieldDataBody),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_article
@@ -121,7 +124,8 @@ def process_article(node):
         title=node.title,
         body=node.get_field(FieldDataFieldContenuArticle),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_actualites
@@ -133,9 +137,14 @@ def process_actualites(node):
         title=node.title,
         head=node.get_field(FieldDataFieldChapeau),
         body=node.get_field(FieldDataFieldDescriptionActualite),
-        images=node.get_media(FieldDataFieldImagesActus, FieldDataFieldImageActus, "field_image_actus_fid"),
+        images=node.get_media(
+            FieldDataFieldImagesActus,
+            FieldDataFieldImageActus,
+            "field_image_actus_fid",
+        ),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_small_ads
@@ -151,7 +160,8 @@ def process_small_ads(node):
         email=node.get_field(FieldDataFieldCourriel),
         mvola_ref=node.get_field(FieldDataFieldReferenceMvola),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_user
@@ -160,7 +170,8 @@ def create_user(user):
         id=user.uid,
         name=user.name,
         email=user.mail,
-        password=user.pass_, )
+        password=user.pass_,
+    )
 
 
 @export_comment
@@ -178,7 +189,8 @@ def create_comment(comment):
         body=getattr(body, "comment_body_value", None),
         created_by=getattr(user, "uid", None),
         created_for_id=node.nid,
-        created_at=datetime.fromtimestamp(comment.created), )
+        created_at=datetime.fromtimestamp(comment.created),
+    )
 
 
 def run():
@@ -189,6 +201,7 @@ def run():
     export_user.dump()
 
     unhandled_type = []
+
     def process_unhandled(node):
         if node.type not in unhandled_type:
             unhandled_type.append(node.type)
