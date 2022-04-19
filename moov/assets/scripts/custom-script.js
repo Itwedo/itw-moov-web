@@ -42,3 +42,8 @@ $("#read-more-article").click(function () {
 
 })
 
+$("#read-more-article-static").click(function () {
+    $("#read-more-article-static").toggle()
+    $("#suite").removeClass('hidden')
+})
+

@@ -92,14 +92,7 @@
             </div>
 
           </div>
-          <!-- <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
-              <img src="/assets/images/powerbox1_0.jpg">
-            </div>
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
-              <img src="/assets/images/morateamb.jpg">
-            </div>
-          </div> -->
+          
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
@@ -120,13 +113,12 @@
           <div class="article-overlay">
 
           </div>
-          <div class="flex flex-row justify-center ">
+          <div class="flex flex-row justify-center " id="read-more-article-static" >
 
-            <a href="#body2"
-              class="z-50 absolute bottom-0 font-normal text-blue-600 hover:underline text-center read-more">Lire la
+            <a href="#suite"
+              class="z-50 absolute bottom-0 font-normal text-blue-600 hover:underline text-center read-more" >Lire la
               suite </a>
-            <div class="reading-text">
-            </div>
+            
 
             
           </div>
@@ -151,9 +143,10 @@
       {% endfor %}
     </div>
   </section>
-  <section class="global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
+
+  <section class="hidden global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48" id="suite">
     {% if body[1] %}
-    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5" id="body2">
+    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5" >
       <div class="content text-justify px-5 md:px-0">
         <div class="picture float-right mb-2 w-full overflow-hidden">
           {% if number_of_images > 2 %}
