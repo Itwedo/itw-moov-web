@@ -1,4 +1,5 @@
 import json
+import csv
 from functools import wraps
 from datetime import datetime, date
 
@@ -60,9 +61,19 @@ class Export:
         _file = EXPORT_DIR / self.name / f"{self.name}.{self.page}.json"
 
         _file.touch()
+        flaskbb_data = ['user']
 
         with _file.open("w") as fp:
             json.dump(self.row, fp, indent=2, default=json_serial)
+
+        if self.name in flaskbb_data:
+            user_csv = EXPORT_DIR/f"{self.name}.csv"
+            with open(user_csv, 'a', encoding='UTF8', newline='') as f:
+                fieldnames = list(self.row[0].keys())
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                if self.page == 0:
+                    writer.writeheader()
+                writer.writerows(self.row)
 
         self.row.clear()
         self.page += 1

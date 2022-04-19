@@ -4,7 +4,7 @@
 from ..etl import drugstores
 from ..etl import forex
 from ..etl import afp
-# from ..etl.legacy_extractor import resolve
+from ..etl.legacy_extractor import resolve
 from ..etl import actualities
 from ..config import *
 from .. import app
@@ -33,6 +33,9 @@ def cmd():
 def run(hostname, port):
     app.run(host=hostname, port=port, debug=True)
 
+@cmd.command()
+def export_drupal():
+    resolve.run()
 
 @cmd.command()
 def export_drupal():
