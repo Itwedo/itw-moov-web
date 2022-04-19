@@ -78,6 +78,9 @@ Large Screen - Others
         display: none;
     }
 
+    .fixed-article-side-pub {
+        width: 288px;
+    }
 
 }
 
@@ -388,6 +391,11 @@ Xtra Small Screen - Small Mobile
 
     .pub-slide img {
         object-fit: cover !important;
+    }
+
+
+    .croped-article {
+        height: 100% !important;
     }
 
 

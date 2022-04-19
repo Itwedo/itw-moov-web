@@ -256,6 +256,13 @@
     -webkit-box-orient: vertical;
 }
 
+.news-card h2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .mini-img-cover {
     object-fit: cover !important;
     justify-content: center !important;
@@ -341,7 +348,7 @@
 .current-article {
     position: relative;
     overflow: hidden;
-    /* height: 960px; */
+    height: 100%;
     z-index: 5;
     margin-bottom: 24px !important;
 }
@@ -350,8 +357,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 80px;
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+    height: 140px;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
     z-index: 10;
 }
 

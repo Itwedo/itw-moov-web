@@ -23,9 +23,7 @@ $("#read-more-article").click(function () {
 
     window.addEventListener("scroll", () => {
         let sectionPubPos = $('.pub-section-slide').offset().top;
-        console.log(sectionPubPos)
         if (window.scrollY >= 980) {
-            // $("#article-side-pub-container").css({ "object-fit": "cover", "z-index": "100", "width": "400px" });
             $("#article-side-pub-container").addClass("fixed-article-side-pub")
             let sidePubPos = ($('#article-side-pub-container').offset().top + $('#article-side-pub-container').height())
             if ((sectionPubPos - sidePubPos) < 40) {
