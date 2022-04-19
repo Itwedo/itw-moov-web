@@ -5,6 +5,8 @@ import requests
 import json
 from pathlib import Path
 
+from PIL import Image
+
 # from requests_html import HTML, HTMLSession
 from ..config import *
 
@@ -18,39 +20,11 @@ class Connector(object):
         self.files = self.loop_dir()
         self.count = 0
 
-    def post_article(self, actuality):
-        if actuality["images"]:
-            try:
-                with open(
-                    f'{self.images_dir}/{actuality["images"][0]}', "rb"
-                ) as f:
-                    response = requests.post(
-                        url=f"{STRAPI_API_URL}/upload",
-                        headers=STRAPI_API_AUTH_TOKEN,
-                        files={
-                            "files": (
-                                actuality["images"][0],
-                                f,
-                                "image/jpeg",
-                            ),
-                            "Content-Disposition": f'form-data; name="file"; filename={actuality["images"][0]}',
-                            "Content-Type": "image/jpeg",
-                        },
-                    )
-                try:
-                    obj = response.json()[0]
-                except Exception:
-                    obj = None
-            except FileNotFoundError:
-                actuality["images"] = []
-                obj = None
-        else:
-            obj = None
-
+    def post_article(self, actuality, image_id):
         actuality_item = dict()
         del actuality["id"]
-        if obj:
-            actuality["images"] = [obj["id"]]
+        if image_id:
+            actuality["images"] = image_id
         if not actuality.get("category"):
             actuality["category"] = "Vaovao"
         if not actuality.get("Type"):
@@ -68,29 +42,50 @@ class Connector(object):
         )
 
     def filter_article(self, article):
-        if len(article["attributes"]["body"]) < 2000:
+        id = None
+        if len(article["body"]) < 2000:
             return None
-        elif (
-            article["attributes"]["images"]["data"]
-            and article["attributes"]["images"]["data"][0]["attributes"][
-                "width"
-            ]
-        ):
-            if (
-                article["attributes"]["images"]["data"][0]["attributes"][
-                    "width"
-                ]
-                < 500
-            ):
+        elif article["images"]:
+            try:
+                with open(
+                    f'{self.images_dir}/{article["images"][0]}', "rb"
+                ) as f:
+                    if (
+                        Image.open(
+                            f'{self.images_dir}/{article["images"][0]}'
+                        ).size[0]
+                        < 500
+                    ):
+                        return None
+                    else:
+                        response = requests.post(
+                            url=f"{STRAPI_API_URL}/upload",
+                            headers=STRAPI_API_AUTH_TOKEN,
+                            files={
+                                "files": (
+                                    article["images"][0],
+                                    f,
+                                    "image/jpeg",
+                                ),
+                                "Content-Disposition": f'form-data; name="file"; filename={article["images"][0]}',
+                                "Content-Type": "image/jpeg",
+                            },
+                        )
+                    try:
+                        id = response.json()[0]["id"]
+                    except Exception:
+                        return None
+            except FileNotFoundError:
                 return None
-        return article
+        return id
 
     def post_articles_file(self, filepath):
         with open(filepath) as json_file:
             data = json.load(json_file)
             for actuality in data:
-                if self.filter_article(actuality):
-                    self.post_article(actuality)
+                id = self.filter_article(actuality)
+                if id:
+                    self.post_article(actuality, id)
                 self.count += 1
 
     def loop_dir(self):
