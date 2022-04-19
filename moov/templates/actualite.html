@@ -28,35 +28,40 @@
     <div class="flex flex-wrap">
       <div
         class="hidden flex-wrap flex-row justify-end w-full md:flex lg:flex-col lg:justify-start lg:w-1/3 py-10 2xl:pl-36 3xl:pl-48">
+        <div class="flex flex-col w-full object-cover " id="article-side-pub-container">
+          <!-- <div class="flex flex-col" id="article-side-pub"> -->
 
-        <div
-          class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-          {% for ad in ads['side_bar'][0]%}
-          <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-            <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-              <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full"></a>
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][0]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full"></a>
+              </div>
+
             </div>
-
+            {% endfor%}
           </div>
-          {% endfor%}
-        </div>
-        <div
-          class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-          {% for ad in ads['side_bar'][1]%}
-          <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-            <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-              <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full"></a>
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][1]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full"></a>
+              </div>
+
             </div>
-
+            {% endfor%}
           </div>
-          {% endfor%}
+          <!-- </div> -->
+
         </div>
 
       </div>
       <div
-        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article">
+        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article croped-article">
 
         <div class="article-overlay"></div>
         <div class="cat-pasti">
@@ -109,32 +114,34 @@
 
             {{ body|markdown|safe }}
           </div>
-          
+
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
               class="hidden modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
               <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
             </button>
           </div>
-          
+
           <div class="article-overlay">
 
           </div>
-          
+
+          <div class="flex flex-col items-center" id="read-more-article">
 
             <a href="#body2"
               class="z-50 absolute bottom-0 font-normal text-blue-600 hover:underline text-center read-more">Lire la
               suite </a>
-            
-
-            
           </div>
 
 
-         
+
         </div>
+
+
+
       </div>
     </div>
+
   </article>
   <section class=" global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <!-- <img class="w-auto pub-section" src="/assets/images/206504526_4371917949494124_5011724154299493509_n@2x.jpg"
@@ -151,7 +158,7 @@
     </div>
   </section>
   <section class="global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
-    
+
   </section>
   <section class="pt-7 md:pt-24">
     <div class="mx-auto overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">

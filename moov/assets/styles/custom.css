@@ -286,11 +286,64 @@
     margin: 16px 0 !important;
 }
 
-.current-article {
+/* .current-article {
     position: relative;
     height: 640px;
     overflow: hidden;
     z-index: 5;
+} */
+.croped-article {
+    height: 640px !important;
+}
+
+.scroll-article {
+
+    overflow-y: scroll !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+
+}
+
+.scroll-article::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-article::-moz-scollbars-none {
+    display: none;
+}
+
+
+.article-side-pub-container {
+    position: relative !important;
+    width: 400px !important;
+    z-index: 100;
+}
+
+.fixed-article-side-pub {
+    position: fixed !important;
+    width: 400px !important;
+    object-fit: cover !important;
+    top: 0px !important;
+    z-index: 200 !important;
+}
+
+/* 
+#article-side-pub {
+    position: absolute;
+    width: 400px;
+    width: 100%;
+    object-fit: cover;
+    top: 640px;
+    z-index: 200;
+    background: yellow !important
+} */
+
+.current-article {
+    position: relative;
+    overflow: hidden;
+    /* height: 960px; */
+    z-index: 5;
+    margin-bottom: 24px !important;
 }
 
 .article-overlay {
@@ -298,7 +351,7 @@
     bottom: 0;
     width: 100%;
     height: 80px;
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.4), transparent);
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
     z-index: 10;
 }
 

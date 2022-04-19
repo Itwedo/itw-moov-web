@@ -4,7 +4,7 @@
 from ..etl import drugstores
 from ..etl import forex
 from ..etl import afp
-from ..etl.legacy_extractor import resolve
+# from ..etl.legacy_extractor import resolve
 from ..etl import actualities
 from ..config import *
 from .. import app
