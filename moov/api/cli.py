@@ -38,11 +38,6 @@ def export_drupal():
     resolve.run()
 
 @cmd.command()
-def export_drupal():
-    resolve.run()
-
-
-@cmd.command()
 @click.argument("action", type=click.Choice(["create", "show"]))
 def config(action):
     config = configparser.ConfigParser()
