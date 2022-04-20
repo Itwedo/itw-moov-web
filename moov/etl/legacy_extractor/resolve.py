@@ -12,6 +12,7 @@ from .models.drupal import (
     Comment as DrupalComment,
     FieldDataBody,
     FieldDataFieldChapeau,
+    FieldDataFieldTypeActualite,
     FieldDataFieldContenuArticle,
     FieldDataFieldCourriel,
     FieldDataFieldDescriptionActualite,
@@ -22,6 +23,7 @@ from .models.drupal import (
     FieldDataFieldPrice,
     FieldDataFieldReferenceMvola,
     Node,
+    TaxonomyTermData,
     Users,
 )
 from .models.strapi import (
@@ -131,12 +133,15 @@ def process_article(node):
 @export_actualites
 def process_actualites(node):
     user = node.get_user()
+    category = node.get_field(FieldDataFieldTypeActualite)
+    category = TaxonomyTermData.get_or_none(TaxonomyTermData.tid == category)
 
     return Actualites(
         id=node.nid,
         title=node.title,
         head=node.get_field(FieldDataFieldChapeau),
         body=node.get_field(FieldDataFieldDescriptionActualite),
+        category=category.name if category else "",
         images=node.get_media(
             FieldDataFieldImagesActus,
             FieldDataFieldImageActus,

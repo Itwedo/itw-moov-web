@@ -36,6 +36,7 @@ class Actualites(BaseNode):
     head: Optional[str]
     body: str
     images: List[str]
+    category: str
     # field_images_actus
     # * field_copyright_image_actus
     # ! field_type_actualite
