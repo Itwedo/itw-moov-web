@@ -1,12 +1,14 @@
 from peewee import *
 
 
-database = MySQLDatabase('c1moov',
-    charset='utf8',
-    sql_mode='PIPES_AS_CONCAT',
+database = MySQLDatabase(
+    "c1moov",
+    charset="utf8",
+    sql_mode="PIPES_AS_CONCAT",
     use_unicode=True,
-    user='moov',
-    password='moov1234', )
+    user="root",
+    password="Xperia12#",
+)
 
 
 class BaseModel(Model):
@@ -20239,7 +20241,10 @@ class Node(BaseModel):
         row = table.get_or_none(table.entity_id == self.nid)
 
         table_name = table._meta.table_name.split("moov_field_data_", 1)[1]
-        if table_name == "field_type_actualite":
+        if (
+            table_name == "field_type_actualite"
+            or table_name == "field_type_tendance"
+        ):
             column_name = f"{table_name}_tid"
         else:
             column_name = f"{table_name}_value"

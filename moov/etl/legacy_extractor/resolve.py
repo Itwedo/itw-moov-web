@@ -12,6 +12,8 @@ from .models.drupal import (
     Comment as DrupalComment,
     FieldDataBody,
     FieldDataFieldChapeau,
+    FieldDataFieldDescriptionTendance,
+    FieldDataFieldIconeTendanceMoov,
     FieldDataFieldTypeActualite,
     FieldDataFieldContenuArticle,
     FieldDataFieldCourriel,
@@ -22,6 +24,7 @@ from .models.drupal import (
     FieldDataFieldPhoneNumber,
     FieldDataFieldPrice,
     FieldDataFieldReferenceMvola,
+    FieldDataFieldTypeTendance,
     Node,
     TaxonomyTermData,
     Users,
@@ -32,6 +35,7 @@ from .models.strapi import (
     Article,
     Forum,
     SmallAds,
+    Tendances,
     User,
 )
 
@@ -96,6 +100,7 @@ class Export:
         return wraped
 
 
+export_tendances = Export("tendance_moov")
 export_forum = Export("forum")
 export_article = Export("article")
 export_actualites = Export("actualites")
@@ -141,6 +146,28 @@ def process_actualites(node):
         title=node.title,
         head=node.get_field(FieldDataFieldChapeau),
         body=node.get_field(FieldDataFieldDescriptionActualite),
+        category=category.name if category else "",
+        images=node.get_media(
+            FieldDataFieldImagesActus,
+            FieldDataFieldImageActus,
+            "field_image_actus_fid",
+        ),
+        created_by=user.uid,
+        created_at=datetime.fromtimestamp(node.created),
+    )
+
+
+@export_tendances
+def process_tendances(node):
+    user = node.get_user()
+    category = node.get_field(FieldDataFieldTypeTendance)
+    category = TaxonomyTermData.get_or_none(TaxonomyTermData.tid == category)
+
+    return Tendances(
+        id=node.nid,
+        title=node.title,
+        head=node.get_field(FieldDataFieldChapeau),
+        body=node.get_field(FieldDataFieldDescriptionTendance),
         category=category.name if category else "",
         images=node.get_media(
             FieldDataFieldImagesActus,
@@ -217,6 +244,7 @@ def run():
             "forum": process_forum,
             "article": process_article,
             "actualites": process_actualites,
+            "tendance_moov": process_tendances,
             "small_ads": process_small_ads,
         }.get(node.type, process_unhandled)
 
@@ -225,6 +253,7 @@ def run():
     export_forum.dump()
     export_article.dump()
     export_actualites.dump()
+    export_tendances.dump()
     export_small_ads.dump()
 
     # create comment
