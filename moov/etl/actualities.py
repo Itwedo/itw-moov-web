@@ -6,7 +6,7 @@ import requests
 import json
 from pathlib import Path
 
-from PIL import Image
+import PIL
 
 # from requests_html import HTML, HTMLSession
 from ..config import *
@@ -59,10 +59,10 @@ class Connector(object):
                 with open(
                     f'{self.images_dir}/{article["images"][0]}', "rb"
                 ) as f:
-                    _size = Image.open(
+                    _size = PIL.Image.open(
                         f'{self.images_dir}/{article["images"][0]}'
                     ).size
-                    if _size[1] < 500:
+                    if _size[1] < 600:
 
                         return None
                     else:
@@ -85,7 +85,7 @@ class Connector(object):
                         id = response.json()[0]["id"]
                     except Exception:
                         return None
-            except FileNotFoundError:
+            except (FileNotFoundError, PIL.UnidentifiedImageError) as e:
                 return None
         return id
 
