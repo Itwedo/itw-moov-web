@@ -170,7 +170,9 @@ def parse_drugstores_list(filepath):
 
 @cmd.command()
 def get_category():
-    csv_file = csv.reader(open("category.csv", "r"), delimiter=",")
+    csv_file = csv.reader(
+        open("moov/api/data/category.csv", "r"), delimiter=","
+    )
     actualities = list()
     magazines = list()
     for row in csv_file:
@@ -211,7 +213,7 @@ def get_category():
 def import_actus():
     obj = actualities.Connector("/tmp/export/actualites", "Actualite")
     article_path = obj.article_dir
-    with click.progressbar(range(441, 5767), length=5767 - 441) as bar:
+    with click.progressbar(range(3173, 5767), length=5767 - 3173) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/actualites.{info}.json")
             print(f"{article_path}/actualites.{info}.json")
@@ -222,10 +224,10 @@ def import_actus():
 def import_tendance():
     obj = actualities.Connector("/tmp/export/tendance_moov", "Tendance")
     article_path = obj.article_dir
-    with click.progressbar(range(2132), length=2132) as bar:
+    with click.progressbar(range(53, 2132), length=2132 - 53) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/tendance_moov.{info}.json")
-            print(f"{article_path}/actualites.{info}.json")
+            print(f"{article_path}/tendance_moov.{info}.json")
             print(f"  {str(obj.count)} actualities inserted")
 
 
