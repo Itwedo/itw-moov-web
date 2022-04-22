@@ -62,8 +62,20 @@ def home():
         params={
             "populate": "images",
             "sort": "id:desc",
+            "filters[Type][$eq]": "Actualite",
             "filters[source][$eq]": "moov",
-            "pagination[limit]": 100,
+            "pagination[limit]": 10,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    magazines = requests.get(
+        url=f"{STRAPI_API_URL}/actualites",
+        params={
+            "populate": "images",
+            "sort": "id:desc",
+            "filters[Type][$eq]": "Tendance",
+            "filters[source][$eq]": "moov",
+            "pagination[limit]": 20,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -100,6 +112,11 @@ def home():
             item
             for item in magazine.json()["data"]
             if item["attributes"]["images"]["data"][0]["attributes"]["width"]
+        ],
+        "magazines": [
+            item
+            for item in magazines.json()["data"]
+            if item["attributes"]["images"]["data"]
         ],
     }
     return {"data": data}
