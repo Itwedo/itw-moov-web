@@ -118,7 +118,7 @@ def filter_articles(minchars):
                         info["attributes"]["images"]["data"][0]["attributes"][
                             "width"
                         ]
-                        < 500
+                        < 600
                     ):
                         infos.append(
                             (
@@ -213,7 +213,7 @@ def get_category():
 def import_actus():
     obj = actualities.Connector("/tmp/export/actualites", "Actualite")
     article_path = obj.article_dir
-    with click.progressbar(range(3173, 5767), length=5767 - 3173) as bar:
+    with click.progressbar(range(5767), length=5767) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/actualites.{info}.json")
             print(f"{article_path}/actualites.{info}.json")
@@ -224,7 +224,7 @@ def import_actus():
 def import_tendance():
     obj = actualities.Connector("/tmp/export/tendance_moov", "Tendance")
     article_path = obj.article_dir
-    with click.progressbar(range(53, 2132), length=2132 - 53) as bar:
+    with click.progressbar(range(2132), length=2132) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/tendance_moov.{info}.json")
             print(f"{article_path}/tendance_moov.{info}.json")
@@ -232,7 +232,7 @@ def import_tendance():
 
 
 @cmd.command()
-def delecte_actus():
+def delete_actus():
     for i in range(10):
 
         result = requests.get(
