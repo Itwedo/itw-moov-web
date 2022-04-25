@@ -230,8 +230,11 @@ def use_template(template=None):
                 {"display": "Vaovao", "slug": "vaovao"},
                 {"display": "Nationale", "slug": "nationale"},
                 {"display": "Economie", "slug": "economie"},
+                {"display": "Sport", "slug": "sport"},
+                {"display": "Internationale", "slug": "internationale"},
                 {"display": "Médecine & Santé", "slug": "sante-medecine"},
                 {"display": "Culture", "slug": "culture"},
+                {"display": "Gasy Winner", "slug": "gasy-winner"},
             ]
             ctx["magazines"] = [
                 {"display": "People", "slug": "people"},

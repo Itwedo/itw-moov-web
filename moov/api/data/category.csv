@@ -2,8 +2,8 @@ slug,cms_content,display
 vaovao,Vaovao,Vaovao
 nationale,Nationale,Nationale
 economie,Economie,Economie
-sports,Sports,Sports
-internationale,Monde,Internationale
+sport,Sport,Sport
+internationale,Internationale,Internationale
 sante-medecine,Médecine & Santé,Médecine & Santé
 people,People,People
 connected-life,High Tech,HighTech
@@ -11,7 +11,7 @@ gastronomie,Gastronomie,Gastronomie
 tourisme-voyage,Tourisme & Voyage,Tourisme & Voyage
 education-emploi,Education & Emploi,Education & Emploi
 maison-jardin,Maison & Jardin,Maison & Jardin
-auto-moto,Auto,Auto-Moto & Moto
+auto-moto,Auto-Moto,Auto & Moto
 famille,Famille,Famille
 politique,Politique,Politique
 culture,Culture,Culture
@@ -19,3 +19,4 @@ video,Vidéo,Vidéo
 look-pour-lui-elle,Look pour lui & elle,Look pour lui & elle
 sante-bien-etre,Santé & Bien-être,Santé & Bien-être
 insolite,Insolite,Insolite
+gasy-winner,Gasy Winner,Gasy Winner
