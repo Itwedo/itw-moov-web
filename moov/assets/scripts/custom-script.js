@@ -15,15 +15,33 @@ $(".menu-item").click(function () {
 });
 
 
-// let articleHeight = $(".current-article").offset().top + $(".current-article").height()
-// let articlePart1Height = $(".text-part-1").offset().top + $(".text-part-1").height()
+$("#read-more-article").click(function () {
+    $(".current-article").removeClass('croped-article')
+    $("#read-more-article").toggle()
+    $(".article-overlay").toggle()
 
-// let text = $(".text-part-1").text().trim()
-// text = text.split(" ")
-// let lastWds = text[text.length - 4] + " " + text[text.length - 3] + " " + text[text.length - 2] + " " + text[text.length - 1]
-// let text2 = $(".text-part-2").text().trim()
-// let apparition = text2.search(text[text.length - 1])
-// text2 = text2.slice(apparition + (text[text.length - 1]).length, (text2.length))
 
-// $(".text-part-1").text($(".text-part-1").text().trim())
-// $(".text-part-2").text(text2)
+    window.addEventListener("scroll", () => {
+        let sectionPubPos = $('.pub-section-slide').offset().top;
+        if (window.scrollY >= 980) {
+            $("#article-side-pub-container").addClass("fixed-article-side-pub")
+            let sidePubPos = ($('#article-side-pub-container').offset().top + $('#article-side-pub-container').height())
+            if ((sectionPubPos - sidePubPos) < 40) {
+                $("#article-side-pub-container").removeClass("fixed-article-side-pub")
+
+            }
+
+
+        } else {
+            $("#article-side-pub-container").removeClass("fixed-article-side-pub")
+        }
+    })
+
+
+})
+
+$("#read-more-article-static").click(function () {
+    $("#read-more-article-static").toggle()
+    $("#suite").removeClass('hidden')
+})
+

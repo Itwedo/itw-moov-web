@@ -1,12 +1,14 @@
 from peewee import *
 
 
-database = MySQLDatabase('c1moov',
-    charset='utf8',
-    sql_mode='PIPES_AS_CONCAT',
+database = MySQLDatabase(
+    "c1moov",
+    charset="utf8",
+    sql_mode="PIPES_AS_CONCAT",
     use_unicode=True,
-    user='moov',
-    password='moov1234', )
+    user="root",
+    password="Xperia12#",
+)
 
 
 class BaseModel(Model):
@@ -30,14 +32,17 @@ class BaseModel(Model):
 
     def get_tag(self):
         if hasattr(self, "tid"):
-            return TaxonomyTermData.get_or_none(TaxonomyTermData.tid == self.tid)
+            return TaxonomyTermData.get_or_none(
+                TaxonomyTermData.tid == self.tid
+            )
         return None
 
     def get_category(self):
         if hasattr(self, "vid"):
-            return TaxonomyVocabulary.get_or_none(TaxonomyVocabulary.vid == self.vid)
+            return TaxonomyVocabulary.get_or_none(
+                TaxonomyVocabulary.vid == self.vid
+            )
         return None
-
 
 
 class Actions(BaseModel):
@@ -48,7 +53,7 @@ class Actions(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_actions'
+        table_name = "moov_actions"
 
 
 class AdvpollElectoralList(BaseModel):
@@ -56,11 +61,9 @@ class AdvpollElectoralList(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_advpoll_electoral_list'
-        indexes = (
-            (('nid', 'uid'), True),
-        )
-        primary_key = CompositeKey('nid', 'uid')
+        table_name = "moov_advpoll_electoral_list"
+        indexes = ((("nid", "uid"), True),)
+        primary_key = CompositeKey("nid", "uid")
 
 
 class AggregatorCategory(BaseModel):
@@ -70,7 +73,7 @@ class AggregatorCategory(BaseModel):
     title = CharField(constraints=[SQL("DEFAULT ''")], unique=True)
 
     class Meta:
-        table_name = 'moov_aggregator_category'
+        table_name = "moov_aggregator_category"
 
 
 class AggregatorCategoryFeed(BaseModel):
@@ -78,11 +81,9 @@ class AggregatorCategoryFeed(BaseModel):
     fid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_aggregator_category_feed'
-        indexes = (
-            (('cid', 'fid'), True),
-        )
-        primary_key = CompositeKey('cid', 'fid')
+        table_name = "moov_aggregator_category_feed"
+        indexes = ((("cid", "fid"), True),)
+        primary_key = CompositeKey("cid", "fid")
 
 
 class AggregatorCategoryItem(BaseModel):
@@ -90,11 +91,9 @@ class AggregatorCategoryItem(BaseModel):
     iid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_aggregator_category_item'
-        indexes = (
-            (('cid', 'iid'), True),
-        )
-        primary_key = CompositeKey('cid', 'iid')
+        table_name = "moov_aggregator_category_item"
+        indexes = ((("cid", "iid"), True),)
+        primary_key = CompositeKey("cid", "iid")
 
 
 class AggregatorFeed(BaseModel):
@@ -113,7 +112,7 @@ class AggregatorFeed(BaseModel):
     url = TextField(index=True)
 
     class Meta:
-        table_name = 'moov_aggregator_feed'
+        table_name = "moov_aggregator_feed"
 
 
 class AggregatorItem(BaseModel):
@@ -127,7 +126,7 @@ class AggregatorItem(BaseModel):
     title = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_aggregator_item'
+        table_name = "moov_aggregator_item"
 
 
 class Authmap(BaseModel):
@@ -137,10 +136,8 @@ class Authmap(BaseModel):
     module = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_authmap'
-        indexes = (
-            (('uid', 'module'), False),
-        )
+        table_name = "moov_authmap"
+        indexes = ((("uid", "module"), False),)
 
 
 class AutoarchDate(BaseModel):
@@ -148,7 +145,7 @@ class AutoarchDate(BaseModel):
     date = IntegerField(null=True)
 
     class Meta:
-        table_name = 'moov_autoarch_date'
+        table_name = "moov_autoarch_date"
 
 
 class AutoarchState(BaseModel):
@@ -157,7 +154,7 @@ class AutoarchState(BaseModel):
     state = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_autoarch_state'
+        table_name = "moov_autoarch_state"
 
 
 class AutoassignrolePage(BaseModel):
@@ -169,7 +166,7 @@ class AutoassignrolePage(BaseModel):
     title = TextField()
 
     class Meta:
-        table_name = 'moov_autoassignrole_page'
+        table_name = "moov_autoassignrole_page"
 
 
 class Batch(BaseModel):
@@ -179,7 +176,7 @@ class Batch(BaseModel):
     token = CharField(index=True)
 
     class Meta:
-        table_name = 'moov_batch'
+        table_name = "moov_batch"
 
 
 class Block(BaseModel):
@@ -199,10 +196,10 @@ class Block(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_block'
+        table_name = "moov_block"
         indexes = (
-            (('theme', 'module', 'delta'), True),
-            (('theme', 'status', 'region', 'weight', 'module'), False),
+            (("theme", "module", "delta"), True),
+            (("theme", "status", "region", "weight", "module"), False),
         )
 
 
@@ -213,7 +210,7 @@ class BlockCustom(BaseModel):
     info = CharField(constraints=[SQL("DEFAULT ''")], unique=True)
 
     class Meta:
-        table_name = 'moov_block_custom'
+        table_name = "moov_block_custom"
 
 
 class BlockNodeType(BaseModel):
@@ -222,11 +219,9 @@ class BlockNodeType(BaseModel):
     type = CharField(index=True)
 
     class Meta:
-        table_name = 'moov_block_node_type'
-        indexes = (
-            (('module', 'delta', 'type'), True),
-        )
-        primary_key = CompositeKey('delta', 'module', 'type')
+        table_name = "moov_block_node_type"
+        indexes = ((("module", "delta", "type"), True),)
+        primary_key = CompositeKey("delta", "module", "type")
 
 
 class BlockRole(BaseModel):
@@ -235,11 +230,9 @@ class BlockRole(BaseModel):
     module = CharField()
 
     class Meta:
-        table_name = 'moov_block_role'
-        indexes = (
-            (('module', 'delta', 'rid'), True),
-        )
-        primary_key = CompositeKey('delta', 'module', 'rid')
+        table_name = "moov_block_role"
+        indexes = ((("module", "delta", "rid"), True),)
+        primary_key = CompositeKey("delta", "module", "rid")
 
 
 class BlockedIps(BaseModel):
@@ -247,7 +240,7 @@ class BlockedIps(BaseModel):
     ip = CharField(constraints=[SQL("DEFAULT ''")], index=True)
 
     class Meta:
-        table_name = 'moov_blocked_ips'
+        table_name = "moov_blocked_ips"
 
 
 class Cache(BaseModel):
@@ -258,7 +251,7 @@ class Cache(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache'
+        table_name = "moov_cache"
 
 
 class CacheAdminMenu(BaseModel):
@@ -269,7 +262,7 @@ class CacheAdminMenu(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_admin_menu'
+        table_name = "moov_cache_admin_menu"
 
 
 class CacheBlock(BaseModel):
@@ -280,7 +273,7 @@ class CacheBlock(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_block'
+        table_name = "moov_cache_block"
 
 
 class CacheBootstrap(BaseModel):
@@ -291,7 +284,7 @@ class CacheBootstrap(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_bootstrap'
+        table_name = "moov_cache_bootstrap"
 
 
 class CacheCustomfilter(BaseModel):
@@ -302,7 +295,7 @@ class CacheCustomfilter(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_customfilter'
+        table_name = "moov_cache_customfilter"
 
 
 class CacheFeatures(BaseModel):
@@ -313,7 +306,7 @@ class CacheFeatures(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_features'
+        table_name = "moov_cache_features"
 
 
 class CacheFeedsHttp(BaseModel):
@@ -324,7 +317,7 @@ class CacheFeedsHttp(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_feeds_http'
+        table_name = "moov_cache_feeds_http"
 
 
 class CacheField(BaseModel):
@@ -335,7 +328,7 @@ class CacheField(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_field'
+        table_name = "moov_cache_field"
 
 
 class CacheFilter(BaseModel):
@@ -346,7 +339,7 @@ class CacheFilter(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_filter'
+        table_name = "moov_cache_filter"
 
 
 class CacheForm(BaseModel):
@@ -357,7 +350,7 @@ class CacheForm(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_form'
+        table_name = "moov_cache_form"
 
 
 class CacheHttpResponseHeaders(BaseModel):
@@ -368,7 +361,7 @@ class CacheHttpResponseHeaders(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_http_response_headers'
+        table_name = "moov_cache_http_response_headers"
 
 
 class CacheImage(BaseModel):
@@ -379,7 +372,7 @@ class CacheImage(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_image'
+        table_name = "moov_cache_image"
 
 
 class CacheL10NUpdate(BaseModel):
@@ -390,7 +383,7 @@ class CacheL10NUpdate(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_l10n_update'
+        table_name = "moov_cache_l10n_update"
 
 
 class CacheLibraries(BaseModel):
@@ -401,7 +394,7 @@ class CacheLibraries(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_libraries'
+        table_name = "moov_cache_libraries"
 
 
 class CacheMenu(BaseModel):
@@ -412,7 +405,7 @@ class CacheMenu(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_menu'
+        table_name = "moov_cache_menu"
 
 
 class CacheMetatag(BaseModel):
@@ -423,7 +416,7 @@ class CacheMetatag(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_metatag'
+        table_name = "moov_cache_metatag"
 
 
 class CachePage(BaseModel):
@@ -434,7 +427,7 @@ class CachePage(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_page'
+        table_name = "moov_cache_page"
 
 
 class CachePath(BaseModel):
@@ -445,7 +438,7 @@ class CachePath(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_path'
+        table_name = "moov_cache_path"
 
 
 class CachePathBreadcrumbs(BaseModel):
@@ -456,7 +449,7 @@ class CachePathBreadcrumbs(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_path_breadcrumbs'
+        table_name = "moov_cache_path_breadcrumbs"
 
 
 class CacheRules(BaseModel):
@@ -467,7 +460,7 @@ class CacheRules(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_rules'
+        table_name = "moov_cache_rules"
 
 
 class CacheSmartIp(BaseModel):
@@ -478,7 +471,7 @@ class CacheSmartIp(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_smart_ip'
+        table_name = "moov_cache_smart_ip"
 
 
 class CacheToken(BaseModel):
@@ -489,7 +482,7 @@ class CacheToken(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_token'
+        table_name = "moov_cache_token"
 
 
 class CacheUpdate(BaseModel):
@@ -500,7 +493,7 @@ class CacheUpdate(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_update'
+        table_name = "moov_cache_update"
 
 
 class CacheVariable(BaseModel):
@@ -511,7 +504,7 @@ class CacheVariable(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_variable'
+        table_name = "moov_cache_variable"
 
 
 class CacheViews(BaseModel):
@@ -522,7 +515,7 @@ class CacheViews(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_cache_views'
+        table_name = "moov_cache_views"
 
 
 class CacheViewsData(BaseModel):
@@ -533,7 +526,7 @@ class CacheViewsData(BaseModel):
     serialized = IntegerField(constraints=[SQL("DEFAULT 1")])
 
     class Meta:
-        table_name = 'moov_cache_views_data'
+        table_name = "moov_cache_views_data"
 
 
 class CaptchaPoints(BaseModel):
@@ -542,7 +535,7 @@ class CaptchaPoints(BaseModel):
     module = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_captcha_points'
+        table_name = "moov_captcha_points"
 
 
 class CaptchaSessions(BaseModel):
@@ -558,10 +551,8 @@ class CaptchaSessions(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_captcha_sessions'
-        indexes = (
-            (('csid', 'ip_address'), False),
-        )
+        table_name = "moov_captcha_sessions"
+        indexes = ((("csid", "ip_address"), False),)
 
 
 class CkeditorInputFormat(BaseModel):
@@ -569,11 +560,9 @@ class CkeditorInputFormat(BaseModel):
     name = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_ckeditor_input_format'
-        indexes = (
-            (('name', 'format'), True),
-        )
-        primary_key = CompositeKey('format', 'name')
+        table_name = "moov_ckeditor_input_format"
+        indexes = ((("name", "format"), True),)
+        primary_key = CompositeKey("format", "name")
 
 
 class CkeditorSettings(BaseModel):
@@ -581,7 +570,7 @@ class CkeditorSettings(BaseModel):
     settings = TextField(null=True)
 
     class Meta:
-        table_name = 'moov_ckeditor_settings'
+        table_name = "moov_ckeditor_settings"
 
 
 class Comment(BaseModel):
@@ -601,15 +590,17 @@ class Comment(BaseModel):
     thread = CharField()
 
     class Meta:
-        table_name = 'moov_comment'
+        table_name = "moov_comment"
         indexes = (
-            (('nid', 'language'), False),
-            (('nid', 'status', 'created', 'cid', 'thread'), False),
-            (('pid', 'status'), False),
+            (("nid", "language"), False),
+            (("nid", "status", "created", "cid", "thread"), False),
+            (("pid", "status"), False),
         )
 
     def get_body(self):
-        return FieldDataCommentBody.get_or_none(FieldDataCommentBody.entity_id == self.cid)
+        return FieldDataCommentBody.get_or_none(
+            FieldDataCommentBody.entity_id == self.cid
+        )
 
 
 class ConditionalFields(BaseModel):
@@ -618,7 +609,7 @@ class ConditionalFields(BaseModel):
     options = TextField()
 
     class Meta:
-        table_name = 'moov_conditional_fields'
+        table_name = "moov_conditional_fields"
 
 
 class ContentAccess(BaseModel):
@@ -626,7 +617,7 @@ class ContentAccess(BaseModel):
     settings = TextField(null=True)
 
     class Meta:
-        table_name = 'moov_content_access'
+        table_name = "moov_content_access"
 
 
 class ContentLock(BaseModel):
@@ -636,7 +627,7 @@ class ContentLock(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_content_lock'
+        table_name = "moov_content_lock"
 
 
 class CtoolsCssCache(BaseModel):
@@ -646,7 +637,7 @@ class CtoolsCssCache(BaseModel):
     filter = IntegerField(null=True)
 
     class Meta:
-        table_name = 'moov_ctools_css_cache'
+        table_name = "moov_ctools_css_cache"
 
 
 class CtoolsObjectCache(BaseModel):
@@ -657,11 +648,9 @@ class CtoolsObjectCache(BaseModel):
     updated = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_ctools_object_cache'
-        indexes = (
-            (('sid', 'obj', 'name'), True),
-        )
-        primary_key = CompositeKey('name', 'obj', 'sid')
+        table_name = "moov_ctools_object_cache"
+        indexes = ((("sid", "obj", "name"), True),)
+        primary_key = CompositeKey("name", "obj", "sid")
 
 
 class CustomfilterFilter(BaseModel):
@@ -674,7 +663,7 @@ class CustomfilterFilter(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_customfilter_filter'
+        table_name = "moov_customfilter_filter"
 
 
 class CustomfilterRule(BaseModel):
@@ -691,7 +680,7 @@ class CustomfilterRule(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_customfilter_rule'
+        table_name = "moov_customfilter_rule"
 
 
 class DateFormatLocale(BaseModel):
@@ -700,11 +689,9 @@ class DateFormatLocale(BaseModel):
     type = CharField()
 
     class Meta:
-        table_name = 'moov_date_format_locale'
-        indexes = (
-            (('type', 'language'), True),
-        )
-        primary_key = CompositeKey('language', 'type')
+        table_name = "moov_date_format_locale"
+        indexes = ((("type", "language"), True),)
+        primary_key = CompositeKey("language", "type")
 
 
 class DateFormatType(BaseModel):
@@ -713,7 +700,7 @@ class DateFormatType(BaseModel):
     type = CharField(primary_key=True)
 
     class Meta:
-        table_name = 'moov_date_format_type'
+        table_name = "moov_date_format_type"
 
 
 class DateFormats(BaseModel):
@@ -723,10 +710,8 @@ class DateFormats(BaseModel):
     type = CharField()
 
     class Meta:
-        table_name = 'moov_date_formats'
-        indexes = (
-            (('format', 'type'), True),
-        )
+        table_name = "moov_date_formats"
+        indexes = ((("format", "type"), True),)
 
 
 class DdblockBlock(BaseModel):
@@ -737,7 +722,7 @@ class DdblockBlock(BaseModel):
     title = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_ddblock_block'
+        table_name = "moov_ddblock_block"
 
 
 class EntityRuleSetting(BaseModel):
@@ -752,9 +737,9 @@ class EntityRuleSetting(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_entity_rule_setting'
+        table_name = "moov_entity_rule_setting"
         indexes = (
-            (('entity_type', 'bundle', 'op', 'rules_config', 'weight'), True),
+            (("entity_type", "bundle", "op", "rules_config", "weight"), True),
         )
 
 
@@ -769,7 +754,7 @@ class Entityform(BaseModel):
     uid = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_entityform'
+        table_name = "moov_entityform"
 
 
 class EntityformType(BaseModel):
@@ -781,7 +766,7 @@ class EntityformType(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_entityform_type'
+        table_name = "moov_entityform_type"
 
 
 class EntitylistLists(BaseModel):
@@ -794,11 +779,9 @@ class EntitylistLists(BaseModel):
     title = CharField()
 
     class Meta:
-        table_name = 'moov_entitylist_lists'
-        indexes = (
-            (('lid', 'name'), True),
-        )
-        primary_key = CompositeKey('lid', 'name')
+        table_name = "moov_entitylist_lists"
+        indexes = ((("lid", "name"), True),)
+        primary_key = CompositeKey("lid", "name")
 
 
 class EventColors(BaseModel):
@@ -807,7 +790,7 @@ class EventColors(BaseModel):
     selector = CharField(constraints=[SQL("DEFAULT ''")], primary_key=True)
 
     class Meta:
-        table_name = 'moov_event_colors'
+        table_name = "moov_event_colors"
 
 
 class FeedImportHashes(BaseModel):
@@ -819,10 +802,8 @@ class FeedImportHashes(BaseModel):
     hash = CharField()
 
     class Meta:
-        table_name = 'moov_feed_import_hashes'
-        indexes = (
-            (('feed_group', 'entity', 'hash'), False),
-        )
+        table_name = "moov_feed_import_hashes"
+        indexes = ((("feed_group", "entity", "hash"), False),)
 
 
 class FeedImportSettings(BaseModel):
@@ -836,7 +817,7 @@ class FeedImportSettings(BaseModel):
     settings = TextField()
 
     class Meta:
-        table_name = 'moov_feed_import_settings'
+        table_name = "moov_feed_import_settings"
 
 
 class FeedsImporter(BaseModel):
@@ -844,7 +825,7 @@ class FeedsImporter(BaseModel):
     id = CharField(constraints=[SQL("DEFAULT ''")], primary_key=True)
 
     class Meta:
-        table_name = 'moov_feeds_importer'
+        table_name = "moov_feeds_importer"
 
 
 class FeedsItem(BaseModel):
@@ -858,15 +839,15 @@ class FeedsItem(BaseModel):
     url = TextField()
 
     class Meta:
-        table_name = 'moov_feeds_item'
+        table_name = "moov_feeds_item"
         indexes = (
-            (('entity_type', 'entity_id'), True),
-            (('entity_type', 'guid'), False),
-            (('entity_type', 'id', 'feed_nid', 'guid'), False),
-            (('entity_type', 'id', 'feed_nid', 'url'), False),
-            (('entity_type', 'url'), False),
+            (("entity_type", "entity_id"), True),
+            (("entity_type", "guid"), False),
+            (("entity_type", "id", "feed_nid", "guid"), False),
+            (("entity_type", "id", "feed_nid", "url"), False),
+            (("entity_type", "url"), False),
         )
-        primary_key = CompositeKey('entity_id', 'entity_type')
+        primary_key = CompositeKey("entity_id", "entity_type")
 
 
 class FeedsLog(BaseModel):
@@ -881,10 +862,8 @@ class FeedsLog(BaseModel):
     variables = TextField()
 
     class Meta:
-        table_name = 'moov_feeds_log'
-        indexes = (
-            (('id', 'feed_nid'), False),
-        )
+        table_name = "moov_feeds_log"
+        indexes = ((("id", "feed_nid"), False),)
 
 
 class FeedsPushSubscriptions(BaseModel):
@@ -898,11 +877,9 @@ class FeedsPushSubscriptions(BaseModel):
     topic = TextField()
 
     class Meta:
-        table_name = 'moov_feeds_push_subscriptions'
-        indexes = (
-            (('domain', 'subscriber_id'), True),
-        )
-        primary_key = CompositeKey('domain', 'subscriber_id')
+        table_name = "moov_feeds_push_subscriptions"
+        indexes = ((("domain", "subscriber_id"), True),)
+        primary_key = CompositeKey("domain", "subscriber_id")
 
 
 class FeedsSource(BaseModel):
@@ -915,12 +892,12 @@ class FeedsSource(BaseModel):
     state = TextField(null=True)
 
     class Meta:
-        table_name = 'moov_feeds_source'
+        table_name = "moov_feeds_source"
         indexes = (
-            (('id', 'feed_nid'), True),
-            (('id', 'source'), False),
+            (("id", "feed_nid"), True),
+            (("id", "source"), False),
         )
-        primary_key = CompositeKey('feed_nid', 'id')
+        primary_key = CompositeKey("feed_nid", "id")
 
 
 class FeedsTamper(BaseModel):
@@ -933,7 +910,7 @@ class FeedsTamper(BaseModel):
     weight = IntegerField()
 
     class Meta:
-        table_name = 'moov_feeds_tamper'
+        table_name = "moov_feeds_tamper"
 
 
 class FieldCollectionItem(BaseModel):
@@ -943,7 +920,7 @@ class FieldCollectionItem(BaseModel):
     revision_id = IntegerField()
 
     class Meta:
-        table_name = 'moov_field_collection_item'
+        table_name = "moov_field_collection_item"
 
 
 class FieldCollectionItemRevision(BaseModel):
@@ -951,7 +928,7 @@ class FieldCollectionItemRevision(BaseModel):
     revision_id = AutoField()
 
     class Meta:
-        table_name = 'moov_field_collection_item_revision'
+        table_name = "moov_field_collection_item_revision"
 
 
 class FieldConfig(BaseModel):
@@ -969,7 +946,7 @@ class FieldConfig(BaseModel):
     type = CharField(index=True)
 
     class Meta:
-        table_name = 'moov_field_config'
+        table_name = "moov_field_config"
 
 
 class FieldConfigInstance(BaseModel):
@@ -981,10 +958,8 @@ class FieldConfigInstance(BaseModel):
     field_name = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_field_config_instance'
-        indexes = (
-            (('field_name', 'entity_type', 'bundle'), False),
-        )
+        table_name = "moov_field_config_instance"
+        indexes = ((("field_name", "entity_type", "bundle"), False),)
 
 
 class FieldDataAdvpollBehavior(BaseModel):
@@ -998,11 +973,16 @@ class FieldDataAdvpollBehavior(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_behavior'
+        table_name = "moov_field_data_advpoll_behavior"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollChoice(BaseModel):
@@ -1018,11 +998,16 @@ class FieldDataAdvpollChoice(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_choice'
+        table_name = "moov_field_data_advpoll_choice"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollClosed(BaseModel):
@@ -1036,11 +1021,16 @@ class FieldDataAdvpollClosed(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_closed'
+        table_name = "moov_field_data_advpoll_closed"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollCookieDuration(BaseModel):
@@ -1054,11 +1044,16 @@ class FieldDataAdvpollCookieDuration(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_cookie_duration'
+        table_name = "moov_field_data_advpoll_cookie_duration"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollDates(BaseModel):
@@ -1073,11 +1068,16 @@ class FieldDataAdvpollDates(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_dates'
+        table_name = "moov_field_data_advpoll_dates"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollMaxChoices(BaseModel):
@@ -1091,11 +1091,16 @@ class FieldDataAdvpollMaxChoices(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_max_choices'
+        table_name = "moov_field_data_advpoll_max_choices"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollMode(BaseModel):
@@ -1109,11 +1114,16 @@ class FieldDataAdvpollMode(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_mode'
+        table_name = "moov_field_data_advpoll_mode"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollOptions(BaseModel):
@@ -1127,11 +1137,16 @@ class FieldDataAdvpollOptions(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_options'
+        table_name = "moov_field_data_advpoll_options"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataAdvpollResults(BaseModel):
@@ -1145,11 +1160,16 @@ class FieldDataAdvpollResults(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_advpoll_results'
+        table_name = "moov_field_data_advpoll_results"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataBody(BaseModel):
@@ -1165,11 +1185,16 @@ class FieldDataBody(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_body'
+        table_name = "moov_field_data_body"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataCommentBody(BaseModel):
@@ -1184,11 +1209,16 @@ class FieldDataCommentBody(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_comment_body'
+        table_name = "moov_field_data_comment_body"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataEventCalendarDate(BaseModel):
@@ -1203,11 +1233,16 @@ class FieldDataEventCalendarDate(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_event_calendar_date'
+        table_name = "moov_field_data_event_calendar_date"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataEventCalendarStatus(BaseModel):
@@ -1221,11 +1256,16 @@ class FieldDataEventCalendarStatus(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_event_calendar_status'
+        table_name = "moov_field_data_event_calendar_status"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldAdressePharmacieGarde(BaseModel):
@@ -1240,11 +1280,16 @@ class FieldDataFieldAdressePharmacieGarde(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_adresse_pharmacie_garde'
+        table_name = "moov_field_data_field_adresse_pharmacie_garde"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldAfficherDansLaPageDAc(BaseModel):
@@ -1253,16 +1298,23 @@ class FieldDataFieldAfficherDansLaPageDAc(BaseModel):
     delta = IntegerField()
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
-    field_afficher_dans_la_page_d_ac_value = IntegerField(index=True, null=True)
+    field_afficher_dans_la_page_d_ac_value = IntegerField(
+        index=True, null=True
+    )
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_afficher_dans_la_page_d_ac'
+        table_name = "moov_field_data_field_afficher_dans_la_page_d_ac"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldAfficherDansLeSlider(BaseModel):
@@ -1276,11 +1328,16 @@ class FieldDataFieldAfficherDansLeSlider(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_afficher_dans_le_slider'
+        table_name = "moov_field_data_field_afficher_dans_le_slider"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldArrivee(BaseModel):
@@ -1295,11 +1352,16 @@ class FieldDataFieldArrivee(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_arrivee'
+        table_name = "moov_field_data_field_arrivee"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldArriveeDuVol(BaseModel):
@@ -1314,11 +1376,16 @@ class FieldDataFieldArriveeDuVol(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_arrivee_du_vol'
+        table_name = "moov_field_data_field_arrivee_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldAuteur(BaseModel):
@@ -1333,11 +1400,16 @@ class FieldDataFieldAuteur(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_auteur'
+        table_name = "moov_field_data_field_auteur"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldAutreTLPhone(BaseModel):
@@ -1352,11 +1424,16 @@ class FieldDataFieldAutreTLPhone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_autre_t_l_phone'
+        table_name = "moov_field_data_field_autre_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCatGorieDeLAnnonce(BaseModel):
@@ -1370,11 +1447,16 @@ class FieldDataFieldCatGorieDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_cat_gorie_de_l_annonce'
+        table_name = "moov_field_data_field_cat_gorie_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCatGorieSmallAds(BaseModel):
@@ -1388,11 +1470,16 @@ class FieldDataFieldCatGorieSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_cat_gorie_small_ads'
+        table_name = "moov_field_data_field_cat_gorie_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCategorieDeLAnnonce(BaseModel):
@@ -1406,11 +1493,16 @@ class FieldDataFieldCategorieDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_categorie_de_l_annonce'
+        table_name = "moov_field_data_field_categorie_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCategorieForum(BaseModel):
@@ -1424,11 +1516,16 @@ class FieldDataFieldCategorieForum(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_categorie_forum'
+        table_name = "moov_field_data_field_categorie_forum"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCategorieLive(BaseModel):
@@ -1442,11 +1539,16 @@ class FieldDataFieldCategorieLive(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_categorie_live'
+        table_name = "moov_field_data_field_categorie_live"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCategorieNumeroUrgence(BaseModel):
@@ -1460,11 +1562,16 @@ class FieldDataFieldCategorieNumeroUrgence(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_categorie_numero_urgence'
+        table_name = "moov_field_data_field_categorie_numero_urgence"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldChaNeTv(BaseModel):
@@ -1478,11 +1585,16 @@ class FieldDataFieldChaNeTv(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_cha_ne_tv'
+        table_name = "moov_field_data_field_cha_ne_tv"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldChannelId(BaseModel):
@@ -1497,11 +1609,16 @@ class FieldDataFieldChannelId(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_channel_id'
+        table_name = "moov_field_data_field_channel_id"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldChapeau(BaseModel):
@@ -1516,11 +1633,16 @@ class FieldDataFieldChapeau(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_chapeau'
+        table_name = "moov_field_data_field_chapeau"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldChoisirCommeContact(BaseModel):
@@ -1534,11 +1656,16 @@ class FieldDataFieldChoisirCommeContact(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_choisir_comme_contact'
+        table_name = "moov_field_data_field_choisir_comme_contact"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldChoixTLPhone(BaseModel):
@@ -1553,11 +1680,16 @@ class FieldDataFieldChoixTLPhone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_choix_t_l_phone'
+        table_name = "moov_field_data_field_choix_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldClouds(BaseModel):
@@ -1572,11 +1704,16 @@ class FieldDataFieldClouds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_clouds'
+        table_name = "moov_field_data_field_clouds"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCodeProvince(BaseModel):
@@ -1591,11 +1728,16 @@ class FieldDataFieldCodeProvince(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_code_province'
+        table_name = "moov_field_data_field_code_province"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCodeRegion(BaseModel):
@@ -1610,11 +1752,16 @@ class FieldDataFieldCodeRegion(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_code_region'
+        table_name = "moov_field_data_field_code_region"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCompagnieDuVol(BaseModel):
@@ -1629,11 +1776,16 @@ class FieldDataFieldCompagnieDuVol(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_compagnie_du_vol'
+        table_name = "moov_field_data_field_compagnie_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCompteurAccueil(BaseModel):
@@ -1647,11 +1799,16 @@ class FieldDataFieldCompteurAccueil(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_compteur_accueil'
+        table_name = "moov_field_data_field_compteur_accueil"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCompteurCategorie(BaseModel):
@@ -1660,16 +1817,23 @@ class FieldDataFieldCompteurCategorie(BaseModel):
     delta = IntegerField()
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
-    field_compteur_categorie_value = CharField(constraints=[SQL("DEFAULT '1'")], null=True)
+    field_compteur_categorie_value = CharField(
+        constraints=[SQL("DEFAULT '1'")], null=True
+    )
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_compteur_categorie'
+        table_name = "moov_field_data_field_compteur_categorie"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldConditionDeVente(BaseModel):
@@ -1683,11 +1847,16 @@ class FieldDataFieldConditionDeVente(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_condition_de_vente'
+        table_name = "moov_field_data_field_condition_de_vente"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldConditionDeVenteAnnonce(BaseModel):
@@ -1703,11 +1872,16 @@ class FieldDataFieldConditionDeVenteAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_condition_de_vente_annonce'
+        table_name = "moov_field_data_field_condition_de_vente_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldConditionDeVentePublici(BaseModel):
@@ -1716,16 +1890,23 @@ class FieldDataFieldConditionDeVentePublici(BaseModel):
     delta = IntegerField()
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
-    field_condition_de_vente_publici_value = IntegerField(index=True, null=True)
+    field_condition_de_vente_publici_value = IntegerField(
+        index=True, null=True
+    )
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_condition_de_vente_publici'
+        table_name = "moov_field_data_field_condition_de_vente_publici"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldContact(BaseModel):
@@ -1739,11 +1920,16 @@ class FieldDataFieldContact(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_contact'
+        table_name = "moov_field_data_field_contact"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldContactDesJournalistes(BaseModel):
@@ -1759,11 +1945,16 @@ class FieldDataFieldContactDesJournalistes(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_contact_des_journalistes'
+        table_name = "moov_field_data_field_contact_des_journalistes"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldContactMe(BaseModel):
@@ -1777,11 +1968,16 @@ class FieldDataFieldContactMe(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_contact_me'
+        table_name = "moov_field_data_field_contact_me"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldContactRapide(BaseModel):
@@ -1796,11 +1992,16 @@ class FieldDataFieldContactRapide(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_contact_rapide_'
+        table_name = "moov_field_data_field_contact_rapide_"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldContactRapideAds(BaseModel):
@@ -1815,11 +2016,16 @@ class FieldDataFieldContactRapideAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_contact_rapide_ads'
+        table_name = "moov_field_data_field_contact_rapide_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldContenuArticle(BaseModel):
@@ -1834,11 +2040,16 @@ class FieldDataFieldContenuArticle(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_contenu_article'
+        table_name = "moov_field_data_field_contenu_article"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightContenu(BaseModel):
@@ -1852,11 +2063,16 @@ class FieldDataFieldCopyrightContenu(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_contenu'
+        table_name = "moov_field_data_field_copyright_contenu"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightContenuDecouvri(BaseModel):
@@ -1870,11 +2086,16 @@ class FieldDataFieldCopyrightContenuDecouvri(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_contenu_decouvri'
+        table_name = "moov_field_data_field_copyright_contenu_decouvri"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightContenuEducatio(BaseModel):
@@ -1889,11 +2110,16 @@ class FieldDataFieldCopyrightContenuEducatio(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_contenu_educatio'
+        table_name = "moov_field_data_field_copyright_contenu_educatio"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightContenuTendace(BaseModel):
@@ -1907,11 +2133,16 @@ class FieldDataFieldCopyrightContenuTendace(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_contenu_tendace'
+        table_name = "moov_field_data_field_copyright_contenu_tendace"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightImageActus(BaseModel):
@@ -1926,11 +2157,16 @@ class FieldDataFieldCopyrightImageActus(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_image_actus'
+        table_name = "moov_field_data_field_copyright_image_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightImageDecouvrir(BaseModel):
@@ -1945,11 +2181,16 @@ class FieldDataFieldCopyrightImageDecouvrir(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_image_decouvrir'
+        table_name = "moov_field_data_field_copyright_image_decouvrir"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightImageEducation(BaseModel):
@@ -1964,11 +2205,16 @@ class FieldDataFieldCopyrightImageEducation(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_image_education'
+        table_name = "moov_field_data_field_copyright_image_education"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightImageGallery(BaseModel):
@@ -1982,11 +2228,16 @@ class FieldDataFieldCopyrightImageGallery(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_image_gallery'
+        table_name = "moov_field_data_field_copyright_image_gallery"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCopyrightImageTendance(BaseModel):
@@ -2001,11 +2252,16 @@ class FieldDataFieldCopyrightImageTendance(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_copyright_image_tendance'
+        table_name = "moov_field_data_field_copyright_image_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCourriel(BaseModel):
@@ -2020,11 +2276,16 @@ class FieldDataFieldCourriel(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_courriel'
+        table_name = "moov_field_data_field_courriel"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCourse(BaseModel):
@@ -2039,11 +2300,16 @@ class FieldDataFieldCourse(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_course'
+        table_name = "moov_field_data_field_course"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldCouvertureOuiNon(BaseModel):
@@ -2057,11 +2323,16 @@ class FieldDataFieldCouvertureOuiNon(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_couverture_oui_non'
+        table_name = "moov_field_data_field_couverture_oui_non"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDPartDuVol(BaseModel):
@@ -2076,11 +2347,16 @@ class FieldDataFieldDPartDuVol(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_d_part_du_vol'
+        table_name = "moov_field_data_field_d_part_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDArrivE(BaseModel):
@@ -2095,11 +2371,16 @@ class FieldDataFieldDateDArrivE(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_d_arriv_e'
+        table_name = "moov_field_data_field_date_d_arriv_e"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDeDButDiffusion(BaseModel):
@@ -2114,11 +2395,16 @@ class FieldDataFieldDateDeDButDiffusion(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_de_d_but_diffusion'
+        table_name = "moov_field_data_field_date_de_d_but_diffusion"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDeDiffusionAds(BaseModel):
@@ -2133,11 +2419,16 @@ class FieldDataFieldDateDeDiffusionAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_de_diffusion_ads'
+        table_name = "moov_field_data_field_date_de_diffusion_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDeFinPublicite(BaseModel):
@@ -2151,11 +2442,16 @@ class FieldDataFieldDateDeFinPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_de_fin_publicite'
+        table_name = "moov_field_data_field_date_de_fin_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDePublication(BaseModel):
@@ -2169,11 +2465,16 @@ class FieldDataFieldDateDePublication(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_de_publication'
+        table_name = "moov_field_data_field_date_de_publication"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDebutDiffusion(BaseModel):
@@ -2187,11 +2488,16 @@ class FieldDataFieldDateDebutDiffusion(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_debut_diffusion'
+        table_name = "moov_field_data_field_date_debut_diffusion"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDebutPublicite(BaseModel):
@@ -2205,11 +2511,16 @@ class FieldDataFieldDateDebutPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_debut_publicite'
+        table_name = "moov_field_data_field_date_debut_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDuCours(BaseModel):
@@ -2224,11 +2535,16 @@ class FieldDataFieldDateDuCours(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_du_cours'
+        table_name = "moov_field_data_field_date_du_cours"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDuCourse(BaseModel):
@@ -2243,11 +2559,16 @@ class FieldDataFieldDateDuCourse(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_du_course'
+        table_name = "moov_field_data_field_date_du_course"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDuProgramme(BaseModel):
@@ -2262,11 +2583,16 @@ class FieldDataFieldDateDuProgramme(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_du_programme'
+        table_name = "moov_field_data_field_date_du_programme"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateDuVol(BaseModel):
@@ -2281,11 +2607,16 @@ class FieldDataFieldDateDuVol(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_du_vol'
+        table_name = "moov_field_data_field_date_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateEndAnnonce(BaseModel):
@@ -2300,11 +2631,16 @@ class FieldDataFieldDateEndAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_end_annonce'
+        table_name = "moov_field_data_field_date_end_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateEndPublicite(BaseModel):
@@ -2319,11 +2655,16 @@ class FieldDataFieldDateEndPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_end_publicite'
+        table_name = "moov_field_data_field_date_end_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateEvenement(BaseModel):
@@ -2337,11 +2678,16 @@ class FieldDataFieldDateEvenement(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_evenement'
+        table_name = "moov_field_data_field_date_evenement"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateFinDiffusion(BaseModel):
@@ -2355,11 +2701,16 @@ class FieldDataFieldDateFinDiffusion(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_fin_diffusion'
+        table_name = "moov_field_data_field_date_fin_diffusion"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateMeteo(BaseModel):
@@ -2374,11 +2725,16 @@ class FieldDataFieldDateMeteo(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_meteo'
+        table_name = "moov_field_data_field_date_meteo"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDatePartenaire(BaseModel):
@@ -2392,11 +2748,16 @@ class FieldDataFieldDatePartenaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_partenaire'
+        table_name = "moov_field_data_field_date_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDatePublicationAnnonce(BaseModel):
@@ -2411,11 +2772,16 @@ class FieldDataFieldDatePublicationAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_publication_annonce'
+        table_name = "moov_field_data_field_date_publication_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDatePublicationPublicite(BaseModel):
@@ -2430,11 +2796,16 @@ class FieldDataFieldDatePublicationPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_publication_publicite'
+        table_name = "moov_field_data_field_date_publication_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateSmallAds(BaseModel):
@@ -2449,11 +2820,16 @@ class FieldDataFieldDateSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_small_ads'
+        table_name = "moov_field_data_field_date_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateStartAnnonce(BaseModel):
@@ -2468,11 +2844,16 @@ class FieldDataFieldDateStartAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_start_annonce'
+        table_name = "moov_field_data_field_date_start_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDateStartPublicite(BaseModel):
@@ -2487,11 +2868,16 @@ class FieldDataFieldDateStartPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_date_start_publicite'
+        table_name = "moov_field_data_field_date_start_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionActualite(BaseModel):
@@ -2506,11 +2892,16 @@ class FieldDataFieldDescriptionActualite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_actualite'
+        table_name = "moov_field_data_field_description_actualite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionDeLAnnonce(BaseModel):
@@ -2525,11 +2916,16 @@ class FieldDataFieldDescriptionDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_de_l_annonce'
+        table_name = "moov_field_data_field_description_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionDecouvrirMada(BaseModel):
@@ -2544,11 +2940,16 @@ class FieldDataFieldDescriptionDecouvrirMada(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_decouvrir_mada'
+        table_name = "moov_field_data_field_description_decouvrir_mada"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionECommerce(BaseModel):
@@ -2563,11 +2964,16 @@ class FieldDataFieldDescriptionECommerce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_e_commerce'
+        table_name = "moov_field_data_field_description_e_commerce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionEducation(BaseModel):
@@ -2583,11 +2989,16 @@ class FieldDataFieldDescriptionEducation(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_education'
+        table_name = "moov_field_data_field_description_education"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionEvenement(BaseModel):
@@ -2603,11 +3014,16 @@ class FieldDataFieldDescriptionEvenement(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_evenement'
+        table_name = "moov_field_data_field_description_evenement"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionFilDinfo(BaseModel):
@@ -2622,11 +3038,16 @@ class FieldDataFieldDescriptionFilDinfo(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_fil_dinfo'
+        table_name = "moov_field_data_field_description_fil_dinfo"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionHotel(BaseModel):
@@ -2641,11 +3062,16 @@ class FieldDataFieldDescriptionHotel(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_hotel'
+        table_name = "moov_field_data_field_description_hotel"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionPartenaire(BaseModel):
@@ -2661,11 +3087,16 @@ class FieldDataFieldDescriptionPartenaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_partenaire'
+        table_name = "moov_field_data_field_description_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionSmallAds(BaseModel):
@@ -2680,11 +3111,16 @@ class FieldDataFieldDescriptionSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_small_ads'
+        table_name = "moov_field_data_field_description_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionTendance(BaseModel):
@@ -2699,11 +3135,16 @@ class FieldDataFieldDescriptionTendance(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_tendance'
+        table_name = "moov_field_data_field_description_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDescriptionUtilisateur(BaseModel):
@@ -2718,11 +3159,16 @@ class FieldDataFieldDescriptionUtilisateur(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_description_utilisateur'
+        table_name = "moov_field_data_field_description_utilisateur"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDestination(BaseModel):
@@ -2737,11 +3183,16 @@ class FieldDataFieldDestination(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_destination'
+        table_name = "moov_field_data_field_destination"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldDevise(BaseModel):
@@ -2755,11 +3206,16 @@ class FieldDataFieldDevise(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_devise'
+        table_name = "moov_field_data_field_devise"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldEMailProfessionnel(BaseModel):
@@ -2774,11 +3230,16 @@ class FieldDataFieldEMailProfessionnel(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_e_mail_professionnel'
+        table_name = "moov_field_data_field_e_mail_professionnel"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldEmailProfessionnelAds(BaseModel):
@@ -2793,11 +3254,16 @@ class FieldDataFieldEmailProfessionnelAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_email_professionnel_ads'
+        table_name = "moov_field_data_field_email_professionnel_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldEmplacement(BaseModel):
@@ -2811,11 +3277,16 @@ class FieldDataFieldEmplacement(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_emplacement'
+        table_name = "moov_field_data_field_emplacement"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldEmplacementDeLAnnonce(BaseModel):
@@ -2829,11 +3300,16 @@ class FieldDataFieldEmplacementDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_emplacement_de_l_annonce'
+        table_name = "moov_field_data_field_emplacement_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldEmplacementDisponiblePub(BaseModel):
@@ -2847,11 +3323,16 @@ class FieldDataFieldEmplacementDisponiblePub(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_emplacement_disponible_pub'
+        table_name = "moov_field_data_field_emplacement_disponible_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldEmplacementDuPubAds(BaseModel):
@@ -2865,11 +3346,16 @@ class FieldDataFieldEmplacementDuPubAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_emplacement_du_pub_ads'
+        table_name = "moov_field_data_field_emplacement_du_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFeedItemDescription(BaseModel):
@@ -2885,11 +3371,16 @@ class FieldDataFieldFeedItemDescription(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_feed_item_description'
+        table_name = "moov_field_data_field_feed_item_description"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFluxRssConnectedLife(BaseModel):
@@ -2904,11 +3395,16 @@ class FieldDataFieldFluxRssConnectedLife(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_flux_rss_connected_life'
+        table_name = "moov_field_data_field_flux_rss_connected_life"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFluxRssInternationale(BaseModel):
@@ -2923,11 +3419,16 @@ class FieldDataFieldFluxRssInternationale(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_flux_rss_internationale'
+        table_name = "moov_field_data_field_flux_rss_internationale"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFluxRssMedecineEtSante(BaseModel):
@@ -2942,11 +3443,16 @@ class FieldDataFieldFluxRssMedecineEtSante(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_flux_rss_medecine_et_sante'
+        table_name = "moov_field_data_field_flux_rss_medecine_et_sante"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFluxRssPeople(BaseModel):
@@ -2961,11 +3467,16 @@ class FieldDataFieldFluxRssPeople(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_flux_rss_people'
+        table_name = "moov_field_data_field_flux_rss_people"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFormatDuPub(BaseModel):
@@ -2980,11 +3491,16 @@ class FieldDataFieldFormatDuPub(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_format_du_pub'
+        table_name = "moov_field_data_field_format_du_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldFormatDuPubAds(BaseModel):
@@ -2998,11 +3514,16 @@ class FieldDataFieldFormatDuPubAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_format_du_pub_ads'
+        table_name = "moov_field_data_field_format_du_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldGrilleTarifaire(BaseModel):
@@ -3017,11 +3538,16 @@ class FieldDataFieldGrilleTarifaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_grille_tarifaire'
+        table_name = "moov_field_data_field_grille_tarifaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldGrilleTarifairePublicite(BaseModel):
@@ -3036,11 +3562,16 @@ class FieldDataFieldGrilleTarifairePublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_grille_tarifaire_publicite'
+        table_name = "moov_field_data_field_grille_tarifaire_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldGuideAnnonce(BaseModel):
@@ -3055,11 +3586,16 @@ class FieldDataFieldGuideAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_guide_annonce'
+        table_name = "moov_field_data_field_guide_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldHeureArrivE(BaseModel):
@@ -3074,11 +3610,16 @@ class FieldDataFieldHeureArrivE(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_heure_arriv_e'
+        table_name = "moov_field_data_field_heure_arriv_e"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldHeureDPart(BaseModel):
@@ -3093,11 +3634,16 @@ class FieldDataFieldHeureDPart(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_heure_d_part'
+        table_name = "moov_field_data_field_heure_d_part"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldHeureDuProgramme(BaseModel):
@@ -3112,11 +3658,16 @@ class FieldDataFieldHeureDuProgramme(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_heure_du_programme'
+        table_name = "moov_field_data_field_heure_du_programme"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldHeureSortir(BaseModel):
@@ -3130,11 +3681,16 @@ class FieldDataFieldHeureSortir(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_heure_sortir'
+        table_name = "moov_field_data_field_heure_sortir"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldHomepage(BaseModel):
@@ -3148,11 +3704,16 @@ class FieldDataFieldHomepage(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_homepage'
+        table_name = "moov_field_data_field_homepage"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldHumidite(BaseModel):
@@ -3167,11 +3728,16 @@ class FieldDataFieldHumidite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_humidite'
+        table_name = "moov_field_data_field_humidite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldIcone(BaseModel):
@@ -3189,11 +3755,16 @@ class FieldDataFieldIcone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_icone'
+        table_name = "moov_field_data_field_icone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldIconeActualites(BaseModel):
@@ -3208,11 +3779,16 @@ class FieldDataFieldIconeActualites(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_icone_actualites'
+        table_name = "moov_field_data_field_icone_actualites"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldIconeDCouvrirMCar(BaseModel):
@@ -3227,11 +3803,16 @@ class FieldDataFieldIconeDCouvrirMCar(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_icone_d_couvrir_m_car'
+        table_name = "moov_field_data_field_icone_d_couvrir_m_car"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldIconeTendanceMoov(BaseModel):
@@ -3246,11 +3827,16 @@ class FieldDataFieldIconeTendanceMoov(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_icone_tendance_moov'
+        table_name = "moov_field_data_field_icone_tendance_moov"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldId(BaseModel):
@@ -3265,11 +3851,16 @@ class FieldDataFieldId(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_id'
+        table_name = "moov_field_data_field_id"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImage(BaseModel):
@@ -3287,11 +3878,16 @@ class FieldDataFieldImage(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image'
+        table_name = "moov_field_data_field_image"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageActus(BaseModel):
@@ -3309,11 +3905,16 @@ class FieldDataFieldImageActus(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_actus'
+        table_name = "moov_field_data_field_image_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageAnnonceDefault(BaseModel):
@@ -3331,11 +3932,16 @@ class FieldDataFieldImageAnnonceDefault(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_annonce_default'
+        table_name = "moov_field_data_field_image_annonce_default"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageDeCouvertureLive(BaseModel):
@@ -3353,11 +3959,16 @@ class FieldDataFieldImageDeCouvertureLive(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_de_couverture_live'
+        table_name = "moov_field_data_field_image_de_couverture_live"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageDeLAnnonce(BaseModel):
@@ -3375,11 +3986,16 @@ class FieldDataFieldImageDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_de_l_annonce'
+        table_name = "moov_field_data_field_image_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageDeLaPub(BaseModel):
@@ -3397,11 +4013,16 @@ class FieldDataFieldImageDeLaPub(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_de_la_pub'
+        table_name = "moov_field_data_field_image_de_la_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageDeLaPubAds(BaseModel):
@@ -3419,11 +4040,16 @@ class FieldDataFieldImageDeLaPubAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_de_la_pub_ads'
+        table_name = "moov_field_data_field_image_de_la_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageECommerce(BaseModel):
@@ -3441,11 +4067,16 @@ class FieldDataFieldImageECommerce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_e_commerce'
+        table_name = "moov_field_data_field_image_e_commerce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageEducation(BaseModel):
@@ -3463,11 +4094,16 @@ class FieldDataFieldImageEducation(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_education'
+        table_name = "moov_field_data_field_image_education"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageEvent(BaseModel):
@@ -3485,11 +4121,16 @@ class FieldDataFieldImageEvent(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_event'
+        table_name = "moov_field_data_field_image_event"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageGuide(BaseModel):
@@ -3507,11 +4148,16 @@ class FieldDataFieldImageGuide(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_guide'
+        table_name = "moov_field_data_field_image_guide"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageLogo(BaseModel):
@@ -3529,11 +4175,16 @@ class FieldDataFieldImageLogo(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_logo'
+        table_name = "moov_field_data_field_image_logo"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageParDefautAnnonce(BaseModel):
@@ -3551,11 +4202,16 @@ class FieldDataFieldImageParDefautAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_par_defaut_annonce'
+        table_name = "moov_field_data_field_image_par_defaut_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagePopin(BaseModel):
@@ -3573,11 +4229,16 @@ class FieldDataFieldImagePopin(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_popin'
+        table_name = "moov_field_data_field_image_popin"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagePubFooter(BaseModel):
@@ -3600,11 +4261,16 @@ class FieldDataFieldImagePubFooter(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_pub_footer'
+        table_name = "moov_field_data_field_image_pub_footer"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagePubHautPub(BaseModel):
@@ -3627,11 +4293,16 @@ class FieldDataFieldImagePubHautPub(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_pub_haut_pub'
+        table_name = "moov_field_data_field_image_pub_haut_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageSmallAds(BaseModel):
@@ -3649,11 +4320,16 @@ class FieldDataFieldImageSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_small_ads'
+        table_name = "moov_field_data_field_image_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageVolutionDuDevise(BaseModel):
@@ -3671,11 +4347,16 @@ class FieldDataFieldImageVolutionDuDevise(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_volution_du_devise'
+        table_name = "moov_field_data_field_image_volution_du_devise"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageVotrePubSurMoov(BaseModel):
@@ -3693,11 +4374,16 @@ class FieldDataFieldImageVotrePubSurMoov(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_image_votre_pub_sur_moov'
+        table_name = "moov_field_data_field_image_votre_pub_sur_moov"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImages(BaseModel):
@@ -3712,11 +4398,16 @@ class FieldDataFieldImages(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images'
+        table_name = "moov_field_data_field_images"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagesActus(BaseModel):
@@ -3731,11 +4422,16 @@ class FieldDataFieldImagesActus(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images_actus'
+        table_name = "moov_field_data_field_images_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagesFondPublicitaire(BaseModel):
@@ -3753,11 +4449,16 @@ class FieldDataFieldImagesFondPublicitaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images_fond_publicitaire'
+        table_name = "moov_field_data_field_images_fond_publicitaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagesLookDuJour(BaseModel):
@@ -3775,11 +4476,16 @@ class FieldDataFieldImagesLookDuJour(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images_look_du_jour'
+        table_name = "moov_field_data_field_images_look_du_jour"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagesPubBas(BaseModel):
@@ -3802,11 +4508,16 @@ class FieldDataFieldImagesPubBas(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images_pub_bas'
+        table_name = "moov_field_data_field_images_pub_bas"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagesPubCarrebas(BaseModel):
@@ -3829,11 +4540,16 @@ class FieldDataFieldImagesPubCarrebas(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images_pub_carrebas'
+        table_name = "moov_field_data_field_images_pub_carrebas"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImagesPubCarrehaut(BaseModel):
@@ -3856,11 +4572,16 @@ class FieldDataFieldImagesPubCarrehaut(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_images_pub_carrehaut'
+        table_name = "moov_field_data_field_images_pub_carrehaut"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldImageschamps(BaseModel):
@@ -3878,11 +4599,16 @@ class FieldDataFieldImageschamps(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_imageschamps'
+        table_name = "moov_field_data_field_imageschamps"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLibelle(BaseModel):
@@ -3897,11 +4623,16 @@ class FieldDataFieldLibelle(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_libelle'
+        table_name = "moov_field_data_field_libelle"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienDuPartenaire(BaseModel):
@@ -3916,11 +4647,16 @@ class FieldDataFieldLienDuPartenaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_du_partenaire'
+        table_name = "moov_field_data_field_lien_du_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienHotel(BaseModel):
@@ -3935,11 +4671,16 @@ class FieldDataFieldLienHotel(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_hotel'
+        table_name = "moov_field_data_field_lien_hotel"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienImage(BaseModel):
@@ -3954,11 +4695,16 @@ class FieldDataFieldLienImage(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_image'
+        table_name = "moov_field_data_field_lien_image"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienImagePublicite(BaseModel):
@@ -3973,11 +4719,16 @@ class FieldDataFieldLienImagePublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_image_publicite'
+        table_name = "moov_field_data_field_lien_image_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienLive(BaseModel):
@@ -3992,11 +4743,16 @@ class FieldDataFieldLienLive(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_live'
+        table_name = "moov_field_data_field_lien_live"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienSortir(BaseModel):
@@ -4011,11 +4767,16 @@ class FieldDataFieldLienSortir(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_sortir'
+        table_name = "moov_field_data_field_lien_sortir"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienSponsorisActus(BaseModel):
@@ -4029,11 +4790,16 @@ class FieldDataFieldLienSponsorisActus(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_sponsoris_actus'
+        table_name = "moov_field_data_field_lien_sponsoris_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienSponsorisDecouvrir(BaseModel):
@@ -4047,11 +4813,16 @@ class FieldDataFieldLienSponsorisDecouvrir(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_sponsoris_decouvrir'
+        table_name = "moov_field_data_field_lien_sponsoris_decouvrir"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienSponsorisEducation(BaseModel):
@@ -4065,11 +4836,16 @@ class FieldDataFieldLienSponsorisEducation(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_sponsoris_education'
+        table_name = "moov_field_data_field_lien_sponsoris_education"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienSponsorisTendance(BaseModel):
@@ -4083,11 +4859,16 @@ class FieldDataFieldLienSponsorisTendance(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_sponsoris_tendance'
+        table_name = "moov_field_data_field_lien_sponsoris_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLienVotrePubSurMoov(BaseModel):
@@ -4102,11 +4883,16 @@ class FieldDataFieldLienVotrePubSurMoov(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lien_votre_pub_sur_moov'
+        table_name = "moov_field_data_field_lien_votre_pub_sur_moov"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLieuAnnonce(BaseModel):
@@ -4120,11 +4906,16 @@ class FieldDataFieldLieuAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lieu_annonce'
+        table_name = "moov_field_data_field_lieu_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLieuEntityform(BaseModel):
@@ -4139,11 +4930,16 @@ class FieldDataFieldLieuEntityform(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lieu_entityform'
+        table_name = "moov_field_data_field_lieu_entityform"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLieuEvenement(BaseModel):
@@ -4158,11 +4954,16 @@ class FieldDataFieldLieuEvenement(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lieu_evenement'
+        table_name = "moov_field_data_field_lieu_evenement"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLieuPartenaire(BaseModel):
@@ -4177,11 +4978,16 @@ class FieldDataFieldLieuPartenaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lieu_partenaire'
+        table_name = "moov_field_data_field_lieu_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLieuSmallAds(BaseModel):
@@ -4195,11 +5001,16 @@ class FieldDataFieldLieuSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_lieu_small_ads'
+        table_name = "moov_field_data_field_lieu_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldListesDesProvinces(BaseModel):
@@ -4214,11 +5025,16 @@ class FieldDataFieldListesDesProvinces(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_listes_des_provinces'
+        table_name = "moov_field_data_field_listes_des_provinces"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoCopyright(BaseModel):
@@ -4236,11 +5052,16 @@ class FieldDataFieldLogoCopyright(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_copyright'
+        table_name = "moov_field_data_field_logo_copyright"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoCopyrightDecouvrir(BaseModel):
@@ -4258,11 +5079,16 @@ class FieldDataFieldLogoCopyrightDecouvrir(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_copyright_decouvrir'
+        table_name = "moov_field_data_field_logo_copyright_decouvrir"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoCopyrightEducation(BaseModel):
@@ -4280,11 +5106,16 @@ class FieldDataFieldLogoCopyrightEducation(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_copyright_education'
+        table_name = "moov_field_data_field_logo_copyright_education"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoCopyrightTendance(BaseModel):
@@ -4302,11 +5133,16 @@ class FieldDataFieldLogoCopyrightTendance(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_copyright_tendance'
+        table_name = "moov_field_data_field_logo_copyright_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoLive(BaseModel):
@@ -4324,11 +5160,16 @@ class FieldDataFieldLogoLive(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_live'
+        table_name = "moov_field_data_field_logo_live"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoMedia(BaseModel):
@@ -4346,11 +5187,16 @@ class FieldDataFieldLogoMedia(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_media'
+        table_name = "moov_field_data_field_logo_media"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldLogoPartenaire(BaseModel):
@@ -4368,11 +5214,16 @@ class FieldDataFieldLogoPartenaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_logo_partenaire'
+        table_name = "moov_field_data_field_logo_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMeteo(BaseModel):
@@ -4387,11 +5238,16 @@ class FieldDataFieldMeteo(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_meteo'
+        table_name = "moov_field_data_field_meteo"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMeteoweek(BaseModel):
@@ -4406,11 +5262,16 @@ class FieldDataFieldMeteoweek(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_meteoweek'
+        table_name = "moov_field_data_field_meteoweek"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMettreEnCouverture(BaseModel):
@@ -4424,11 +5285,16 @@ class FieldDataFieldMettreEnCouverture(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_mettre_en_couverture'
+        table_name = "moov_field_data_field_mettre_en_couverture"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldModRationCondition(BaseModel):
@@ -4444,11 +5310,16 @@ class FieldDataFieldModRationCondition(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_mod_ration_condition'
+        table_name = "moov_field_data_field_mod_ration_condition"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMontantDeLaPublicite(BaseModel):
@@ -4463,11 +5334,16 @@ class FieldDataFieldMontantDeLaPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_montant_de_la_publicite'
+        table_name = "moov_field_data_field_montant_de_la_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMontantEnAriary(BaseModel):
@@ -4482,11 +5358,16 @@ class FieldDataFieldMontantEnAriary(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_montant_en_ariary'
+        table_name = "moov_field_data_field_montant_en_ariary"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMontantPayer(BaseModel):
@@ -4501,11 +5382,16 @@ class FieldDataFieldMontantPayer(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_montant_payer'
+        table_name = "moov_field_data_field_montant_payer"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMontantPayerSmallAds(BaseModel):
@@ -4520,11 +5406,16 @@ class FieldDataFieldMontantPayerSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_montant_payer_small_ads'
+        table_name = "moov_field_data_field_montant_payer_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMontantPubliciteAds(BaseModel):
@@ -4539,11 +5430,16 @@ class FieldDataFieldMontantPubliciteAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_montant_publicite_ads'
+        table_name = "moov_field_data_field_montant_publicite_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldMvolaPharmacie(BaseModel):
@@ -4558,11 +5454,16 @@ class FieldDataFieldMvolaPharmacie(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_mvola_pharmacie'
+        table_name = "moov_field_data_field_mvola_pharmacie"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNom(BaseModel):
@@ -4577,11 +5478,16 @@ class FieldDataFieldNom(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nom'
+        table_name = "moov_field_data_field_nom"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNomDeLaSociete(BaseModel):
@@ -4596,11 +5502,16 @@ class FieldDataFieldNomDeLaSociete(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nom_de_la_societe'
+        table_name = "moov_field_data_field_nom_de_la_societe"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNomDuPub(BaseModel):
@@ -4615,11 +5526,16 @@ class FieldDataFieldNomDuPub(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nom_du_pub'
+        table_name = "moov_field_data_field_nom_du_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNomSocieteAds(BaseModel):
@@ -4634,11 +5550,16 @@ class FieldDataFieldNomSocieteAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nom_societe_ads'
+        table_name = "moov_field_data_field_nom_societe_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNombreDeJourAds(BaseModel):
@@ -4652,11 +5573,16 @@ class FieldDataFieldNombreDeJourAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nombre_de_jour_ads'
+        table_name = "moov_field_data_field_nombre_de_jour_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNombreDeJourAnnonce(BaseModel):
@@ -4671,11 +5597,16 @@ class FieldDataFieldNombreDeJourAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nombre_de_jour_annonce'
+        table_name = "moov_field_data_field_nombre_de_jour_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNombreDeJourPublicite(BaseModel):
@@ -4689,11 +5620,16 @@ class FieldDataFieldNombreDeJourPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nombre_de_jour_publicite'
+        table_name = "moov_field_data_field_nombre_de_jour_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNombreDeJourSmallAds(BaseModel):
@@ -4708,11 +5644,16 @@ class FieldDataFieldNombreDeJourSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nombre_de_jour_small_ads'
+        table_name = "moov_field_data_field_nombre_de_jour_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNombreDeTransaction(BaseModel):
@@ -4727,11 +5668,16 @@ class FieldDataFieldNombreDeTransaction(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nombre_de_transaction'
+        table_name = "moov_field_data_field_nombre_de_transaction"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNomicone(BaseModel):
@@ -4746,11 +5692,16 @@ class FieldDataFieldNomicone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_nomicone'
+        table_name = "moov_field_data_field_nomicone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNumero(BaseModel):
@@ -4765,11 +5716,16 @@ class FieldDataFieldNumero(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_numero'
+        table_name = "moov_field_data_field_numero"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNumeroDeLaPubAds(BaseModel):
@@ -4784,11 +5740,16 @@ class FieldDataFieldNumeroDeLaPubAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_numero_de_la_pub_ads'
+        table_name = "moov_field_data_field_numero_de_la_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNumeroDeTelephone(BaseModel):
@@ -4803,11 +5764,16 @@ class FieldDataFieldNumeroDeTelephone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_numero_de_telephone'
+        table_name = "moov_field_data_field_numero_de_telephone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNumeroDeTelephoneAds(BaseModel):
@@ -4822,11 +5788,16 @@ class FieldDataFieldNumeroDeTelephoneAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_numero_de_telephone_ads'
+        table_name = "moov_field_data_field_numero_de_telephone_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNumeroTLPhone(BaseModel):
@@ -4841,11 +5812,16 @@ class FieldDataFieldNumeroTLPhone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_numero_t_l_phone'
+        table_name = "moov_field_data_field_numero_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldNumeroTphAnnonce(BaseModel):
@@ -4860,11 +5836,16 @@ class FieldDataFieldNumeroTphAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_numero_tph_annonce'
+        table_name = "moov_field_data_field_numero_tph_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldOrigine(BaseModel):
@@ -4879,11 +5860,16 @@ class FieldDataFieldOrigine(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_origine'
+        table_name = "moov_field_data_field_origine"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPageDeLaPubliciteAds(BaseModel):
@@ -4897,11 +5883,16 @@ class FieldDataFieldPageDeLaPubliciteAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_page_de_la_publicite_ads'
+        table_name = "moov_field_data_field_page_de_la_publicite_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPetitesAnnoncesId(BaseModel):
@@ -4916,11 +5907,16 @@ class FieldDataFieldPetitesAnnoncesId(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_petites_annonces_id'
+        table_name = "moov_field_data_field_petites_annonces_id"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPhoneNumber(BaseModel):
@@ -4935,11 +5931,16 @@ class FieldDataFieldPhoneNumber(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_phone_number'
+        table_name = "moov_field_data_field_phone_number"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPrNoms(BaseModel):
@@ -4954,11 +5955,16 @@ class FieldDataFieldPrNoms(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_pr_noms'
+        table_name = "moov_field_data_field_pr_noms"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPressure(BaseModel):
@@ -4973,11 +5979,16 @@ class FieldDataFieldPressure(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_pressure'
+        table_name = "moov_field_data_field_pressure"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPrice(BaseModel):
@@ -4992,11 +6003,16 @@ class FieldDataFieldPrice(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_price'
+        table_name = "moov_field_data_field_price"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPrixEnAriary(BaseModel):
@@ -5010,11 +6026,16 @@ class FieldDataFieldPrixEnAriary(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_prix_en_ariary'
+        table_name = "moov_field_data_field_prix_en_ariary"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldPubliciteId(BaseModel):
@@ -5029,11 +6050,16 @@ class FieldDataFieldPubliciteId(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_publicite_id'
+        table_name = "moov_field_data_field_publicite_id"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuartBnous4Rapport(BaseModel):
@@ -5048,11 +6074,16 @@ class FieldDataFieldQuartBnous4Rapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quart_bnous_4_rapport'
+        table_name = "moov_field_data_field_quart_bnous_4_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuartBonus4Isa(BaseModel):
@@ -5067,11 +6098,16 @@ class FieldDataFieldQuartBonus4Isa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quart_bonus_4_isa'
+        table_name = "moov_field_data_field_quart_bonus_4_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuartDesordreIsa(BaseModel):
@@ -5086,11 +6122,16 @@ class FieldDataFieldQuartDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quart_desordre_isa'
+        table_name = "moov_field_data_field_quart_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuartDesordreRapport(BaseModel):
@@ -5105,11 +6146,16 @@ class FieldDataFieldQuartDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quart_desordre_rapport'
+        table_name = "moov_field_data_field_quart_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuartOrdreRapport(BaseModel):
@@ -5124,11 +6170,16 @@ class FieldDataFieldQuartOrdreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quart_ordre_rapport'
+        table_name = "moov_field_data_field_quart_ordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuarteOrdreIsa(BaseModel):
@@ -5143,11 +6194,16 @@ class FieldDataFieldQuarteOrdreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quarte_ordre_isa'
+        table_name = "moov_field_data_field_quarte_ordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuintBonusIsa(BaseModel):
@@ -5162,11 +6218,16 @@ class FieldDataFieldQuintBonusIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quint_bonus_isa'
+        table_name = "moov_field_data_field_quint_bonus_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuintBonusRapport(BaseModel):
@@ -5181,11 +6242,16 @@ class FieldDataFieldQuintBonusRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quint_bonus_rapport'
+        table_name = "moov_field_data_field_quint_bonus_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuintDesordreIsa(BaseModel):
@@ -5200,11 +6266,16 @@ class FieldDataFieldQuintDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quint_desordre_isa'
+        table_name = "moov_field_data_field_quint_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuintDesordreRapport(BaseModel):
@@ -5219,11 +6290,16 @@ class FieldDataFieldQuintDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quint_desordre_rapport'
+        table_name = "moov_field_data_field_quint_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuintOrdreIsa(BaseModel):
@@ -5238,11 +6314,16 @@ class FieldDataFieldQuintOrdreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quint_ordre_isa'
+        table_name = "moov_field_data_field_quint_ordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldQuintOrdreRapport(BaseModel):
@@ -5257,11 +6338,16 @@ class FieldDataFieldQuintOrdreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_quint_ordre_rapport'
+        table_name = "moov_field_data_field_quint_ordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldRFRenceDePaiementMvol(BaseModel):
@@ -5276,11 +6362,16 @@ class FieldDataFieldRFRenceDePaiementMvol(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_r_f_rence_de_paiement_mvol'
+        table_name = "moov_field_data_field_r_f_rence_de_paiement_mvol"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldRFRencePaiementMvola(BaseModel):
@@ -5295,11 +6386,16 @@ class FieldDataFieldRFRencePaiementMvola(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_r_f_rence_paiement_mvola'
+        table_name = "moov_field_data_field_r_f_rence_paiement_mvola"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldRGionPharmacieListe(BaseModel):
@@ -5313,11 +6409,16 @@ class FieldDataFieldRGionPharmacieListe(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_r_gion_pharmacie_liste'
+        table_name = "moov_field_data_field_r_gion_pharmacie_liste"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldReferenceMvola(BaseModel):
@@ -5332,11 +6433,16 @@ class FieldDataFieldReferenceMvola(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_reference_mvola'
+        table_name = "moov_field_data_field_reference_mvola"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldReferenceMvolaAds(BaseModel):
@@ -5351,11 +6457,16 @@ class FieldDataFieldReferenceMvolaAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_reference_mvola_ads'
+        table_name = "moov_field_data_field_reference_mvola_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldReponse(BaseModel):
@@ -5370,11 +6481,16 @@ class FieldDataFieldReponse(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_reponse'
+        table_name = "moov_field_data_field_reponse"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldRestricitonMineurForum(BaseModel):
@@ -5388,11 +6504,16 @@ class FieldDataFieldRestricitonMineurForum(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_restriciton_mineur_forum'
+        table_name = "moov_field_data_field_restriciton_mineur_forum"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldRestrictionMineurCondit(BaseModel):
@@ -5408,11 +6529,16 @@ class FieldDataFieldRestrictionMineurCondit(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_restriction_mineur_condit'
+        table_name = "moov_field_data_field_restriction_mineur_condit"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldRubriqueCategorie(BaseModel):
@@ -5426,11 +6552,16 @@ class FieldDataFieldRubriqueCategorie(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_rubrique_categorie'
+        table_name = "moov_field_data_field_rubrique_categorie"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSaisirNouveauNumero(BaseModel):
@@ -5445,11 +6576,16 @@ class FieldDataFieldSaisirNouveauNumero(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_saisir_nouveau_numero'
+        table_name = "moov_field_data_field_saisir_nouveau_numero"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSaisirUnNouveauEmail(BaseModel):
@@ -5463,11 +6599,16 @@ class FieldDataFieldSaisirUnNouveauEmail(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_saisir_un_nouveau_email'
+        table_name = "moov_field_data_field_saisir_un_nouveau_email"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSemaineDeGarde(BaseModel):
@@ -5482,11 +6623,16 @@ class FieldDataFieldSemaineDeGarde(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_semaine_de_garde'
+        table_name = "moov_field_data_field_semaine_de_garde"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSixteBonus4Isa(BaseModel):
@@ -5501,11 +6647,16 @@ class FieldDataFieldSixteBonus4Isa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sixte_bonus_4_isa'
+        table_name = "moov_field_data_field_sixte_bonus_4_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSixteBonus4Rapport(BaseModel):
@@ -5520,11 +6671,16 @@ class FieldDataFieldSixteBonus4Rapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sixte_bonus_4_rapport'
+        table_name = "moov_field_data_field_sixte_bonus_4_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSixteDesordreIsa(BaseModel):
@@ -5539,11 +6695,16 @@ class FieldDataFieldSixteDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sixte_desordre_isa'
+        table_name = "moov_field_data_field_sixte_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSixteDesordreRapport(BaseModel):
@@ -5558,11 +6719,16 @@ class FieldDataFieldSixteDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sixte_desordre_rapport'
+        table_name = "moov_field_data_field_sixte_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSixteOdreRapport(BaseModel):
@@ -5577,11 +6743,16 @@ class FieldDataFieldSixteOdreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sixte_odre_rapport'
+        table_name = "moov_field_data_field_sixte_odre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSixteOrdre(BaseModel):
@@ -5596,11 +6767,16 @@ class FieldDataFieldSixteOrdre(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sixte_ordre'
+        table_name = "moov_field_data_field_sixte_ordre"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSliderPageAccueil(BaseModel):
@@ -5614,11 +6790,16 @@ class FieldDataFieldSliderPageAccueil(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_slider_page_accueil'
+        table_name = "moov_field_data_field_slider_page_accueil"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSliderPageCategorie(BaseModel):
@@ -5632,11 +6813,16 @@ class FieldDataFieldSliderPageCategorie(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_slider_page_categorie'
+        table_name = "moov_field_data_field_slider_page_categorie"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSliderPageCategorieIn(BaseModel):
@@ -5650,11 +6836,16 @@ class FieldDataFieldSliderPageCategorieIn(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_slider_page_categorie_in'
+        table_name = "moov_field_data_field_slider_page_categorie_in"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSourceCours(BaseModel):
@@ -5669,11 +6860,16 @@ class FieldDataFieldSourceCours(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_source_cours'
+        table_name = "moov_field_data_field_source_cours"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSousCatGorieAnnonce(BaseModel):
@@ -5687,11 +6883,16 @@ class FieldDataFieldSousCatGorieAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sous_cat_gorie_annonce'
+        table_name = "moov_field_data_field_sous_cat_gorie_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSousCategorieSmallAds(BaseModel):
@@ -5705,11 +6906,16 @@ class FieldDataFieldSousCategorieSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sous_categorie_small_ads'
+        table_name = "moov_field_data_field_sous_categorie_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSousTitreEducation(BaseModel):
@@ -5724,11 +6930,16 @@ class FieldDataFieldSousTitreEducation(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sous_titre_education'
+        table_name = "moov_field_data_field_sous_titre_education"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldSousTitreTendance(BaseModel):
@@ -5743,11 +6954,16 @@ class FieldDataFieldSousTitreTendance(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_sous_titre_tendance'
+        table_name = "moov_field_data_field_sous_titre_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldStatusDeLaTransaction(BaseModel):
@@ -5762,11 +6978,16 @@ class FieldDataFieldStatusDeLaTransaction(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_status_de_la_transaction'
+        table_name = "moov_field_data_field_status_de_la_transaction"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldStatusTransactionPub(BaseModel):
@@ -5781,11 +7002,16 @@ class FieldDataFieldStatusTransactionPub(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_status_transaction_pub'
+        table_name = "moov_field_data_field_status_transaction_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldStatutTransactionAds(BaseModel):
@@ -5800,11 +7026,16 @@ class FieldDataFieldStatutTransactionAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_statut_transaction_ads'
+        table_name = "moov_field_data_field_statut_transaction_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTLPhone(BaseModel):
@@ -5819,11 +7050,16 @@ class FieldDataFieldTLPhone(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_t_l_phone'
+        table_name = "moov_field_data_field_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTags(BaseModel):
@@ -5837,11 +7073,16 @@ class FieldDataFieldTags(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_tags'
+        table_name = "moov_field_data_field_tags"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTelephonePharmacie(BaseModel):
@@ -5856,11 +7097,16 @@ class FieldDataFieldTelephonePharmacie(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_telephone_pharmacie'
+        table_name = "moov_field_data_field_telephone_pharmacie"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTemperatureJour(BaseModel):
@@ -5875,11 +7121,16 @@ class FieldDataFieldTemperatureJour(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_temperature_jour'
+        table_name = "moov_field_data_field_temperature_jour"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTemperatureMatin(BaseModel):
@@ -5894,11 +7145,16 @@ class FieldDataFieldTemperatureMatin(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_temperature_matin'
+        table_name = "moov_field_data_field_temperature_matin"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTemperatureMax(BaseModel):
@@ -5913,11 +7169,16 @@ class FieldDataFieldTemperatureMax(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_temperature_max'
+        table_name = "moov_field_data_field_temperature_max"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTemperatureNuit(BaseModel):
@@ -5932,11 +7193,16 @@ class FieldDataFieldTemperatureNuit(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_temperature_nuit'
+        table_name = "moov_field_data_field_temperature_nuit"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTemperatureSoir(BaseModel):
@@ -5951,11 +7217,16 @@ class FieldDataFieldTemperatureSoir(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_temperature_soir'
+        table_name = "moov_field_data_field_temperature_soir"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTierceBonusIsa(BaseModel):
@@ -5970,11 +7241,16 @@ class FieldDataFieldTierceBonusIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_tierce_bonus_isa'
+        table_name = "moov_field_data_field_tierce_bonus_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTierceDesordreIsa(BaseModel):
@@ -5989,11 +7265,16 @@ class FieldDataFieldTierceDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_tierce_desordre_isa'
+        table_name = "moov_field_data_field_tierce_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTierceDesordreRapport(BaseModel):
@@ -6008,11 +7289,16 @@ class FieldDataFieldTierceDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_tierce_desordre_rapport'
+        table_name = "moov_field_data_field_tierce_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTierceOrdreIsa(BaseModel):
@@ -6027,11 +7313,16 @@ class FieldDataFieldTierceOrdreIsa(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_tierce_ordre_isa'
+        table_name = "moov_field_data_field_tierce_ordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTierceOrdreRapport(BaseModel):
@@ -6046,11 +7337,16 @@ class FieldDataFieldTierceOrdreRapport(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_tierce_ordre_rapport'
+        table_name = "moov_field_data_field_tierce_ordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTitreAnnonce(BaseModel):
@@ -6065,11 +7361,16 @@ class FieldDataFieldTitreAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_titre_annonce'
+        table_name = "moov_field_data_field_titre_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTitreTest(BaseModel):
@@ -6084,11 +7385,16 @@ class FieldDataFieldTitreTest(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_titre_test'
+        table_name = "moov_field_data_field_titre_test"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTokenId(BaseModel):
@@ -6103,11 +7409,16 @@ class FieldDataFieldTokenId(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_token_id'
+        table_name = "moov_field_data_field_token_id"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTokenIdAds(BaseModel):
@@ -6122,11 +7433,16 @@ class FieldDataFieldTokenIdAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_token_id_ads'
+        table_name = "moov_field_data_field_token_id_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTokenIdPublicite(BaseModel):
@@ -6141,11 +7457,16 @@ class FieldDataFieldTokenIdPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_token_id_publicite'
+        table_name = "moov_field_data_field_token_id_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTransactionId(BaseModel):
@@ -6160,11 +7481,16 @@ class FieldDataFieldTransactionId(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_transaction_id'
+        table_name = "moov_field_data_field_transaction_id"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTransactionIdPublicite(BaseModel):
@@ -6179,11 +7505,16 @@ class FieldDataFieldTransactionIdPublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_transaction_id_publicite'
+        table_name = "moov_field_data_field_transaction_id_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeActualite(BaseModel):
@@ -6197,11 +7528,16 @@ class FieldDataFieldTypeActualite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_actualite'
+        table_name = "moov_field_data_field_type_actualite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDeCondition(BaseModel):
@@ -6215,11 +7551,16 @@ class FieldDataFieldTypeDeCondition(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_de_condition'
+        table_name = "moov_field_data_field_type_de_condition"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDeMedia(BaseModel):
@@ -6233,11 +7574,16 @@ class FieldDataFieldTypeDeMedia(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_de_media'
+        table_name = "moov_field_data_field_type_de_media"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDeVidO(BaseModel):
@@ -6251,11 +7597,16 @@ class FieldDataFieldTypeDeVidO(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_de_vid_o'
+        table_name = "moov_field_data_field_type_de_vid_o"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDeVotreAnnonce(BaseModel):
@@ -6269,11 +7620,16 @@ class FieldDataFieldTypeDeVotreAnnonce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_de_votre_annonce'
+        table_name = "moov_field_data_field_type_de_votre_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDecouvrirMadagascar(BaseModel):
@@ -6287,11 +7643,16 @@ class FieldDataFieldTypeDecouvrirMadagascar(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_decouvrir_madagascar'
+        table_name = "moov_field_data_field_type_decouvrir_madagascar"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDuProgramme(BaseModel):
@@ -6305,11 +7666,16 @@ class FieldDataFieldTypeDuProgramme(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_du_programme'
+        table_name = "moov_field_data_field_type_du_programme"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeDuVol(BaseModel):
@@ -6324,11 +7690,16 @@ class FieldDataFieldTypeDuVol(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_du_vol'
+        table_name = "moov_field_data_field_type_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeECommerce(BaseModel):
@@ -6342,11 +7713,16 @@ class FieldDataFieldTypeECommerce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_e_commerce'
+        table_name = "moov_field_data_field_type_e_commerce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeSmallAds(BaseModel):
@@ -6360,11 +7736,16 @@ class FieldDataFieldTypeSmallAds(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_small_ads'
+        table_name = "moov_field_data_field_type_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldTypeTendance(BaseModel):
@@ -6378,11 +7759,16 @@ class FieldDataFieldTypeTendance(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_type_tendance'
+        table_name = "moov_field_data_field_type_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlMedia(BaseModel):
@@ -6397,11 +7783,16 @@ class FieldDataFieldUrlMedia(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_media'
+        table_name = "moov_field_data_field_url_media"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPageEcommerce(BaseModel):
@@ -6416,11 +7807,16 @@ class FieldDataFieldUrlPageEcommerce(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_ecommerce'
+        table_name = "moov_field_data_field_url_page_ecommerce"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPageEmploi(BaseModel):
@@ -6435,11 +7831,16 @@ class FieldDataFieldUrlPageEmploi(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_emploi'
+        table_name = "moov_field_data_field_url_page_emploi"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPageIframe(BaseModel):
@@ -6454,11 +7855,16 @@ class FieldDataFieldUrlPageIframe(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_iframe'
+        table_name = "moov_field_data_field_url_page_iframe"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPagePmu(BaseModel):
@@ -6473,11 +7879,16 @@ class FieldDataFieldUrlPagePmu(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_pmu'
+        table_name = "moov_field_data_field_url_page_pmu"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPagePratiqueReservez(BaseModel):
@@ -6492,11 +7903,16 @@ class FieldDataFieldUrlPagePratiqueReservez(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_pratique_reservez'
+        table_name = "moov_field_data_field_url_page_pratique_reservez"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPageRelooking(BaseModel):
@@ -6511,11 +7927,16 @@ class FieldDataFieldUrlPageRelooking(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_relooking'
+        table_name = "moov_field_data_field_url_page_relooking"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPageSelfcare(BaseModel):
@@ -6530,11 +7951,16 @@ class FieldDataFieldUrlPageSelfcare(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_selfcare'
+        table_name = "moov_field_data_field_url_page_selfcare"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlPageVotrePublicite(BaseModel):
@@ -6549,11 +7975,16 @@ class FieldDataFieldUrlPageVotrePublicite(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_page_votre_publicite'
+        table_name = "moov_field_data_field_url_page_votre_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldUrlVidO(BaseModel):
@@ -6568,11 +7999,16 @@ class FieldDataFieldUrlVidO(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_url_vid_o'
+        table_name = "moov_field_data_field_url_vid_o"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVidOEvent(BaseModel):
@@ -6587,11 +8023,16 @@ class FieldDataFieldVidOEvent(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_vid_o_event'
+        table_name = "moov_field_data_field_vid_o_event"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVidOStreaming(BaseModel):
@@ -6601,17 +8042,24 @@ class FieldDataFieldVidOStreaming(BaseModel):
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     field_vid_o_streaming_description = TextField(null=True)
-    field_vid_o_streaming_display = IntegerField(constraints=[SQL("DEFAULT 1")])
+    field_vid_o_streaming_display = IntegerField(
+        constraints=[SQL("DEFAULT 1")]
+    )
     field_vid_o_streaming_fid = IntegerField(index=True, null=True)
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_vid_o_streaming'
+        table_name = "moov_field_data_field_vid_o_streaming"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVideoUrl(BaseModel):
@@ -6626,11 +8074,16 @@ class FieldDataFieldVideoUrl(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_video_url'
+        table_name = "moov_field_data_field_video_url"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVideosDuJour(BaseModel):
@@ -6645,11 +8098,16 @@ class FieldDataFieldVideosDuJour(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_videos_du_jour'
+        table_name = "moov_field_data_field_videos_du_jour"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVille(BaseModel):
@@ -6663,11 +8121,16 @@ class FieldDataFieldVille(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_ville'
+        table_name = "moov_field_data_field_ville"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVillePartenaire(BaseModel):
@@ -6681,11 +8144,16 @@ class FieldDataFieldVillePartenaire(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_ville_partenaire'
+        table_name = "moov_field_data_field_ville_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVitesse(BaseModel):
@@ -6700,11 +8168,16 @@ class FieldDataFieldVitesse(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_vitesse'
+        table_name = "moov_field_data_field_vitesse"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVolume(BaseModel):
@@ -6719,11 +8192,16 @@ class FieldDataFieldVolume(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_volume'
+        table_name = "moov_field_data_field_volume"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldVotrePubDansLaPage(BaseModel):
@@ -6737,11 +8215,16 @@ class FieldDataFieldVotrePubDansLaPage(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_votre_pub_dans_la_page'
+        table_name = "moov_field_data_field_votre_pub_dans_la_page"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldWeatherCom(BaseModel):
@@ -6756,11 +8239,16 @@ class FieldDataFieldWeatherCom(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_weather_com'
+        table_name = "moov_field_data_field_weather_com"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldWorldWeatherOnline(BaseModel):
@@ -6775,11 +8263,16 @@ class FieldDataFieldWorldWeatherOnline(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_world_weather_online'
+        table_name = "moov_field_data_field_world_weather_online"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataFieldYahooWeather(BaseModel):
@@ -6794,11 +8287,16 @@ class FieldDataFieldYahooWeather(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_field_yahoo_weather'
+        table_name = "moov_field_data_field_yahoo_weather"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataNameField(BaseModel):
@@ -6813,11 +8311,16 @@ class FieldDataNameField(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_data_name_field'
+        table_name = "moov_field_data_name_field"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDataTitleField(BaseModel):
@@ -6832,11 +8335,16 @@ class FieldDataTitleField(BaseModel):
     title_field_value = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_field_data_title_field'
+        table_name = "moov_field_data_title_field"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDeletedData166(BaseModel):
@@ -6851,11 +8359,16 @@ class FieldDeletedData166(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_deleted_data_166'
+        table_name = "moov_field_deleted_data_166"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDeletedData199(BaseModel):
@@ -6870,11 +8383,16 @@ class FieldDeletedData199(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_deleted_data_199'
+        table_name = "moov_field_deleted_data_199"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDeletedData200(BaseModel):
@@ -6888,11 +8406,16 @@ class FieldDeletedData200(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_deleted_data_200'
+        table_name = "moov_field_deleted_data_200"
         indexes = (
-            (('entity_type', 'entity_id', 'deleted', 'delta', 'language'), True),
+            (
+                ("entity_type", "entity_id", "deleted", "delta", "language"),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language')
+        primary_key = CompositeKey(
+            "deleted", "delta", "entity_id", "entity_type", "language"
+        )
 
 
 class FieldDeletedRevision166(BaseModel):
@@ -6907,11 +8430,28 @@ class FieldDeletedRevision166(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_deleted_revision_166'
+        table_name = "moov_field_deleted_revision_166"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldDeletedRevision199(BaseModel):
@@ -6926,11 +8466,28 @@ class FieldDeletedRevision199(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_deleted_revision_199'
+        table_name = "moov_field_deleted_revision_199"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldDeletedRevision200(BaseModel):
@@ -6944,11 +8501,28 @@ class FieldDeletedRevision200(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_deleted_revision_200'
+        table_name = "moov_field_deleted_revision_200"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldImageFieldCaption(BaseModel):
@@ -6963,11 +8537,22 @@ class FieldImageFieldCaption(BaseModel):
     revision_id = IntegerField(index=True, null=True)
 
     class Meta:
-        table_name = 'moov_field_image_field_caption'
+        table_name = "moov_field_image_field_caption"
         indexes = (
-            (('field_name', 'entity_type', 'entity_id', 'delta', 'language'), True),
+            (
+                (
+                    "field_name",
+                    "entity_type",
+                    "entity_id",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('delta', 'entity_id', 'entity_type', 'field_name', 'language')
+        primary_key = CompositeKey(
+            "delta", "entity_id", "entity_type", "field_name", "language"
+        )
 
 
 class FieldImageFieldCaptionRevision(BaseModel):
@@ -6982,11 +8567,28 @@ class FieldImageFieldCaptionRevision(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_image_field_caption_revision'
+        table_name = "moov_field_image_field_caption_revision"
         indexes = (
-            (('field_name', 'entity_type', 'entity_id', 'revision_id', 'delta', 'language'), True),
+            (
+                (
+                    "field_name",
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('delta', 'entity_id', 'entity_type', 'field_name', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "delta",
+            "entity_id",
+            "entity_type",
+            "field_name",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollBehavior(BaseModel):
@@ -7000,11 +8602,28 @@ class FieldRevisionAdvpollBehavior(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_behavior'
+        table_name = "moov_field_revision_advpoll_behavior"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollChoice(BaseModel):
@@ -7020,11 +8639,28 @@ class FieldRevisionAdvpollChoice(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_choice'
+        table_name = "moov_field_revision_advpoll_choice"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollClosed(BaseModel):
@@ -7038,11 +8674,28 @@ class FieldRevisionAdvpollClosed(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_closed'
+        table_name = "moov_field_revision_advpoll_closed"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollCookieDuration(BaseModel):
@@ -7056,11 +8709,28 @@ class FieldRevisionAdvpollCookieDuration(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_cookie_duration'
+        table_name = "moov_field_revision_advpoll_cookie_duration"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollDates(BaseModel):
@@ -7075,11 +8745,28 @@ class FieldRevisionAdvpollDates(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_dates'
+        table_name = "moov_field_revision_advpoll_dates"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollMaxChoices(BaseModel):
@@ -7093,11 +8780,28 @@ class FieldRevisionAdvpollMaxChoices(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_max_choices'
+        table_name = "moov_field_revision_advpoll_max_choices"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollMode(BaseModel):
@@ -7111,11 +8815,28 @@ class FieldRevisionAdvpollMode(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_mode'
+        table_name = "moov_field_revision_advpoll_mode"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollOptions(BaseModel):
@@ -7129,11 +8850,28 @@ class FieldRevisionAdvpollOptions(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_options'
+        table_name = "moov_field_revision_advpoll_options"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionAdvpollResults(BaseModel):
@@ -7147,11 +8885,28 @@ class FieldRevisionAdvpollResults(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_advpoll_results'
+        table_name = "moov_field_revision_advpoll_results"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionBody(BaseModel):
@@ -7167,11 +8922,28 @@ class FieldRevisionBody(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_body'
+        table_name = "moov_field_revision_body"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionCommentBody(BaseModel):
@@ -7186,11 +8958,28 @@ class FieldRevisionCommentBody(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_comment_body'
+        table_name = "moov_field_revision_comment_body"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionEventCalendarDate(BaseModel):
@@ -7205,11 +8994,28 @@ class FieldRevisionEventCalendarDate(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_event_calendar_date'
+        table_name = "moov_field_revision_event_calendar_date"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionEventCalendarStatus(BaseModel):
@@ -7223,11 +9029,28 @@ class FieldRevisionEventCalendarStatus(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_event_calendar_status'
+        table_name = "moov_field_revision_event_calendar_status"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldAdressePharmacieGarde(BaseModel):
@@ -7242,11 +9065,28 @@ class FieldRevisionFieldAdressePharmacieGarde(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_adresse_pharmacie_garde'
+        table_name = "moov_field_revision_field_adresse_pharmacie_garde"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldAfficherDansLaPageDAc(BaseModel):
@@ -7255,16 +9095,35 @@ class FieldRevisionFieldAfficherDansLaPageDAc(BaseModel):
     delta = IntegerField()
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
-    field_afficher_dans_la_page_d_ac_value = IntegerField(index=True, null=True)
+    field_afficher_dans_la_page_d_ac_value = IntegerField(
+        index=True, null=True
+    )
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_afficher_dans_la_page_d_ac'
+        table_name = "moov_field_revision_field_afficher_dans_la_page_d_ac"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldAfficherDansLeSlider(BaseModel):
@@ -7278,11 +9137,28 @@ class FieldRevisionFieldAfficherDansLeSlider(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_afficher_dans_le_slider'
+        table_name = "moov_field_revision_field_afficher_dans_le_slider"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldArrivee(BaseModel):
@@ -7297,11 +9173,28 @@ class FieldRevisionFieldArrivee(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_arrivee'
+        table_name = "moov_field_revision_field_arrivee"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldArriveeDuVol(BaseModel):
@@ -7316,11 +9209,28 @@ class FieldRevisionFieldArriveeDuVol(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_arrivee_du_vol'
+        table_name = "moov_field_revision_field_arrivee_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldAuteur(BaseModel):
@@ -7335,11 +9245,28 @@ class FieldRevisionFieldAuteur(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_auteur'
+        table_name = "moov_field_revision_field_auteur"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldAutreTLPhone(BaseModel):
@@ -7354,11 +9281,28 @@ class FieldRevisionFieldAutreTLPhone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_autre_t_l_phone'
+        table_name = "moov_field_revision_field_autre_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCatGorieDeLAnnonce(BaseModel):
@@ -7372,11 +9316,28 @@ class FieldRevisionFieldCatGorieDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_cat_gorie_de_l_annonce'
+        table_name = "moov_field_revision_field_cat_gorie_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCatGorieSmallAds(BaseModel):
@@ -7390,11 +9351,28 @@ class FieldRevisionFieldCatGorieSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_cat_gorie_small_ads'
+        table_name = "moov_field_revision_field_cat_gorie_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCategorieDeLAnnonce(BaseModel):
@@ -7408,11 +9386,28 @@ class FieldRevisionFieldCategorieDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_categorie_de_l_annonce'
+        table_name = "moov_field_revision_field_categorie_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCategorieForum(BaseModel):
@@ -7426,11 +9421,28 @@ class FieldRevisionFieldCategorieForum(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_categorie_forum'
+        table_name = "moov_field_revision_field_categorie_forum"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCategorieLive(BaseModel):
@@ -7444,11 +9456,28 @@ class FieldRevisionFieldCategorieLive(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_categorie_live'
+        table_name = "moov_field_revision_field_categorie_live"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCategorieNumeroUrgence(BaseModel):
@@ -7462,11 +9491,28 @@ class FieldRevisionFieldCategorieNumeroUrgence(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_categorie_numero_urgence'
+        table_name = "moov_field_revision_field_categorie_numero_urgence"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldChaNeTv(BaseModel):
@@ -7480,11 +9526,28 @@ class FieldRevisionFieldChaNeTv(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_cha_ne_tv'
+        table_name = "moov_field_revision_field_cha_ne_tv"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldChannelId(BaseModel):
@@ -7499,11 +9562,28 @@ class FieldRevisionFieldChannelId(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_channel_id'
+        table_name = "moov_field_revision_field_channel_id"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldChapeau(BaseModel):
@@ -7518,11 +9598,28 @@ class FieldRevisionFieldChapeau(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_chapeau'
+        table_name = "moov_field_revision_field_chapeau"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldChoisirCommeContact(BaseModel):
@@ -7536,11 +9633,28 @@ class FieldRevisionFieldChoisirCommeContact(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_choisir_comme_contact'
+        table_name = "moov_field_revision_field_choisir_comme_contact"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldChoixTLPhone(BaseModel):
@@ -7555,11 +9669,28 @@ class FieldRevisionFieldChoixTLPhone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_choix_t_l_phone'
+        table_name = "moov_field_revision_field_choix_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldClouds(BaseModel):
@@ -7574,11 +9705,28 @@ class FieldRevisionFieldClouds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_clouds'
+        table_name = "moov_field_revision_field_clouds"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCodeProvince(BaseModel):
@@ -7593,11 +9741,28 @@ class FieldRevisionFieldCodeProvince(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_code_province'
+        table_name = "moov_field_revision_field_code_province"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCodeRegion(BaseModel):
@@ -7612,11 +9777,28 @@ class FieldRevisionFieldCodeRegion(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_code_region'
+        table_name = "moov_field_revision_field_code_region"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCompagnieDuVol(BaseModel):
@@ -7631,11 +9813,28 @@ class FieldRevisionFieldCompagnieDuVol(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_compagnie_du_vol'
+        table_name = "moov_field_revision_field_compagnie_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCompteurAccueil(BaseModel):
@@ -7649,11 +9848,28 @@ class FieldRevisionFieldCompteurAccueil(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_compteur_accueil'
+        table_name = "moov_field_revision_field_compteur_accueil"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCompteurCategorie(BaseModel):
@@ -7662,16 +9878,35 @@ class FieldRevisionFieldCompteurCategorie(BaseModel):
     delta = IntegerField()
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
-    field_compteur_categorie_value = CharField(constraints=[SQL("DEFAULT '1'")], null=True)
+    field_compteur_categorie_value = CharField(
+        constraints=[SQL("DEFAULT '1'")], null=True
+    )
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_compteur_categorie'
+        table_name = "moov_field_revision_field_compteur_categorie"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldConditionDeVente(BaseModel):
@@ -7685,11 +9920,28 @@ class FieldRevisionFieldConditionDeVente(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_condition_de_vente'
+        table_name = "moov_field_revision_field_condition_de_vente"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldConditionDeVenteAnnonce(BaseModel):
@@ -7705,11 +9957,28 @@ class FieldRevisionFieldConditionDeVenteAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_condition_de_vente_annonce'
+        table_name = "moov_field_revision_field_condition_de_vente_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldConditionDeVentePublici(BaseModel):
@@ -7718,16 +9987,35 @@ class FieldRevisionFieldConditionDeVentePublici(BaseModel):
     delta = IntegerField()
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
-    field_condition_de_vente_publici_value = IntegerField(index=True, null=True)
+    field_condition_de_vente_publici_value = IntegerField(
+        index=True, null=True
+    )
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_condition_de_vente_publici'
+        table_name = "moov_field_revision_field_condition_de_vente_publici"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldContact(BaseModel):
@@ -7741,11 +10029,28 @@ class FieldRevisionFieldContact(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_contact'
+        table_name = "moov_field_revision_field_contact"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldContactDesJournalistes(BaseModel):
@@ -7761,11 +10066,28 @@ class FieldRevisionFieldContactDesJournalistes(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_contact_des_journalistes'
+        table_name = "moov_field_revision_field_contact_des_journalistes"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldContactMe(BaseModel):
@@ -7779,11 +10101,28 @@ class FieldRevisionFieldContactMe(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_contact_me'
+        table_name = "moov_field_revision_field_contact_me"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldContactRapide(BaseModel):
@@ -7798,11 +10137,28 @@ class FieldRevisionFieldContactRapide(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_contact_rapide_'
+        table_name = "moov_field_revision_field_contact_rapide_"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldContactRapideAds(BaseModel):
@@ -7817,11 +10173,28 @@ class FieldRevisionFieldContactRapideAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_contact_rapide_ads'
+        table_name = "moov_field_revision_field_contact_rapide_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldContenuArticle(BaseModel):
@@ -7836,11 +10209,28 @@ class FieldRevisionFieldContenuArticle(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_contenu_article'
+        table_name = "moov_field_revision_field_contenu_article"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightContenu(BaseModel):
@@ -7854,11 +10244,28 @@ class FieldRevisionFieldCopyrightContenu(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_contenu'
+        table_name = "moov_field_revision_field_copyright_contenu"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightContenuDecouvri(BaseModel):
@@ -7872,11 +10279,28 @@ class FieldRevisionFieldCopyrightContenuDecouvri(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_contenu_decouvri'
+        table_name = "moov_field_revision_field_copyright_contenu_decouvri"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightContenuEducatio(BaseModel):
@@ -7891,11 +10315,28 @@ class FieldRevisionFieldCopyrightContenuEducatio(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_contenu_educatio'
+        table_name = "moov_field_revision_field_copyright_contenu_educatio"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightContenuTendace(BaseModel):
@@ -7909,11 +10350,28 @@ class FieldRevisionFieldCopyrightContenuTendace(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_contenu_tendace'
+        table_name = "moov_field_revision_field_copyright_contenu_tendace"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightImageActus(BaseModel):
@@ -7928,11 +10386,28 @@ class FieldRevisionFieldCopyrightImageActus(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_image_actus'
+        table_name = "moov_field_revision_field_copyright_image_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightImageDecouvrir(BaseModel):
@@ -7947,11 +10422,28 @@ class FieldRevisionFieldCopyrightImageDecouvrir(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_image_decouvrir'
+        table_name = "moov_field_revision_field_copyright_image_decouvrir"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightImageEducation(BaseModel):
@@ -7966,11 +10458,28 @@ class FieldRevisionFieldCopyrightImageEducation(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_image_education'
+        table_name = "moov_field_revision_field_copyright_image_education"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightImageGallery(BaseModel):
@@ -7984,11 +10493,28 @@ class FieldRevisionFieldCopyrightImageGallery(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_image_gallery'
+        table_name = "moov_field_revision_field_copyright_image_gallery"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCopyrightImageTendance(BaseModel):
@@ -8003,11 +10529,28 @@ class FieldRevisionFieldCopyrightImageTendance(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_copyright_image_tendance'
+        table_name = "moov_field_revision_field_copyright_image_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCourriel(BaseModel):
@@ -8022,11 +10565,28 @@ class FieldRevisionFieldCourriel(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_courriel'
+        table_name = "moov_field_revision_field_courriel"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCourse(BaseModel):
@@ -8041,11 +10601,28 @@ class FieldRevisionFieldCourse(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_course'
+        table_name = "moov_field_revision_field_course"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldCouvertureOuiNon(BaseModel):
@@ -8059,11 +10636,28 @@ class FieldRevisionFieldCouvertureOuiNon(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_couverture_oui_non'
+        table_name = "moov_field_revision_field_couverture_oui_non"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDPartDuVol(BaseModel):
@@ -8078,11 +10672,28 @@ class FieldRevisionFieldDPartDuVol(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_d_part_du_vol'
+        table_name = "moov_field_revision_field_d_part_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDArrivE(BaseModel):
@@ -8097,11 +10708,28 @@ class FieldRevisionFieldDateDArrivE(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_d_arriv_e'
+        table_name = "moov_field_revision_field_date_d_arriv_e"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDeDButDiffusion(BaseModel):
@@ -8116,11 +10744,28 @@ class FieldRevisionFieldDateDeDButDiffusion(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_de_d_but_diffusion'
+        table_name = "moov_field_revision_field_date_de_d_but_diffusion"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDeDiffusionAds(BaseModel):
@@ -8135,11 +10780,28 @@ class FieldRevisionFieldDateDeDiffusionAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_de_diffusion_ads'
+        table_name = "moov_field_revision_field_date_de_diffusion_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDeFinPublicite(BaseModel):
@@ -8153,11 +10815,28 @@ class FieldRevisionFieldDateDeFinPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_de_fin_publicite'
+        table_name = "moov_field_revision_field_date_de_fin_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDePublication(BaseModel):
@@ -8171,11 +10850,28 @@ class FieldRevisionFieldDateDePublication(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_de_publication'
+        table_name = "moov_field_revision_field_date_de_publication"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDebutDiffusion(BaseModel):
@@ -8189,11 +10885,28 @@ class FieldRevisionFieldDateDebutDiffusion(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_debut_diffusion'
+        table_name = "moov_field_revision_field_date_debut_diffusion"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDebutPublicite(BaseModel):
@@ -8207,11 +10920,28 @@ class FieldRevisionFieldDateDebutPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_debut_publicite'
+        table_name = "moov_field_revision_field_date_debut_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDuCours(BaseModel):
@@ -8226,11 +10956,28 @@ class FieldRevisionFieldDateDuCours(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_du_cours'
+        table_name = "moov_field_revision_field_date_du_cours"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDuCourse(BaseModel):
@@ -8245,11 +10992,28 @@ class FieldRevisionFieldDateDuCourse(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_du_course'
+        table_name = "moov_field_revision_field_date_du_course"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDuProgramme(BaseModel):
@@ -8264,11 +11028,28 @@ class FieldRevisionFieldDateDuProgramme(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_du_programme'
+        table_name = "moov_field_revision_field_date_du_programme"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateDuVol(BaseModel):
@@ -8283,11 +11064,28 @@ class FieldRevisionFieldDateDuVol(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_du_vol'
+        table_name = "moov_field_revision_field_date_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateEndAnnonce(BaseModel):
@@ -8302,11 +11100,28 @@ class FieldRevisionFieldDateEndAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_end_annonce'
+        table_name = "moov_field_revision_field_date_end_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateEndPublicite(BaseModel):
@@ -8321,11 +11136,28 @@ class FieldRevisionFieldDateEndPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_end_publicite'
+        table_name = "moov_field_revision_field_date_end_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateEvenement(BaseModel):
@@ -8339,11 +11171,28 @@ class FieldRevisionFieldDateEvenement(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_evenement'
+        table_name = "moov_field_revision_field_date_evenement"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateFinDiffusion(BaseModel):
@@ -8357,11 +11206,28 @@ class FieldRevisionFieldDateFinDiffusion(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_fin_diffusion'
+        table_name = "moov_field_revision_field_date_fin_diffusion"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateMeteo(BaseModel):
@@ -8376,11 +11242,28 @@ class FieldRevisionFieldDateMeteo(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_meteo'
+        table_name = "moov_field_revision_field_date_meteo"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDatePartenaire(BaseModel):
@@ -8394,11 +11277,28 @@ class FieldRevisionFieldDatePartenaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_partenaire'
+        table_name = "moov_field_revision_field_date_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDatePublicationAnnonce(BaseModel):
@@ -8413,11 +11313,28 @@ class FieldRevisionFieldDatePublicationAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_publication_annonce'
+        table_name = "moov_field_revision_field_date_publication_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDatePublicationPublicite(BaseModel):
@@ -8432,11 +11349,28 @@ class FieldRevisionFieldDatePublicationPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_publication_publicite'
+        table_name = "moov_field_revision_field_date_publication_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateSmallAds(BaseModel):
@@ -8451,11 +11385,28 @@ class FieldRevisionFieldDateSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_small_ads'
+        table_name = "moov_field_revision_field_date_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateStartAnnonce(BaseModel):
@@ -8470,11 +11421,28 @@ class FieldRevisionFieldDateStartAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_start_annonce'
+        table_name = "moov_field_revision_field_date_start_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDateStartPublicite(BaseModel):
@@ -8489,11 +11457,28 @@ class FieldRevisionFieldDateStartPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_date_start_publicite'
+        table_name = "moov_field_revision_field_date_start_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionActualite(BaseModel):
@@ -8508,11 +11493,28 @@ class FieldRevisionFieldDescriptionActualite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_actualite'
+        table_name = "moov_field_revision_field_description_actualite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionDeLAnnonce(BaseModel):
@@ -8527,11 +11529,28 @@ class FieldRevisionFieldDescriptionDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_de_l_annonce'
+        table_name = "moov_field_revision_field_description_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionDecouvrirMada(BaseModel):
@@ -8546,11 +11565,28 @@ class FieldRevisionFieldDescriptionDecouvrirMada(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_decouvrir_mada'
+        table_name = "moov_field_revision_field_description_decouvrir_mada"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionECommerce(BaseModel):
@@ -8565,11 +11601,28 @@ class FieldRevisionFieldDescriptionECommerce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_e_commerce'
+        table_name = "moov_field_revision_field_description_e_commerce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionEducation(BaseModel):
@@ -8585,11 +11638,28 @@ class FieldRevisionFieldDescriptionEducation(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_education'
+        table_name = "moov_field_revision_field_description_education"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionEvenement(BaseModel):
@@ -8605,11 +11675,28 @@ class FieldRevisionFieldDescriptionEvenement(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_evenement'
+        table_name = "moov_field_revision_field_description_evenement"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionFilDinfo(BaseModel):
@@ -8624,11 +11711,28 @@ class FieldRevisionFieldDescriptionFilDinfo(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_fil_dinfo'
+        table_name = "moov_field_revision_field_description_fil_dinfo"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionHotel(BaseModel):
@@ -8643,11 +11747,28 @@ class FieldRevisionFieldDescriptionHotel(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_hotel'
+        table_name = "moov_field_revision_field_description_hotel"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionPartenaire(BaseModel):
@@ -8663,11 +11784,28 @@ class FieldRevisionFieldDescriptionPartenaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_partenaire'
+        table_name = "moov_field_revision_field_description_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionSmallAds(BaseModel):
@@ -8682,11 +11820,28 @@ class FieldRevisionFieldDescriptionSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_small_ads'
+        table_name = "moov_field_revision_field_description_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionTendance(BaseModel):
@@ -8701,11 +11856,28 @@ class FieldRevisionFieldDescriptionTendance(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_tendance'
+        table_name = "moov_field_revision_field_description_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDescriptionUtilisateur(BaseModel):
@@ -8720,11 +11892,28 @@ class FieldRevisionFieldDescriptionUtilisateur(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_description_utilisateur'
+        table_name = "moov_field_revision_field_description_utilisateur"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDestination(BaseModel):
@@ -8739,11 +11928,28 @@ class FieldRevisionFieldDestination(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_destination'
+        table_name = "moov_field_revision_field_destination"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldDevise(BaseModel):
@@ -8757,11 +11963,28 @@ class FieldRevisionFieldDevise(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_devise'
+        table_name = "moov_field_revision_field_devise"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldEMailProfessionnel(BaseModel):
@@ -8776,11 +11999,28 @@ class FieldRevisionFieldEMailProfessionnel(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_e_mail_professionnel'
+        table_name = "moov_field_revision_field_e_mail_professionnel"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldEmailProfessionnelAds(BaseModel):
@@ -8795,11 +12035,28 @@ class FieldRevisionFieldEmailProfessionnelAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_email_professionnel_ads'
+        table_name = "moov_field_revision_field_email_professionnel_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldEmplacement(BaseModel):
@@ -8813,11 +12070,28 @@ class FieldRevisionFieldEmplacement(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_emplacement'
+        table_name = "moov_field_revision_field_emplacement"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldEmplacementDeLAnnonce(BaseModel):
@@ -8831,11 +12105,28 @@ class FieldRevisionFieldEmplacementDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_emplacement_de_l_annonce'
+        table_name = "moov_field_revision_field_emplacement_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldEmplacementDisponiblePub(BaseModel):
@@ -8849,11 +12140,28 @@ class FieldRevisionFieldEmplacementDisponiblePub(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_emplacement_disponible_pub'
+        table_name = "moov_field_revision_field_emplacement_disponible_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldEmplacementDuPubAds(BaseModel):
@@ -8867,11 +12175,28 @@ class FieldRevisionFieldEmplacementDuPubAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_emplacement_du_pub_ads'
+        table_name = "moov_field_revision_field_emplacement_du_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFeedItemDescription(BaseModel):
@@ -8887,11 +12212,28 @@ class FieldRevisionFieldFeedItemDescription(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_feed_item_description'
+        table_name = "moov_field_revision_field_feed_item_description"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFluxRssConnectedLife(BaseModel):
@@ -8906,11 +12248,28 @@ class FieldRevisionFieldFluxRssConnectedLife(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_flux_rss_connected_life'
+        table_name = "moov_field_revision_field_flux_rss_connected_life"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFluxRssInternationale(BaseModel):
@@ -8925,11 +12284,28 @@ class FieldRevisionFieldFluxRssInternationale(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_flux_rss_internationale'
+        table_name = "moov_field_revision_field_flux_rss_internationale"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFluxRssMedecineEtSante(BaseModel):
@@ -8944,11 +12320,28 @@ class FieldRevisionFieldFluxRssMedecineEtSante(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_flux_rss_medecine_et_sante'
+        table_name = "moov_field_revision_field_flux_rss_medecine_et_sante"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFluxRssPeople(BaseModel):
@@ -8963,11 +12356,28 @@ class FieldRevisionFieldFluxRssPeople(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_flux_rss_people'
+        table_name = "moov_field_revision_field_flux_rss_people"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFormatDuPub(BaseModel):
@@ -8982,11 +12392,28 @@ class FieldRevisionFieldFormatDuPub(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_format_du_pub'
+        table_name = "moov_field_revision_field_format_du_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldFormatDuPubAds(BaseModel):
@@ -9000,11 +12427,28 @@ class FieldRevisionFieldFormatDuPubAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_format_du_pub_ads'
+        table_name = "moov_field_revision_field_format_du_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldGrilleTarifaire(BaseModel):
@@ -9019,11 +12463,28 @@ class FieldRevisionFieldGrilleTarifaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_grille_tarifaire'
+        table_name = "moov_field_revision_field_grille_tarifaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldGrilleTarifairePublicite(BaseModel):
@@ -9038,11 +12499,28 @@ class FieldRevisionFieldGrilleTarifairePublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_grille_tarifaire_publicite'
+        table_name = "moov_field_revision_field_grille_tarifaire_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldGuideAnnonce(BaseModel):
@@ -9057,11 +12535,28 @@ class FieldRevisionFieldGuideAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_guide_annonce'
+        table_name = "moov_field_revision_field_guide_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldHeureArrivE(BaseModel):
@@ -9076,11 +12571,28 @@ class FieldRevisionFieldHeureArrivE(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_heure_arriv_e'
+        table_name = "moov_field_revision_field_heure_arriv_e"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldHeureDPart(BaseModel):
@@ -9095,11 +12607,28 @@ class FieldRevisionFieldHeureDPart(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_heure_d_part'
+        table_name = "moov_field_revision_field_heure_d_part"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldHeureDuProgramme(BaseModel):
@@ -9114,11 +12643,28 @@ class FieldRevisionFieldHeureDuProgramme(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_heure_du_programme'
+        table_name = "moov_field_revision_field_heure_du_programme"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldHeureSortir(BaseModel):
@@ -9132,11 +12678,28 @@ class FieldRevisionFieldHeureSortir(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_heure_sortir'
+        table_name = "moov_field_revision_field_heure_sortir"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldHomepage(BaseModel):
@@ -9150,11 +12713,28 @@ class FieldRevisionFieldHomepage(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_homepage'
+        table_name = "moov_field_revision_field_homepage"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldHumidite(BaseModel):
@@ -9169,11 +12749,28 @@ class FieldRevisionFieldHumidite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_humidite'
+        table_name = "moov_field_revision_field_humidite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldIcone(BaseModel):
@@ -9191,11 +12788,28 @@ class FieldRevisionFieldIcone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_icone'
+        table_name = "moov_field_revision_field_icone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldIconeActualites(BaseModel):
@@ -9210,11 +12824,28 @@ class FieldRevisionFieldIconeActualites(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_icone_actualites'
+        table_name = "moov_field_revision_field_icone_actualites"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldIconeDCouvrirMCar(BaseModel):
@@ -9229,11 +12860,28 @@ class FieldRevisionFieldIconeDCouvrirMCar(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_icone_d_couvrir_m_car'
+        table_name = "moov_field_revision_field_icone_d_couvrir_m_car"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldIconeTendanceMoov(BaseModel):
@@ -9248,11 +12896,28 @@ class FieldRevisionFieldIconeTendanceMoov(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_icone_tendance_moov'
+        table_name = "moov_field_revision_field_icone_tendance_moov"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldId(BaseModel):
@@ -9267,11 +12932,28 @@ class FieldRevisionFieldId(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_id'
+        table_name = "moov_field_revision_field_id"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImage(BaseModel):
@@ -9289,11 +12971,28 @@ class FieldRevisionFieldImage(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image'
+        table_name = "moov_field_revision_field_image"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageActus(BaseModel):
@@ -9311,11 +13010,28 @@ class FieldRevisionFieldImageActus(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_actus'
+        table_name = "moov_field_revision_field_image_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageAnnonceDefault(BaseModel):
@@ -9333,11 +13049,28 @@ class FieldRevisionFieldImageAnnonceDefault(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_annonce_default'
+        table_name = "moov_field_revision_field_image_annonce_default"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageDeCouvertureLive(BaseModel):
@@ -9355,11 +13088,28 @@ class FieldRevisionFieldImageDeCouvertureLive(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_de_couverture_live'
+        table_name = "moov_field_revision_field_image_de_couverture_live"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageDeLAnnonce(BaseModel):
@@ -9377,11 +13127,28 @@ class FieldRevisionFieldImageDeLAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_de_l_annonce'
+        table_name = "moov_field_revision_field_image_de_l_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageDeLaPub(BaseModel):
@@ -9399,11 +13166,28 @@ class FieldRevisionFieldImageDeLaPub(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_de_la_pub'
+        table_name = "moov_field_revision_field_image_de_la_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageDeLaPubAds(BaseModel):
@@ -9421,11 +13205,28 @@ class FieldRevisionFieldImageDeLaPubAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_de_la_pub_ads'
+        table_name = "moov_field_revision_field_image_de_la_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageECommerce(BaseModel):
@@ -9443,11 +13244,28 @@ class FieldRevisionFieldImageECommerce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_e_commerce'
+        table_name = "moov_field_revision_field_image_e_commerce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageEducation(BaseModel):
@@ -9465,11 +13283,28 @@ class FieldRevisionFieldImageEducation(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_education'
+        table_name = "moov_field_revision_field_image_education"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageEvent(BaseModel):
@@ -9487,11 +13322,28 @@ class FieldRevisionFieldImageEvent(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_event'
+        table_name = "moov_field_revision_field_image_event"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageGuide(BaseModel):
@@ -9509,11 +13361,28 @@ class FieldRevisionFieldImageGuide(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_guide'
+        table_name = "moov_field_revision_field_image_guide"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageLogo(BaseModel):
@@ -9531,11 +13400,28 @@ class FieldRevisionFieldImageLogo(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_logo'
+        table_name = "moov_field_revision_field_image_logo"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageParDefautAnnonce(BaseModel):
@@ -9553,11 +13439,28 @@ class FieldRevisionFieldImageParDefautAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_par_defaut_annonce'
+        table_name = "moov_field_revision_field_image_par_defaut_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagePopin(BaseModel):
@@ -9575,11 +13478,28 @@ class FieldRevisionFieldImagePopin(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_popin'
+        table_name = "moov_field_revision_field_image_popin"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagePubFooter(BaseModel):
@@ -9602,11 +13522,28 @@ class FieldRevisionFieldImagePubFooter(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_pub_footer'
+        table_name = "moov_field_revision_field_image_pub_footer"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagePubHautPub(BaseModel):
@@ -9629,11 +13566,28 @@ class FieldRevisionFieldImagePubHautPub(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_pub_haut_pub'
+        table_name = "moov_field_revision_field_image_pub_haut_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageSmallAds(BaseModel):
@@ -9651,11 +13605,28 @@ class FieldRevisionFieldImageSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_small_ads'
+        table_name = "moov_field_revision_field_image_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageVolutionDuDevise(BaseModel):
@@ -9673,11 +13644,28 @@ class FieldRevisionFieldImageVolutionDuDevise(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_volution_du_devise'
+        table_name = "moov_field_revision_field_image_volution_du_devise"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageVotrePubSurMoov(BaseModel):
@@ -9695,11 +13683,28 @@ class FieldRevisionFieldImageVotrePubSurMoov(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_image_votre_pub_sur_moov'
+        table_name = "moov_field_revision_field_image_votre_pub_sur_moov"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImages(BaseModel):
@@ -9714,11 +13719,28 @@ class FieldRevisionFieldImages(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images'
+        table_name = "moov_field_revision_field_images"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagesActus(BaseModel):
@@ -9733,11 +13755,28 @@ class FieldRevisionFieldImagesActus(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images_actus'
+        table_name = "moov_field_revision_field_images_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagesFondPublicitaire(BaseModel):
@@ -9755,11 +13794,28 @@ class FieldRevisionFieldImagesFondPublicitaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images_fond_publicitaire'
+        table_name = "moov_field_revision_field_images_fond_publicitaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagesLookDuJour(BaseModel):
@@ -9777,11 +13833,28 @@ class FieldRevisionFieldImagesLookDuJour(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images_look_du_jour'
+        table_name = "moov_field_revision_field_images_look_du_jour"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagesPubBas(BaseModel):
@@ -9804,11 +13877,28 @@ class FieldRevisionFieldImagesPubBas(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images_pub_bas'
+        table_name = "moov_field_revision_field_images_pub_bas"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagesPubCarrebas(BaseModel):
@@ -9831,11 +13921,28 @@ class FieldRevisionFieldImagesPubCarrebas(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images_pub_carrebas'
+        table_name = "moov_field_revision_field_images_pub_carrebas"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImagesPubCarrehaut(BaseModel):
@@ -9858,11 +13965,28 @@ class FieldRevisionFieldImagesPubCarrehaut(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_images_pub_carrehaut'
+        table_name = "moov_field_revision_field_images_pub_carrehaut"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldImageschamps(BaseModel):
@@ -9880,11 +14004,28 @@ class FieldRevisionFieldImageschamps(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_imageschamps'
+        table_name = "moov_field_revision_field_imageschamps"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLibelle(BaseModel):
@@ -9899,11 +14040,28 @@ class FieldRevisionFieldLibelle(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_libelle'
+        table_name = "moov_field_revision_field_libelle"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienDuPartenaire(BaseModel):
@@ -9918,11 +14076,28 @@ class FieldRevisionFieldLienDuPartenaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_du_partenaire'
+        table_name = "moov_field_revision_field_lien_du_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienHotel(BaseModel):
@@ -9937,11 +14112,28 @@ class FieldRevisionFieldLienHotel(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_hotel'
+        table_name = "moov_field_revision_field_lien_hotel"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienImage(BaseModel):
@@ -9956,11 +14148,28 @@ class FieldRevisionFieldLienImage(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_image'
+        table_name = "moov_field_revision_field_lien_image"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienImagePublicite(BaseModel):
@@ -9975,11 +14184,28 @@ class FieldRevisionFieldLienImagePublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_image_publicite'
+        table_name = "moov_field_revision_field_lien_image_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienLive(BaseModel):
@@ -9994,11 +14220,28 @@ class FieldRevisionFieldLienLive(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_live'
+        table_name = "moov_field_revision_field_lien_live"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienSortir(BaseModel):
@@ -10013,11 +14256,28 @@ class FieldRevisionFieldLienSortir(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_sortir'
+        table_name = "moov_field_revision_field_lien_sortir"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienSponsorisActus(BaseModel):
@@ -10031,11 +14291,28 @@ class FieldRevisionFieldLienSponsorisActus(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_sponsoris_actus'
+        table_name = "moov_field_revision_field_lien_sponsoris_actus"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienSponsorisDecouvrir(BaseModel):
@@ -10049,11 +14326,28 @@ class FieldRevisionFieldLienSponsorisDecouvrir(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_sponsoris_decouvrir'
+        table_name = "moov_field_revision_field_lien_sponsoris_decouvrir"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienSponsorisEducation(BaseModel):
@@ -10067,11 +14361,28 @@ class FieldRevisionFieldLienSponsorisEducation(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_sponsoris_education'
+        table_name = "moov_field_revision_field_lien_sponsoris_education"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienSponsorisTendance(BaseModel):
@@ -10085,11 +14396,28 @@ class FieldRevisionFieldLienSponsorisTendance(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_sponsoris_tendance'
+        table_name = "moov_field_revision_field_lien_sponsoris_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLienVotrePubSurMoov(BaseModel):
@@ -10104,11 +14432,28 @@ class FieldRevisionFieldLienVotrePubSurMoov(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lien_votre_pub_sur_moov'
+        table_name = "moov_field_revision_field_lien_votre_pub_sur_moov"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLieuAnnonce(BaseModel):
@@ -10122,11 +14467,28 @@ class FieldRevisionFieldLieuAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lieu_annonce'
+        table_name = "moov_field_revision_field_lieu_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLieuEntityform(BaseModel):
@@ -10141,11 +14503,28 @@ class FieldRevisionFieldLieuEntityform(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lieu_entityform'
+        table_name = "moov_field_revision_field_lieu_entityform"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLieuEvenement(BaseModel):
@@ -10160,11 +14539,28 @@ class FieldRevisionFieldLieuEvenement(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lieu_evenement'
+        table_name = "moov_field_revision_field_lieu_evenement"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLieuPartenaire(BaseModel):
@@ -10179,11 +14575,28 @@ class FieldRevisionFieldLieuPartenaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lieu_partenaire'
+        table_name = "moov_field_revision_field_lieu_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLieuSmallAds(BaseModel):
@@ -10197,11 +14610,28 @@ class FieldRevisionFieldLieuSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_lieu_small_ads'
+        table_name = "moov_field_revision_field_lieu_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldListesDesProvinces(BaseModel):
@@ -10216,11 +14646,28 @@ class FieldRevisionFieldListesDesProvinces(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_listes_des_provinces'
+        table_name = "moov_field_revision_field_listes_des_provinces"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoCopyright(BaseModel):
@@ -10238,11 +14685,28 @@ class FieldRevisionFieldLogoCopyright(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_copyright'
+        table_name = "moov_field_revision_field_logo_copyright"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoCopyrightDecouvrir(BaseModel):
@@ -10260,11 +14724,28 @@ class FieldRevisionFieldLogoCopyrightDecouvrir(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_copyright_decouvrir'
+        table_name = "moov_field_revision_field_logo_copyright_decouvrir"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoCopyrightEducation(BaseModel):
@@ -10282,11 +14763,28 @@ class FieldRevisionFieldLogoCopyrightEducation(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_copyright_education'
+        table_name = "moov_field_revision_field_logo_copyright_education"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoCopyrightTendance(BaseModel):
@@ -10304,11 +14802,28 @@ class FieldRevisionFieldLogoCopyrightTendance(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_copyright_tendance'
+        table_name = "moov_field_revision_field_logo_copyright_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoLive(BaseModel):
@@ -10326,11 +14841,28 @@ class FieldRevisionFieldLogoLive(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_live'
+        table_name = "moov_field_revision_field_logo_live"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoMedia(BaseModel):
@@ -10348,11 +14880,28 @@ class FieldRevisionFieldLogoMedia(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_media'
+        table_name = "moov_field_revision_field_logo_media"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldLogoPartenaire(BaseModel):
@@ -10370,11 +14919,28 @@ class FieldRevisionFieldLogoPartenaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_logo_partenaire'
+        table_name = "moov_field_revision_field_logo_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMeteo(BaseModel):
@@ -10389,11 +14955,28 @@ class FieldRevisionFieldMeteo(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_meteo'
+        table_name = "moov_field_revision_field_meteo"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMeteoweek(BaseModel):
@@ -10408,11 +14991,28 @@ class FieldRevisionFieldMeteoweek(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_meteoweek'
+        table_name = "moov_field_revision_field_meteoweek"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMettreEnCouverture(BaseModel):
@@ -10426,11 +15026,28 @@ class FieldRevisionFieldMettreEnCouverture(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_mettre_en_couverture'
+        table_name = "moov_field_revision_field_mettre_en_couverture"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldModRationCondition(BaseModel):
@@ -10446,11 +15063,28 @@ class FieldRevisionFieldModRationCondition(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_mod_ration_condition'
+        table_name = "moov_field_revision_field_mod_ration_condition"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMontantDeLaPublicite(BaseModel):
@@ -10465,11 +15099,28 @@ class FieldRevisionFieldMontantDeLaPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_montant_de_la_publicite'
+        table_name = "moov_field_revision_field_montant_de_la_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMontantEnAriary(BaseModel):
@@ -10484,11 +15135,28 @@ class FieldRevisionFieldMontantEnAriary(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_montant_en_ariary'
+        table_name = "moov_field_revision_field_montant_en_ariary"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMontantPayer(BaseModel):
@@ -10503,11 +15171,28 @@ class FieldRevisionFieldMontantPayer(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_montant_payer'
+        table_name = "moov_field_revision_field_montant_payer"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMontantPayerSmallAds(BaseModel):
@@ -10522,11 +15207,28 @@ class FieldRevisionFieldMontantPayerSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_montant_payer_small_ads'
+        table_name = "moov_field_revision_field_montant_payer_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMontantPubliciteAds(BaseModel):
@@ -10541,11 +15243,28 @@ class FieldRevisionFieldMontantPubliciteAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_montant_publicite_ads'
+        table_name = "moov_field_revision_field_montant_publicite_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldMvolaPharmacie(BaseModel):
@@ -10560,11 +15279,28 @@ class FieldRevisionFieldMvolaPharmacie(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_mvola_pharmacie'
+        table_name = "moov_field_revision_field_mvola_pharmacie"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNom(BaseModel):
@@ -10579,11 +15315,28 @@ class FieldRevisionFieldNom(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nom'
+        table_name = "moov_field_revision_field_nom"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNomDeLaSociete(BaseModel):
@@ -10598,11 +15351,28 @@ class FieldRevisionFieldNomDeLaSociete(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nom_de_la_societe'
+        table_name = "moov_field_revision_field_nom_de_la_societe"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNomDuPub(BaseModel):
@@ -10617,11 +15387,28 @@ class FieldRevisionFieldNomDuPub(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nom_du_pub'
+        table_name = "moov_field_revision_field_nom_du_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNomSocieteAds(BaseModel):
@@ -10636,11 +15423,28 @@ class FieldRevisionFieldNomSocieteAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nom_societe_ads'
+        table_name = "moov_field_revision_field_nom_societe_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNombreDeJourAds(BaseModel):
@@ -10654,11 +15458,28 @@ class FieldRevisionFieldNombreDeJourAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nombre_de_jour_ads'
+        table_name = "moov_field_revision_field_nombre_de_jour_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNombreDeJourAnnonce(BaseModel):
@@ -10673,11 +15494,28 @@ class FieldRevisionFieldNombreDeJourAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nombre_de_jour_annonce'
+        table_name = "moov_field_revision_field_nombre_de_jour_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNombreDeJourPublicite(BaseModel):
@@ -10691,11 +15529,28 @@ class FieldRevisionFieldNombreDeJourPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nombre_de_jour_publicite'
+        table_name = "moov_field_revision_field_nombre_de_jour_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNombreDeJourSmallAds(BaseModel):
@@ -10710,11 +15565,28 @@ class FieldRevisionFieldNombreDeJourSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nombre_de_jour_small_ads'
+        table_name = "moov_field_revision_field_nombre_de_jour_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNombreDeTransaction(BaseModel):
@@ -10729,11 +15601,28 @@ class FieldRevisionFieldNombreDeTransaction(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nombre_de_transaction'
+        table_name = "moov_field_revision_field_nombre_de_transaction"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNomicone(BaseModel):
@@ -10748,11 +15637,28 @@ class FieldRevisionFieldNomicone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_nomicone'
+        table_name = "moov_field_revision_field_nomicone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNumero(BaseModel):
@@ -10767,11 +15673,28 @@ class FieldRevisionFieldNumero(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_numero'
+        table_name = "moov_field_revision_field_numero"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNumeroDeLaPubAds(BaseModel):
@@ -10786,11 +15709,28 @@ class FieldRevisionFieldNumeroDeLaPubAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_numero_de_la_pub_ads'
+        table_name = "moov_field_revision_field_numero_de_la_pub_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNumeroDeTelephone(BaseModel):
@@ -10805,11 +15745,28 @@ class FieldRevisionFieldNumeroDeTelephone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_numero_de_telephone'
+        table_name = "moov_field_revision_field_numero_de_telephone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNumeroDeTelephoneAds(BaseModel):
@@ -10824,11 +15781,28 @@ class FieldRevisionFieldNumeroDeTelephoneAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_numero_de_telephone_ads'
+        table_name = "moov_field_revision_field_numero_de_telephone_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNumeroTLPhone(BaseModel):
@@ -10843,11 +15817,28 @@ class FieldRevisionFieldNumeroTLPhone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_numero_t_l_phone'
+        table_name = "moov_field_revision_field_numero_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldNumeroTphAnnonce(BaseModel):
@@ -10862,11 +15853,28 @@ class FieldRevisionFieldNumeroTphAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_numero_tph_annonce'
+        table_name = "moov_field_revision_field_numero_tph_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldOrigine(BaseModel):
@@ -10881,11 +15889,28 @@ class FieldRevisionFieldOrigine(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_origine'
+        table_name = "moov_field_revision_field_origine"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPageDeLaPubliciteAds(BaseModel):
@@ -10899,11 +15924,28 @@ class FieldRevisionFieldPageDeLaPubliciteAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_page_de_la_publicite_ads'
+        table_name = "moov_field_revision_field_page_de_la_publicite_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPetitesAnnoncesId(BaseModel):
@@ -10918,11 +15960,28 @@ class FieldRevisionFieldPetitesAnnoncesId(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_petites_annonces_id'
+        table_name = "moov_field_revision_field_petites_annonces_id"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPhoneNumber(BaseModel):
@@ -10937,11 +15996,28 @@ class FieldRevisionFieldPhoneNumber(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_phone_number'
+        table_name = "moov_field_revision_field_phone_number"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPrNoms(BaseModel):
@@ -10956,11 +16032,28 @@ class FieldRevisionFieldPrNoms(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_pr_noms'
+        table_name = "moov_field_revision_field_pr_noms"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPressure(BaseModel):
@@ -10975,11 +16068,28 @@ class FieldRevisionFieldPressure(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_pressure'
+        table_name = "moov_field_revision_field_pressure"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPrice(BaseModel):
@@ -10994,11 +16104,28 @@ class FieldRevisionFieldPrice(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_price'
+        table_name = "moov_field_revision_field_price"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPrixEnAriary(BaseModel):
@@ -11012,11 +16139,28 @@ class FieldRevisionFieldPrixEnAriary(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_prix_en_ariary'
+        table_name = "moov_field_revision_field_prix_en_ariary"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldPubliciteId(BaseModel):
@@ -11031,11 +16175,28 @@ class FieldRevisionFieldPubliciteId(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_publicite_id'
+        table_name = "moov_field_revision_field_publicite_id"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuartBnous4Rapport(BaseModel):
@@ -11050,11 +16211,28 @@ class FieldRevisionFieldQuartBnous4Rapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quart_bnous_4_rapport'
+        table_name = "moov_field_revision_field_quart_bnous_4_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuartBonus4Isa(BaseModel):
@@ -11069,11 +16247,28 @@ class FieldRevisionFieldQuartBonus4Isa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quart_bonus_4_isa'
+        table_name = "moov_field_revision_field_quart_bonus_4_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuartDesordreIsa(BaseModel):
@@ -11088,11 +16283,28 @@ class FieldRevisionFieldQuartDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quart_desordre_isa'
+        table_name = "moov_field_revision_field_quart_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuartDesordreRapport(BaseModel):
@@ -11107,11 +16319,28 @@ class FieldRevisionFieldQuartDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quart_desordre_rapport'
+        table_name = "moov_field_revision_field_quart_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuartOrdreRapport(BaseModel):
@@ -11126,11 +16355,28 @@ class FieldRevisionFieldQuartOrdreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quart_ordre_rapport'
+        table_name = "moov_field_revision_field_quart_ordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuarteOrdreIsa(BaseModel):
@@ -11145,11 +16391,28 @@ class FieldRevisionFieldQuarteOrdreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quarte_ordre_isa'
+        table_name = "moov_field_revision_field_quarte_ordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuintBonusIsa(BaseModel):
@@ -11164,11 +16427,28 @@ class FieldRevisionFieldQuintBonusIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quint_bonus_isa'
+        table_name = "moov_field_revision_field_quint_bonus_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuintBonusRapport(BaseModel):
@@ -11183,11 +16463,28 @@ class FieldRevisionFieldQuintBonusRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quint_bonus_rapport'
+        table_name = "moov_field_revision_field_quint_bonus_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuintDesordreIsa(BaseModel):
@@ -11202,11 +16499,28 @@ class FieldRevisionFieldQuintDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quint_desordre_isa'
+        table_name = "moov_field_revision_field_quint_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuintDesordreRapport(BaseModel):
@@ -11221,11 +16535,28 @@ class FieldRevisionFieldQuintDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quint_desordre_rapport'
+        table_name = "moov_field_revision_field_quint_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuintOrdreIsa(BaseModel):
@@ -11240,11 +16571,28 @@ class FieldRevisionFieldQuintOrdreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quint_ordre_isa'
+        table_name = "moov_field_revision_field_quint_ordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldQuintOrdreRapport(BaseModel):
@@ -11259,11 +16607,28 @@ class FieldRevisionFieldQuintOrdreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_quint_ordre_rapport'
+        table_name = "moov_field_revision_field_quint_ordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldRFRenceDePaiementMvol(BaseModel):
@@ -11278,11 +16643,28 @@ class FieldRevisionFieldRFRenceDePaiementMvol(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_r_f_rence_de_paiement_mvol'
+        table_name = "moov_field_revision_field_r_f_rence_de_paiement_mvol"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldRFRencePaiementMvola(BaseModel):
@@ -11297,11 +16679,28 @@ class FieldRevisionFieldRFRencePaiementMvola(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_r_f_rence_paiement_mvola'
+        table_name = "moov_field_revision_field_r_f_rence_paiement_mvola"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldRGionPharmacieListe(BaseModel):
@@ -11315,11 +16714,28 @@ class FieldRevisionFieldRGionPharmacieListe(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_r_gion_pharmacie_liste'
+        table_name = "moov_field_revision_field_r_gion_pharmacie_liste"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldReferenceMvola(BaseModel):
@@ -11334,11 +16750,28 @@ class FieldRevisionFieldReferenceMvola(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_reference_mvola'
+        table_name = "moov_field_revision_field_reference_mvola"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldReferenceMvolaAds(BaseModel):
@@ -11353,11 +16786,28 @@ class FieldRevisionFieldReferenceMvolaAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_reference_mvola_ads'
+        table_name = "moov_field_revision_field_reference_mvola_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldReponse(BaseModel):
@@ -11372,11 +16822,28 @@ class FieldRevisionFieldReponse(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_reponse'
+        table_name = "moov_field_revision_field_reponse"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldRestricitonMineurForum(BaseModel):
@@ -11390,11 +16857,28 @@ class FieldRevisionFieldRestricitonMineurForum(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_restriciton_mineur_forum'
+        table_name = "moov_field_revision_field_restriciton_mineur_forum"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldRestrictionMineurCondit(BaseModel):
@@ -11410,11 +16894,28 @@ class FieldRevisionFieldRestrictionMineurCondit(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_restriction_mineur_condit'
+        table_name = "moov_field_revision_field_restriction_mineur_condit"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldRubriqueCategorie(BaseModel):
@@ -11428,11 +16929,28 @@ class FieldRevisionFieldRubriqueCategorie(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_rubrique_categorie'
+        table_name = "moov_field_revision_field_rubrique_categorie"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSaisirNouveauNumero(BaseModel):
@@ -11447,11 +16965,28 @@ class FieldRevisionFieldSaisirNouveauNumero(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_saisir_nouveau_numero'
+        table_name = "moov_field_revision_field_saisir_nouveau_numero"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSaisirUnNouveauEmail(BaseModel):
@@ -11465,11 +17000,28 @@ class FieldRevisionFieldSaisirUnNouveauEmail(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_saisir_un_nouveau_email'
+        table_name = "moov_field_revision_field_saisir_un_nouveau_email"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSemaineDeGarde(BaseModel):
@@ -11484,11 +17036,28 @@ class FieldRevisionFieldSemaineDeGarde(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_semaine_de_garde'
+        table_name = "moov_field_revision_field_semaine_de_garde"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSixteBonus4Isa(BaseModel):
@@ -11503,11 +17072,28 @@ class FieldRevisionFieldSixteBonus4Isa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sixte_bonus_4_isa'
+        table_name = "moov_field_revision_field_sixte_bonus_4_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSixteBonus4Rapport(BaseModel):
@@ -11522,11 +17108,28 @@ class FieldRevisionFieldSixteBonus4Rapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sixte_bonus_4_rapport'
+        table_name = "moov_field_revision_field_sixte_bonus_4_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSixteDesordreIsa(BaseModel):
@@ -11541,11 +17144,28 @@ class FieldRevisionFieldSixteDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sixte_desordre_isa'
+        table_name = "moov_field_revision_field_sixte_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSixteDesordreRapport(BaseModel):
@@ -11560,11 +17180,28 @@ class FieldRevisionFieldSixteDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sixte_desordre_rapport'
+        table_name = "moov_field_revision_field_sixte_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSixteOdreRapport(BaseModel):
@@ -11579,11 +17216,28 @@ class FieldRevisionFieldSixteOdreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sixte_odre_rapport'
+        table_name = "moov_field_revision_field_sixte_odre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSixteOrdre(BaseModel):
@@ -11598,11 +17252,28 @@ class FieldRevisionFieldSixteOrdre(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sixte_ordre'
+        table_name = "moov_field_revision_field_sixte_ordre"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSliderPageAccueil(BaseModel):
@@ -11616,11 +17287,28 @@ class FieldRevisionFieldSliderPageAccueil(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_slider_page_accueil'
+        table_name = "moov_field_revision_field_slider_page_accueil"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSliderPageCategorie(BaseModel):
@@ -11634,11 +17322,28 @@ class FieldRevisionFieldSliderPageCategorie(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_slider_page_categorie'
+        table_name = "moov_field_revision_field_slider_page_categorie"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSliderPageCategorieIn(BaseModel):
@@ -11652,11 +17357,28 @@ class FieldRevisionFieldSliderPageCategorieIn(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_slider_page_categorie_in'
+        table_name = "moov_field_revision_field_slider_page_categorie_in"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSourceCours(BaseModel):
@@ -11671,11 +17393,28 @@ class FieldRevisionFieldSourceCours(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_source_cours'
+        table_name = "moov_field_revision_field_source_cours"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSousCatGorieAnnonce(BaseModel):
@@ -11689,11 +17428,28 @@ class FieldRevisionFieldSousCatGorieAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sous_cat_gorie_annonce'
+        table_name = "moov_field_revision_field_sous_cat_gorie_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSousCategorieSmallAds(BaseModel):
@@ -11707,11 +17463,28 @@ class FieldRevisionFieldSousCategorieSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sous_categorie_small_ads'
+        table_name = "moov_field_revision_field_sous_categorie_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSousTitreEducation(BaseModel):
@@ -11726,11 +17499,28 @@ class FieldRevisionFieldSousTitreEducation(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sous_titre_education'
+        table_name = "moov_field_revision_field_sous_titre_education"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldSousTitreTendance(BaseModel):
@@ -11745,11 +17535,28 @@ class FieldRevisionFieldSousTitreTendance(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_sous_titre_tendance'
+        table_name = "moov_field_revision_field_sous_titre_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldStatusDeLaTransaction(BaseModel):
@@ -11764,11 +17571,28 @@ class FieldRevisionFieldStatusDeLaTransaction(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_status_de_la_transaction'
+        table_name = "moov_field_revision_field_status_de_la_transaction"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldStatusTransactionPub(BaseModel):
@@ -11783,11 +17607,28 @@ class FieldRevisionFieldStatusTransactionPub(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_status_transaction_pub'
+        table_name = "moov_field_revision_field_status_transaction_pub"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldStatutTransactionAds(BaseModel):
@@ -11802,11 +17643,28 @@ class FieldRevisionFieldStatutTransactionAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_statut_transaction_ads'
+        table_name = "moov_field_revision_field_statut_transaction_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTLPhone(BaseModel):
@@ -11821,11 +17679,28 @@ class FieldRevisionFieldTLPhone(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_t_l_phone'
+        table_name = "moov_field_revision_field_t_l_phone"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTags(BaseModel):
@@ -11839,11 +17714,28 @@ class FieldRevisionFieldTags(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_tags'
+        table_name = "moov_field_revision_field_tags"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTelephonePharmacie(BaseModel):
@@ -11858,11 +17750,28 @@ class FieldRevisionFieldTelephonePharmacie(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_telephone_pharmacie'
+        table_name = "moov_field_revision_field_telephone_pharmacie"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTemperatureJour(BaseModel):
@@ -11877,11 +17786,28 @@ class FieldRevisionFieldTemperatureJour(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_temperature_jour'
+        table_name = "moov_field_revision_field_temperature_jour"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTemperatureMatin(BaseModel):
@@ -11896,11 +17822,28 @@ class FieldRevisionFieldTemperatureMatin(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_temperature_matin'
+        table_name = "moov_field_revision_field_temperature_matin"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTemperatureMax(BaseModel):
@@ -11915,11 +17858,28 @@ class FieldRevisionFieldTemperatureMax(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_temperature_max'
+        table_name = "moov_field_revision_field_temperature_max"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTemperatureNuit(BaseModel):
@@ -11934,11 +17894,28 @@ class FieldRevisionFieldTemperatureNuit(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_temperature_nuit'
+        table_name = "moov_field_revision_field_temperature_nuit"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTemperatureSoir(BaseModel):
@@ -11953,11 +17930,28 @@ class FieldRevisionFieldTemperatureSoir(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_temperature_soir'
+        table_name = "moov_field_revision_field_temperature_soir"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTierceBonusIsa(BaseModel):
@@ -11972,11 +17966,28 @@ class FieldRevisionFieldTierceBonusIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_tierce_bonus_isa'
+        table_name = "moov_field_revision_field_tierce_bonus_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTierceDesordreIsa(BaseModel):
@@ -11991,11 +18002,28 @@ class FieldRevisionFieldTierceDesordreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_tierce_desordre_isa'
+        table_name = "moov_field_revision_field_tierce_desordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTierceDesordreRapport(BaseModel):
@@ -12010,11 +18038,28 @@ class FieldRevisionFieldTierceDesordreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_tierce_desordre_rapport'
+        table_name = "moov_field_revision_field_tierce_desordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTierceOrdreIsa(BaseModel):
@@ -12029,11 +18074,28 @@ class FieldRevisionFieldTierceOrdreIsa(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_tierce_ordre_isa'
+        table_name = "moov_field_revision_field_tierce_ordre_isa"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTierceOrdreRapport(BaseModel):
@@ -12048,11 +18110,28 @@ class FieldRevisionFieldTierceOrdreRapport(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_tierce_ordre_rapport'
+        table_name = "moov_field_revision_field_tierce_ordre_rapport"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTitreAnnonce(BaseModel):
@@ -12067,11 +18146,28 @@ class FieldRevisionFieldTitreAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_titre_annonce'
+        table_name = "moov_field_revision_field_titre_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTitreTest(BaseModel):
@@ -12086,11 +18182,28 @@ class FieldRevisionFieldTitreTest(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_titre_test'
+        table_name = "moov_field_revision_field_titre_test"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTokenId(BaseModel):
@@ -12105,11 +18218,28 @@ class FieldRevisionFieldTokenId(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_token_id'
+        table_name = "moov_field_revision_field_token_id"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTokenIdAds(BaseModel):
@@ -12124,11 +18254,28 @@ class FieldRevisionFieldTokenIdAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_token_id_ads'
+        table_name = "moov_field_revision_field_token_id_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTokenIdPublicite(BaseModel):
@@ -12143,11 +18290,28 @@ class FieldRevisionFieldTokenIdPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_token_id_publicite'
+        table_name = "moov_field_revision_field_token_id_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTransactionId(BaseModel):
@@ -12162,11 +18326,28 @@ class FieldRevisionFieldTransactionId(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_transaction_id'
+        table_name = "moov_field_revision_field_transaction_id"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTransactionIdPublicite(BaseModel):
@@ -12181,11 +18362,28 @@ class FieldRevisionFieldTransactionIdPublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_transaction_id_publicite'
+        table_name = "moov_field_revision_field_transaction_id_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeActualite(BaseModel):
@@ -12199,11 +18397,28 @@ class FieldRevisionFieldTypeActualite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_actualite'
+        table_name = "moov_field_revision_field_type_actualite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDeCondition(BaseModel):
@@ -12217,11 +18432,28 @@ class FieldRevisionFieldTypeDeCondition(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_de_condition'
+        table_name = "moov_field_revision_field_type_de_condition"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDeMedia(BaseModel):
@@ -12235,11 +18467,28 @@ class FieldRevisionFieldTypeDeMedia(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_de_media'
+        table_name = "moov_field_revision_field_type_de_media"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDeVidO(BaseModel):
@@ -12253,11 +18502,28 @@ class FieldRevisionFieldTypeDeVidO(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_de_vid_o'
+        table_name = "moov_field_revision_field_type_de_vid_o"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDeVotreAnnonce(BaseModel):
@@ -12271,11 +18537,28 @@ class FieldRevisionFieldTypeDeVotreAnnonce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_de_votre_annonce'
+        table_name = "moov_field_revision_field_type_de_votre_annonce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDecouvrirMadagascar(BaseModel):
@@ -12289,11 +18572,28 @@ class FieldRevisionFieldTypeDecouvrirMadagascar(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_decouvrir_madagascar'
+        table_name = "moov_field_revision_field_type_decouvrir_madagascar"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDuProgramme(BaseModel):
@@ -12307,11 +18607,28 @@ class FieldRevisionFieldTypeDuProgramme(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_du_programme'
+        table_name = "moov_field_revision_field_type_du_programme"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeDuVol(BaseModel):
@@ -12326,11 +18643,28 @@ class FieldRevisionFieldTypeDuVol(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_du_vol'
+        table_name = "moov_field_revision_field_type_du_vol"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeECommerce(BaseModel):
@@ -12344,11 +18678,28 @@ class FieldRevisionFieldTypeECommerce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_e_commerce'
+        table_name = "moov_field_revision_field_type_e_commerce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeSmallAds(BaseModel):
@@ -12362,11 +18713,28 @@ class FieldRevisionFieldTypeSmallAds(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_small_ads'
+        table_name = "moov_field_revision_field_type_small_ads"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldTypeTendance(BaseModel):
@@ -12380,11 +18748,28 @@ class FieldRevisionFieldTypeTendance(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_type_tendance'
+        table_name = "moov_field_revision_field_type_tendance"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlMedia(BaseModel):
@@ -12399,11 +18784,28 @@ class FieldRevisionFieldUrlMedia(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_media'
+        table_name = "moov_field_revision_field_url_media"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPageEcommerce(BaseModel):
@@ -12418,11 +18820,28 @@ class FieldRevisionFieldUrlPageEcommerce(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_ecommerce'
+        table_name = "moov_field_revision_field_url_page_ecommerce"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPageEmploi(BaseModel):
@@ -12437,11 +18856,28 @@ class FieldRevisionFieldUrlPageEmploi(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_emploi'
+        table_name = "moov_field_revision_field_url_page_emploi"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPageIframe(BaseModel):
@@ -12456,11 +18892,28 @@ class FieldRevisionFieldUrlPageIframe(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_iframe'
+        table_name = "moov_field_revision_field_url_page_iframe"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPagePmu(BaseModel):
@@ -12475,11 +18928,28 @@ class FieldRevisionFieldUrlPagePmu(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_pmu'
+        table_name = "moov_field_revision_field_url_page_pmu"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPagePratiqueReservez(BaseModel):
@@ -12494,11 +18964,28 @@ class FieldRevisionFieldUrlPagePratiqueReservez(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_pratique_reservez'
+        table_name = "moov_field_revision_field_url_page_pratique_reservez"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPageRelooking(BaseModel):
@@ -12513,11 +19000,28 @@ class FieldRevisionFieldUrlPageRelooking(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_relooking'
+        table_name = "moov_field_revision_field_url_page_relooking"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPageSelfcare(BaseModel):
@@ -12532,11 +19036,28 @@ class FieldRevisionFieldUrlPageSelfcare(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_selfcare'
+        table_name = "moov_field_revision_field_url_page_selfcare"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlPageVotrePublicite(BaseModel):
@@ -12551,11 +19072,28 @@ class FieldRevisionFieldUrlPageVotrePublicite(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_page_votre_publicite'
+        table_name = "moov_field_revision_field_url_page_votre_publicite"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldUrlVidO(BaseModel):
@@ -12570,11 +19108,28 @@ class FieldRevisionFieldUrlVidO(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_url_vid_o'
+        table_name = "moov_field_revision_field_url_vid_o"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVidOEvent(BaseModel):
@@ -12589,11 +19144,28 @@ class FieldRevisionFieldVidOEvent(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_vid_o_event'
+        table_name = "moov_field_revision_field_vid_o_event"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVidOStreaming(BaseModel):
@@ -12603,17 +19175,36 @@ class FieldRevisionFieldVidOStreaming(BaseModel):
     entity_id = IntegerField(index=True)
     entity_type = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     field_vid_o_streaming_description = TextField(null=True)
-    field_vid_o_streaming_display = IntegerField(constraints=[SQL("DEFAULT 1")])
+    field_vid_o_streaming_display = IntegerField(
+        constraints=[SQL("DEFAULT 1")]
+    )
     field_vid_o_streaming_fid = IntegerField(index=True, null=True)
     language = CharField(constraints=[SQL("DEFAULT ''")], index=True)
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_vid_o_streaming'
+        table_name = "moov_field_revision_field_vid_o_streaming"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVideoUrl(BaseModel):
@@ -12628,11 +19219,28 @@ class FieldRevisionFieldVideoUrl(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_video_url'
+        table_name = "moov_field_revision_field_video_url"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVideosDuJour(BaseModel):
@@ -12647,11 +19255,28 @@ class FieldRevisionFieldVideosDuJour(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_videos_du_jour'
+        table_name = "moov_field_revision_field_videos_du_jour"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVille(BaseModel):
@@ -12665,11 +19290,28 @@ class FieldRevisionFieldVille(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_ville'
+        table_name = "moov_field_revision_field_ville"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVillePartenaire(BaseModel):
@@ -12683,11 +19325,28 @@ class FieldRevisionFieldVillePartenaire(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_ville_partenaire'
+        table_name = "moov_field_revision_field_ville_partenaire"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVitesse(BaseModel):
@@ -12702,11 +19361,28 @@ class FieldRevisionFieldVitesse(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_vitesse'
+        table_name = "moov_field_revision_field_vitesse"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVolume(BaseModel):
@@ -12721,11 +19397,28 @@ class FieldRevisionFieldVolume(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_volume'
+        table_name = "moov_field_revision_field_volume"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldVotrePubDansLaPage(BaseModel):
@@ -12739,11 +19432,28 @@ class FieldRevisionFieldVotrePubDansLaPage(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_votre_pub_dans_la_page'
+        table_name = "moov_field_revision_field_votre_pub_dans_la_page"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldWeatherCom(BaseModel):
@@ -12758,11 +19468,28 @@ class FieldRevisionFieldWeatherCom(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_weather_com'
+        table_name = "moov_field_revision_field_weather_com"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldWorldWeatherOnline(BaseModel):
@@ -12777,11 +19504,28 @@ class FieldRevisionFieldWorldWeatherOnline(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_world_weather_online'
+        table_name = "moov_field_revision_field_world_weather_online"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionFieldYahooWeather(BaseModel):
@@ -12796,11 +19540,28 @@ class FieldRevisionFieldYahooWeather(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_field_yahoo_weather'
+        table_name = "moov_field_revision_field_yahoo_weather"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionNameField(BaseModel):
@@ -12815,11 +19576,28 @@ class FieldRevisionNameField(BaseModel):
     revision_id = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_field_revision_name_field'
+        table_name = "moov_field_revision_name_field"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldRevisionTitleField(BaseModel):
@@ -12834,11 +19612,28 @@ class FieldRevisionTitleField(BaseModel):
     title_field_value = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_field_revision_title_field'
+        table_name = "moov_field_revision_title_field"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'deleted', 'delta', 'language'), True),
+            (
+                (
+                    "entity_type",
+                    "entity_id",
+                    "revision_id",
+                    "deleted",
+                    "delta",
+                    "language",
+                ),
+                True,
+            ),
         )
-        primary_key = CompositeKey('deleted', 'delta', 'entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "deleted",
+            "delta",
+            "entity_id",
+            "entity_type",
+            "language",
+            "revision_id",
+        )
 
 
 class FieldValidationRule(BaseModel):
@@ -12854,10 +19649,8 @@ class FieldValidationRule(BaseModel):
     validator = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_field_validation_rule'
-        indexes = (
-            (('field_name', 'entity_type', 'bundle'), False),
-        )
+        table_name = "moov_field_validation_rule"
+        indexes = ((("field_name", "entity_type", "bundle"), False),)
 
 
 class FileManaged(BaseModel):
@@ -12871,7 +19664,7 @@ class FileManaged(BaseModel):
     uri = CharField(constraints=[SQL("DEFAULT ''")], unique=True)
 
     class Meta:
-        table_name = 'moov_file_managed'
+        table_name = "moov_file_managed"
 
 
 class FileUsage(BaseModel):
@@ -12882,14 +19675,14 @@ class FileUsage(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_file_usage'
+        table_name = "moov_file_usage"
         indexes = (
-            (('fid', 'count'), False),
-            (('fid', 'module'), False),
-            (('fid', 'type', 'id', 'module'), True),
-            (('type', 'id'), False),
+            (("fid", "count"), False),
+            (("fid", "module"), False),
+            (("fid", "type", "id", "module"), True),
+            (("type", "id"), False),
         )
-        primary_key = CompositeKey('fid', 'id', 'module', 'type')
+        primary_key = CompositeKey("fid", "id", "module", "type")
 
 
 class Filter(BaseModel):
@@ -12901,12 +19694,12 @@ class Filter(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_filter'
+        table_name = "moov_filter"
         indexes = (
-            (('format', 'name'), True),
-            (('weight', 'module', 'name'), False),
+            (("format", "name"), True),
+            (("weight", "module", "name"), False),
         )
-        primary_key = CompositeKey('format', 'name')
+        primary_key = CompositeKey("format", "name")
 
 
 class FilterFormat(BaseModel):
@@ -12917,22 +19710,22 @@ class FilterFormat(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_filter_format'
-        indexes = (
-            (('status', 'weight'), False),
-        )
+        table_name = "moov_filter_format"
+        indexes = ((("status", "weight"), False),)
 
 
 class Flag(BaseModel):
     entity_type = CharField(constraints=[SQL("DEFAULT ''")])
     fid = AutoField()
-    global_ = IntegerField(column_name='global', constraints=[SQL("DEFAULT 0")], null=True)
+    global_ = IntegerField(
+        column_name="global", constraints=[SQL("DEFAULT 0")], null=True
+    )
     name = CharField(constraints=[SQL("DEFAULT ''")], null=True, unique=True)
     options = TextField(null=True)
     title = CharField(constraints=[SQL("DEFAULT ''")], null=True)
 
     class Meta:
-        table_name = 'moov_flag'
+        table_name = "moov_flag"
 
 
 class FlagActions(BaseModel):
@@ -12945,7 +19738,7 @@ class FlagActions(BaseModel):
     threshold = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_flag_actions'
+        table_name = "moov_flag_actions"
 
 
 class FlagCounts(BaseModel):
@@ -12956,15 +19749,15 @@ class FlagCounts(BaseModel):
     last_updated = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_flag_counts'
+        table_name = "moov_flag_counts"
         indexes = (
-            (('entity_type', 'entity_id'), False),
-            (('fid', 'count'), False),
-            (('fid', 'entity_id'), True),
-            (('fid', 'entity_type'), False),
-            (('fid', 'last_updated'), False),
+            (("entity_type", "entity_id"), False),
+            (("fid", "count"), False),
+            (("fid", "entity_id"), True),
+            (("fid", "entity_type"), False),
+            (("fid", "last_updated"), False),
         )
-        primary_key = CompositeKey('entity_id', 'fid')
+        primary_key = CompositeKey("entity_id", "fid")
 
 
 class FlagTypes(BaseModel):
@@ -12972,7 +19765,7 @@ class FlagTypes(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_flag_types'
+        table_name = "moov_flag_types"
         primary_key = False
 
 
@@ -12986,12 +19779,12 @@ class Flagging(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_flagging'
+        table_name = "moov_flagging"
         indexes = (
-            (('entity_id', 'fid'), False),
-            (('entity_type', 'entity_id', 'uid', 'sid'), False),
-            (('entity_type', 'uid', 'sid'), False),
-            (('fid', 'entity_id', 'uid', 'sid'), True),
+            (("entity_id", "fid"), False),
+            (("entity_type", "entity_id", "uid", "sid"), False),
+            (("entity_type", "uid", "sid"), False),
+            (("fid", "entity_id", "uid", "sid"), True),
         )
 
 
@@ -13002,7 +19795,7 @@ class FlexsliderOptionset(BaseModel):
     title = CharField()
 
     class Meta:
-        table_name = 'moov_flexslider_optionset'
+        table_name = "moov_flexslider_optionset"
 
 
 class Flood(BaseModel):
@@ -13013,10 +19806,8 @@ class Flood(BaseModel):
     timestamp = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_flood'
-        indexes = (
-            (('event', 'identifier', 'timestamp'), False),
-        )
+        table_name = "moov_flood"
+        indexes = ((("event", "identifier", "timestamp"), False),)
 
 
 class FormBuilderCache(BaseModel):
@@ -13027,10 +19818,8 @@ class FormBuilderCache(BaseModel):
     updated = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_form_builder_cache'
-        indexes = (
-            (('sid', 'type', 'form_id'), False),
-        )
+        table_name = "moov_form_builder_cache"
+        indexes = ((("sid", "type", "form_id"), False),)
         primary_key = False
 
 
@@ -13040,25 +19829,25 @@ class Forum(BaseModel):
     vid = AutoField()
 
     class Meta:
-        table_name = 'moov_forum'
-        indexes = (
-            (('nid', 'tid'), False),
-        )
+        table_name = "moov_forum"
+        indexes = ((("nid", "tid"), False),)
 
 
 class ForumIndex(BaseModel):
     comment_count = IntegerField(constraints=[SQL("DEFAULT 0")])
     created = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
-    last_comment_timestamp = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
+    last_comment_timestamp = IntegerField(
+        constraints=[SQL("DEFAULT 0")], index=True
+    )
     nid = IntegerField(constraints=[SQL("DEFAULT 0")])
     sticky = IntegerField(constraints=[SQL("DEFAULT 0")], null=True)
     tid = IntegerField(constraints=[SQL("DEFAULT 0")])
     title = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_forum_index'
+        table_name = "moov_forum_index"
         indexes = (
-            (('nid', 'tid', 'sticky', 'last_comment_timestamp'), False),
+            (("nid", "tid", "sticky", "last_comment_timestamp"), False),
         )
         primary_key = False
 
@@ -13069,11 +19858,9 @@ class History(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_history'
-        indexes = (
-            (('uid', 'nid'), True),
-        )
-        primary_key = CompositeKey('nid', 'uid')
+        table_name = "moov_history"
+        indexes = ((("uid", "nid"), True),)
+        primary_key = CompositeKey("nid", "uid")
 
 
 class HttpResponseHeaders(BaseModel):
@@ -13089,7 +19876,7 @@ class HttpResponseHeaders(BaseModel):
     visibility = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_http_response_headers'
+        table_name = "moov_http_response_headers"
 
 
 class HybridauthIdentity(BaseModel):
@@ -13099,10 +19886,8 @@ class HybridauthIdentity(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_hybridauth_identity'
-        indexes = (
-            (('provider', 'provider_identifier'), True),
-        )
+        table_name = "moov_hybridauth_identity"
+        indexes = ((("provider", "provider_identifier"), True),)
 
 
 class HybridauthSession(BaseModel):
@@ -13111,7 +19896,7 @@ class HybridauthSession(BaseModel):
     updated = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_hybridauth_session'
+        table_name = "moov_hybridauth_session"
 
 
 class ImageEffects(BaseModel):
@@ -13122,7 +19907,7 @@ class ImageEffects(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_image_effects'
+        table_name = "moov_image_effects"
 
 
 class ImageStyles(BaseModel):
@@ -13131,7 +19916,7 @@ class ImageStyles(BaseModel):
     name = CharField(unique=True)
 
     class Meta:
-        table_name = 'moov_image_styles'
+        table_name = "moov_image_styles"
 
 
 class JobSchedule(BaseModel):
@@ -13150,10 +19935,10 @@ class JobSchedule(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_job_schedule'
+        table_name = "moov_job_schedule"
         indexes = (
-            (('name', 'type'), False),
-            (('name', 'type', 'id'), False),
+            (("name", "type"), False),
+            (("name", "type", "id"), False),
         )
 
 
@@ -13166,7 +19951,7 @@ class JobSchedulerTrigger(BaseModel):
     trid = AutoField()
 
     class Meta:
-        table_name = 'moov_job_scheduler_trigger'
+        table_name = "moov_job_scheduler_trigger"
 
 
 class L10NUpdateFile(BaseModel):
@@ -13182,11 +19967,9 @@ class L10NUpdateFile(BaseModel):
     version = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_l10n_update_file'
-        indexes = (
-            (('project', 'language'), True),
-        )
-        primary_key = CompositeKey('language', 'project')
+        table_name = "moov_l10n_update_file"
+        indexes = ((("project", "language"), True),)
+        primary_key = CompositeKey("language", "project")
 
 
 class L10NUpdateProject(BaseModel):
@@ -13199,7 +19982,7 @@ class L10NUpdateProject(BaseModel):
     version = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_l10n_update_project'
+        table_name = "moov_l10n_update_project"
 
 
 class Languages(BaseModel):
@@ -13216,10 +19999,8 @@ class Languages(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_languages'
-        indexes = (
-            (('weight', 'name'), False),
-        )
+        table_name = "moov_languages"
+        indexes = ((("weight", "name"), False),)
 
 
 class LinkedinToken(BaseModel):
@@ -13229,7 +20010,7 @@ class LinkedinToken(BaseModel):
     uid = AutoField()
 
     class Meta:
-        table_name = 'moov_linkedin_token'
+        table_name = "moov_linkedin_token"
 
 
 class LocalesSource(BaseModel):
@@ -13241,10 +20022,8 @@ class LocalesSource(BaseModel):
     version = CharField(constraints=[SQL("DEFAULT 'none'")])
 
     class Meta:
-        table_name = 'moov_locales_source'
-        indexes = (
-            (('source', 'context'), False),
-        )
+        table_name = "moov_locales_source"
+        indexes = ((("source", "context"), False),)
 
 
 class LocalesTarget(BaseModel):
@@ -13256,11 +20035,9 @@ class LocalesTarget(BaseModel):
     translation = TextField()
 
     class Meta:
-        table_name = 'moov_locales_target'
-        indexes = (
-            (('language', 'lid', 'plural'), True),
-        )
-        primary_key = CompositeKey('language', 'lid', 'plural')
+        table_name = "moov_locales_target"
+        indexes = ((("language", "lid", "plural"), True),)
+        primary_key = CompositeKey("language", "lid", "plural")
 
 
 class LoginDestination(BaseModel):
@@ -13274,7 +20051,7 @@ class LoginDestination(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_login_destination'
+        table_name = "moov_login_destination"
 
 
 class LsAnsw(BaseModel):
@@ -13289,10 +20066,8 @@ class LsAnsw(BaseModel):
     vid = IntegerField(constraints=[SQL("DEFAULT 0")], null=True)
 
     class Meta:
-        table_name = 'moov_ls_answ'
-        indexes = (
-            (('nid', 'ls_sid', 'ls_aid'), False),
-        )
+        table_name = "moov_ls_answ"
+        indexes = ((("nid", "ls_sid", "ls_aid"), False),)
         primary_key = False
 
 
@@ -13304,10 +20079,8 @@ class LsSurvey(BaseModel):
     vid = IntegerField(constraints=[SQL("DEFAULT 0")], null=True)
 
     class Meta:
-        table_name = 'moov_ls_survey'
-        indexes = (
-            (('nid', 'ls_sid'), False),
-        )
+        table_name = "moov_ls_survey"
+        indexes = ((("nid", "ls_sid"), False),)
         primary_key = False
 
 
@@ -13317,7 +20090,7 @@ class MenuCustom(BaseModel):
     title = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_menu_custom'
+        table_name = "moov_menu_custom"
 
 
 class MenuLinks(BaseModel):
@@ -13348,11 +20121,25 @@ class MenuLinks(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_menu_links'
+        table_name = "moov_menu_links"
         indexes = (
-            (('link_path', 'menu_name'), False),
-            (('menu_name', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'), False),
-            (('menu_name', 'plid', 'expanded', 'has_children'), False),
+            (("link_path", "menu_name"), False),
+            (
+                (
+                    "menu_name",
+                    "p1",
+                    "p2",
+                    "p3",
+                    "p4",
+                    "p5",
+                    "p6",
+                    "p7",
+                    "p8",
+                    "p9",
+                ),
+                False,
+            ),
+            (("menu_name", "plid", "expanded", "has_children"), False),
         )
 
 
@@ -13361,11 +20148,9 @@ class MenuLinksVisibilityRole(BaseModel):
     rid = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_menu_links_visibility_role'
-        indexes = (
-            (('mlid', 'rid'), True),
-        )
-        primary_key = CompositeKey('mlid', 'rid')
+        table_name = "moov_menu_links_visibility_role"
+        indexes = ((("mlid", "rid"), True),)
+        primary_key = CompositeKey("mlid", "rid")
 
 
 class MenuRouter(BaseModel):
@@ -13394,10 +20179,10 @@ class MenuRouter(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_menu_router'
+        table_name = "moov_menu_router"
         indexes = (
-            (('tab_parent', 'weight', 'title'), False),
-            (('tab_root', 'weight', 'title'), False),
+            (("tab_parent", "weight", "title"), False),
+            (("tab_root", "weight", "title"), False),
         )
 
 
@@ -13409,12 +20194,14 @@ class Metatag(BaseModel):
     revision_id = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_metatag'
+        table_name = "moov_metatag"
         indexes = (
-            (('entity_type', 'entity_id', 'revision_id', 'language'), True),
-            (('entity_type', 'revision_id'), False),
+            (("entity_type", "entity_id", "revision_id", "language"), True),
+            (("entity_type", "revision_id"), False),
         )
-        primary_key = CompositeKey('entity_id', 'entity_type', 'language', 'revision_id')
+        primary_key = CompositeKey(
+            "entity_id", "entity_type", "language", "revision_id"
+        )
 
 
 class MetatagConfig(BaseModel):
@@ -13423,7 +20210,7 @@ class MetatagConfig(BaseModel):
     instance = CharField(constraints=[SQL("DEFAULT ''")], unique=True)
 
     class Meta:
-        table_name = 'moov_metatag_config'
+        table_name = "moov_metatag_config"
 
 
 class Node(BaseModel):
@@ -13443,18 +20230,24 @@ class Node(BaseModel):
     translate = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_node'
+        table_name = "moov_node"
         indexes = (
-            (('promote', 'status', 'sticky', 'created'), False),
-            (('status', 'type', 'nid'), False),
-            (('title', 'type'), False),
+            (("promote", "status", "sticky", "created"), False),
+            (("status", "type", "nid"), False),
+            (("title", "type"), False),
         )
 
     def get_field(self, table):
         row = table.get_or_none(table.entity_id == self.nid)
 
         table_name = table._meta.table_name.split("moov_field_data_", 1)[1]
-        column_name = f"{table_name}_value"
+        if (
+            table_name == "field_type_actualite"
+            or table_name == "field_type_tendance"
+        ):
+            column_name = f"{table_name}_tid"
+        else:
+            column_name = f"{table_name}_value"
         return getattr(row, column_name, None)
 
     def get_collection(self, table, from_table, column_name):
@@ -13481,11 +20274,9 @@ class NodeAccess(BaseModel):
     realm = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_node_access'
-        indexes = (
-            (('nid', 'gid', 'realm'), True),
-        )
-        primary_key = CompositeKey('gid', 'nid', 'realm')
+        table_name = "moov_node_access"
+        indexes = ((("nid", "gid", "realm"), True),)
+        primary_key = CompositeKey("gid", "nid", "realm")
 
 
 class NodeCommentStatistics(BaseModel):
@@ -13493,11 +20284,13 @@ class NodeCommentStatistics(BaseModel):
     cid = IntegerField(constraints=[SQL("DEFAULT 0")])
     comment_count = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
     last_comment_name = CharField(null=True)
-    last_comment_timestamp = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
+    last_comment_timestamp = IntegerField(
+        constraints=[SQL("DEFAULT 0")], index=True
+    )
     last_comment_uid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_node_comment_statistics'
+        table_name = "moov_node_comment_statistics"
 
 
 class NodeLimit(BaseModel):
@@ -13508,7 +20301,7 @@ class NodeLimit(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_node_limit'
+        table_name = "moov_node_limit"
 
 
 class NodeLimitInterval(BaseModel):
@@ -13517,7 +20310,7 @@ class NodeLimitInterval(BaseModel):
     unit = IntegerField()
 
     class Meta:
-        table_name = 'moov_node_limit_interval'
+        table_name = "moov_node_limit_interval"
 
 
 class NodeLimitRole(BaseModel):
@@ -13525,11 +20318,9 @@ class NodeLimitRole(BaseModel):
     rid = IntegerField()
 
     class Meta:
-        table_name = 'moov_node_limit_role'
-        indexes = (
-            (('lid', 'rid'), True),
-        )
-        primary_key = CompositeKey('lid', 'rid')
+        table_name = "moov_node_limit_role"
+        indexes = ((("lid", "rid"), True),)
+        primary_key = CompositeKey("lid", "rid")
 
 
 class NodeLimitType(BaseModel):
@@ -13537,11 +20328,9 @@ class NodeLimitType(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_node_limit_type'
-        indexes = (
-            (('lid', 'type'), True),
-        )
-        primary_key = CompositeKey('lid', 'type')
+        table_name = "moov_node_limit_type"
+        indexes = ((("lid", "type"), True),)
+        primary_key = CompositeKey("lid", "type")
 
 
 class NodeLimitUser(BaseModel):
@@ -13549,11 +20338,9 @@ class NodeLimitUser(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_node_limit_user'
-        indexes = (
-            (('lid', 'uid'), True),
-        )
-        primary_key = CompositeKey('lid', 'uid')
+        table_name = "moov_node_limit_user"
+        indexes = ((("lid", "uid"), True),)
+        primary_key = CompositeKey("lid", "uid")
 
 
 class NodeLimitUserofrole(BaseModel):
@@ -13561,11 +20348,9 @@ class NodeLimitUserofrole(BaseModel):
     rid = IntegerField()
 
     class Meta:
-        table_name = 'moov_node_limit_userofrole'
-        indexes = (
-            (('lid', 'rid'), True),
-        )
-        primary_key = CompositeKey('lid', 'rid')
+        table_name = "moov_node_limit_userofrole"
+        indexes = ((("lid", "rid"), True),)
+        primary_key = CompositeKey("lid", "rid")
 
 
 class NodeRevision(BaseModel):
@@ -13581,7 +20366,7 @@ class NodeRevision(BaseModel):
     vid = AutoField()
 
     class Meta:
-        table_name = 'moov_node_revision'
+        table_name = "moov_node_revision"
 
 
 class NodeType(BaseModel):
@@ -13600,7 +20385,7 @@ class NodeType(BaseModel):
     type = CharField(primary_key=True)
 
     class Meta:
-        table_name = 'moov_node_type'
+        table_name = "moov_node_type"
 
 
 class Nodeblock(BaseModel):
@@ -13614,7 +20399,7 @@ class Nodeblock(BaseModel):
     view_mode = CharField()
 
     class Meta:
-        table_name = 'moov_nodeblock'
+        table_name = "moov_nodeblock"
 
 
 class Note(BaseModel):
@@ -13625,7 +20410,7 @@ class Note(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_note'
+        table_name = "moov_note"
 
 
 class OauthCommonConsumer(BaseModel):
@@ -13636,7 +20421,7 @@ class OauthCommonConsumer(BaseModel):
     secret = TextField()
 
     class Meta:
-        table_name = 'moov_oauth_common_consumer'
+        table_name = "moov_oauth_common_consumer"
 
 
 class OauthCommonContext(BaseModel):
@@ -13647,7 +20432,7 @@ class OauthCommonContext(BaseModel):
     title = CharField()
 
     class Meta:
-        table_name = 'moov_oauth_common_context'
+        table_name = "moov_oauth_common_context"
 
 
 class OauthCommonNonce(BaseModel):
@@ -13656,10 +20441,8 @@ class OauthCommonNonce(BaseModel):
     token_key = CharField()
 
     class Meta:
-        table_name = 'moov_oauth_common_nonce'
-        indexes = (
-            (('timestamp', 'token_key'), False),
-        )
+        table_name = "moov_oauth_common_nonce"
+        indexes = ((("timestamp", "token_key"), False),)
 
 
 class OauthCommonProviderConsumer(BaseModel):
@@ -13673,7 +20456,7 @@ class OauthCommonProviderConsumer(BaseModel):
     uid = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_oauth_common_provider_consumer'
+        table_name = "moov_oauth_common_provider_consumer"
 
 
 class OauthCommonProviderToken(BaseModel):
@@ -13685,7 +20468,7 @@ class OauthCommonProviderToken(BaseModel):
     token_key = CharField(primary_key=True)
 
     class Meta:
-        table_name = 'moov_oauth_common_provider_token'
+        table_name = "moov_oauth_common_provider_token"
 
 
 class OauthCommonToken(BaseModel):
@@ -13700,7 +20483,7 @@ class OauthCommonToken(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_oauth_common_token'
+        table_name = "moov_oauth_common_token"
 
 
 class OneallSocialLoginIdentities(BaseModel):
@@ -13710,7 +20493,7 @@ class OneallSocialLoginIdentities(BaseModel):
     provider_name = CharField()
 
     class Meta:
-        table_name = 'moov_oneall_social_login_identities'
+        table_name = "moov_oneall_social_login_identities"
 
 
 class OneallSocialLoginSettings(BaseModel):
@@ -13719,7 +20502,7 @@ class OneallSocialLoginSettings(BaseModel):
     value = CharField()
 
     class Meta:
-        table_name = 'moov_oneall_social_login_settings'
+        table_name = "moov_oneall_social_login_settings"
 
 
 class OpengraphMeta(BaseModel):
@@ -13731,7 +20514,7 @@ class OpengraphMeta(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_opengraph_meta'
+        table_name = "moov_opengraph_meta"
 
 
 class PageManagerHandlers(BaseModel):
@@ -13744,10 +20527,8 @@ class PageManagerHandlers(BaseModel):
     weight = IntegerField(null=True)
 
     class Meta:
-        table_name = 'moov_page_manager_handlers'
-        indexes = (
-            (('task', 'subtask', 'weight'), False),
-        )
+        table_name = "moov_page_manager_handlers"
+        indexes = ((("task", "subtask", "weight"), False),)
 
 
 class PageManagerPages(BaseModel):
@@ -13760,10 +20541,12 @@ class PageManagerPages(BaseModel):
     name = CharField(null=True, unique=True)
     path = CharField(null=True)
     pid = AutoField()
-    task = CharField(constraints=[SQL("DEFAULT 'page'")], index=True, null=True)
+    task = CharField(
+        constraints=[SQL("DEFAULT 'page'")], index=True, null=True
+    )
 
     class Meta:
-        table_name = 'moov_page_manager_pages'
+        table_name = "moov_page_manager_pages"
 
 
 class PageManagerWeights(BaseModel):
@@ -13771,10 +20554,8 @@ class PageManagerWeights(BaseModel):
     weight = IntegerField(null=True)
 
     class Meta:
-        table_name = 'moov_page_manager_weights'
-        indexes = (
-            (('name', 'weight'), False),
-        )
+        table_name = "moov_page_manager_weights"
+        indexes = ((("name", "weight"), False),)
 
 
 class PathBreadcrumbs(BaseModel):
@@ -13786,7 +20567,7 @@ class PathBreadcrumbs(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_path_breadcrumbs'
+        table_name = "moov_path_breadcrumbs"
 
 
 class PmIndex(BaseModel):
@@ -13798,14 +20579,14 @@ class PmIndex(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT 'user'")])
 
     class Meta:
-        table_name = 'moov_pm_index'
+        table_name = "moov_pm_index"
         indexes = (
-            (('mid', 'recipient', 'type'), False),
-            (('mid', 'recipient', 'type'), True),
-            (('recipient', 'type', 'deleted', 'is_new'), False),
-            (('thread_id', 'recipient', 'type', 'deleted'), False),
+            (("mid", "recipient", "type"), False),
+            (("mid", "recipient", "type"), True),
+            (("recipient", "type", "deleted", "is_new"), False),
+            (("thread_id", "recipient", "type", "deleted"), False),
         )
-        primary_key = CompositeKey('mid', 'recipient', 'type')
+        primary_key = CompositeKey("mid", "recipient", "type")
 
 
 class PmMessage(BaseModel):
@@ -13819,7 +20600,7 @@ class PmMessage(BaseModel):
     timestamp = IntegerField()
 
     class Meta:
-        table_name = 'moov_pm_message'
+        table_name = "moov_pm_message"
 
 
 class PmSetting(BaseModel):
@@ -13829,11 +20610,9 @@ class PmSetting(BaseModel):
     value = IntegerField(null=True)
 
     class Meta:
-        table_name = 'moov_pm_setting'
-        indexes = (
-            (('id', 'type', 'setting'), True),
-        )
-        primary_key = CompositeKey('id', 'setting', 'type')
+        table_name = "moov_pm_setting"
+        indexes = ((("id", "type", "setting"), True),)
+        primary_key = CompositeKey("id", "setting", "type")
 
 
 class PmTags(BaseModel):
@@ -13843,10 +20622,8 @@ class PmTags(BaseModel):
     tag_id = AutoField()
 
     class Meta:
-        table_name = 'moov_pm_tags'
-        indexes = (
-            (('tag_id', 'tag', 'public'), False),
-        )
+        table_name = "moov_pm_tags"
+        indexes = ((("tag_id", "tag", "public"), False),)
 
 
 class PmTagsIndex(BaseModel):
@@ -13855,12 +20632,12 @@ class PmTagsIndex(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_pm_tags_index'
+        table_name = "moov_pm_tags_index"
         indexes = (
-            (('tag_id', 'uid', 'thread_id'), True),
-            (('uid', 'thread_id'), False),
+            (("tag_id", "uid", "thread_id"), True),
+            (("uid", "thread_id"), False),
         )
-        primary_key = CompositeKey('tag_id', 'thread_id', 'uid')
+        primary_key = CompositeKey("tag_id", "thread_id", "uid")
 
 
 class Poll(BaseModel):
@@ -13869,7 +20646,7 @@ class Poll(BaseModel):
     runtime = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_poll'
+        table_name = "moov_poll"
 
 
 class PollChoice(BaseModel):
@@ -13880,7 +20657,7 @@ class PollChoice(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_poll_choice'
+        table_name = "moov_poll_choice"
 
 
 class PollVote(BaseModel):
@@ -13891,11 +20668,9 @@ class PollVote(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_poll_vote'
-        indexes = (
-            (('nid', 'uid', 'hostname'), True),
-        )
-        primary_key = CompositeKey('hostname', 'nid', 'uid')
+        table_name = "moov_poll_vote"
+        indexes = ((("nid", "uid", "hostname"), True),)
+        primary_key = CompositeKey("hostname", "nid", "uid")
 
 
 class PrintNodeConf(BaseModel):
@@ -13905,7 +20680,7 @@ class PrintNodeConf(BaseModel):
     url_list = IntegerField(constraints=[SQL("DEFAULT 1")])
 
     class Meta:
-        table_name = 'moov_print_node_conf'
+        table_name = "moov_print_node_conf"
 
 
 class PrintPageCounter(BaseModel):
@@ -13914,7 +20689,7 @@ class PrintPageCounter(BaseModel):
     totalcount = BigIntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_print_page_counter'
+        table_name = "moov_print_page_counter"
 
 
 class PrintPdfNodeConf(BaseModel):
@@ -13926,7 +20701,7 @@ class PrintPdfNodeConf(BaseModel):
     url_list = IntegerField(constraints=[SQL("DEFAULT 1")])
 
     class Meta:
-        table_name = 'moov_print_pdf_node_conf'
+        table_name = "moov_print_pdf_node_conf"
 
 
 class PrintPdfPageCounter(BaseModel):
@@ -13935,7 +20710,7 @@ class PrintPdfPageCounter(BaseModel):
     totalcount = BigIntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_print_pdf_page_counter'
+        table_name = "moov_print_pdf_page_counter"
 
 
 class Queue(BaseModel):
@@ -13946,10 +20721,8 @@ class Queue(BaseModel):
     name = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_queue'
-        indexes = (
-            (('name', 'created'), False),
-        )
+        table_name = "moov_queue"
+        indexes = ((("name", "created"), False),)
 
 
 class RdfMapping(BaseModel):
@@ -13958,11 +20731,9 @@ class RdfMapping(BaseModel):
     type = CharField()
 
     class Meta:
-        table_name = 'moov_rdf_mapping'
-        indexes = (
-            (('type', 'bundle'), True),
-        )
-        primary_key = CompositeKey('bundle', 'type')
+        table_name = "moov_rdf_mapping"
+        indexes = ((("type", "bundle"), True),)
+        primary_key = CompositeKey("bundle", "type")
 
 
 class Registry(BaseModel):
@@ -13973,12 +20744,12 @@ class Registry(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_registry'
+        table_name = "moov_registry"
         indexes = (
-            (('name', 'type'), True),
-            (('type', 'weight', 'module'), False),
+            (("name", "type"), True),
+            (("type", "weight", "module"), False),
         )
-        primary_key = CompositeKey('name', 'type')
+        primary_key = CompositeKey("name", "type")
 
 
 class RegistryFile(BaseModel):
@@ -13986,7 +20757,7 @@ class RegistryFile(BaseModel):
     hash = CharField()
 
     class Meta:
-        table_name = 'moov_registry_file'
+        table_name = "moov_registry_file"
 
 
 class RevisioningScheduler(BaseModel):
@@ -13996,7 +20767,7 @@ class RevisioningScheduler(BaseModel):
     revision_vid = AutoField()
 
     class Meta:
-        table_name = 'moov_revisioning_scheduler'
+        table_name = "moov_revisioning_scheduler"
 
 
 class Role(BaseModel):
@@ -14005,10 +20776,8 @@ class Role(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_role'
-        indexes = (
-            (('name', 'weight'), False),
-        )
+        table_name = "moov_role"
+        indexes = ((("name", "weight"), False),)
 
 
 class RolePermission(BaseModel):
@@ -14017,11 +20786,9 @@ class RolePermission(BaseModel):
     rid = IntegerField()
 
     class Meta:
-        table_name = 'moov_role_permission'
-        indexes = (
-            (('rid', 'permission'), True),
-        )
-        primary_key = CompositeKey('permission', 'rid')
+        table_name = "moov_role_permission"
+        indexes = ((("rid", "permission"), True),)
+        primary_key = CompositeKey("permission", "rid")
 
 
 class RulesConfig(BaseModel):
@@ -14038,7 +20805,7 @@ class RulesConfig(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_rules_config'
+        table_name = "moov_rules_config"
 
 
 class RulesDependencies(BaseModel):
@@ -14046,11 +20813,9 @@ class RulesDependencies(BaseModel):
     module = CharField(index=True)
 
     class Meta:
-        table_name = 'moov_rules_dependencies'
-        indexes = (
-            (('id', 'module'), True),
-        )
-        primary_key = CompositeKey('id', 'module')
+        table_name = "moov_rules_dependencies"
+        indexes = ((("id", "module"), True),)
+        primary_key = CompositeKey("id", "module")
 
 
 class RulesScheduler(BaseModel):
@@ -14062,7 +20827,7 @@ class RulesScheduler(BaseModel):
     tid = AutoField()
 
     class Meta:
-        table_name = 'moov_rules_scheduler'
+        table_name = "moov_rules_scheduler"
 
 
 class RulesTags(BaseModel):
@@ -14070,11 +20835,9 @@ class RulesTags(BaseModel):
     tag = CharField()
 
     class Meta:
-        table_name = 'moov_rules_tags'
-        indexes = (
-            (('id', 'tag'), True),
-        )
-        primary_key = CompositeKey('id', 'tag')
+        table_name = "moov_rules_tags"
+        indexes = ((("id", "tag"), True),)
+        primary_key = CompositeKey("id", "tag")
 
 
 class RulesTrigger(BaseModel):
@@ -14082,11 +20845,9 @@ class RulesTrigger(BaseModel):
     id = IntegerField()
 
     class Meta:
-        table_name = 'moov_rules_trigger'
-        indexes = (
-            (('id', 'event'), True),
-        )
-        primary_key = CompositeKey('event', 'id')
+        table_name = "moov_rules_trigger"
+        indexes = ((("id", "event"), True),)
+        primary_key = CompositeKey("event", "id")
 
 
 class Scheduler(BaseModel):
@@ -14095,7 +20856,7 @@ class Scheduler(BaseModel):
     unpublish_on = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_scheduler'
+        table_name = "moov_scheduler"
 
 
 class SearchDataset(BaseModel):
@@ -14105,11 +20866,9 @@ class SearchDataset(BaseModel):
     type = CharField()
 
     class Meta:
-        table_name = 'moov_search_dataset'
-        indexes = (
-            (('sid', 'type'), True),
-        )
-        primary_key = CompositeKey('sid', 'type')
+        table_name = "moov_search_dataset"
+        indexes = ((("sid", "type"), True),)
+        primary_key = CompositeKey("sid", "type")
 
 
 class SearchIndex(BaseModel):
@@ -14119,12 +20878,12 @@ class SearchIndex(BaseModel):
     word = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_search_index'
+        table_name = "moov_search_index"
         indexes = (
-            (('sid', 'type'), False),
-            (('word', 'sid', 'type'), True),
+            (("sid", "type"), False),
+            (("word", "sid", "type"), True),
         )
-        primary_key = CompositeKey('sid', 'type', 'word')
+        primary_key = CompositeKey("sid", "type", "word")
 
 
 class SearchNodeLinks(BaseModel):
@@ -14134,11 +20893,9 @@ class SearchNodeLinks(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_search_node_links'
-        indexes = (
-            (('sid', 'type', 'nid'), True),
-        )
-        primary_key = CompositeKey('nid', 'sid', 'type')
+        table_name = "moov_search_node_links"
+        indexes = ((("sid", "type", "nid"), True),)
+        primary_key = CompositeKey("nid", "sid", "type")
 
 
 class SearchTotal(BaseModel):
@@ -14146,7 +20903,7 @@ class SearchTotal(BaseModel):
     word = CharField(constraints=[SQL("DEFAULT ''")], primary_key=True)
 
     class Meta:
-        table_name = 'moov_search_total'
+        table_name = "moov_search_total"
 
 
 class Semaphore(BaseModel):
@@ -14155,14 +20912,14 @@ class Semaphore(BaseModel):
     value = CharField(constraints=[SQL("DEFAULT ''")], index=True)
 
     class Meta:
-        table_name = 'moov_semaphore'
+        table_name = "moov_semaphore"
 
 
 class Sequences(BaseModel):
     value = AutoField()
 
     class Meta:
-        table_name = 'moov_sequences'
+        table_name = "moov_sequences"
 
 
 class ServicesEndpoint(BaseModel):
@@ -14176,7 +20933,7 @@ class ServicesEndpoint(BaseModel):
     server_settings = TextField()
 
     class Meta:
-        table_name = 'moov_services_endpoint'
+        table_name = "moov_services_endpoint"
 
 
 class ServicesUser(BaseModel):
@@ -14185,7 +20942,7 @@ class ServicesUser(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_services_user'
+        table_name = "moov_services_user"
         primary_key = False
 
 
@@ -14199,11 +20956,9 @@ class Sessions(BaseModel):
     uid = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_sessions'
-        indexes = (
-            (('sid', 'ssid'), True),
-        )
-        primary_key = CompositeKey('sid', 'ssid')
+        table_name = "moov_sessions"
+        indexes = ((("sid", "ssid"), True),)
+        primary_key = CompositeKey("sid", "ssid")
 
 
 class ShortcutSet(BaseModel):
@@ -14211,7 +20966,7 @@ class ShortcutSet(BaseModel):
     title = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_shortcut_set'
+        table_name = "moov_shortcut_set"
 
 
 class ShortcutSetUsers(BaseModel):
@@ -14219,7 +20974,7 @@ class ShortcutSetUsers(BaseModel):
     uid = AutoField()
 
     class Meta:
-        table_name = 'moov_shortcut_set_users'
+        table_name = "moov_shortcut_set_users"
 
 
 class SmartIp(BaseModel):
@@ -14233,7 +20988,7 @@ class SmartIp(BaseModel):
     zip = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_smart_ip'
+        table_name = "moov_smart_ip"
 
 
 class SocialShareNetworks(BaseModel):
@@ -14244,7 +20999,7 @@ class SocialShareNetworks(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_social_share_networks'
+        table_name = "moov_social_share_networks"
 
 
 class Survey(BaseModel):
@@ -14259,7 +21014,7 @@ class Survey(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_survey'
+        table_name = "moov_survey"
 
 
 class SurveyQuestion(BaseModel):
@@ -14274,7 +21029,7 @@ class SurveyQuestion(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_survey_question'
+        table_name = "moov_survey_question"
 
 
 class SurveyQuestionResponse(BaseModel):
@@ -14288,10 +21043,8 @@ class SurveyQuestionResponse(BaseModel):
     value_key = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_survey_question_response'
-        indexes = (
-            (('survey_response_id', 'question_key'), False),
-        )
+        table_name = "moov_survey_question_response"
+        indexes = ((("survey_response_id", "question_key"), False),)
 
 
 class SurveyResponse(BaseModel):
@@ -14302,7 +21055,7 @@ class SurveyResponse(BaseModel):
     uid = IntegerField(index=True)
 
     class Meta:
-        table_name = 'moov_survey_response'
+        table_name = "moov_survey_response"
 
 
 class System(BaseModel):
@@ -14317,10 +21070,10 @@ class System(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_system'
+        table_name = "moov_system"
         indexes = (
-            (('status', 'bootstrap', 'type', 'weight', 'name'), False),
-            (('type', 'name'), False),
+            (("status", "bootstrap", "type", "weight", "name"), False),
+            (("type", "name"), False),
         )
 
 
@@ -14334,11 +21087,9 @@ class TaxonomyAccessDefault(BaseModel):
     vid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_taxonomy_access_default'
-        indexes = (
-            (('vid', 'rid'), True),
-        )
-        primary_key = CompositeKey('rid', 'vid')
+        table_name = "moov_taxonomy_access_default"
+        indexes = ((("vid", "rid"), True),)
+        primary_key = CompositeKey("rid", "vid")
 
 
 class TaxonomyAccessTerm(BaseModel):
@@ -14351,11 +21102,9 @@ class TaxonomyAccessTerm(BaseModel):
     tid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_taxonomy_access_term'
-        indexes = (
-            (('tid', 'rid'), True),
-        )
-        primary_key = CompositeKey('rid', 'tid')
+        table_name = "moov_taxonomy_access_term"
+        indexes = ((("tid", "rid"), True),)
+        primary_key = CompositeKey("rid", "tid")
 
 
 class TaxonomyBreadcrumbTerm(BaseModel):
@@ -14363,7 +21112,7 @@ class TaxonomyBreadcrumbTerm(BaseModel):
     tid = AutoField()
 
     class Meta:
-        table_name = 'moov_taxonomy_breadcrumb_term'
+        table_name = "moov_taxonomy_breadcrumb_term"
 
 
 class TaxonomyBreadcrumbVocabulary(BaseModel):
@@ -14371,7 +21120,7 @@ class TaxonomyBreadcrumbVocabulary(BaseModel):
     vid = AutoField()
 
     class Meta:
-        table_name = 'moov_taxonomy_breadcrumb_vocabulary'
+        table_name = "moov_taxonomy_breadcrumb_vocabulary"
 
 
 class TaxonomyIndex(BaseModel):
@@ -14381,10 +21130,8 @@ class TaxonomyIndex(BaseModel):
     tid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_taxonomy_index'
-        indexes = (
-            (('tid', 'sticky', 'created'), False),
-        )
+        table_name = "moov_taxonomy_index"
+        indexes = ((("tid", "sticky", "created"), False),)
         primary_key = False
 
 
@@ -14394,11 +21141,9 @@ class TaxonomyMenu(BaseModel):
     vid = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_taxonomy_menu'
-        indexes = (
-            (('mlid', 'tid'), True),
-        )
-        primary_key = CompositeKey('mlid', 'tid')
+        table_name = "moov_taxonomy_menu"
+        indexes = ((("mlid", "tid"), True),)
+        primary_key = CompositeKey("mlid", "tid")
 
 
 class TaxonomyTermData(BaseModel):
@@ -14410,10 +21155,10 @@ class TaxonomyTermData(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_taxonomy_term_data'
+        table_name = "moov_taxonomy_term_data"
         indexes = (
-            (('vid', 'name'), False),
-            (('vid', 'weight', 'name'), False),
+            (("vid", "name"), False),
+            (("vid", "weight", "name"), False),
         )
 
 
@@ -14422,11 +21167,9 @@ class TaxonomyTermHierarchy(BaseModel):
     tid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_taxonomy_term_hierarchy'
-        indexes = (
-            (('tid', 'parent'), True),
-        )
-        primary_key = CompositeKey('parent', 'tid')
+        table_name = "moov_taxonomy_term_hierarchy"
+        indexes = ((("tid", "parent"), True),)
+        primary_key = CompositeKey("parent", "tid")
 
 
 class TaxonomyVocabulary(BaseModel):
@@ -14439,10 +21182,8 @@ class TaxonomyVocabulary(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_taxonomy_vocabulary'
-        indexes = (
-            (('weight', 'name'), False),
-        )
+        table_name = "moov_taxonomy_vocabulary"
+        indexes = ((("weight", "name"), False),)
 
 
 class Termstatus(BaseModel):
@@ -14450,7 +21191,7 @@ class Termstatus(BaseModel):
     tid = AutoField()
 
     class Meta:
-        table_name = 'moov_termstatus'
+        table_name = "moov_termstatus"
 
 
 class TriggerAssignments(BaseModel):
@@ -14459,11 +21200,9 @@ class TriggerAssignments(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_trigger_assignments'
-        indexes = (
-            (('hook', 'aid'), True),
-        )
-        primary_key = CompositeKey('aid', 'hook')
+        table_name = "moov_trigger_assignments"
+        indexes = ((("hook", "aid"), True),)
+        primary_key = CompositeKey("aid", "hook")
 
 
 class UrlAlias(BaseModel):
@@ -14473,10 +21212,10 @@ class UrlAlias(BaseModel):
     source = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_url_alias'
+        table_name = "moov_url_alias"
         indexes = (
-            (('alias', 'language', 'pid'), False),
-            (('source', 'language', 'pid'), False),
+            (("alias", "language", "pid"), False),
+            (("source", "language", "pid"), False),
         )
 
 
@@ -14485,7 +21224,7 @@ class UserEmailVerification(BaseModel):
     verified = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_user_email_verification'
+        table_name = "moov_user_email_verification"
 
 
 class UserImport(BaseModel):
@@ -14505,7 +21244,7 @@ class UserImport(BaseModel):
     valid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_user_import'
+        table_name = "moov_user_import"
 
 
 class UserImportErrors(BaseModel):
@@ -14514,7 +21253,7 @@ class UserImportErrors(BaseModel):
     import_id = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
 
     class Meta:
-        table_name = 'moov_user_import_errors'
+        table_name = "moov_user_import_errors"
         primary_key = False
 
 
@@ -14526,7 +21265,7 @@ class UserVerify(BaseModel):
     uid = IntegerField(unique=True)
 
     class Meta:
-        table_name = 'moov_user_verify'
+        table_name = "moov_user_verify"
         primary_key = False
 
 
@@ -14539,7 +21278,7 @@ class Users(BaseModel):
     login = IntegerField(constraints=[SQL("DEFAULT 0")])
     mail = CharField(constraints=[SQL("DEFAULT ''")], index=True, null=True)
     name = CharField(constraints=[SQL("DEFAULT ''")], unique=True)
-    pass_ = CharField(column_name='pass', constraints=[SQL("DEFAULT ''")])
+    pass_ = CharField(column_name="pass", constraints=[SQL("DEFAULT ''")])
     picture = IntegerField(constraints=[SQL("DEFAULT 0")], index=True)
     signature = CharField(constraints=[SQL("DEFAULT ''")])
     signature_format = CharField(null=True)
@@ -14549,7 +21288,7 @@ class Users(BaseModel):
     uid = AutoField()
 
     class Meta:
-        table_name = 'moov_users'
+        table_name = "moov_users"
 
 
 class UsersRoles(BaseModel):
@@ -14557,11 +21296,9 @@ class UsersRoles(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_users_roles'
-        indexes = (
-            (('uid', 'rid'), True),
-        )
-        primary_key = CompositeKey('rid', 'uid')
+        table_name = "moov_users_roles"
+        indexes = ((("uid", "rid"), True),)
+        primary_key = CompositeKey("rid", "uid")
 
 
 class Variable(BaseModel):
@@ -14569,7 +21306,7 @@ class Variable(BaseModel):
     value = TextField()
 
     class Meta:
-        table_name = 'moov_variable'
+        table_name = "moov_variable"
 
 
 class ViewsDisplay(BaseModel):
@@ -14581,12 +21318,12 @@ class ViewsDisplay(BaseModel):
     vid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_views_display'
+        table_name = "moov_views_display"
         indexes = (
-            (('vid', 'id'), True),
-            (('vid', 'position'), False),
+            (("vid", "id"), True),
+            (("vid", "position"), False),
         )
-        primary_key = CompositeKey('id', 'vid')
+        primary_key = CompositeKey("id", "vid")
 
 
 class ViewsView(BaseModel):
@@ -14599,7 +21336,7 @@ class ViewsView(BaseModel):
     vid = AutoField()
 
     class Meta:
-        table_name = 'moov_views_view'
+        table_name = "moov_views_view"
 
 
 class VlsRooms(BaseModel):
@@ -14614,7 +21351,9 @@ class VlsRooms(BaseModel):
     enabledusers = IntegerField(constraints=[SQL("DEFAULT 1")])
     enabledvideo = IntegerField(constraints=[SQL("DEFAULT 1")])
     fillwindow = IntegerField(constraints=[SQL("DEFAULT 1")])
-    filterregex = CharField(constraints=[SQL("DEFAULT '(?i)(fuck|cunt)(?-i)'")], null=True)
+    filterregex = CharField(
+        constraints=[SQL("DEFAULT '(?i)(fuck|cunt)(?-i)'")], null=True
+    )
     filterreplace = CharField(constraints=[SQL("DEFAULT ' ** '")], null=True)
     floodprotection = IntegerField(constraints=[SQL("DEFAULT 3")])
     floodprotection2 = IntegerField(constraints=[SQL("DEFAULT 3")])
@@ -14642,11 +21381,9 @@ class VlsRooms(BaseModel):
     write_text2 = IntegerField(constraints=[SQL("DEFAULT 1")])
 
     class Meta:
-        table_name = 'moov_vls_rooms'
-        indexes = (
-            (('vid', 'nid'), True),
-        )
-        primary_key = CompositeKey('nid', 'vid')
+        table_name = "moov_vls_rooms"
+        indexes = ((("vid", "nid"), True),)
+        primary_key = CompositeKey("nid", "vid")
 
 
 class VotingapiCache(BaseModel):
@@ -14660,13 +21397,16 @@ class VotingapiCache(BaseModel):
     vote_cache_id = AutoField()
 
     class Meta:
-        table_name = 'moov_votingapi_cache'
+        table_name = "moov_votingapi_cache"
         indexes = (
-            (('entity_type', 'entity_id'), False),
-            (('entity_type', 'entity_id', 'function'), False),
-            (('entity_type', 'entity_id', 'tag', 'function'), False),
-            (('entity_type', 'entity_id', 'value_type', 'tag'), False),
-            (('entity_type', 'entity_id', 'value_type', 'tag', 'function'), False),
+            (("entity_type", "entity_id"), False),
+            (("entity_type", "entity_id", "function"), False),
+            (("entity_type", "entity_id", "tag", "function"), False),
+            (("entity_type", "entity_id", "value_type", "tag"), False),
+            (
+                ("entity_type", "entity_id", "value_type", "tag", "function"),
+                False,
+            ),
         )
 
 
@@ -14682,12 +21422,12 @@ class VotingapiVote(BaseModel):
     vote_source = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_votingapi_vote'
+        table_name = "moov_votingapi_vote"
         indexes = (
-            (('entity_type', 'entity_id', 'uid'), False),
-            (('entity_type', 'entity_id', 'value_type', 'tag'), False),
-            (('entity_type', 'entity_id', 'vote_source'), False),
-            (('entity_type', 'uid'), False),
+            (("entity_type", "entity_id", "uid"), False),
+            (("entity_type", "entity_id", "value_type", "tag"), False),
+            (("entity_type", "entity_id", "vote_source"), False),
+            (("entity_type", "uid"), False),
         )
 
 
@@ -14705,7 +21445,7 @@ class Watchdog(BaseModel):
     wid = AutoField()
 
     class Meta:
-        table_name = 'moov_watchdog'
+        table_name = "moov_watchdog"
 
 
 class WeatherDisplays(BaseModel):
@@ -14714,11 +21454,9 @@ class WeatherDisplays(BaseModel):
     type = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_weather_displays'
-        indexes = (
-            (('type', 'number'), True),
-        )
-        primary_key = CompositeKey('number', 'type')
+        table_name = "moov_weather_displays"
+        indexes = ((("type", "number"), True),)
+        primary_key = CompositeKey("number", "type")
 
 
 class WeatherDisplaysPlaces(BaseModel):
@@ -14729,7 +21467,7 @@ class WeatherDisplaysPlaces(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_weather_displays_places'
+        table_name = "moov_weather_displays_places"
 
 
 class WeatherForecastInformation(BaseModel):
@@ -14740,7 +21478,7 @@ class WeatherForecastInformation(BaseModel):
     utc_offset = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_weather_forecast_information'
+        table_name = "moov_weather_forecast_information"
 
 
 class WeatherForecasts(BaseModel):
@@ -14756,7 +21494,7 @@ class WeatherForecasts(BaseModel):
     wind_speed = FloatField(null=True)
 
     class Meta:
-        table_name = 'moov_weather_forecasts'
+        table_name = "moov_weather_forecasts"
 
 
 class WeatherPlaces(BaseModel):
@@ -14768,7 +21506,7 @@ class WeatherPlaces(BaseModel):
     name = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_weather_places'
+        table_name = "moov_weather_places"
 
 
 class Webform(BaseModel):
@@ -14788,13 +21526,17 @@ class Webform(BaseModel):
     preview_prev_button_label = CharField(null=True)
     preview_title = CharField(null=True)
     progressbar_bar = IntegerField(constraints=[SQL("DEFAULT 0")])
-    progressbar_include_confirmation = IntegerField(constraints=[SQL("DEFAULT 0")])
+    progressbar_include_confirmation = IntegerField(
+        constraints=[SQL("DEFAULT 0")]
+    )
     progressbar_label_confirmation = CharField(null=True)
     progressbar_label_first = CharField(null=True)
     progressbar_page_number = IntegerField(constraints=[SQL("DEFAULT 0")])
     progressbar_pagebreak_labels = IntegerField(constraints=[SQL("DEFAULT 0")])
     progressbar_percent = IntegerField(constraints=[SQL("DEFAULT 0")])
-    redirect_url = CharField(constraints=[SQL("DEFAULT '<confirmation>'")], null=True)
+    redirect_url = CharField(
+        constraints=[SQL("DEFAULT '<confirmation>'")], null=True
+    )
     status = IntegerField(constraints=[SQL("DEFAULT 1")])
     submit_interval = IntegerField(constraints=[SQL("DEFAULT -1")])
     submit_limit = IntegerField(constraints=[SQL("DEFAULT -1")])
@@ -14805,7 +21547,7 @@ class Webform(BaseModel):
     webform_ajax = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform'
+        table_name = "moov_webform"
 
 
 class WebformComponent(BaseModel):
@@ -14821,11 +21563,9 @@ class WebformComponent(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_component'
-        indexes = (
-            (('nid', 'cid'), True),
-        )
-        primary_key = CompositeKey('cid', 'nid')
+        table_name = "moov_webform_component"
+        indexes = ((("nid", "cid"), True),)
+        primary_key = CompositeKey("cid", "nid")
 
 
 class WebformConditional(BaseModel):
@@ -14835,11 +21575,9 @@ class WebformConditional(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_conditional'
-        indexes = (
-            (('nid', 'rgid'), True),
-        )
-        primary_key = CompositeKey('nid', 'rgid')
+        table_name = "moov_webform_conditional"
+        indexes = ((("nid", "rgid"), True),)
+        primary_key = CompositeKey("nid", "rgid")
 
 
 class WebformConditionalActions(BaseModel):
@@ -14853,11 +21591,9 @@ class WebformConditionalActions(BaseModel):
     target_type = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_webform_conditional_actions'
-        indexes = (
-            (('nid', 'rgid', 'aid'), True),
-        )
-        primary_key = CompositeKey('aid', 'nid', 'rgid')
+        table_name = "moov_webform_conditional_actions"
+        indexes = ((("nid", "rgid", "aid"), True),)
+        primary_key = CompositeKey("aid", "nid", "rgid")
 
 
 class WebformConditionalRules(BaseModel):
@@ -14870,11 +21606,9 @@ class WebformConditionalRules(BaseModel):
     value = TextField(null=True)
 
     class Meta:
-        table_name = 'moov_webform_conditional_rules'
-        indexes = (
-            (('nid', 'rgid', 'rid'), True),
-        )
-        primary_key = CompositeKey('nid', 'rgid', 'rid')
+        table_name = "moov_webform_conditional_rules"
+        indexes = ((("nid", "rgid", "rid"), True),)
+        primary_key = CompositeKey("nid", "rgid", "rid")
 
 
 class WebformEmails(BaseModel):
@@ -14893,11 +21627,9 @@ class WebformEmails(BaseModel):
     template = TextField(null=True)
 
     class Meta:
-        table_name = 'moov_webform_emails'
-        indexes = (
-            (('nid', 'eid'), True),
-        )
-        primary_key = CompositeKey('eid', 'nid')
+        table_name = "moov_webform_emails"
+        indexes = ((("nid", "eid"), True),)
+        primary_key = CompositeKey("eid", "nid")
 
 
 class WebformLastDownload(BaseModel):
@@ -14907,11 +21639,9 @@ class WebformLastDownload(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_last_download'
-        indexes = (
-            (('nid', 'uid'), True),
-        )
-        primary_key = CompositeKey('nid', 'uid')
+        table_name = "moov_webform_last_download"
+        indexes = ((("nid", "uid"), True),)
+        primary_key = CompositeKey("nid", "uid")
 
 
 class WebformRegistration(BaseModel):
@@ -14923,14 +21653,14 @@ class WebformRegistration(BaseModel):
     nid = AutoField()
     opt_in = CharField(null=True)
     opt_in_value = CharField(null=True)
-    pass_ = CharField(column_name='pass', null=True)
+    pass_ = CharField(column_name="pass", null=True)
     pass_confirm = CharField(null=True)
     roles = TextField(null=True)
     status = IntegerField(null=True)
     theme_override = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_registration'
+        table_name = "moov_webform_registration"
 
 
 class WebformRoles(BaseModel):
@@ -14938,11 +21668,9 @@ class WebformRoles(BaseModel):
     rid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_roles'
-        indexes = (
-            (('nid', 'rid'), True),
-        )
-        primary_key = CompositeKey('nid', 'rid')
+        table_name = "moov_webform_roles"
+        indexes = ((("nid", "rid"), True),)
+        primary_key = CompositeKey("nid", "rid")
 
 
 class WebformSubmissions(BaseModel):
@@ -14958,12 +21686,12 @@ class WebformSubmissions(BaseModel):
     uid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_submissions'
+        table_name = "moov_webform_submissions"
         indexes = (
-            (('nid', 'serial'), True),
-            (('nid', 'sid'), False),
-            (('nid', 'uid', 'sid'), False),
-            (('sid', 'nid'), True),
+            (("nid", "serial"), True),
+            (("nid", "sid"), False),
+            (("nid", "uid", "sid"), False),
+            (("sid", "nid"), True),
         )
 
 
@@ -14975,12 +21703,12 @@ class WebformSubmittedData(BaseModel):
     sid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_submitted_data'
+        table_name = "moov_webform_submitted_data"
         indexes = (
-            (('nid', 'sid', 'cid', 'no'), True),
-            (('sid', 'nid'), False),
+            (("nid", "sid", "cid", "no"), True),
+            (("sid", "nid"), False),
         )
-        primary_key = CompositeKey('cid', 'nid', 'no', 'sid')
+        primary_key = CompositeKey("cid", "nid", "no", "sid")
 
 
 class WebformValidationRule(BaseModel):
@@ -14994,7 +21722,7 @@ class WebformValidationRule(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_validation_rule'
+        table_name = "moov_webform_validation_rule"
 
 
 class WebformValidationRuleComponents(BaseModel):
@@ -15002,11 +21730,9 @@ class WebformValidationRuleComponents(BaseModel):
     ruleid = IntegerField(constraints=[SQL("DEFAULT 0")])
 
     class Meta:
-        table_name = 'moov_webform_validation_rule_components'
-        indexes = (
-            (('ruleid', 'cid'), True),
-        )
-        primary_key = CompositeKey('cid', 'ruleid')
+        table_name = "moov_webform_validation_rule_components"
+        indexes = ((("ruleid", "cid"), True),)
+        primary_key = CompositeKey("cid", "ruleid")
 
 
 class WorkbenchAccess(BaseModel):
@@ -15016,11 +21742,9 @@ class WorkbenchAccess(BaseModel):
     access_type_id = CharField(constraints=[SQL("DEFAULT ''")])
 
     class Meta:
-        table_name = 'moov_workbench_access'
-        indexes = (
-            (('access_id', 'access_scheme'), True),
-        )
-        primary_key = CompositeKey('access_id', 'access_scheme')
+        table_name = "moov_workbench_access"
+        indexes = ((("access_id", "access_scheme"), True),)
+        primary_key = CompositeKey("access_id", "access_scheme")
 
 
 class WorkbenchAccessNode(BaseModel):
@@ -15029,11 +21753,9 @@ class WorkbenchAccessNode(BaseModel):
     nid = IntegerField()
 
     class Meta:
-        table_name = 'moov_workbench_access_node'
-        indexes = (
-            (('nid', 'access_id', 'access_scheme'), True),
-        )
-        primary_key = CompositeKey('access_id', 'access_scheme', 'nid')
+        table_name = "moov_workbench_access_node"
+        indexes = ((("nid", "access_id", "access_scheme"), True),)
+        primary_key = CompositeKey("access_id", "access_scheme", "nid")
 
 
 class WorkbenchAccessRole(BaseModel):
@@ -15042,11 +21764,9 @@ class WorkbenchAccessRole(BaseModel):
     rid = IntegerField()
 
     class Meta:
-        table_name = 'moov_workbench_access_role'
-        indexes = (
-            (('rid', 'access_id', 'access_scheme'), True),
-        )
-        primary_key = CompositeKey('access_id', 'access_scheme', 'rid')
+        table_name = "moov_workbench_access_role"
+        indexes = ((("rid", "access_id", "access_scheme"), True),)
+        primary_key = CompositeKey("access_id", "access_scheme", "rid")
 
 
 class WorkbenchAccessUser(BaseModel):
@@ -15055,11 +21775,9 @@ class WorkbenchAccessUser(BaseModel):
     uid = IntegerField()
 
     class Meta:
-        table_name = 'moov_workbench_access_user'
-        indexes = (
-            (('uid', 'access_id', 'access_scheme'), True),
-        )
-        primary_key = CompositeKey('access_id', 'access_scheme', 'uid')
+        table_name = "moov_workbench_access_user"
+        indexes = ((("uid", "access_id", "access_scheme"), True),)
+        primary_key = CompositeKey("access_id", "access_scheme", "uid")
 
 
 class WorkbenchModerationNodeHistory(BaseModel):
@@ -15074,7 +21792,7 @@ class WorkbenchModerationNodeHistory(BaseModel):
     state = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_workbench_moderation_node_history'
+        table_name = "moov_workbench_moderation_node_history"
 
 
 class WorkbenchModerationStates(BaseModel):
@@ -15084,7 +21802,7 @@ class WorkbenchModerationStates(BaseModel):
     weight = IntegerField(constraints=[SQL("DEFAULT 0")], null=True)
 
     class Meta:
-        table_name = 'moov_workbench_moderation_states'
+        table_name = "moov_workbench_moderation_states"
 
 
 class WorkbenchModerationTransitions(BaseModel):
@@ -15093,5 +21811,4 @@ class WorkbenchModerationTransitions(BaseModel):
     to_name = CharField(null=True)
 
     class Meta:
-        table_name = 'moov_workbench_moderation_transitions'
-
+        table_name = "moov_workbench_moderation_transitions"

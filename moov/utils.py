@@ -228,11 +228,19 @@ def use_template(template=None):
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
             ctx["actualities"] = [
                 {"display": "Vaovao", "slug": "vaovao"},
+                {"display": "Nationale", "slug": "nationale"},
+                {"display": "Economie", "slug": "economie"},
+                {"display": "Sport", "slug": "sport"},
                 {"display": "Internationale", "slug": "internationale"},
-                {"display": "Medecine & Santé", "slug": "sante-medecine"},
-                {"display": "People", "slug": "people"},
+                {"display": "Médecine & Santé", "slug": "sante-medecine"},
+                {"display": "Culture", "slug": "culture"},
+                {"display": "Gasy Winner", "slug": "gasy-winner"},
             ]
-            ctx["magazines"] = []
+            ctx["magazines"] = [
+                {"display": "People", "slug": "people"},
+                {"display": "HighTech", "slug": "connected-life"},
+                {"display": "Famille", "slug": "famille"},
+            ]
             return render_template(template_name, **ctx)
 
         return decorated_function

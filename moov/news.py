@@ -17,14 +17,17 @@ get_category = {
     "vaovao": {"content": "Vaovao", "display": "Vaovao"},
     "nationale": {"content": "Nationale", "display": "Nationale"},
     "internationale": {
-        "content": "Monde",
+        "content": "Internationale",
         "display": "Internationale",
     },
     "economie": {"content": "Economie", "display": "Economie"},
-    "sport": {"content": "Sports", "display": "Sports"},
+    "sport": {"content": "Sport", "display": "Sports"},
     "culture": {"content": "Culture", "display": "Culture"},
-    "gasy-winner": {"content": "GasyWinner", "display": "Gasy Winner"},
-    "sante-medecine": {"content": "Sante", "display": "Medecine et santé"},
+    "gasy-winner": {"content": "Gasy Winner", "display": "Gasy Winner"},
+    "sante-medecine": {
+        "content": "Médecine & Santé",
+        "display": "Médecine & santé",
+    },
     "people": {"content": "People", "display": "People"},
 }
 
@@ -37,6 +40,7 @@ def news():
         params={
             "populate": "images",
             "sort": "id:desc",
+            "filters[Type][$eq]": "Actualite",
             "pagination[pageSize]": 9,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
