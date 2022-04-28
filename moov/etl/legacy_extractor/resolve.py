@@ -27,6 +27,8 @@ from .models.drupal import (
     FieldDataFieldTypeTendance,
     Node,
     TaxonomyTermData,
+    FieldDataFieldCategorieForum,
+    TaxonomyTermData,
     Users,
 )
 from .models.strapi import (
@@ -67,22 +69,34 @@ class Export:
         _file = EXPORT_DIR / self.name / f"{self.name}.{self.page}.json"
 
         _file.touch()
-        flaskbb_data = ["user"]
+        flaskbb_data = ['user', 'forum', 'comment']
 
         with _file.open("w") as fp:
             json.dump(self.row, fp, indent=2, default=json_serial)
 
         if self.name in flaskbb_data:
-            user_csv = EXPORT_DIR / f"{self.name}.csv"
-            with open(user_csv, "a", encoding="UTF8", newline="") as f:
-                fieldnames = list(self.row[0].keys())
-                writer = csv.DictWriter(f, fieldnames=fieldnames)
-                if self.page == 0:
-                    writer.writeheader()
-                writer.writerows(self.row)
+            self.create_csv()
 
         self.row.clear()
         self.page += 1
+
+    def create_csv(self):
+        if self.name == 'comment':
+            new_row = []
+            for row in self.row:
+                node = Node.select().where(
+                    Node.nid == row['created_for_id']).get()
+                if node.type == 'forum':
+                    new_row.append(row)
+            self.row = new_row
+
+        csv_file = EXPORT_DIR / self.name / f"{self.name}.csv"
+        with open(csv_file, 'a', encoding='UTF8', newline='') as f:
+            fieldnames = list(self.row[0].keys())
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            if self.page == 0:
+                writer.writeheader()
+            writer.writerows(self.row)
 
     def __call__(self, func):
         @wraps(func)
@@ -112,6 +126,16 @@ export_comment = Export("comment", item_per_page=50)
 @export_forum
 def process_forum(node: Node):
     user = node.get_user()
+    try:
+        category_field = FieldDataFieldCategorieForum.select().where(
+            FieldDataFieldCategorieForum.entity_id == node.nid
+        ).get()
+        category = TaxonomyTermData.select().where(
+            TaxonomyTermData.tid == category_field.field_categorie_forum_tid
+        ).get()
+        category = category.name
+    except:
+        category = "Géneralité"
 
     return Forum(
         id=node.nid,
@@ -119,6 +143,7 @@ def process_forum(node: Node):
         body=node.get_field(FieldDataBody),
         created_by=user.uid,
         created_at=datetime.fromtimestamp(node.created),
+        category=category,
     )
 
 

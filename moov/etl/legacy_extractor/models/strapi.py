@@ -22,6 +22,7 @@ class BaseNode(BaseModel):
 
 class Forum(BaseNode):
     body: str
+    category: str
     # ! field_categorie_forum
 
 

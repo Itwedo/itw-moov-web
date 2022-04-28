@@ -40,7 +40,7 @@ The package is now installed as `moov` in your environment and provides a manage
 
 ### Configuration
 
-This app requires a configuraiton file located in `/etc/moov/config.ini` .
+This app requires a configuraiton file located in `/opt/moov/moov-web.conf` .
 With the `moov` command, you can actually initalize this file:
 
 ```

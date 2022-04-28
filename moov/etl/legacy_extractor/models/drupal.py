@@ -6,8 +6,8 @@ database = MySQLDatabase(
     charset="utf8",
     sql_mode="PIPES_AS_CONCAT",
     use_unicode=True,
-    user="root",
-    password="Xperia12#",
+    user="moov",
+    password="moov1234",
 )
 
 
