@@ -90,7 +90,7 @@ class Export:
                     new_row.append(row)
             self.row = new_row
 
-        csv_file = EXPORT_DIR / f"{self.name}.csv"
+        csv_file = EXPORT_DIR / self.name / f"{self.name}.csv"
         with open(csv_file, 'a', encoding='UTF8', newline='') as f:
             fieldnames = list(self.row[0].keys())
             writer = csv.DictWriter(f, fieldnames=fieldnames)

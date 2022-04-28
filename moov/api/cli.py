@@ -33,6 +33,9 @@ def cmd():
 def run(hostname, port):
     app.run(host=hostname, port=port, debug=True)
 
+@cmd.command()
+def export_drupal():
+    resolve.run()
 
 @cmd.command()
 @click.argument("action", type=click.Choice(["create", "show"]))
