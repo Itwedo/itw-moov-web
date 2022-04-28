@@ -50,10 +50,10 @@
               </h2>
               <div class="card-time flex items-center text-xl">
                 <span class="mr-4">
-                  {{ result["data"][0]["attributes"]["createdAt"]|date }}
+                  {{ result["data"][0]["attributes"]["date"]|date }}
                 </span>
                 <span class="mr-4">
-                  {{ result["data"][0]["attributes"]["createdAt"]|time }}
+                  {{ result["data"][0]["attributes"]["date"]|time }}
                 </span>
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
@@ -87,10 +87,10 @@
               </h2>
               <div class="card-time flex items-center text-xl">
                 <span class="mr-4">
-                  {{ element["attributes"]["createdAt"]|date }}
+                  {{ element["attributes"]["date"]|date }}
                 </span>
                 <span class="mr-4">
-                  {{ element["attributes"]["createdAt"]|time }}
+                  {{ element["attributes"]["date"]|time }}
                 </span>
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
@@ -134,10 +134,10 @@
               </h2>
               <div class="card-time flex items-center text-xl">
                 <span class="mr-4">
-                  {{ element["attributes"]["createdAt"]|date }}
+                  {{ element["attributes"]["date"]|date }}
                 </span>
                 <span class="mr-4">
-                  {{ element["attributes"]["createdAt"]|time }}
+                  {{ element["attributes"]["date"]|time }}
                 </span>
                 <span class="mr-4 inline-flex items-center flex-nowrap">
                   <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
@@ -186,10 +186,10 @@
                   </h3>
                   <div class="card-time">
                     <span class="mr-4">
-                      {{ news["attributes"]["createdAt"]|date }}
+                      {{ news["attributes"]["date"]|date }}
                     </span>
                     <span class="mr-4">
-                      {{ news["attributes"]["createdAt"]|time }}
+                      {{ news["attributes"]["date"]|time }}
                     </span>
                     <span class="mr-4 inline-flex items-center flex-nowrap">
                       <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130</span>

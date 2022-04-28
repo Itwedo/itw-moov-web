@@ -87,7 +87,7 @@ def home():
             {
                 "id": item["id"],
                 "title": item["attributes"]["title"],
-                "createdAt": item["attributes"]["createdAt"],
+                "createdAt": item["attributes"]["date"],
                 "head": item["attributes"]["head"],
                 "images": item["attributes"]["images"]["data"],
                 "category": item["attributes"]["category"],
