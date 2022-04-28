@@ -1,6 +1,6 @@
-# moov-proto
+# moov-web
 
-Prototype for the brand new moov.mg portal.
+Brand new moov.mg portal.
 
 This application is using Flask and consuming the Strapi CMS REST API (https://github.com/codeandscale/moov-cms)
 
