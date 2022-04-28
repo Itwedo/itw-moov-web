@@ -143,9 +143,14 @@ def filter_articles(minchars):
 
 
 @cmd.command()
+@click.option(
+    "--type",
+    default="Actualite",
+    help="Type of article (Actualite or Tendance",
+)
 @click.argument("url")
-def get_afp_feed(url):
-    obj = afp.Connector(url)
+def get_afp_feed(type, url):
+    obj = afp.Connector(url, type)
     feed = obj.get_feed()
     with click.progressbar(obj.feed, length=len(obj.feed)) as bar:
         for info in bar:
