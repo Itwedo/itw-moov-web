@@ -17,6 +17,7 @@ import requests
 import shlex
 import subprocess as sub
 import sys
+from tqdm import tqdm
 
 
 __app__ = ["cmd"]
@@ -33,9 +34,11 @@ def cmd():
 def run(hostname, port):
     app.run(host=hostname, port=port, debug=True)
 
+
 @cmd.command()
 def export_drupal():
     resolve.run()
+
 
 @cmd.command()
 @click.argument("action", type=click.Choice(["create", "show"]))
@@ -97,7 +100,7 @@ def filter_articles(minchars):
                         (
                             f"{info['id']}|"
                             f"{info['attributes']['title']}|"
-                            f"{info['attributes']['createdAt']}|"
+                            f"{info['attributes']['date']}|"
                             f"{info['attributes']['updatedAt']}|"
                             f"{info['attributes']['publishedAt']}"
                         )
@@ -122,7 +125,7 @@ def filter_articles(minchars):
                             (
                                 f"{info['id']}|"
                                 f"{info['attributes']['title']}|"
-                                f"{info['attributes']['createdAt']}|"
+                                f"{info['attributes']['date']}|"
                                 f"{info['attributes']['updatedAt']}|"
                                 f"{info['attributes']['publishedAt']}"
                             )
@@ -164,7 +167,7 @@ def update_currency_exchange():
 @cmd.command()
 @click.argument("filepath", type=click.Path(exists=True))
 def parse_drugstores_list(filepath):
-    obj = drugstore.Connector(filepath)
+    obj = drugstores.Connector(filepath)
     obj.parse_file()
     with click.progressbar(obj.data, length=len(obj.data)) as bar:
         for info in bar:
@@ -216,7 +219,7 @@ def get_category():
 def import_actus():
     obj = actualities.Connector("/tmp/export/actualites", "Actualite")
     article_path = obj.article_dir
-    with click.progressbar(range(5767), length=5767) as bar:
+    with click.progressbar(range(5766), length=5766) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/actualites.{info}.json")
             print(f"{article_path}/actualites.{info}.json")
@@ -231,7 +234,7 @@ def import_tendance():
         for info in bar:
             obj.post_articles_file(f"{article_path}/tendance_moov.{info}.json")
             print(f"{article_path}/tendance_moov.{info}.json")
-            print(f"  {str(obj.count)} actualities inserted")
+            print(f"  {str(obj.count)} tendances inserted")
 
 
 @cmd.command()
@@ -257,3 +260,43 @@ def delete_actus():
                     headers=STRAPI_API_AUTH_TOKEN,
                 )
         print(i)
+
+
+@cmd.command()
+def delete_doublon():
+    count = 0
+    deleted = 0
+    click.echo(f"delete doublon")
+    while True:
+        response = requests.get(
+            url=f"{STRAPI_API_URL}/actualites",
+            headers=STRAPI_API_AUTH_TOKEN,
+            params={
+                "populate": "images",
+                "filters[Type][$eq]": "Tendance",
+                "pagination[start]": count,
+                "pagination[limit]": 1,
+            },
+        )
+        data = response.json()["data"]
+        if not data:
+            break
+        for article in tqdm(data, desc=str(count)):
+            doublons = requests.get(
+                url=f"{STRAPI_API_URL}/actualites",
+                headers=STRAPI_API_AUTH_TOKEN,
+                params={
+                    "populate": "images",
+                    "filters[title][$eq]": article["attributes"]["title"],
+                },
+            )
+            if len(doublons.json()["data"]) > 1:
+                for doublon in doublons.json()["data"][1:]:
+                    result = requests.delete(
+                        url=f"{STRAPI_API_URL}/actualites/{doublon['id']}",
+                        headers=STRAPI_API_AUTH_TOKEN,
+                    )
+                    deleted += 1
+
+        count += len(data)
+        click.echo(f"{deleted} /{count} actus")

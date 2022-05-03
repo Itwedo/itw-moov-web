@@ -5,6 +5,7 @@ from calendar import firstweekday
 import requests
 import json
 from pathlib import Path
+import csv
 
 import PIL
 
@@ -37,11 +38,13 @@ class Connector(object):
 
         if not actuality.get("source"):
             actuality["source"] = "moov"
+        if actuality["created_at"]:
+            actuality["date"] = actuality["created_at"]
+            del actuality["created_at"]
 
         for item, value in actuality.items():
             if value:
                 actuality_item[item] = value
-
         result = requests.post(
             url=f"{STRAPI_API_URL}/actualites",
             headers=STRAPI_API_AUTH_TOKEN,
@@ -52,21 +55,43 @@ class Connector(object):
 
     def filter_article(self, article):
         id = None
-        if len(article["body"]) < 2000:
-            return None
+        doublons = requests.get(
+            url=f"{STRAPI_API_URL}/actualites",
+            headers=STRAPI_API_AUTH_TOKEN,
+            params={
+                "populate": "images",
+                "filters[title][$eq]": article["title"],
+            },
+        )
+        if len(doublons.json()["data"]) > 1:
+            return {
+                "id": article["id"],
+                "reason": "doublons",
+                "value": article["body"],
+            }
+        elif len(article["body"]) < 2000:
+            return {
+                "id": article["id"],
+                "reason": "body low charactere",
+                "value": article["body"],
+            }
         elif article["images"]:
             try:
                 with open(
                     f'{self.images_dir}/{article["images"][0]}', "rb"
                 ) as f:
-                    _size = PIL.Image.open(
+                    image = PIL.Image.open(
                         f'{self.images_dir}/{article["images"][0]}'
-                    ).size
-                    if _size[1] < 600:
+                    )
+                    if image.width < 600:
 
-                        return None
+                        return {
+                            "id": article["id"],
+                            "reason": article["images"][0],
+                            "value": image.size,
+                        }
                     else:
-                        print(_size)
+                        print(image.size)
                         response = requests.post(
                             url=f"{STRAPI_API_URL}/upload",
                             headers=STRAPI_API_AUTH_TOKEN,
@@ -90,13 +115,23 @@ class Connector(object):
         return id
 
     def post_articles_file(self, filepath):
+        missing = list()
         with open(filepath) as json_file:
             data = json.load(json_file)
             for actuality in data:
                 id = self.filter_article(actuality)
-                if id:
+                if type(id) == int:
                     self.post_article(actuality, id)
                     # self.count += 1
+                elif type(id) == dict:
+                    missing.append(id)
+
+        filename = filepath.split(".")[1]
+        out_file = open(
+            f"/Users/mampionona/projects/pers/category_drupal/report/{self.type}/{self.type}{filename}.json",
+            "w",
+        )
+        json.dump(missing, out_file, indent=4)
 
     def loop_dir(self):
         list_files = list()
