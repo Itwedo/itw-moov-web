@@ -21,10 +21,10 @@ try:
     misc_config = config["MISC"]
 except KeyError:
     DEBUG = False
-    LOG_FILE = "/opt/moov/moov-web.log"
+    LOG_FILE = "/opt/moov/log/moov-web/moov-web.log"
 else:
     DEBUG = eval(misc_config["DEBUG"])
-    LOG_FILE = misc_config['WEBSITE_LOG_FILE']
+    LOG_FILE = misc_config["WEBSITE_LOG_FILE"]
 
 
 try:
@@ -60,4 +60,3 @@ else:
     STRAPI_API_AUTH_TOKEN = {
         "Authorization": f"Bearer {cms_config['STRAPI_API_AUTH_TOKEN']}"
     }
-
