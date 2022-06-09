@@ -47,7 +47,10 @@ def config(action):
     config.optionxform = lambda option: option.upper()
     if action == "create":
         if not os.path.isfile("/opt/moov/moov-web.conf"):
-            sub.call(shlex.split("sudo mkdir /opt/moov"))
+            sub.call(shlex.split("mkdir /opt/moov"))
+            sub.call(shlex.split("mkdir -p /opt/moov/log/moov-web"))
+            sub.call(shlex.split("touch /opt/moov/moov-web.conf"))
+
         click.echo(
             (
                 "Copy the following configuration "
