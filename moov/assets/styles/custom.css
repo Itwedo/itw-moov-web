@@ -395,3 +395,8 @@ currency
 .picture {
     margin: 0 0 0 24px;
 }
+
+/* contact */
+.contact-form .input-form:focus{
+outline: none;
+}

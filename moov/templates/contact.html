@@ -16,7 +16,7 @@
       <p class="font-bold text-2xl text-gray-100">Nous sommes toujours disponible pour vous</p>
     </div>
   </section>
-  <section class="relative">
+  <section class="relative global-margin">
     <div class="mx-auto 3xl:container 2xl:px-36 3xl:px-48">
       <div class="flex flex-wrap">
         <div class="w-full md:w-2/3 lg:w-1/2">
@@ -25,18 +25,36 @@
             <div class="flex flex-wrap md:flex-nowrap">
               <div class="w-full lg:w-1/2 mr-0 md:mr-5">
                 <input class="input-form" name="name" placeholder="Nom">
+                
+              </div>
+              <div class="w-full lg:w-1/2 mr-0 md:mr-5">
                 <input
-                  class="input-form" placeholder="Numéro de téléphone" name="phonenumber"> 
+                class="input-form" placeholder="Numéro de téléphone" name="phonenumber"> 
+              </div>
+
+            </div>
+           
+            <div class="flex flex-wrap md:flex-nowrap">
+              <div class="w-full  mr-0 md:mr-5">
+              
+            
                 <input class="input-form" name="email" type="email"
                   placeholder="E-mail">
               </div>
-              <div class="w-full lg:w-1/2"><textarea name="message" class="textarea-form" rows="7"
-                  placeholder="Votre message"></textarea></div>
+              
             </div>
             <div class="flex flex-wrap md:flex-nowrap">
-              <div class="w-full lg:w-1/2 mr-0 md:mr-5">
+              <div class="w-full "><textarea name="message" class="textarea-form" rows="7"
+                placeholder="Votre message"></textarea></div>
+            </div>
+            <div class="flex flex-wrap md:flex-nowrap py-5">
+              <div class="w-full lg:w-1/2 mr-0  md:mr-5">
                 <img src={{image}} alt="captcha text">
               </div>
+              
+            </div>
+            <div class="flex flex-wrap md:flex-nowrap py-5">
+             
               <div class="w-full lg:w-1/2">
                 <input class="input-form" name="captcha" 
                   placeholder="Recopiez le texte ici" required pattern={{captcha}} >
