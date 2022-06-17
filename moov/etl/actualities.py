@@ -2,22 +2,30 @@
 # -*- coding: utf-8 -*-
 
 from calendar import firstweekday
+from cgi import print_arguments
+from io import BytesIO
+from operator import contains
+import os
+from cv2 import error
+import numpy
 import requests
 import json
 from pathlib import Path
 import csv
+import cv2
 
 import PIL
 
 # from requests_html import HTML, HTMLSession
 from ..config import *
 from .legacy_extractor.mapping import map_category
+import imghdr
 
 
 class Connector(object):
     def __init__(self, filepath, node_type):
         self.article_dir = filepath
-        self.images_dir = "/Users/mampionona/projects/telma/moov/MOOV.MG/moov/sites/default/files"
+        self.images_dir = "/Users/mampionona/projects/telma/moov/drupal/moov/sites/default/files"
         self.files = self.loop_dir()
         self.count = 0
         self.type = node_type
@@ -75,7 +83,13 @@ class Connector(object):
                 "reason": "body low charactere",
                 "value": article["body"],
             }
-        elif article["images"]:
+        elif article["images"] and not article["images"][0].endswith(".gif"):
+
+            img_original = cv2.imread(
+                f'{self.images_dir}/{article["images"][0]}'
+            )
+            # if img_original contains "Corrupt JPEG data: premature end of data segment"
+
             try:
                 with open(
                     f'{self.images_dir}/{article["images"][0]}', "rb"
@@ -92,25 +106,37 @@ class Connector(object):
                         }
                     else:
                         print(image.size)
-                        response = requests.post(
-                            url=f"{STRAPI_API_URL}/upload",
-                            headers=STRAPI_API_AUTH_TOKEN,
-                            files={
-                                "files": (
-                                    article["images"][0],
-                                    f,
-                                    "image/jpeg",
-                                ),
-                                "Content-Disposition": f'form-data; name="file"; filename={article["images"][0]}',
-                                "Content-Type": "image/jpeg",
-                            },
-                        )
-                        # print(response.json())
+                        try:
+                            response = requests.post(
+                                url=f"{STRAPI_API_URL}/upload",
+                                headers=STRAPI_API_AUTH_TOKEN,
+                                files={
+                                    "files": (
+                                        article["images"][0],
+                                        f,
+                                        "image/jpeg",
+                                    ),
+                                    "Content-Disposition": f'form-data; name="file"; filename={article["images"][0]}',
+                                    "Content-Type": "image/jpeg",
+                                },
+                            )
+                            # print(response.json())
+                        except:
+                            return None
+                    f.close()
                     try:
                         id = response.json()[0]["id"]
                     except Exception:
                         return None
-            except (FileNotFoundError, PIL.UnidentifiedImageError) as e:
+            except (
+                OSError,
+                FileNotFoundError,
+                PIL.UnidentifiedImageError,
+                IOError,
+                SyntaxError,
+                error,
+                SystemError,
+            ) as e:
                 return None
         return id
 
@@ -128,7 +154,7 @@ class Connector(object):
 
         filename = filepath.split(".")[1]
         out_file = open(
-            f"/Users/mampionona/projects/pers/category_drupal/report/{self.type}/{self.type}{filename}.json",
+            f"report/{self.type}/{self.type}{filename}.json",
             "w",
         )
         json.dump(missing, out_file, indent=4)
