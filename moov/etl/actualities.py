@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from calendar import firstweekday
-from cgi import print_arguments
-from io import BytesIO
+
 from operator import contains
 import os
 from cv2 import error
-import numpy
 import requests
 import json
 from pathlib import Path
@@ -86,9 +83,8 @@ class Connector(object):
         elif article["images"] and not article["images"][0].endswith(".gif"):
 
             img_original = cv2.imread(
-                f'{self.images_dir}/{article["images"][0]}'
+                f'{self.images_dir}/{article["images"][0]}',
             )
-            # if img_original contains "Corrupt JPEG data: premature end of data segment"
 
             try:
                 with open(
@@ -97,47 +93,63 @@ class Connector(object):
                     image = PIL.Image.open(
                         f'{self.images_dir}/{article["images"][0]}'
                     )
-                    if image.width < 600:
 
-                        return {
-                            "id": article["id"],
-                            "reason": article["images"][0],
-                            "value": image.size,
-                        }
+                    if not self.is_file_corrupted(image):
+
+                        if image.width < 600:
+
+                            return {
+                                "id": article["id"],
+                                "reason": article["images"][0],
+                                "value": image.size,
+                            }
+                        else:
+                            print(image.size)
+                            id = self.post_upload(f, article["images"][0])
+
+                        f.close()
                     else:
-                        print(image.size)
-                        try:
-                            response = requests.post(
-                                url=f"{STRAPI_API_URL}/upload",
-                                headers=STRAPI_API_AUTH_TOKEN,
-                                files={
-                                    "files": (
-                                        article["images"][0],
-                                        f,
-                                        "image/jpeg",
-                                    ),
-                                    "Content-Disposition": f'form-data; name="file"; filename={article["images"][0]}',
-                                    "Content-Type": "image/jpeg",
-                                },
-                            )
-                            # print(response.json())
-                        except:
-                            return None
-                    f.close()
-                    try:
-                        id = response.json()[0]["id"]
-                    except Exception:
                         return None
-            except (
-                OSError,
-                FileNotFoundError,
-                PIL.UnidentifiedImageError,
-                IOError,
-                SyntaxError,
-                error,
-                SystemError,
-            ) as e:
+
+            except (Exception) as e:
+                print(e)
+                print("error")
                 return None
+        return id
+
+    def is_file_corrupted(self, image_object):
+        try:
+
+            if os.path.getsize(image_object.filename) == 0:
+                return True
+            image_object.getdata()[0]
+            return False
+        except Exception as e:
+            print(e)
+            print("file corrupted :" + image_object.filename)
+            return True
+
+    def post_upload(self, file_object, filename):
+        """
+        return the id of the upload node is success
+        """
+        response = requests.post(
+            url=f"{STRAPI_API_URL}/upload",
+            headers=STRAPI_API_AUTH_TOKEN,
+            files={
+                "files": (
+                    filename,
+                    file_object,
+                    "image/jpeg",
+                ),
+                "Content-Disposition": f'form-data; name="file"; filename={filename}',
+                "Content-Type": "image/jpeg",
+            },
+        )
+        try:
+            id = response.json()[0]["id"]
+        except Exception:
+            return None
         return id
 
     def post_articles_file(self, filepath):

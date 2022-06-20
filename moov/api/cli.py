@@ -219,10 +219,12 @@ def get_category():
 
 
 @cmd.command()
-def import_actus():
+@click.argument("total", type=int)
+@click.argument("start", type=int)
+def import_actus(total, start):
     obj = actualities.Connector("/tmp/export/actualites", "Actualite")
     article_path = obj.article_dir
-    with click.progressbar(range(5766), length=5766) as bar:
+    with click.progressbar(range(start, total), length=total - start) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/actualites.{info}.json")
             print(f"{article_path}/actualites.{info}.json")
@@ -230,10 +232,12 @@ def import_actus():
 
 
 @cmd.command()
-def import_tendance():
+@click.argument("toal", type=int)
+@click.argument("start", type=int)
+def import_tendance(total, start):
     obj = actualities.Connector("/tmp/export/tendance_moov", "Tendance")
     article_path = obj.article_dir
-    with click.progressbar(range(2132), length=2132) as bar:
+    with click.progressbar(range(start, total), length=total - start) as bar:
         for info in bar:
             obj.post_articles_file(f"{article_path}/tendance_moov.{info}.json")
             print(f"{article_path}/tendance_moov.{info}.json")
