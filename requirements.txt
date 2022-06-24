@@ -21,3 +21,4 @@ requests
 requests-html
 captcha==0.4
 wheel
+opencv-python
