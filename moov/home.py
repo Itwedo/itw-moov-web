@@ -82,7 +82,7 @@ def home():
 
     locale.setlocale(locale.LC_TIME,'fr_FR.UTF-8')
     data = {
-        "today": datetime.now().strftime("%A, %d %B %Y"),
+        "today": datetime.now().strftime("%A, %d %B %Y").title(),
         "spotlights": [
             # each spotligh needs an image, an id, a title, createdAt, head
             {
