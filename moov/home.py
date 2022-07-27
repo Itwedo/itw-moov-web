@@ -10,7 +10,7 @@ from .config import *
 from .utils import use_template
 
 import requests
-
+import locale
 
 app = Blueprint("home", __name__, url_prefix="/")
 
@@ -80,6 +80,7 @@ def home():
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
+    locale.setlocale(locale.LC_TIME,'fr_FR.UTF-8')
     data = {
         "today": datetime.now().strftime("%A, %d %B %Y"),
         "spotlights": [
