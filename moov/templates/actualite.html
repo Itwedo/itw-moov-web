@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block meta %}
-<meta name="title" content={{news['data']['attributes']['metaTitle']}}>
-<meta name="description" content={{news['data']['attributes']['metaDescription']}}>
+<meta name="description" content="{{news['data']['attributes']['metaDescription']}}">
 <!--<meta name="keywords" content={{news['data']['attributes']['keywords']}}>-->
 {% endblock %}
-{% block title %}Actualités{% endblock %}
+{% block title %}{{news['data']['attributes']['metaTitle']}}{% endblock %}
 
 {% block content %}
 <main>
@@ -22,6 +21,7 @@
         <ul class="list-none flex flex-nowrap flex-column">
           <li class="breadcrumb-item"><a href="{{ url_for('home.home') }}">Accueil </a></li>
           <li class="breadcrumb-item"><a href="{{ url_for('news.news') }}">Actualités</a></li>
+          <li class="breadcrumb-item"><a href="{{ url_for('news.news') }}">{{news['data']['attributes']['metaDescription']}}</a></li>
         </ul>
       </div>
     </div>
