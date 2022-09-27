@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block meta %}
-<meta name="description" content="Article">
+<meta name="title" content={{news['data']['attributes']['metaTitle']}}>
+<meta name="description" content={{news['data']['attributes']['metaDescription']}}>
+<!--<meta name="keywords" content={{news['data']['attributes']['keywords']}}>-->
 {% endblock %}
 {% block title %}Actualités{% endblock %}
 
