@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-{% if news['data']['attributes']['metaDescription']  %}
-    <meta name="description" content="{{news['data']['attributes']['metaDescription']}}">
-{% else %}
-    <meta name="description" content="{{news['data']['attributes']['head']}}">
-{% endif %}
-<meta property="og:image" content="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}"/>
-<!--<meta name="keywords" content={{news['data']['attributes']['keywords']}}>-->
+  {% if news['data']['attributes']['metaDescription']  %}
+  <meta name="description" content="{{news['data']['attributes']['metaDescription']}}">
+  <meta property="og:description" content="{{news['data']['attributes']['metaDescription']}}"/>
+  {% else %}
+  <meta name="description" content="{{news['data']['attributes']['head']}}">
+  <meta property="og:description" content="{{news['data']['attributes']['head']}}"/>
+  {% endif %}
+
+  <meta property="og:image" content="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}"/>
+  <!--<meta name="keywords" content={{news['data']['attributes']['keywords']}}>-->
 {% endblock %}
 
 {% block title %}
