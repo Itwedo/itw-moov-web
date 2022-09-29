@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
+
 {% block meta %}
-<meta name="description" content="{{news['data']['attributes']['metaDescription']}}">
+
+{% if news['data']['attributes']['metaDescription']  %}
+    <meta name="description" content="{{news['data']['attributes']['metaDescription']}}">
+{% else %}
+    <meta name="description" content="{{news['data']['attributes']['head']}}">
+{% endif %}
+
 <!--<meta name="keywords" content={{news['data']['attributes']['keywords']}}>-->
 {% endblock %}
-{% block title %}{{news['data']['attributes']['metaTitle']}}{% endblock %}
+
+{% block title %}
+  {% if news['data']['attributes']['metaTitle']  %}
+      {{news['data']['attributes']['metaTitle']}}
+  {% else %}
+      {{news['data']['attributes']['title']}}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 <main>
