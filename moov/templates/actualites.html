@@ -30,15 +30,9 @@
         </div>
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           <div class="news-card col-span-2 relative overflow-hidden w-full v2">
-            {% if result['data'][0]['attributes']['images']['data'] and
-            result['data'][0]['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" style="border: 1px "
               src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
-              alt="Image">
-            {% else %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
-              alt="Image">
-            {% endif %}
+              alt="Image" onerror="this.src='/assets/images/Apercu.png';">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
                 result["data"][0]["attributes"]["category"] }}</span>
@@ -65,19 +59,13 @@
           <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex">
             <a href="{{ads['with_article'][1]['url']}}" target="_blank">
               <img class="img-absolute-contain" src="{{CMS_URL}}{{ads['with_article'][1]['image']}}"
-                alt="Moov publicité">
+                alt="Moov publicité" onerror="this.src='/assets/images/Apercu.png';">
             </a>
           </div>
           {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'] and
-            element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-            {% else %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
-              alt="Image">
-            {% endif %}
+              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Apercu.png';">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"]
                 }}</span>
@@ -112,21 +100,15 @@
             {% for ad in ads['side_bar']%}
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
               <a href="ad['url']"></a>
-              <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité">
+              <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité" onerror="this.src='/assets/images/Apercu.png';">
             </div>
             {%endfor%}
 
           </div>
           {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
-            {% if element['attributes']['images']['data'] and
-            element['attributes']['images']['data'][0]['attributes']['width'] %}
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-            {% else %}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
-              alt="Image">
-            {% endif %}
+              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Apercu.png';">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ element["attributes"]["category"]
                 }}</span>
@@ -161,7 +143,7 @@
           <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
             <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
               <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full"></a>
+                  class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
             </div>
 
           </div>
@@ -176,14 +158,8 @@
             <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article',
               id=news['id'],slug=news['attributes']['slugId']) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
-                {% if news['attributes']['images']['data'] and
-                news['attributes']['images']['data'][0]['attributes']['width'] %}
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-                  src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-                {% else %}
-                <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-                  src="/assets/images/Apercu.png" alt="Image">
-                {% endif %}
+                  src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Apercu.png';">
               </div>
               <div class="relative w-full md:w-3/5">
                 <div class="w-full text-gray-600 px-4 pb-3">
@@ -220,7 +196,7 @@
           <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
             <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
               <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full"></a>
+                  class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
             </div>
 
           </div>

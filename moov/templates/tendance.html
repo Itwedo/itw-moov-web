@@ -16,12 +16,7 @@
       {% for news in result["magazines"] %}
       <div class="slide-item px-6">
         <div class="news-card relative overflow-hidden w-full">
-          {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
-          <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-          {%else%}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-          {%endif%}
+          <img class="img-absolute-cover img-hover-scale" src={{CMS_URL}}{{news["attributes"]["images"]["data"][0]["attributes"]["url"]}} onerror="this.src='/assets/images/Apercu.png';">
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
           </div>
@@ -56,12 +51,7 @@
         {% for news in result["people"] %}
         <a class="mini-card relative flex cat-mini-card " href={{ url_for('article.news_article', id=news["id"],slug=news["attributes"]["slugId"]) }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette">
-            {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
-            <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-              news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            {%else%}
-            <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-            {%endif%}
+            <img class="img-absolute-cover img-hover-scale" src={{CMS_URL}}{{news["attributes"]["images"]["data"][0]["attributes"]["url"] }} onerror="this.src='/assets/images/Apercu.png';" >
           </div>
           <div class="relative w-full md:w-2/3 cat-content-descri">
             <div class="w-full text-gray-600 px-4 pb-3">
@@ -96,12 +86,8 @@
       <div class="grid gap-10 mt-10 sj-slide sj-slide-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {% for news in result["magazines"][8:11] %}
         <div class="slide-item news-card-v2 relative overflow-hidden w-full">
-          {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-          {%else%}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-          {%endif%}
+            news["attributes"]["images"]["data"][0]["attributes"]["url"] }} onerror="this.src='/assets/images/Apercu.png';">
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"]}}</span>
           </div>
@@ -131,7 +117,7 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" onerror="this.src='/assets/images/Banner.png';"/>
         </a>
       </div>
 
@@ -154,12 +140,8 @@
         {% for news in result["magazines"][11:15] %}
         <a class="mini-card relative flex" href={{ url_for('article.news_article', id=news["id"],slug=news["attributes"]["slugId"]) }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette ">
-            {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
             <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-              news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            {%else%}
-            <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-            {%endif%}
+              news["attributes"]["images"]["data"][0]["attributes"]["url"] }} onerror="this.src='/assets/images/Apercu.png';">
           </div>
           <div class="relative w-full md:w-2/3 cat-content-descri">
             <div class="w-full text-gray-600 px-4 pb-3">
@@ -199,12 +181,9 @@
       <div class="grid gap-10 mt-10 sj-slide sj-slide-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {% for news in result["hightech"] %}
         <div class="slide-item news-card-v2 relative overflow-hidden w-full">
-          {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-          {%else%}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-          {%endif%}
+            news["attributes"]["images"]["data"][0]["attributes"]["url"] }} onerror="this.src='/assets/images/Apercu.png';">
+
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"]}}</span>
           </div>

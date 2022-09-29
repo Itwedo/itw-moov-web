@@ -8,12 +8,7 @@
 <main>
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden">
-      {% if images and images[0]['attributes']['width']%}
-      <img class="img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image">
-      {% else %}
-      <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-        alt="Image">
-      {% endif %}
+      <img class="img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Banner.png';">
     </div>
     <div class="px-5 py-2 bg-black w-full">
       <div class="breadcrumb article-breadcrumb pl-0 md:pl-4 xl:pl-12">
@@ -35,7 +30,7 @@
           <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
             <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
               <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full"></a>
+                  class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
             </div>
 
           </div>
@@ -47,7 +42,7 @@
           <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
             <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
               <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full"></a>
+                  class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
             </div>
 
           </div>
@@ -83,7 +78,7 @@
               <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
                 <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
                   <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}"
-                      alt="Moov publicité"></a>
+                      alt="Moov publicité" onerror="this.src='/assets/images/Apercu.png';"></a>
                 </div>
 
               </div>
@@ -91,7 +86,7 @@
             </div>
 
           </div>
-          
+
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
@@ -117,9 +112,9 @@
             <a href="#suite"
               class="z-50 absolute bottom-0 font-normal text-blue-600 hover:underline text-center read-more" >Lire la
               suite </a>
-            
 
-            
+
+
           </div>
 
 
@@ -136,7 +131,7 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" onerror="this.src='/assets/images/Banner.png';"/>
         </a>
       </div>
       {% endfor %}
@@ -176,13 +171,8 @@
             href="{{ url_for('article.news_article', id=item['id'],slug=item['attributes']['slugId']) }}">
             <div class="relative overflow-hidden w-full md:w-2/5">
               {%if item['attributes']['images']['data'] and
-              item['attributes']['images']['data'][0]['attributes']['width']%}
               <img class="img-absolute-cover img-hover-scale"
-                src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-              {%else%}
-              <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-                alt="Image">
-              {%endif%}
+                src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Banner.png';">
             </div>
             <div class="relative w-full md:w-3/5">
               <div class="w-full text-gray-600 px-4 pb-3">
@@ -223,14 +213,8 @@
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {% for item in same_category %}
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
-            {%if item['attributes']['images']['data'] and
-            item['attributes']['images']['data'][0]['attributes']['width']%}
             <img class="img-absolute-cover img-hover-scale"
-              src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-            {%else%}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-              alt="Image">
-            {%endif%}
+              src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Banner.png';">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">
                 {{ item['attributes']['category'] }}

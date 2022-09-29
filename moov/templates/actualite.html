@@ -53,7 +53,7 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
               </div>
 
             </div>
@@ -65,7 +65,7 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
               </div>
 
             </div>
@@ -104,7 +104,7 @@
               <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
                 <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
                   <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}"
-                      alt="Moov publicité"></a>
+                      alt="Moov publicité" onerror="this.src='/assets/images/Apercu.png';"></a>
                 </div>
 
               </div>
@@ -166,7 +166,7 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" onerror="this.src='/assets/images/Banner.png';" />
         </a>
       </div>
       {% endfor %}

@@ -60,7 +60,7 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
               </div>
 
             </div>
@@ -72,7 +72,7 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
               </div>
 
             </div>
@@ -85,19 +85,19 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
               </div>
 
             </div>
             {% endfor%}
           </div>
-          
+
 )          <!-- {%for ad in ads['side_bar']%}
               <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
                   <a href="{{ad['url']}}" target="_blank"></a>
                   <img src="{{CMS_URL}}{{ad['image']}}">
               </div>
-             
+
               {%endfor%} -->
         </div>
       </div>

@@ -75,14 +75,10 @@
               {% for news in actualites["data"] %}
               <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"],slug=news['attributes']['slugId']) }}>
                 <div class="relative overflow-hidden w-full md:w-2/5">
-                  {%if news["attributes"]["images"]["data"] and news["attributes"]["images"]["data"][0]["attributes"]["width"]  %}
                   <img
 		    class="img-absolute-cover img-hover-scale"
-		    src={{ CMS_URL }}{{ news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
+		    src={{ CMS_URL }}{{ news["attributes"]["images"]["data"][0]["attributes"]["url"] }} onerror="this.src='/assets/images/Apercu.png';"
 		    >
-                  {%else%}
-                  <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png">
-                  {%endif%}
                 </div>
                 <div class="relative w-full md:w-3/5">
                   <div class="w-full text-gray-600 px-4 pb-3">
@@ -115,13 +111,13 @@
             </div>
           </div>
           <div class="flex flex-row w-full md:flex-wrap md:flex-col">
-            
+
             {%for ad in ads['side_bar']%}
             <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
                 <a href="{{ad['url']}}" target="_blank"></a>
                 <img src="{{CMS_URL}}{{ad['image']}}">
             </div>
-           
+
             {%endfor%}
           </div>
         </div>
