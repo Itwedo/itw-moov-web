@@ -4,7 +4,7 @@
 {% if news['data']['attributes']['metaTitle']  %}
   <meta property="og:title" content="{{news['data']['attributes']['metaTitle']}}"/>
 {% else %}
-  <meta property="og:title" content="{{news['data']['attributes']['title']}}" or="this.src='/assets/images/Banner.png';"/>
+  <meta property="og:title" content="{{news['data']['attributes']['title']}}" or="this.content='/assets/images/Banner.png';"/>
 {% endif %}
 <meta property="og:image" content="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}"/>
 {% if news['data']['attributes']['metaDescription']  %}
