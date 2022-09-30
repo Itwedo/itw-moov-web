@@ -82,7 +82,7 @@ def news_article(id, slug):
 @use_template("actualite2.html")
 def news_article2():
     response = requests.get(
-        url=f"{STRAPI_API_URL}/actualites/{16658}",
+        url=f"{STRAPI_API_URL}/actualites/5368",
         params={"populate": "images"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -94,13 +94,8 @@ def news_article2():
         number_of_images = 0
     body = news["data"]["attributes"]["body"]
     body = body.replace("- ", "# ").replace(" -", "")
-    body = cut_body(
-        response.json()["data"]["attributes"]["title"],
-        response.json()["data"]["attributes"]["head"],
-        response.json()["data"]["attributes"]["body"],
-        number_of_images,
-    )
 
+    body2 = news["data"]["attributes"]["bodyPart2"]
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
@@ -141,6 +136,7 @@ def news_article2():
         "images": images,
         "number_of_images": number_of_images,
         "body": body,
+        "body2": body2,
         "same_category": same_category,
         "regular": regular,
     }
