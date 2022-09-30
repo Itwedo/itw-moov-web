@@ -89,8 +89,10 @@
         <div class="card-time  heading-card-time">
           <span class="mr-4">{{ news['data']['attributes']["date"]|date }}</span>
           <span class="mr-4">{{ news['data']['attributes']["date"]|time }}</span>
+          <span class="mr-4"> . </span>
+          <span class="mr-4"> {{ news['data']['attributes']["source"] | title }}</span>
           <span class="mr-4 inline-flex items-center flex-nowrap">
-            <img class="h-6 pr-2" src="/assets/images/share-gray.svg">
+<!--            <img class="h-6 pr-2" src="/assets/images/share-gray.svg">-->
             <!-- 130 -->
           </span>
         </div>
@@ -123,6 +125,7 @@
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
+            <span> Copyright Image : © {{ images[1]['attributes']['caption'] }}"</span>
             {% endif %}
           </div>
           <div class="reading-text">

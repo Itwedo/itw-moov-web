@@ -130,6 +130,13 @@ def _markdown(s):
         )
     return ""
 
+@app.template_filter("title")
+def _title(s):
+    if isinstance(s, str):
+        return s.title()
+    return ""
+
+
 
 @app.route("/mention.html")
 @use_template()
