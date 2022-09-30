@@ -134,7 +134,7 @@ def _markdown(s):
 def _title(s):
     if isinstance(s, str):
         return s.title()
-    return ""
+    return "Moov"
 
 
 

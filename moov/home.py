@@ -93,7 +93,7 @@ def home():
                 "images": item["attributes"]["images"]["data"],
                 "category": item["attributes"]["category"],
                 "slugId": item["attributes"]["slugId"],
-                "source": item["attributes"]["source"]
+                "copyright": item["attributes"]["copyright"]
             }
             for item in spotlights.json()["data"]
         ],
