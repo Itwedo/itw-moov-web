@@ -46,9 +46,14 @@
             {% for item in data["flashes"] %}
             <div class="flex flex-wrap items-center border-b-2 py-5">
               <div class="text-xl w-3/4">
+                {% if item["article"]%}
                 <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}">
                   <p>{{ item["head"] }}</p>
                 </a>
+                {% else %}
+                  <p>{{ item["head"] }}</p>
+                {% endif %}
+
               </div>
               <div class="text-center w-1/4">
                 {{ item["createdAt"]|time }}

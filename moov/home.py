@@ -101,6 +101,7 @@ def home():
                 "head": item["attributes"]["head"],
                 "createdAt": item["attributes"]["createdAt"],
                 "id": item["id"],
+                "article": True if item["attributes"].__contains__('category') else False
             }
             for item in flashes[:20]
         ],
