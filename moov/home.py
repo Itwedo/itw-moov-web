@@ -100,7 +100,7 @@ def home():
         "flashes": [
             {
                 "head": item["attributes"]["head"],
-                "createdAt": item["attributes"]["createdAt"],
+                "createdAt": item["attributes"]["date"],
                 "id": item["id"],
                 "article": True if item["attributes"].__contains__('category') else False,
                 "slugId": item["attributes"]["slugId"] if item["attributes"].__contains__('slugId') else ""
