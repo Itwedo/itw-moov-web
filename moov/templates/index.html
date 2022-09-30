@@ -25,8 +25,10 @@
             <div class="card-time">
               <span class="mr-4">{{ item["createdAt"]|date }}</span>
               <span class="mr-4">{{ item["createdAt"]|time }}</span>
+              <span class="mr-4">.</span>
+              <span class="mr-4">{{ item["source"]|title }}</span>
               <span class="mr-4 inline-flex items-center flex-nowrap">
-                <img class="h-6 pr-2" src="/assets/images/share-white.svg">
+<!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
                 <!-- 130 -->
               </span>
             </div>
@@ -94,10 +96,13 @@
               {% if data["magazine"] %}
               <span class="mr-4">{{ data["magazine"][0]["attributes"]["date"]|date }}</span>
               <span class="mr-4">{{ data["magazine"][0]["attributes"]["date"]|time }}</span>
-              <span class="mr-4 inline-flex items-center flex-nowrap">
-                <img class="h-6 pr-2" src="/assets/images/share-white.svg">
-                <!-- 130 -->
-              </span>
+              <span class="mr-4">.</span>
+              <span class="mr-4">{{ data["magazine"][0]["attributes"]["source"]|title }}</span>
+
+              <!--              <span class="mr-4 inline-flex items-center flex-nowrap">-->
+<!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
+<!--                &lt;!&ndash; 130 &ndash;&gt;-->
+<!--              </span>-->
               {% endif %}
             </div>
           </a>
@@ -201,8 +206,12 @@
             <div class="card-time">
               <span class="mr-4">{{ data["spotlights"][0]["createdAt"]|date }}</span>
               <span class="mr-4">{{ data["spotlights"][0]["createdAt"]|time }}</span>
+              <span class="mr-4">.</span>
+
               <span class="mr-4 inline-flex items-center flex-nowrap">
-                <img class="h-6 pr-2" src="/assets/images/share-white.svg">
+<!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
+                <span class="mr-4">{{ data["spotlights"][0]["source"]|title }}</span>
+
                 <!-- 130 -->
               </span>
             </div>
