@@ -83,7 +83,7 @@ def news_article(id, slug):
 def news_article2():
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/5368",
-        params={"populate": "images"},
+        params={"populate": "images","populate":"rubrique"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
@@ -102,7 +102,7 @@ def news_article2():
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": news["data"]["attributes"]["category"],
+            "filters[rubrique][slug][$eq]": news["data"]["attributes"]["rubrique"]["data"]["attributes"]["slug"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )

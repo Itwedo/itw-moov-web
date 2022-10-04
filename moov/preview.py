@@ -56,7 +56,7 @@ def preview_page(slug):
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": article["attributes"]["category"],
+            "filter[rubrique][slug][$eq]": article["attributes"]["rubrique"]["data"]["attributes"]["slug"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )

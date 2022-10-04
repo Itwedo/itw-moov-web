@@ -39,7 +39,6 @@ def get_ads_by_location(location):
 
     list_ads = []
     for ad in ads.json()["data"]:
-
         list_ads.append(
             {
                 "image": ad["attributes"]["image"]["data"][0]["attributes"][
@@ -149,11 +148,11 @@ def cut_body(title, head, text, images_number):
             if second_part:
                 second_part.append(child)
             elif (
-                get_heigh("title", title)
-                + get_heigh("head", head)
-                + get_heigh("body", "".join([str(tag) for tag in first_part]))
-                + get_heigh("body", str(child))
-                >= FIRST_LIMIT_HEIGH
+                    get_heigh("title", title)
+                    + get_heigh("head", head)
+                    + get_heigh("body", "".join([str(tag) for tag in first_part]))
+                    + get_heigh("body", str(child))
+                    >= FIRST_LIMIT_HEIGH
             ):
                 second_part.append(child)
             else:
@@ -209,16 +208,27 @@ def get_paginated_curency(date_list, page, result_list, existant_dates):
         existant_dates,
     )
 
+
 def get_menus(type):
-    actualities= requests.get(
+    actualities = requests.get(
         url=f"{STRAPI_API_URL}/rubriques",
         headers=STRAPI_API_AUTH_TOKEN,
         params={
-            "filters[actualites][id][$notNull]" : True,
+            "filters[actualites][id][$notNull]": True,
             "filters[type][$eq]": type,
         },
     )
     return actualities.json()["data"]
+
+
+def get_category_display(category):
+    return requests.get(
+        url=f"{STRAPI_API_URL}/rubriques",
+        params={
+            "filters[slug][$eq]": category,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    ).json()["data"][0]["attributes"]["name"]
 
 
 def use_template(template=None):
@@ -238,8 +248,10 @@ def use_template(template=None):
             ctx["ads"] = get_ads()
             ctx["currency"] = get_currency()
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
-            ctx["actualities"] = [{"display": menu["attributes"]["name"],"slug": menu["attributes"]["slug"]} for menu in get_menus("Actualite")]
-            ctx["magazines"] = [{"display": menu["attributes"]["name"],"slug": menu["attributes"]["slug"]} for menu in get_menus("Tendance")]
+            ctx["actualities"] = [{"display": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]} for menu
+                                  in get_menus("Actualite")]
+            ctx["magazines"] = [{"display": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]} for menu in
+                                get_menus("Tendance")]
             return render_template(template_name, **ctx)
 
         return decorated_function
@@ -250,7 +262,7 @@ def use_template(template=None):
 def create_captcha():
     captcha_path = "/tmp/captcha"
     Path(captcha_path).mkdir(exist_ok=True)
-    captcha_name = f"captcha{random.randint(0,100)}"
+    captcha_name = f"captcha{random.randint(0, 100)}"
     captcha_text = "".join(
         random.choices(string.ascii_uppercase + string.digits, k=5)
     )
