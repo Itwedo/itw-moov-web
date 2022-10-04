@@ -209,6 +209,17 @@ def get_paginated_curency(date_list, page, result_list, existant_dates):
         existant_dates,
     )
 
+def get_menus(type):
+    actualities= requests.get(
+        url=f"{STRAPI_API_URL}/rubriques",
+        headers=STRAPI_API_AUTH_TOKEN,
+        params={
+            "filters[actualites][id][$notNull]" : True,
+            "filters[type][$eq]": type,
+        },
+    )
+    return actualities.json()["data"]
+
 
 def use_template(template=None):
     def decorator(f):
@@ -223,24 +234,12 @@ def use_template(template=None):
             ctx = f(*args, **kwargs)
             if not ctx:
                 ctx = {}
+
             ctx["ads"] = get_ads()
             ctx["currency"] = get_currency()
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
-            ctx["actualities"] = [
-                {"display": "Vaovao", "slug": "vaovao"},
-                {"display": "Nationale", "slug": "nationale"},
-                {"display": "Economie", "slug": "economie"},
-                {"display": "Sport", "slug": "sport"},
-                {"display": "Internationale", "slug": "internationale"},
-                {"display": "Médecine & Santé", "slug": "sante-medecine"},
-                {"display": "Culture", "slug": "culture"},
-                {"display": "Gasy Winner", "slug": "gasy-winner"},
-            ]
-            ctx["magazines"] = [
-                {"display": "People", "slug": "people"},
-                {"display": "HighTech", "slug": "connected-life"},
-                {"display": "Famille", "slug": "famille"},
-            ]
+            ctx["actualities"] = [{"display": menu["attributes"]["name"],"slug": menu["attributes"]["slug"]} for menu in get_menus("Actualite")]
+            ctx["magazines"] = [{"display": menu["attributes"]["name"],"slug": menu["attributes"]["slug"]} for menu in get_menus("Tendance")]
             return render_template(template_name, **ctx)
 
         return decorated_function
