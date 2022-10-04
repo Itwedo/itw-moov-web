@@ -89,9 +89,14 @@
           {{ news['data']['attributes']['title'] }}
         </h1>
         <div class="card-time  heading-card-time">
+          {% if news['data']['attributes']["date"]|date %}
           <span class="mr-4">{{ news['data']['attributes']["date"]|date }}</span>
+          {% endif %}
+
+          {% if news['data']['attributes']["date"]|time %}
           <span class="mr-4">{{ news['data']['attributes']["date"]|time }}</span>
-          <span class="mr-4"> . </span>
+          {% endif %}
+          <span class="mr-4"> © </span>
           <span class="mr-4"> {{ news['data']['attributes']["copyright"] | title }}</span>
           <span class="mr-4 inline-flex items-center flex-nowrap">
             <!--            <img class="h-6 pr-2" src="/assets/images/share-gray.svg">-->
@@ -99,7 +104,8 @@
           </span>
         </div>
         <div class="content news-content">
-          <p class="text-3xl robotoslab text-left">{{ news['data']['attributes']['head'] }}</p> <br />
+          <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
+          <br />
 
           <div class="article-pub">
             <div
@@ -116,18 +122,11 @@
             </div>
 
           </div>
-          <!-- <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
-              <img src="/assets/images/powerbox1_0.jpg">
-            </div>
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
-              <img src="/assets/images/morateamb.jpg">
-            </div>
-          </div> -->
+
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
-            <span> Copyright Image : © {{ images[1]['attributes']['caption'] }}"</span>
+            <span class="img-copyright"> Copyright Image : © {{ images[1]['attributes']['caption'] }}"</span>
             {% endif %}
           </div>
           <div class="reading-text">
@@ -206,10 +205,17 @@
               href="{{ url_for('article.news_article', id=item['id'],slug=item['attributes']['slugId'] )}}">
               <h2 class="text-2xl mb-3 sm:text-4xl">{{ item['attributes']['title'] }}</h2>
               <div class="card-time flex items-center">
+                {% if item['attributes']["date"]|date %}
                 <span class="mr-4">{{ item['attributes']["date"]|date }}</span>
+                {% endif %}
+                {% if item['attributes']["date"]|time %}
                 <span class="mr-4">{{ item['attributes']["date"]|time }}</span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">
+                {% endif %}
+                <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                  onclick="return false;">
+                  <i class="fas fa-share-nodes"
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=item['id'],slug=item['attributes']['slugId'] )}}`)"></i>
+
                   <!-- 130 -->
                 </span>
               </div>
@@ -220,5 +226,7 @@
       </div>
     </div>
   </section>
+  {% include 'includes/share-popover.html' %}
+
 </main>
 {% endblock %}

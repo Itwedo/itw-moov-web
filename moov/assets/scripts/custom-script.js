@@ -48,12 +48,8 @@ $("#read-more-article-static").click(function () {
 
 //share popover
 
-// $(".popover-share").click(() => {
-//     console.log($(".popover-share").)
-// })
 
 function setLinkToShare(link) {
-    console.log(link)
     $(".fb-link").attr("href", "https://www.facebook.com/share.php?u=https://moov-web.sudo.mg" + link)
     $(".tw-link").attr("href", `https://twitter.com/intent/tweet?url=<?=urlencode('https://moov-web.sudo.mg'+${link})?>`)
 }
