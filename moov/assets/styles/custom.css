@@ -397,6 +397,27 @@ currency
 }
 
 /* contact */
-.contact-form .input-form:focus{
-outline: none;
+.contact-form .input-form:focus {
+    outline: none;
+}
+
+/* share links */
+.pop-comp-content {
+    width: 160px;
+}
+
+.platform-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.platform-icon {
+    display: flex;
+    width: 3.2rem;
+    height: 3.2rem;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 50%;
 }
