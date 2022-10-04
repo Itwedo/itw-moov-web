@@ -176,6 +176,18 @@ def parse_drugstores_list(filepath):
         for info in bar:
             obj.insert_allnighters(info["start"], info["stop"], info["infos"])
 
+@cmd.command()
+def post_category():
+    csv_file = csv.reader(
+        open("moov/api/data/category.csv", "r"), delimiter=","
+    )
+    for category in csv_file :
+        response=requests.post(
+            url=f"{STRAPI_API_URL}/rubriques",
+            headers=STRAPI_API_AUTH_TOKEN,
+            json={"data": {"name": category[2],"slug": category[0],"type":category[3]}},
+        )
+        print (category[2] + "added")
 
 @cmd.command()
 def get_category():
