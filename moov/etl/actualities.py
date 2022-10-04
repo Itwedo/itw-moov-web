@@ -41,8 +41,8 @@ class Connector(object):
         if not actuality.get("Type"):
             actuality["Type"] = self.type
 
-        if not actuality.get("source"):
-            actuality["source"] = "moov"
+        if not actuality.get("copyright"):
+            actuality["copyright"] = "moov"
         if actuality["created_at"]:
             actuality["date"] = actuality["created_at"]
             del actuality["created_at"]

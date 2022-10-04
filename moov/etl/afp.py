@@ -89,7 +89,7 @@ class Connector(object):
                     "title": element["title"],
                     "head": head,
                     "body": body,
-                    "source": "afp",
+                    "copyright": "afp",
                     "category": element["category"],
                     "Type": self.type,
                 }
