@@ -190,6 +190,47 @@ def post_category():
         print (category[2] + "added")
 
 @cmd.command()
+def update_actuality():
+    menus = requests.get(
+        url=f"{STRAPI_API_URL}/rubriques",
+        headers=STRAPI_API_AUTH_TOKEN,
+    ).json()["data"]
+    menu_list=[]
+    for menu in menus:
+        menu_list.append({"id": menu["id"],"name":menu["attributes"]["name"],"slug":menu["attributes"]["slug"]})
+    count=0
+    while True:
+        response = requests.get(
+            url=f"{STRAPI_API_URL}/actualites",
+            headers=STRAPI_API_AUTH_TOKEN,
+            params={
+                "populate": "images",
+                "pagination[start]": count,
+                "pagination[limit]": 1,
+            },
+        )
+        data = response.json()["data"]
+        if not data:
+            break
+        for article in tqdm(data, desc=str(count)):
+            menu=100;
+            for m in menu_list:
+                if m["name"]==article["attributes"]["category"]:
+                    menu=m["id"]
+            print(menu)
+            requests.put(
+                url=f"{STRAPI_API_URL}/actualites/{article['id']}",
+                headers=STRAPI_API_AUTH_TOKEN,
+                json={"data": {"rubrique": [menu]}},
+
+            )
+
+        count += len(data)
+        click.echo(f"/{count} actus")
+
+
+
+@cmd.command()
 def get_category():
     csv_file = csv.reader(
         open("moov/api/data/category.csv", "r"), delimiter=","
