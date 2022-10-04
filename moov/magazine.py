@@ -1,38 +1,12 @@
 from flask import (
     Blueprint,
-    redirect,
     request,
-    render_template,
-    send_from_directory,
 )
 
-from .utils import use_template
+from .utils import use_template,get_category_display
 from .config import *
 
 import requests
-
-get_category = {
-    "gastronomie": {"cms": "Gastronomie", "display": "Gastronomie"},
-    "tourisme-voyage": {
-        "cms": "Tourisme & Voyage",
-        "display": "Tourisme & Voyage",
-    },
-    "education-emploi": {
-        "cms": "Education & Emploi",
-        "display": "Education & Emploi",
-    },
-    "sante-bien-etre": {
-        "cms": "Santé & Bien-être",
-        "display": "Santé & Bien-être",
-    },
-    "famille": {"cms": "Famille", "display": "Famille"},
-    "maison-jardin": {
-        "cms": "Maison & Jardin",
-        "display": "Maison & Jardin",
-    },
-    "people": {"cms": "People", "display": "People"},
-    "connected-life": {"cms": "High Tech", "display": "HighTech"},
-}
 
 app = Blueprint("magazine", __name__, url_prefix="/magazine")
 
@@ -46,7 +20,7 @@ def magazine():
         params={
             "populate": "images",
             "sort": "id:desc",
-            "filters[Type][$eq]": "Tendance",
+            "filters[rubrique][type][$eq]": "Tendance",
             "pagination[pageSize]": 18,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
@@ -59,8 +33,8 @@ def magazine():
         params={
             "populate": "images",
             "sort": "id:desc",
-            "filters[Type][$eq]": "Tendance",
-            "filters[category][$eq]": "People",
+            "filters[rubrique][type][$eq]": "Tendance",
+            "filters[rubrique][slug][$eq]": "people",
             "pagination[pageSize]": 4,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
@@ -73,8 +47,8 @@ def magazine():
         params={
             "populate": "images",
             "sort": "id:desc",
-            "filters[Type][$eq]": "Tendance",
-            "filters[category][$eq]": "High Tech",
+            "filters[rubrique][type][$eq]": "Tendance",
+            "filters[rubrique][slug][$eq]": "connected-life",
             "pagination[pageSize]": 3,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
@@ -97,8 +71,8 @@ def category_magazines(category):
         params={
             "populate": "images",
             "sort": "id:desc",
-            "filters[Type][$eq]": "Tendance",
-            "filters[category][$eq]": get_category[category]["cms"],
+            "filters[rubrique][type][$eq]": "Tendance",
+            "filters[rubrique][slug][$eq]": category,
             "pagination[pageSize]": 9,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
@@ -106,7 +80,7 @@ def category_magazines(category):
         headers=STRAPI_API_AUTH_TOKEN,
     )
     return {
-        "category": get_category[category]["display"],
+        "category": get_category_display(category),
         "result": result.json(),
         "page": request.args.get("page", 1),
         "type": "Tendances",
