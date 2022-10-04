@@ -228,26 +228,8 @@
     </div>
 
 
-    <!--share link-popover  -->
-    <div id="popover-target">
-      <div class="pop-comp-content px-5 py-4">
-        <div class="platform-lists">
-          <a class="platform-list-item my-4 fb-link" target="_blank">
-            <div class="platform-icon"><i class="fab fa-facebook-f"></i> </div>
-            <div class="platform-name">Facebook</div>
-          </a>
-          <a class="platform-list-item my-4 tw-link" target="_blank">
-            <div class="platform-icon"><i class="fab fa-twitter"></i> </div>
-            <div class="platform-name">Twitter</div>
-          </a>
-          <a class="platform-list-item my-4 to-copy-link">
-            <div class="platform-icon"><i class="fas fa-link"></i> </div>
-            <div class="platform-name">Copier le lien</div>
-          </a>
-        </div>
+    {% include 'includes/share-popover.html' %}
 
-      </div>
-    </div>
   </section>
 </main>
 {% endblock %}

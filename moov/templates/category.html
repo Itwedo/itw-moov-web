@@ -50,8 +50,11 @@
                 <span class="mr-4">
                   {{ result["data"][0]["attributes"]["date"]|time }}
                 </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">
+                <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                  onclick="return false;">
+                  <i class="fas fa-share-nodes"
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=result['data'][0]['id'],slug=result['data'][0]['attributes']['slugId']) }}`)"></i>
+
                   <!-- 130 -->
                 </span>
               </div>
@@ -66,7 +69,8 @@
           {% for element in result["data"][1:5] %}
           <div class="news-card relative overflow-hidden w-full v2">
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Apercu.png';">
+              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
+              onerror="this.src='/assets/images/Apercu.png';">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
             </div>
@@ -82,8 +86,12 @@
                 <span class="mr-4">
                   {{ element["attributes"]["date"]|time }}
                 </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">
+
+                <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                  onclick="return false;">
+                  <i class="fas fa-share-nodes"
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}`)"></i>
+
                   <!-- 130 -->
                 </span>
               </div>
@@ -99,14 +107,16 @@
             {% for ad in ads['side_bar']%}
             <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
               <a href="ad['url']"></a>
-              <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité" onerror="this.src='/assets/images/Apercu.png';">
+              <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                onerror="this.src='/assets/images/Apercu.png';">
             </div>
             {%endfor%}
           </div>
           {% for element in result["data"][5:10] %}
           <div class="news-card relative overflow-hidden w-full v2">
             <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Apercu.png';">
+              src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
+              onerror="this.src='/assets/images/Apercu.png';">
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
             </div>
@@ -122,8 +132,12 @@
                 <span class="mr-4">
                   {{ element["attributes"]["date"]|time }}
                 </span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">
+
+                <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                  onclick="return false;">
+                  <i class="fas fa-share-nodes"
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}`)"></i>
+
                   <!-- 130 -->
                 </span>
               </div>
@@ -151,10 +165,12 @@
             derniers articles</h2>
           <div class="mini-card-v1 no-scrollbar">
             {% for news in result["data"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"], slug=news['attributes']["slugId"]) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"],
+              slug=news['attributes']["slugId"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
-                  src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image" onerror="this.src='/assets/images/Apercu.png';">
+                  src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
+                  onerror="this.src='/assets/images/Apercu.png';">
               </div>
               <div class="relative w-full md:w-3/5">
                 <div class="w-full text-gray-600 px-4 pb-3">
@@ -168,8 +184,11 @@
                     <span class="mr-4">
                       {{ news["attributes"]["date"]|time }}
                     </span>
-                    <span class="mr-4 inline-flex items-center flex-nowrap">
-                      <img class="h-6 pr-2" src="/assets/images/share-gray.svg">
+                    <span class=" inline-flex items-center flex-nowrap popover-share"
+                      data-popover-target="#popover-target" onclick="return false;">
+                      <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'],
+                    slug=news['attributes']['slugId']) }}`)"></i>
+
                       <!-- 130 -->
                     </span>
                   </div>
@@ -202,5 +221,8 @@
       </div>
     </div>
   </section>
+
+  {% include 'includes/share-popover.html' %}
+
 </main>
 {% endblock %}
