@@ -15,7 +15,7 @@ app = Blueprint("article", __name__, url_prefix="/article")
 def news_article(id, slug):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
-        params={"populate": "images"},
+        params={"populate": ["images","rubrique"]},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
@@ -36,10 +36,10 @@ def news_article(id, slug):
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": news["data"]["attributes"]["category"],
+            "filters[rubrique][name][$eq]": news["data"]["attributes"]["rubrique"]["data"]["attributes"]["name"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -54,7 +54,7 @@ def news_article(id, slug):
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "pagination[limit]": 100,
         },
