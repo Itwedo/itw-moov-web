@@ -31,8 +31,8 @@
               {% if item["createdAt"]|time %}
               <span class="mr-4">{{ item["createdAt"]|time }}</span>
               {% endif %}
-              <span class="mr-4">©</span>
-              <span class="mr-4">{{ item["copyright"]|title }}</span>
+              <span class="mr-2">© </span>
+              <span class="ml-2 mr-4">{{ item["copyright"]|title }}</span>
               <span class="mr-4 inline-flex items-center flex-nowrap">
                 <!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
                 <!-- 130 -->
@@ -109,8 +109,8 @@
               {% if data["magazine"][0]["attributes"]["date"]|time %}
               <span class="mr-4">{{ data["magazine"][0]["attributes"]["date"]|time }}</span>
               {% endif %}
-              <span class="mr-4">©</span>
-              <span class="mr-4">{{ data["magazine"][0]["attributes"]["copyright"]|title }}</span>
+              <span class="mr-2">© </span>
+              <span class="ml-2 mr-4">{{ data["magazine"][0]["attributes"]["copyright"]|title }}</span>
 
               <!--              <span class="mr-4 inline-flex items-center flex-nowrap">-->
               <!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
@@ -240,9 +240,9 @@
               {% if data["spotlights"][0]["createdAt"]|time %}
               <span class="mr-4">{{ data["spotlights"][0]["createdAt"]|time }}</span>
               {% endif %}
-              <span class="mr-4">©</span>
+              <span class=" mr-2">© </span>
 
-              <span class="mr-4 inline-flex items-center flex-nowrap">
+              <span class="ml-2 mr-4 inline-flex items-center flex-nowrap">
                 <!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
                 <span class="mr-4">{{ data["spotlights"][0]["copyright"]|title }}</span>
 
