@@ -226,6 +226,7 @@ def get_category_display(category):
         url=f"{STRAPI_API_URL}/rubriques",
         params={
             "filters[slug][$eq]": category,
+            "sort":"order:asc"
         },
         headers=STRAPI_API_AUTH_TOKEN,
     ).json()["data"][0]["attributes"]["name"]
