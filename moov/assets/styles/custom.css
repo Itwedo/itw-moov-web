@@ -122,6 +122,17 @@
 
 /* end slider */
 
+/* flash actus */
+.linked-flash-actu:hover {
+    text-decoration: underline;
+}
+
+.go-to-article {
+    font-size: 0.4 !important;
+}
+
+/*end flash actus */
+
 /* pub */
 #home-pub {
     object-fit: cover;

@@ -55,7 +55,8 @@
             <div class="flex flex-wrap items-center border-b-2 py-5">
               <div class="text-xl w-3/4">
                 {% if item["article"]%}
-                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}">
+                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}"
+                  class="linked-flash-actu">
                   <p>{{ item["head"] }}</p>
                 </a>
                 {% else %}
@@ -65,6 +66,12 @@
               </div>
               <div class="text-center w-1/4">
                 {{ item["createdAt"]|time }}
+                {% if item["article"]%}
+
+                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}"
+                  class="go-to-article">Lire la suite</a>
+                {% endif %}
+
               </div>
             </div>
             {% endfor %}
