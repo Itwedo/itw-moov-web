@@ -7,6 +7,7 @@ from ..etl import afp
 from ..etl.legacy_extractor import resolve
 from ..etl import actualities
 from ..config import *
+from ..utils import get_rubriques
 from .. import app
 
 import click
@@ -191,13 +192,7 @@ def post_category():
 
 @cmd.command()
 def update_actuality():
-    menus = requests.get(
-        url=f"{STRAPI_API_URL}/rubriques",
-        headers=STRAPI_API_AUTH_TOKEN,
-    ).json()["data"]
-    menu_list=[]
-    for menu in menus:
-        menu_list.append({"id": menu["id"],"name":menu["attributes"]["name"],"slug":menu["attributes"]["slug"]})
+    menu_list=get_rubriques()
     count=0
     while True:
         response = requests.get(

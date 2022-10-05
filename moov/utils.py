@@ -226,10 +226,29 @@ def get_category_display(category):
         url=f"{STRAPI_API_URL}/rubriques",
         params={
             "filters[slug][$eq]": category,
-            "sort":"order:asc"
+            "sort": "order:asc"
         },
         headers=STRAPI_API_AUTH_TOKEN,
     ).json()["data"][0]["attributes"]["name"]
+
+
+def get_rubriques():
+    menus = requests.get(
+        url=f"{STRAPI_API_URL}/rubriques",
+        headers=STRAPI_API_AUTH_TOKEN,
+    ).json()["data"]
+    menu_list = []
+    for menu in menus:
+        menu_list.append({"id": menu["id"], "name": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]})
+    return menu_list
+
+
+def get_rubrique_id(article_category):
+    for m in get_rubriques():
+        if m["name"] == article_category:
+            return m["id"]
+        else:
+            return 0
 
 
 def use_template(template=None):

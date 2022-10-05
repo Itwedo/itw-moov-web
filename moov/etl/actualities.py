@@ -13,9 +13,11 @@ import cv2
 
 import PIL
 
+
 # from requests_html import HTML, HTMLSession
 from ..config import *
 from .legacy_extractor.mapping import map_category
+from ..utils import get_rubrique_id
 import imghdr
 
 
@@ -34,9 +36,9 @@ class Connector(object):
             actuality["images"] = image_id
 
         if not actuality.get("category"):
-            actuality["category"] = "Vaovao"
+            actuality["rubrique"] = get_rubrique_id("Vaovao")
         else:
-            actuality["category"] = map_category(actuality.get("category"))
+            actuality["rubrique"] = get_rubrique_id(actuality.get("category"))
 
         if not actuality.get("Type"):
             actuality["Type"] = self.type
