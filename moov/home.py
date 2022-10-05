@@ -21,10 +21,10 @@ def home():
     spotlights = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[spotlight][$eq]": "true",
-            "filters[Type][$eq]": "Actualite",
+            "filters[rubrique][type][$eq]" : "Actualite",
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -49,10 +49,10 @@ def home():
     magazine = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[spotlight][$eq]": "true",
-            "filters[Type][$eq]": "Tendance",
+            "filters[rubrique][type][$eq]": "Tendance",
             "pagination[limit]": 5,
         },
         headers=STRAPI_API_AUTH_TOKEN,
@@ -60,9 +60,9 @@ def home():
     news = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
-            "filters[Type][$eq]": "Actualite",
+            "filters[rubrique][type][$eq]": "Actualite",
             "pagination[limit]": 10,
         },
         headers=STRAPI_API_AUTH_TOKEN,
@@ -70,9 +70,9 @@ def home():
     magazines = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
-            "filters[Type][$eq]": "Tendance",
+            "filters[rubrique][type][$eq]": "Tendance",
             "pagination[limit]": 20,
         },
         headers=STRAPI_API_AUTH_TOKEN,
@@ -89,7 +89,7 @@ def home():
                 "createdAt": item["attributes"]["date"],
                 "head": item["attributes"]["head"],
                 "images": item["attributes"]["images"]["data"],
-                "category": item["attributes"]["category"],
+                "category": item["attributes"]["rubrique"]["data"]["attributes"]["name"],
                 "slugId": item["attributes"]["slugId"],
                 "copyright": item["attributes"]["copyright"]
             }
