@@ -38,7 +38,7 @@ def news():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[rubrique][type][$eq]": "Actualite",
             "pagination[pageSize]": 9,
@@ -59,7 +59,7 @@ def category_actuality(category):
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[rubrique][slug][$eq]": category,
             "pagination[pageSize]": 9,

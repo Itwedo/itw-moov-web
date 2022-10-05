@@ -18,7 +18,7 @@ def magazine():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate":["images","rubrique"],
             "sort": "id:desc",
             "filters[rubrique][type][$eq]": "Tendance",
             "pagination[pageSize]": 18,
@@ -31,7 +31,7 @@ def magazine():
     people = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[rubrique][type][$eq]": "Tendance",
             "filters[rubrique][slug][$eq]": "people",
@@ -45,7 +45,7 @@ def magazine():
     hightech = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[rubrique][type][$eq]": "Tendance",
             "filters[rubrique][slug][$eq]": "connected-life",
@@ -69,7 +69,7 @@ def category_magazines(category):
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[rubrique][type][$eq]": "Tendance",
             "filters[rubrique][slug][$eq]": category,
