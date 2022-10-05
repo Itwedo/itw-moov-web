@@ -24,10 +24,15 @@
               {{ item["title"] }}
             </h2>
             <div class="card-time">
+              {% if item["createdAt"]|date %}
               <span class="mr-4">{{ item["createdAt"]|date }}</span>
+              {% endif %}
+
+              {% if item["createdAt"]|time %}
               <span class="mr-4">{{ item["createdAt"]|time }}</span>
-              <span class="mr-4">.</span>
-              <span class="mr-4">{{ item["copyright"]|title }}</span>
+              {% endif %}
+              <span class="mr-2">© </span>
+              <span class="ml-2 mr-4">{{ item["copyright"]|title }}</span>
               <span class="mr-4 inline-flex items-center flex-nowrap">
                 <!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
                 <!-- 130 -->
@@ -50,7 +55,8 @@
             <div class="flex flex-wrap items-center border-b-2 py-5">
               <div class="text-xl w-3/4">
                 {% if item["article"]%}
-                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}">
+                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}"
+                  class="linked-flash-actu">
                   <p>{{ item["head"] }}</p>
                 </a>
                 {% else %}
@@ -60,6 +66,12 @@
               </div>
               <div class="text-center w-1/4">
                 {{ item["createdAt"]|time }}
+                {% if item["article"]%}
+
+                <a href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}"
+                  class="go-to-article">Lire la suite</a>
+                {% endif %}
+
               </div>
             </div>
             {% endfor %}
@@ -96,10 +108,16 @@
             {% endif %}
             <div class="card-time">
               {% if data["magazine"] %}
+
+              {% if data["magazine"][0]["attributes"]["date"]|date %}
               <span class="mr-4">{{ data["magazine"][0]["attributes"]["date"]|date }}</span>
+              {% endif %}
+
+              {% if data["magazine"][0]["attributes"]["date"]|time %}
               <span class="mr-4">{{ data["magazine"][0]["attributes"]["date"]|time }}</span>
-              <span class="mr-4">.</span>
-              <span class="mr-4">{{ data["magazine"][0]["attributes"]["copyright"]|title }}</span>
+              {% endif %}
+              <span class="mr-2">© </span>
+              <span class="ml-2 mr-4">{{ data["magazine"][0]["attributes"]["copyright"]|title }}</span>
 
               <!--              <span class="mr-4 inline-flex items-center flex-nowrap">-->
               <!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
@@ -140,11 +158,21 @@
             href={{ url_for('article.news_article', id=item["id"],slug=item['attributes']['slugId']) }}>
             <h2 class=" text-2xl mb-3 sm:text-4xl">{{ item["attributes"]["title"] }}</h2>
             <div class="card-time flex items-center text-xl">
-              <span class="mr-4">{{ item["attributes"]["date"]|date }}</span>
-              <span class="mr-4">{{ item["attributes"]["date"]|time }}</span>
+              {% if item["attributes"]["date"]|date %}
+              <span class="mr-4">
+                {{ item["attributes"]["date"]|date }}
+              </span>
+              {% endif %}
 
-              <span class="mr-4 inline-flex items-center flex-nowrap popover-share"
-                data-popover-target="#popover-target" onclick="return false;">
+              {% if item["attributes"]["date"]|time %}
+              <span class="mr-4">
+                {{ item["attributes"]["date"]|time }}
+              </span>
+              {% endif %}
+
+
+              <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                onclick="return false;">
                 <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article',
               id=item['id'],slug=item['attributes']['slugId']) }}`)"></i>
 
@@ -196,7 +224,7 @@
         <div
           class="robotoslab inline-block1 text-gray-600 text-4xl font-normal pb-4 mb-7 border-b-2 border-gray-600 sm:text-5xl">
           Les derniers articles</div>
-        <h2 class="text-6xl text-bold text-gray-600 pb-7 sm:text-7xl md:text-8xl lg:text-7xl xl:text-9xl">
+        <h2 class="text-6xl text-bold text-gray-600 pb-7 sm:text-7xl ">
           {{ data["spotlights"][0]["title"] }}
         </h2>
         <div class="big-news-card news-card news-card-lg relative overflow-hidden w-full">
@@ -212,11 +240,16 @@
 
             </h3>
             <div class="card-time">
+              {% if data["spotlights"][0]["createdAt"]|date %}
               <span class="mr-4">{{ data["spotlights"][0]["createdAt"]|date }}</span>
-              <span class="mr-4">{{ data["spotlights"][0]["createdAt"]|time }}</span>
-              <span class="mr-4">.</span>
+              {% endif %}
 
-              <span class="mr-4 inline-flex items-center flex-nowrap">
+              {% if data["spotlights"][0]["createdAt"]|time %}
+              <span class="mr-4">{{ data["spotlights"][0]["createdAt"]|time }}</span>
+              {% endif %}
+              <span class=" mr-2">© </span>
+
+              <span class="ml-2 mr-4 inline-flex items-center flex-nowrap">
                 <!--                <img class="h-6 pr-2" src="/assets/images/share-white.svg">-->
                 <span class="mr-4">{{ data["spotlights"][0]["copyright"]|title }}</span>
 
@@ -246,14 +279,19 @@
                     {{ item["attributes"]["title"] }}
                   </h3>
                   <div class="card-time">
+                    {% if item["attributes"]["date"]|date %}
                     <span class="mr-4">
                       {{ item["attributes"]["date"]|date }}
                     </span>
+                    {% endif %}
+
+                    {% if item["attributes"]["date"]|time %}
                     <span class="mr-4">
                       {{ item["attributes"]["date"]|time }}
                     </span>
+                    {% endif %}
 
-                    <span class="mr-4 inline-flex items-center flex-nowrap popover-share"
+                    <span class=" inline-flex items-center flex-nowrap popover-share"
                       data-popover-target="#popover-target" onclick="return false;">
                       <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article',
                       id=item['id'],slug=item['attributes']['slugId']) }}`)"></i>
@@ -300,26 +338,8 @@
     </div>
   </section>
 
-  <!--share link-popover  -->
-  <div id="popover-target">
-    <div class="pop-comp-content px-5 py-4">
-      <div class="platform-lists">
-        <a class="platform-list-item my-4 fb-link" target="_blank">
-          <div class="platform-icon"><i class="fab fa-facebook-f"></i> </div>
-          <div class="platform-name">Facebook</div>
-        </a>
-        <a class="platform-list-item my-4 tw-link" target="_blank">
-          <div class="platform-icon"><i class="fab fa-twitter"></i> </div>
-          <div class="platform-name">Twitter</div>
-        </a>
-        <a class="platform-list-item my-4 to-copy-link">
-          <div class="platform-icon"><i class="fas fa-link"></i> </div>
-          <div class="platform-name">Copier le lien</div>
-        </a>
-      </div>
+  {% include 'includes/share-popover.html' %}
 
-    </div>
-  </div>
 </main>
 {% endblock %}
 

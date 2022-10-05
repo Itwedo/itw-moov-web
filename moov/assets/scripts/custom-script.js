@@ -47,16 +47,22 @@ $("#read-more-article-static").click(function () {
 
 
 //share popover
-
-// $(".popover-share").click(() => {
-//     console.log($(".popover-share").)
-// })
-
 function setLinkToShare(link) {
-    console.log(link)
+    $(".to-copy-link .platform-name").text("Copier le lien")
+
     $(".fb-link").attr("href", "https://www.facebook.com/share.php?u=https://moov-web.sudo.mg" + link)
     $(".tw-link").attr("href", `https://twitter.com/intent/tweet?url=<?=urlencode('https://moov-web.sudo.mg'+${link})?>`)
+    $(".to-copy-link").attr("data-clipboard-text", `https://moov-web.sudo.mg${link}`)
+
+
 }
 PopoverComponent.init({
     ele: '.popover-share'
+});
+
+// clipboard
+var clipboard = new ClipboardJS('.to-copy-link');
+clipboard.on('success', function (e) {
+    $(".to-copy-link .platform-name").text("Lien copié")
+    e.clearSelection();
 });

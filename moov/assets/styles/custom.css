@@ -51,10 +51,11 @@
 }
 
 .header-headline-caption {
-    overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    font-size: 4.5rem;
+    /* overflow: hidden; */
+    /* -webkit-line-clamp: 3; */
 }
 
 /* menu */
@@ -120,6 +121,17 @@
 }
 
 /* end slider */
+
+/* flash actus */
+.linked-flash-actu:hover {
+    text-decoration: underline;
+}
+
+.go-to-article {
+    font-size: 0.4 !important;
+}
+
+/*end flash actus */
 
 /* pub */
 #home-pub {
@@ -345,12 +357,28 @@
     background: yellow !important
 } */
 
+#article-heading {
+    margin: 32px 0 !important;
+}
+
 .current-article {
     position: relative;
     overflow: hidden;
     height: 100%;
     z-index: 5;
     margin-bottom: 24px !important;
+}
+
+.picture {
+    margin-left: 32px !important;
+    margin-bottom: 24px !important;
+}
+
+.img-copyright {
+    position: relative;
+    top: -24px;
+    left: 8px;
+    font-size: 12px;
 }
 
 .article-overlay {
@@ -420,4 +448,8 @@ currency
     align-items: center;
     border: 1px solid;
     border-radius: 50%;
+}
+
+.popover-share {
+    font-size: 2rem;
 }
