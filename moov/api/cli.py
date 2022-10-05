@@ -205,8 +205,9 @@ def update_actuality():
             headers=STRAPI_API_AUTH_TOKEN,
             params={
                 "populate": "images",
+                 "sort": "id:desc",
                 "pagination[start]": count,
-                "pagination[limit]": 1,
+                "pagination[limit]": 25,
             },
         )
         data = response.json()["data"]
