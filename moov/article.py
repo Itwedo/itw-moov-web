@@ -15,7 +15,7 @@ app = Blueprint("article", __name__, url_prefix="/article")
 def news_article(id, slug):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
-        params={"populate": ["images","rubrique"]},
+        params={"populate": ["images","rubrique","bodyCollection","bodyCollection.images"]},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
