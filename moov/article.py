@@ -75,6 +75,7 @@ def news_article(id, slug):
         "body": body,
         "same_category": same_category,
         "regular": regular,
+        "bodyCollection":news["data"]["attributes"]["bodyCollection"]
     }
 
 
