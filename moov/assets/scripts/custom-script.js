@@ -50,8 +50,8 @@ $("#read-more-article-static").click(function () {
 function setLinkToShare(link) {
     $(".to-copy-link .platform-name").text("Copier le lien")
     $(".fb-link").attr("href", "https://www.facebook.com/share.php?u=https://moov-web.sudo.mg" + link)
-    $(".tw-link").attr("href", `https://twitter.com/intent/tweet?url=<?=urlencode('https://moov-web.sudo.mg'+${link})?>`)
-    $(".tw-link").attr("href", `https://www.linkedin.com/sharing/share-offsite/?url=moov-web.sudo.mg${link}`)
+    $(".tw-link").attr("href", `https://twitter.com/intent/tweet?url=moov-web.sudo.mg${link}`)
+    $(".in-link").attr("href", `https://www.linkedin.com/sharing/share-offsite/?url=moov-web.sudo.mg${link}`)
     $(".to-copy-link").attr("data-clipboard-text", `https://moov-web.sudo.mg${link}`)
 }
 PopoverComponent.init({
