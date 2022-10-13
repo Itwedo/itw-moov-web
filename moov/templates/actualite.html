@@ -114,7 +114,6 @@
         </div>
         <div class="content news-content">
           <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
-          <br />
 
           <div class="article-pub">
             <div
@@ -132,16 +131,33 @@
 
           </div>
 
-          <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
-            {% if number_of_images > 1 %}
-            <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
-            <span class="img-copyright"> Copyright Image : © {{ images[1]['attributes']['caption'] }}"</span>
-            {% endif %}
-          </div>
-          <div class="reading-text">
 
-            {{ body|markdown|safe }}
+          <div class="reading-text">
+            {% for item in bodyCollection %}
+            {% if loop.index == 1 %}
+
+            <div class="float-none  my-2 w-full overflow-hidden">
+              <img class="w-full h-auto mx-auto"
+                src="{{ CMS_URL }}{{item['images']['data']['attributes']['formats']['large']['url']}}" />
+              <span class="img-copyright"> Copyright Image : © {{
+                item['images']['data']['attributes']['caption'] }}</span>
+            </div>
+            {% else %}
+            <br /><br />
+            <div class="float-none  my-5 w-full overflow-hidden">
+              <img class="w-full h-auto mx-auto"
+                src="{{ CMS_URL }}{{item['images']['data']['attributes']['formats']['large']['url']}}" />
+              <span class="img-copyright"> Copyright Image : © {{
+                item['images']['data']['attributes']['caption'] }}</span>
+            </div><br />
+            {% endif %}
+
+            <div>
+              {{item['Text'] |markdown|safe}}
+            </div>
+            {% endfor %}
           </div>
+
 
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
@@ -167,10 +183,13 @@
 
 
 
+
       </div>
     </div>
 
   </article>
+
+
   <section class=" global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <!-- <img class="w-auto pub-section" src="/assets/images/206504526_4371917949494124_5011724154299493509_n@2x.jpg"
       alt="banner"> -->
@@ -187,7 +206,6 @@
     </div>
   </section>
   <section class="global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
-
   </section>
   <section class="pt-7 md:pt-24">
     <div class="mx-auto overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">

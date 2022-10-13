@@ -64,3 +64,6 @@ clipboard.on('success', function (e) {
     $(".to-copy-link .platform-name").text("Lien copié")
     e.clearSelection();
 });
+
+
+
