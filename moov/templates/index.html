@@ -11,7 +11,7 @@
       <div class="home-block-slide block-slide relative overflow-hidden">
         <img class="slide-img-item img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
           src="{{ CMS_URL }}{{ item['images'][0]['attributes']['url'] }}" alt="Image"
-          onerror="this.src='/assets/images/Banner.png';">
+          onerror="this.src='/assets/images/MOOV.svg';">
         <a class="header-headline content-slide absolute bottom-0 left-0 text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm h-auto lg:top-0 lg:bottom-unset lg:h-full w-full lg:w-2/5"
           href="{{ url_for('article.news_article', id=item['id'],slug=item['slugId']) }}">
           <div class="group-content">
@@ -86,7 +86,7 @@
         <div class="news-card news-flash relative overflow-hidden w-full">
           <img class="img-absolute-cover img-hover-scale"
             src="{{ CMS_URL}}{{data['magazine'][0]['attributes']['images']['data'][0]['attributes']['url']}}"
-            onerror="this.src='/assets/images/Apercu.png';">
+            onerror="this.src='/assets/images/moov_square.svg';">
           <div class="cat-pasti absolute top-8 left-0">
             {% if data["magazine"] %}
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
@@ -137,12 +137,12 @@
           {% if ads['with_article'] %}
           <a href="{{ ads['with_article'][1]['url'] }}" target="_blank">
             <img src="{{ CMS_URL }}{{ ads['with_article'][1]['image'] }}" alt="Moov publicité"
-              id="header_vertical_rectangle_1" onerror="this.src='/assets/images/Apercu.png';">
+              id="header_vertical_rectangle_1" onerror="this.src='/assets/images/moov_square.svg';">
           </a>
           {% else %}
           <a href="#" target="_blank">
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
-              alt="Moov publicité" id="header_vertical_rectangle_1">
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+              src="/assets/images/moov_square.svg" alt="Moov publicité" id="header_vertical_rectangle_1">
           </a>
           {% endif %}
         </div>
@@ -150,9 +150,10 @@
         <div class="news-card relative overflow-hidden w-full">
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             item["attributes"]["images"]["data"][0]["attributes"]["url"] }}
-            onerror="this.src='/assets/images/Apercu.png';">
+            onerror="this.src='/assets/images/moov_square.svg';">
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{ item["attributes"]["rubrique"]["data"]["attributes"]["name"] }}</span>
+            <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
+              item["attributes"]["rubrique"]["data"]["attributes"]["name"] }}</span>
           </div>
           <a class="overlay absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
             href={{ url_for('article.news_article', id=item["id"],slug=item['attributes']['slugId']) }}>
@@ -186,12 +187,12 @@
           {% if ads['with_article'] %}
           <a href="{{ads['with_article'][0]['url']}}" target="_blank">
             <img src="{{ CMS_URL }}{{ ads['with_article'][0]['image'] }}" alt="Moov publicité"
-              id="header_vertical_rectangle_2" onerror="this.src='/assets/images/Apercu.png';">
+              id="header_vertical_rectangle_2" onerror="this.src='/assets/images/moov_square.svg';">
           </a>
           {% else %}
           <a href="#" target="_blank">
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Apercu.png"
-              alt="Moov publicité" id="header_vertical_rectangle_1">
+            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
+              src="/assets/images/moov_square.svg" alt="Moov publicité" id="header_vertical_rectangle_1">
           </a>
           {% endif %}
 
@@ -207,7 +208,7 @@
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ CMS_URL }}{{ ad['url'] }}" target="_blank">
           <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section"
-            onerror="this.src='/assets/images/Banner.png';" />
+            onerror="this.src='/assets/images/MOOV.svg';" />
         </a>
       </div>
 
@@ -229,7 +230,8 @@
         </h2>
         <div class="big-news-card news-card news-card-lg relative overflow-hidden w-full">
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            data["spotlights"][0]["images"][0]["attributes"]["url"] }} onerror="this.src='/assets/images/Apercu.png';">
+            data["spotlights"][0]["images"][0]["attributes"]["url"] }}
+            onerror="this.src='/assets/images/moov_square.svg';">
           <a class=" absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
             href={{ url_for('article.news_article', id=data["spotlights"][0]["id"],slug=data["spotlights"][0]["slugId"])
             }}>
@@ -271,7 +273,7 @@
               <div class="relative overflow-hidden w-full md:w-2/5">
                 <img class="mini-img-cover img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
                   item["attributes"]["images"]["data"][0]["attributes"]["url"] }}
-                  onerror="this.src='/assets/images/Apercu.png';">
+                  onerror="this.src='/assets/images/moov_square.svg';">
               </div>
               <div class="relative w-full md:w-3/5">
                 <div class="w-full text-gray-600 px-4 pb-3">

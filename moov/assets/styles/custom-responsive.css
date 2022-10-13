@@ -242,6 +242,10 @@ Xtra Small Screen - Small Mobile
 ====================================
 */
 @media screen and (max-width: 576px) {
+    .moov-logo {
+        width: 240px;
+    }
+
 
     .group-content {
         position: relative;

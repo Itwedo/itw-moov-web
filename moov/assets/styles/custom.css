@@ -1,4 +1,9 @@
 /* header  */
+
+.moov-logo {
+    width: 360px;
+}
+
 .custom-navbar {
     display: flex;
     flex-direction: row;

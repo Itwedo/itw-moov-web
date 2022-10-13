@@ -5,7 +5,7 @@
 <meta property="og:title" content="{{news['data']['attributes']['metaTitle']}}" />
 {% else %}
 <meta property="og:title" content="{{news['data']['attributes']['title']}}"
-  or="this.content='/assets/images/Banner.png';" />
+  or="this.content='/assets/images/MOOV.svg';" />
 {% endif %}
 <meta property="og:image" content="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" />
 {% if news['data']['attributes']['metaDescription'] %}
@@ -31,7 +31,7 @@
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden">
       <img class="backup-image img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image"
-        onerror="this.src='/assets/images/Banner.png';">
+        onerror="this.src='/assets/images/MOOV.svg';">
     </div>
     <div class="px-5 py-2 bg-black w-full">
       <div class="breadcrumb article-breadcrumb pl-0 md:pl-4 xl:pl-12">
@@ -55,7 +55,7 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
               </div>
 
             </div>
@@ -67,7 +67,7 @@
             <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
               <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
                 <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+                    class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
               </div>
 
             </div>
@@ -123,7 +123,7 @@
               <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
                 <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
                   <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                      onerror="this.src='/assets/images/Apercu.png';"></a>
+                      onerror="this.src='/assets/images/moov_square.svg';"></a>
                 </div>
 
               </div>
@@ -180,7 +180,7 @@
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
           <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section"
-            onerror="this.src='/assets/images/Banner.png';" />
+            onerror="this.src='/assets/images/MOOV.svg';" />
         </a>
       </div>
       {% endfor %}
@@ -203,7 +203,7 @@
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
             <img class="img-absolute-cover img-hover-scale"
               src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
-              onerror="this.src='/assets/images/Banner.png';">
+              onerror="this.src='/assets/images/MOOV.svg';">
 
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">

@@ -152,10 +152,10 @@
       <div class="flex flex-wrap mx-auto 3xl:container">
         <div class="relative flex justify-content-center items-center mx-auto container w-full md:w-2/5">
           <div class="burger-menu flex md:hidden rounded-r-xl sm:rounded-xl"><img class="opacity-100"
-              src="/assets/images/burger-gray.svg"><img class="opacity-0" src="/assets/images/burger-white.svg"></div><a
-            class="block px-7 py-7 mx-auto h-28 overflow-hidden md:h-32 2xl:h-40 3xl:h-48 lg:mr-0 xl:mr-10 3xl:mr-20 lg:ml-auto"
-            href="{{ url_for('home.home') }}"><img class="h-full w-auto mr-0 lg:mr-14"
-              src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo"></a>
+              src="/assets/images/burger-gray.svg"><img class="opacity-0" src="/assets/images/burger-white.svg"></div>
+          <a class="moov-logo img-fluid block px-7  mx-auto h-28 overflow-hidden md:h-32 2xl:h-40 3xl:h-48 lg:mr-0 xl:mr-10 3xl:mr-20 lg:ml-auto"
+            href="{{ url_for('home.home') }}"><img class="img-fluid mr-0 lg:mr-14"
+              src="/assets/images/logo_moov_svg.svg" alt="Moov logo"></a>
         </div>
         <div class="header-pub">
           <div
@@ -165,7 +165,7 @@
               <a href="{{ad['url']}}" target="_blank">
                 <img src="{{ CMS_URL }}{{ad['image']}}" alt="Moov publicité" id="header_large_leaderboard"
                   class="header-slide-img img-absolute-cover objec-cover xl:w-auto h-full xl:h-auto"
-                  onerror="this.src='/assets/images/Banner.png';">
+                  onerror="this.src='/assets/images/MOOV.svg';">
               </a>
             </div>
             {% endfor %}
@@ -263,7 +263,7 @@
 
       <div class="flex  flex-col items-center border">
         <a class="block px-7 py-7 mx-auto h-40" href="{{ url_for('home.home') }}">
-          <img class="h-20 w-auto" src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo" />
+          <img class="h-20 w-auto" src="/assets/images/logo_moov_svg.svg" alt="Moov logo" />
         </a>
 
         <div class="md:w-2/5 flex items-center flex-col md:flex-row  justify-between  divide-x">
