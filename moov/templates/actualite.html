@@ -79,11 +79,12 @@
 
       </div>
       <div
-        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article croped-article">
+        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article croped-article ">
 
         <div class="article-overlay"></div>
         <div class="cat-pasti">
-          <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news['data']['attributes']['rubrique']['data']['attributes']['name'] }} </span>
+          <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+            news['data']['attributes']['rubrique']['data']['attributes']['name'] }} </span>
         </div>
         <h1 class="text-5xl text-bold mb-4 lg:text-7xl xl:text-8xl">
           {{ news['data']['attributes']['title'] }}
@@ -98,10 +99,18 @@
           {% endif %}
           <span class="mr-4"> © </span>
           <span class="mr-4"> {{ news['data']['attributes']["copyright"] | title }}</span>
-          <span class="mr-4 inline-flex items-center flex-nowrap">
-            <!--            <img class="h-6 pr-2" src="/assets/images/share-gray.svg">-->
-            <!-- 130 -->
-          </span>
+          <a
+            href="https://moov-web.sudo.mg/article/{{ news['data']['id'] }}-{{ news['data']['attributes']['slugId'] }}">
+
+            <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+              onclick="return false;">
+              <i class="fas fa-share-nodes"
+                onclick="setLinkToShare(`/article/{{ news['data']['id'] }}-{{ news['data']['attributes']['slugId'] }}`)"></i>
+
+              <!-- 130 -->
+            </span>
+          </a>
+
         </div>
         <div class="content news-content">
           <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
@@ -225,8 +234,9 @@
         </div>
       </div>
     </div>
+    {% include 'includes/share-popover.html' %}
   </section>
-  {% include 'includes/share-popover.html' %}
+
 
 </main>
 {% endblock %}

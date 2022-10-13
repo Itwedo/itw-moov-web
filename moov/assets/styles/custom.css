@@ -431,7 +431,9 @@ currency
 
 /* share links */
 .pop-comp-content {
+
     width: 160px;
+    z-index: 30090;
 }
 
 .platform-list-item {
@@ -452,4 +454,9 @@ currency
 
 .popover-share {
     font-size: 2rem;
+}
+
+
+.pop-comp-wrapper {
+    z-index: 3000 !important;
 }
