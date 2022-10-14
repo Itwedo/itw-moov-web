@@ -9,7 +9,7 @@ setup(
     name="moov-web",
     author="codeandscale.com",
     author_email="hi@codeandscale.com",
-    version="0.1",
+    version="1.0",
     packages=find_packages(),
     description="moov web",
     install_requires=[
