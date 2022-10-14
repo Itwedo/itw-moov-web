@@ -48,7 +48,7 @@ except KeyError:
         "STRAPI_API_URL", "https://moov-cms.sudo.mg/api"
     )
     STRAPI_API_AUTH_TOKEN = {
-        "Authorization": "Bearer 1c901303b81202af57d48292eb65174d560dc19675976fb383c0b5891cfeed25d08fcb6410614126f7ee2c474c8be300f2c726fd9441918f50ba29909602d01e21635132aaf2841948eee9c09c3ec616e9c9e8ecd1f0f8dd75492da9830a2ff58f5e54d79ac2188b2dc70ab4d87ee1704b70627ed5c9fb9c4f391be350906ab1"
+        "Authorization": "Bearer a054f3cd7166597996223ca3ea11bfba225e6641aff4c258ffdb7a104eec12137d339f25407c097700c5bc9282fe32c3c2f2a96db00007f80f2b02f8eda2605aac0f3711fcce4b5067eaece186aa96a861fdcb33664d69bf62df691b23c3d8fc33733da0baab3a87aa6795eaa7734d1d27206e203eac7b18a954508c7cbf5f5d"
     }
     STRAPI_PUBLIC_URL = os.environ.get(
         "STRAPI_PUBLIC_URL",

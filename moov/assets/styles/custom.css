@@ -273,6 +273,13 @@
     -webkit-box-orient: vertical;
 }
 
+.threelines-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .news-card h2 {
     overflow: hidden;
     display: -webkit-box;
