@@ -2,13 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-from operator import contains
 import os
-from cv2 import error
 import requests
 import json
 from pathlib import Path
-import csv
 import cv2
 
 import PIL
@@ -16,9 +13,7 @@ import PIL
 
 # from requests_html import HTML, HTMLSession
 from ..config import *
-from .legacy_extractor.mapping import map_category
 from ..utils import get_rubrique_id
-import imghdr
 
 
 class Connector(object):
