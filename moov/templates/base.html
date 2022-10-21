@@ -200,7 +200,6 @@
               class="menu-item horizontal">{{category["display"]}}</a>
             {% endfor%}
 
-            <a href="{{ url_for('news.news') }}" class="menu-item horizontal">Tous</a>
           </div>
         </li>
         <li class="mx-3 dropdown">
@@ -212,7 +211,6 @@
             <a href="{{ url_for('magazine.category_magazines', category=category['slug']) }}"
               class="menu-item horizontal">{{category["display"]}}</a>
             {%endfor%}
-            <a href="{{ url_for('magazine.magazine') }}" class="menu-item horizontal">Tous</a>
           </div>
         </li>
 
@@ -407,9 +405,7 @@
                   class="block pl-7 py-2">{{category["display"]}}</a>
               </li>
               {% endfor%}
-              <li>
-                <a href="{{ url_for('news.news') }}" class="block pl-7 py-2">Tous</a>
-              </li>
+
             </ul>
           </li>
 
@@ -428,7 +424,6 @@
                   class="block pl-7 py-2">{{category["display"]}}</a>
               </li>
               {%endfor%}
-              <li><a href="{{ url_for('magazine.magazine') }}" class="block pl-7 py-2">Tous</a></li>
             </ul>
           </li>
 
