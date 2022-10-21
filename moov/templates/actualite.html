@@ -142,14 +142,19 @@
             {% endif %}
           </div>
 
-
+          <br /><br />
           {% if bodyCollection %}
 
           <div class="reading-text">
             {% for item in bodyCollection %}
 
-
-            {{ body|markdown|safe }}
+            <div class="float-none  my-2 w-full overflow-hidden">
+              <img class="w-full h-auto mx-auto"
+                src="{{ CMS_URL }}{{item['images']['data']['attributes']['formats']['large']['url']}}" />
+              <span class="img-copyright"> Copyright Image : © {{
+                item['images']['data']['attributes']['caption'] }}</span>
+            </div>
+            <br />
             <div>
               {{item['Text'] |markdown|safe}}
             </div>
