@@ -172,7 +172,7 @@
         <div class="mini-card-v1 mini-card-article no-scrollbar">
           {% for item in regular %}
           <a class="mini-card relative flex pb-4"
-            href="{{ url_for('article.news_article', id=item['id'],slug=item['attributes']['slugId']) }}">
+            href="{{ url_for('article.news_article', id=item['id']) }}">
             <div class="relative overflow-hidden w-full md:w-2/5">
               <img class="img-absolute-cover img-hover-scale"
                 src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
@@ -226,7 +226,7 @@
               </span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=item['id'],slug=item['attributes']['slugId'] )}}">
+              href="{{ url_for('article.news_article', id=item['id'] )}}">
               <h2 class="text-2xl mb-3 sm:text-4xl">{{ item['attributes']['title'] }}</h2>
               <div class="card-time flex items-center">
                 <span class="mr-4">{{ item['attributes']["date"]|date }}</span>

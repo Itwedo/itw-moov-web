@@ -39,7 +39,7 @@
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=result['data'][0]['id'],slug=result['data'][0]['attributes']['slugId']) }}">
+              href="{{ url_for('article.news_article', id=result['data'][0]['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ result["data"][0]["attributes"]["title"] }}
               </h2>
@@ -53,7 +53,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=result['data'][0]['id'],slug=result['data'][0]['attributes']['slugId']) }}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=result['data'][0]['id']) }}`)"></i>
 
                   <!-- 130 -->
                 </span>
@@ -75,7 +75,7 @@
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}">
+              href="{{ url_for('article.news_article', id=element['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ element["attributes"]["title"] }}
               </h2>
@@ -90,7 +90,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id']) }}`)"></i>
 
                   <!-- 130 -->
                 </span>
@@ -121,7 +121,7 @@
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}">
+              href="{{ url_for('article.news_article', id=element['id']) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ element["attributes"]["title"] }}
               </h2>
@@ -136,7 +136,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'],slug=element['attributes']['slugId']) }}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id']) }}`)"></i>
 
                   <!-- 130 -->
                 </span>
@@ -165,8 +165,7 @@
             derniers articles</h2>
           <div class="mini-card-v1 no-scrollbar">
             {% for news in result["data"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"],
-              slug=news['attributes']["slugId"]) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"]) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
@@ -186,8 +185,7 @@
                     </span>
                     <span class=" inline-flex items-center flex-nowrap popover-share"
                       data-popover-target="#popover-target" onclick="return false;">
-                      <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'],
-                    slug=news['attributes']['slugId']) }}`)"></i>
+                      <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id']) }}`)"></i>
 
                       <!-- 130 -->
                     </span>
