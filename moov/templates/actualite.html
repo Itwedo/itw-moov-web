@@ -137,9 +137,25 @@
             {% endif %}
           </div>
           <div class="reading-text">
+            {% if body %}
+            {{ body|markdown|safe }}
+            {% endif %}
+          </div>
+
+
+          {% if bodyCollection %}
+
+          <div class="reading-text">
+            {% for item in bodyCollection %}
+
 
             {{ body|markdown|safe }}
+            <div>
+              {{item['Text'] |markdown|safe}}
+            </div>
+            {% endfor %}
           </div>
+          {% endif %}
 
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
