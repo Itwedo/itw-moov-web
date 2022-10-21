@@ -131,36 +131,15 @@
 
           </div>
 
-
-          <div class="reading-text">
-            {% for item in bodyCollection %}
-            {% if loop.index == 1 %}
-              {% if item['images']['data']%}
-              <div class="float-none  my-2 w-full overflow-hidden">
-                <img class="w-full h-auto mx-auto"
-                  src="{{ CMS_URL }}{{item['images']['data']['attributes']['url']}}" />
-                <span class="img-copyright"> Copyright Image : © {{
-                  item['images']['data']['attributes']['caption'] }}</span>
-              </div>
-              {% endif %}
-            {% else %}
-              {% if item['images']['data']%}
-              <br /><br />
-              <div class="float-none  my-5 w-full overflow-hidden">
-                <img class="w-full h-auto mx-auto"
-                  src="{{ CMS_URL }}{{item['images']['data']['attributes']['url']}}" />
-                <span class="img-copyright"> Copyright Image : © {{
-                  item['images']['data']['attributes']['caption'] }}</span>
-              </div><br />
-              {% endif %}
+          <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
+            {% if number_of_images > 1 %}
+            <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
             {% endif %}
-
-            <div>
-              {{item['Text'] |markdown|safe}}
-            </div>
-            {% endfor %}
           </div>
+          <div class="reading-text">
 
+            {{ body|markdown|safe }}
+          </div>
 
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
