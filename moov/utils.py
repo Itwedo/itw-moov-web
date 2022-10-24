@@ -229,7 +229,7 @@ def get_category_display(category):
             "sort": "order:asc"
         },
         headers=STRAPI_API_AUTH_TOKEN,
-    ).json()["data"][0]["attributes"]["name"]
+    ).json()["data"][0]["attributes"]
 
 
 def get_rubriques():

@@ -2,7 +2,7 @@
 {% block meta %}
 <meta name="description" content="Actualités">
 {% endblock %}
-{% block title %}{{category}}{% endblock %}
+{% block title %}{{category['name']}}{% endblock %}
 
 
 {% block content %}
@@ -16,15 +16,15 @@
               <a href="{{ url_for('home.home') }}">Accueil </a>
             </li>
             <li class="breadcrumb-item">
-              <a href="{{ url_for('news.news') }}">{{type}}</a>
+              <a href="{{ url_for('news.news') }}">{{type['name']}}</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="{{ url_for('news.news') }}">{{category}}</a>
+              <a href="{{ url_for('news.news') }}">{{category['name']}}</a>
             </li>
           </ul>
         </div>
         <div class="big-title flex items-center w-full pt-5 pb-9">
-          <h2 class="title text-8xl text-center md:text-left w-full md:w-1/2 xl:w-1/3 md:text-6xl">{{category}}</h2>
+          <h2 class="title text-8xl text-center md:text-left w-full md:w-1/2 xl:w-1/3 md:text-6xl">{{category['name']}}</h2>
           <div class="line flex items-center hidden md:block w-1/2 xl:w-2/3">
             <div class="h-1 w-full bg-gray-400">
             </div>
@@ -36,10 +36,10 @@
               src="{{ CMS_URL }}{{ result['data'][0]['attributes']['images']['data'][0]['attributes']['url'] }}"
               alt="Image" onerror="this.src='/assets/images/moov_square.svg';">
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category['name']}}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=result['data'][0]['id'], slug=result['data'][0]['attributes']['slugId']) }}">
+              href="{{ url_for('article.news_article', id=result['data'][0]['id'], slug=result['data'][0]['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ result["data"][0]["attributes"]["title"] }}
               </h2>
@@ -53,7 +53,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=result['data'][0]['id'] , slug=result['data'][0]['attributes']['slugId']) }}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=result['data'][0]['id'] , slug=result['data'][0]['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}`)"></i>
 
                   <!-- 130 -->
                 </span>
@@ -72,10 +72,10 @@
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
               onerror="this.src='/assets/images/moov_square.svg';">
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category['name']}}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId']) }}">
+              href="{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ element["attributes"]["title"] }}
               </h2>
@@ -90,7 +90,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId']) }}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}`)"></i>
 
                   <!-- 130 -->
                 </span>
@@ -118,10 +118,10 @@
               src="{{ CMS_URL }}{{ element['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
               onerror="this.src='/assets/images/moov_square.svg';">
             <div class="cat-pasti absolute top-8 left-0">
-              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category}}</span>
+              <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{category['name']}}</span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId']) }}">
+              href="{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}">
               <h2 class="text-2xl mb-3 sm:text-4xl">
                 {{ element["attributes"]["title"] }}
               </h2>
@@ -136,7 +136,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId']) }}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=element['id'], slug=element['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}`)"></i>
 
                   <!-- 130 -->
                 </span>
@@ -165,7 +165,7 @@
             derniers articles</h2>
           <div class="mini-card-v1 no-scrollbar">
             {% for news in result["data"] %}
-            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"], slug=news["attributes"]["slugId"]) }}>
+            <a class="mini-card relative flex pb-4" href={{ url_for('article.news_article', id=news["id"], slug=news["attributes"]["slugId"], category=category['slug'], type=type['slug'] ) }}>
               <div class="relative overflow-hidden w-full md:w-2/5">
                 <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto"
                   src="{{ CMS_URL }}{{ news['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
@@ -185,7 +185,7 @@
                     </span>
                     <span class=" inline-flex items-center flex-nowrap popover-share"
                       data-popover-target="#popover-target" onclick="return false;">
-                      <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'],slug=news['attributes']['slugId']) }}`)"></i>
+                      <i class="fas fa-share-nodes" onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'],slug=news['attributes']['slugId'], category=category['slug'], type=type['slug'] ) }}`)"></i>
 
                       <!-- 130 -->
                     </span>

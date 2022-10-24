@@ -83,5 +83,5 @@ def category_magazines(category):
         "category": get_category_display(category),
         "result": result.json(),
         "page": request.args.get("page", 1),
-        "type": "Tendances",
+        "type": {"name": "Tendances", "slug":"tendance"},
     }

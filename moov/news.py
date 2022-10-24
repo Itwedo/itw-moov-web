@@ -72,5 +72,5 @@ def category_actuality(category):
         "category": get_category_display(category),
         "result": result.json(),
         "page": request.args.get("page", 1),
-        "type": "Actualités",
+        "type": {"name":"Actualités", "slug":"actualite"},
     }
