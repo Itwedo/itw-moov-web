@@ -10,9 +10,9 @@ import requests
 app = Blueprint("article", __name__, url_prefix="/article")
 
 
-@app.route("/<int:id>")
+@app.route("/<int:id>-<slug>")
 @use_template("actualite.html")
-def news_article(id):
+def news_article(id, slug):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": ["images","rubrique","bodyCollection","bodyCollection.images"]},

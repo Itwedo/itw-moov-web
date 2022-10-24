@@ -90,7 +90,7 @@ def home():
                 "head": item["attributes"]["head"],
                 "images": item["attributes"]["images"]["data"],
                 "category": item["attributes"]["rubrique"]["data"]["attributes"]["name"],
-                "slugId": item["attributes"]["slugId"],
+                "slugId": item["attributes"]["slugId"] if item["attributes"]["slugId"] else "article",
                 "copyright": item["attributes"]["copyright"]
             }
             for item in spotlights.json()["data"]

@@ -224,7 +224,32 @@ def update_actuality():
         count += len(data)
         click.echo(f"/{count} actus")
 
+@cmd.command()
+def update_slug():
+    count=0
+    while True:
+        response = requests.get(
+            url=f"{STRAPI_API_URL}/actualites",
+            headers=STRAPI_API_AUTH_TOKEN,
+            params={
+                "populate": "images",
+                "sort": "id:desc",
+                "pagination[start]": count,
+                "pagination[limit]": 25,
+            },
+        )
+        data = response.json()["data"]
+        if not data:
+            break
+        for article in tqdm(data, desc=str(count)):
+            requests.put(
+                url=f"{STRAPI_API_URL}/actualites/{article['id']}",
+                headers=STRAPI_API_AUTH_TOKEN,
+                json={"data": {"title": article["attributes"]["title"]+" "}},
+            )
 
+        count += len(data)
+        click.echo(f"/{count} actus")
 
 @cmd.command()
 def get_category():
