@@ -50,7 +50,7 @@ def news():
     return {"result": result.json(), "page": request.args.get("page", 1)}
 
 
-@app.route("/<category>")
+@app.route("/<string:category>")
 @use_template("category.html")
 def category_actuality(category):
     if category == "médecine-et-santé":

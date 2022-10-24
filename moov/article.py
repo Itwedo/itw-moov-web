@@ -7,12 +7,14 @@ from .utils import cut_body, use_template
 import requests
 
 
-app = Blueprint("article", __name__, url_prefix="/article")
+app = Blueprint("article", __name__, url_prefix="")
 
 
-@app.route("/<int:id>-<slug>")
+@app.route("/article/<int:id>-<slug>")
+@app.route("/<type>/<int:id>-<slug>")
+@app.route("/<type>/<category>/<int:id>-<slug>")
 @use_template("actualite.html")
-def news_article(id, slug):
+def news_article(id, slug, type=None, category=None):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": ["images","rubrique","bodyCollection","bodyCollection.images"]},
