@@ -225,7 +225,8 @@ def update_actuality():
         click.echo(f"/{count} actus")
 
 @cmd.command()
-def update_slug():
+@click.argument("category", type=str)
+def update_slug(category):
     count=0
     while True:
         response = requests.get(
@@ -234,8 +235,9 @@ def update_slug():
             params={
                 "populate": "images",
                 "sort": "id:desc",
+                "filters[rubrique][slug][$eq]":category,
                 "pagination[start]": count,
-                "pagination[limit]": 25,
+                "pagination[limit]": 100,
             },
         )
         data = response.json()["data"]

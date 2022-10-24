@@ -232,7 +232,7 @@
               </span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=item['id'])}}">
+              href="{{ url_for('article.news_article', id=item['id'], slug=item['attributes']['slugId'])}}">
               <h2 class="text-2xl mb-3 sm:text-4xl">{{ item['attributes']['title'] }}</h2>
               <div class="card-time flex items-center">
                 {% if item['attributes']["date"]|date %}
@@ -244,7 +244,7 @@
                 <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                   onclick="return false;">
                   <i class="fas fa-share-nodes"
-                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=item['id'] )}}`)"></i>
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=item['id'] , slug=item['attributes']['slugId'])}}`)"></i>
 
                   <!-- 130 -->
                 </span>
