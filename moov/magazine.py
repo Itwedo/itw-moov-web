@@ -8,7 +8,7 @@ from .config import *
 
 import requests
 
-app = Blueprint("magazine", __name__, url_prefix="/magazine")
+app = Blueprint("magazine", __name__, url_prefix="/magazines")
 
 
 @app.route("/")

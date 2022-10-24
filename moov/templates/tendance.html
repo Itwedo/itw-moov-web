@@ -24,7 +24,7 @@
               news['attributes']['rubrique']['data']['attributes']['name'] }}</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
-            href={{ url_for('article.news_article', id=news["id"],slug=news['attributes']['slugId'] ) }}>
+            href={{ url_for('article.news_article', id=news["id"],slug=news['attributes']['slugId'], type='magazine' ) }}>
             <h2 class="text-4xl mb-3">{{ news["attributes"]["title"] }}</h2>
             <div class="card-time">
               <span class="mr-4">{{ news["attributes"]["date"]|date }}</span>
@@ -32,7 +32,7 @@
               <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                 onclick="return false;">
                 <i class="fas fa-share-nodes"
-                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId']) }}`)"></i>
+                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId'], type='magazine') }}`)"></i>
 
                 <!-- 130 -->
               </span>
@@ -55,7 +55,7 @@
       <div class="grid gap-x-20 gap-y-10 mini-card-v3 no-scrollbar mt-10 mx-5 md:mx-20 grid-cols-1 lg:grid-cols-2">
         {% for news in result["people"] %}
         <a class="mini-card relative flex cat-mini-card " href={{ url_for('article.news_article',
-          id=news["id"], slug=news["attributes"]["slugId"]) }}>
+          id=news["id"], slug=news["attributes"]["slugId"], type='magazine') }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette">
             <img class="img-absolute-cover img-hover-scale"
               src={{CMS_URL}}{{news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
@@ -103,7 +103,7 @@
               news['attributes']['rubrique']['data']['attributes']['name']}}</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
-            href={{ url_for('article.news_article', id=news["id"], slug=['attributes']['slugId']) }}>
+            href={{ url_for('article.news_article', id=news["id"], slug=['attributes']['slugId'], type='magazine') }}>
             <h2 class="text-4xl mb-3">{{ news["attributes"]["title"] }}</h2>
             <div class="card-time">
               <span class="mr-4">{{ news["attributes"]["date"]|date }}</span>
@@ -112,7 +112,7 @@
               <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                 onclick="return false;">
                 <i class="fas fa-share-nodes"
-                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId']) }}`)"></i>
+                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId'], type='magazine') }}`)"></i>
 
                 <!-- 130 -->
               </span>
@@ -154,7 +154,7 @@
       <div class="grid gap-x-20 gap-y-10 mini-card-v3 no-scrollbar mt-10 mx-5 md:mx-20 grid-cols-1 lg:grid-cols-2">
         {% for news in result["magazines"][11:15] %}
         <a class="mini-card relative flex" href={{ url_for('article.news_article',
-          id=news["id"], slug=news['attributes']['slugId']) }}>
+          id=news["id"], slug=news['attributes']['slugId'], type='magazine') }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette ">
             <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
               news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
@@ -208,7 +208,7 @@
               news['attributes']['rubrique']['data']['attributes']['name']}}</span>
           </div>
           <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8 "
-            href={{ url_for('article.news_article', id=news["id"], slug=news["attributes"]["slugId"]) }}>
+            href={{ url_for('article.news_article', id=news["id"], slug=news["attributes"]["slugId"], type='magazine') }}>
             <h2 class="text-4xl mb-3">{{ news["attributes"]["title"] }}</h2>
             <div class="card-time">
               <span class="mr-4">{{ news["attributes"]["date"]|date }}</span>
@@ -216,7 +216,7 @@
               <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
                 onclick="return false;">
                 <i class="fas fa-share-nodes"
-                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId']) }}`)"></i>
+                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId'], type='magazine') }}`)"></i>
 
                 <!-- 130 -->
               </span>
