@@ -46,14 +46,14 @@
   <section>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">People</h2>
+        <h2 class="text-6xl text-center">{{result['category_1']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-normal text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='people') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_1']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="grid gap-x-20 gap-y-10 mini-card-v3 no-scrollbar mt-10 mx-5 md:mx-20 grid-cols-1 lg:grid-cols-2">
-        {% for news in result["people"] %}
+        {% for news in result["category_1"]["articles"] %}
         <a class="mini-card relative flex cat-mini-card " href={{ url_for('article.news_article',
           id=news["id"], slug=news["attributes"]["slugId"], type='magazine') }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette">
@@ -86,14 +86,14 @@
   <section >
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">Santé & Bien-être</h2>
+        <h2 class="text-6xl text-center">{{result['category_2']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-light text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_2']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="mx-auto 2xl:px-36 3xl:px-48 2xl:container">
       <div class="grid gap-10 mt-10 sj-slide sj-slide-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {% for news in result["magazines"][8:11] %}
+        {% for news in result["category_2"]["articles"] %}
         <div class="slide-item news-card-v2 relative overflow-hidden w-full">
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
@@ -145,14 +145,14 @@
   <section>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">Maison & Jardin</h2>
+        <h2 class="text-6xl text-center">{{result['category_3']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-normal text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_3']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="grid gap-x-20 gap-y-10 mini-card-v3 no-scrollbar mt-10 mx-5 md:mx-20 grid-cols-1 lg:grid-cols-2">
-        {% for news in result["magazines"][11:15] %}
+        {% for news in result["category_3"]['articles'] %}
         <a class="mini-card relative flex" href={{ url_for('article.news_article',
           id=news["id"], slug=news['attributes']['slugId'], type='magazine') }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette ">
@@ -190,14 +190,14 @@
   <section class="pb-12 px-8">
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">High-tech</h2>
+        <h2 class="text-6xl text-center">{{result['category_4']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-light text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='connected-life') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_4']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="mx-auto 2xl:px-36 3xl:px-48 2xl:container">
       <div class="grid gap-10 mt-10 sj-slide sj-slide-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {% for news in result["hightech"] %}
+        {% for news in result["category_4"]["articles"] %}
         <div class="slide-item  news-card-v2 relative overflow-hidden w-full">
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
             news["attributes"]["images"]["data"][0]["attributes"]["url"] }}

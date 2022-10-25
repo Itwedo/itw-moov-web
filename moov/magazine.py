@@ -28,37 +28,24 @@ def magazine():
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
-    people = requests.get(
-        url=f"{STRAPI_API_URL}/actualites",
+    rubriques = requests.get(
+        url=f"{STRAPI_API_URL}/magazine",
         params={
-            "populate": ["images","rubrique"],
-            "sort": "id:desc",
-            "filters[rubrique][type][$eq]": "Tendance",
-            "filters[rubrique][slug][$eq]": "people",
-            "pagination[pageSize]": 4,
-            "pagination[page]": request.args.get("page", 1),
-            "pagination[withCount]": 1,
+            'populate':'categorie.rubrique'
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
+    categories_news =[]
+    for rubrique in rubriques.json()['data']['attributes']['categorie']:
+        rubrique=rubrique['rubrique']['data']['attributes']
+        categories_news.append({"rubrique" : rubrique,"articles" : get_news_by_rubrique(rubrique,4,1,request)})
 
-    hightech = requests.get(
-        url=f"{STRAPI_API_URL}/actualites",
-        params={
-            "populate": ["images","rubrique"],
-            "sort": "id:desc",
-            "filters[rubrique][type][$eq]": "Tendance",
-            "filters[rubrique][slug][$eq]": "connected-life",
-            "pagination[pageSize]": 3,
-            "pagination[page]": request.args.get("page", 1),
-            "pagination[withCount]": 1,
-        },
-        headers=STRAPI_API_AUTH_TOKEN,
-    )
     data = {
         "magazines": result.json()["data"],
-        "people": people.json()["data"],
-        "hightech": hightech.json()["data"],
+        "category_1": categories_news[0],
+        "category_2": categories_news[1],
+        "category_3": categories_news[2],
+        "category_4": categories_news[3]
     }
     return {"result": data, "page": request.args.get("page", 1)}
 
@@ -85,3 +72,20 @@ def category_magazines(category):
         "page": request.args.get("page", 1),
         "type": {"name": "Tendances", "slug":"tendance"},
     }
+
+
+def get_news_by_rubrique(rubrique,article_per_page,page_count,request):
+    return requests.get(
+        url=f"{STRAPI_API_URL}/actualites",
+        params={
+            "populate": ["images","rubrique"],
+            "sort": "id:desc",
+            "filters[rubrique][type][$eq]": rubrique['type'],
+            "filters[rubrique][slug][$eq]": rubrique['slug'],
+            "pagination[pageSize]": article_per_page,
+            "pagination[page]": request.args.get("page", 1),
+            "pagination[withCount]": page_count,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    ).json()["data"]
+
