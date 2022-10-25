@@ -248,7 +248,8 @@ def get_rubrique_id(article_category):
         if m["name"] == article_category:
             return m["id"]
         else:
-            return 0
+            pass
+    return 0
 
 
 def use_template(template=None):
