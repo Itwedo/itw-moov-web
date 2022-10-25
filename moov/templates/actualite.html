@@ -113,8 +113,9 @@
 
         </div>
         <div class="content news-content">
+          {% if news['data']['attributes']['head']  %}
           <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
-
+{% endif %}
           <div class="article-pub">
             <div
               class=" slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">

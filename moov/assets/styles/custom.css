@@ -414,6 +414,7 @@
 .reading-text {
     line-height: 1.8;
     text-align: justify;
+    text-justify: newspaper !important;
 }
 
 .reading-text h3 {
