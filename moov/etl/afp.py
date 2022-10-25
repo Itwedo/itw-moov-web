@@ -5,6 +5,7 @@ import requests
 from requests_html import HTML, HTMLSession
 import PIL
 from .. import config
+from ..utils import get_rubrique_id
 
 
 class Connector(object):
@@ -44,6 +45,7 @@ class Connector(object):
                 guid = item.find("guid", first=True).text
                 description = item.find("description", first=True).text
                 media = item.find("content", first=True).attrs.get("url")
+                media_copyright = item.find("copyright", first=True).text
                 row = {
                     "title": title,
                     "pubDate": pubDate,
@@ -51,14 +53,17 @@ class Connector(object):
                     "category": self.mapping_category(category),
                     "description": description,
                     "media": media,
+                    "media_copyright": media_copyright
                 }
                 self.feed.append(row)
         return self.feed
 
     def insert_element(self, element):
         image_url = element["media"]
+        image_caption=element["media_copyright"]
         image_name = image_url.split("/")[-1]
         image = requests.get(image_url, stream=True)
+        print(image_caption)
         with open(f"/tmp/{image_name}", "wb") as f:
             for chunk in image:
                 f.write(chunk)
@@ -71,13 +76,16 @@ class Connector(object):
                         files={
                             "files": (image_name, f, "image/jpeg"),
                             "Content-Disposition": f'form-data; name="file"; filename={image_name}',
+                            "fileInfo": '{"caption": "image_caption"}',
                             "Content-Type": "image/jpeg",
                         },
+
                     )
                 try:
                     obj = response.json()[0]
                 except Exception:
                     obj = None
+
                 head, body = element["description"].split("\n", 1)
                 body = (
                     body.replace("- ", "### ")
@@ -90,8 +98,9 @@ class Connector(object):
                     "head": head,
                     "body": body,
                     "copyright": "afp",
-                    "category": element["category"],
-                    "Type": self.type,
+                    "rubrique": [get_rubrique_id(element["category"])],
+                    "metaTitle": element["title"][:79],
+                    "metaDescription": head[:119]
                 }
                 if obj:
                     article_data["images"] = obj["id"]
