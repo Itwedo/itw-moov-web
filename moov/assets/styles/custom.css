@@ -314,6 +314,15 @@
     display: block !important;
 }
 
+
+.main-img-copiright{
+position: absolute;
+bottom: 0;
+z-index: 40;
+color: #ffd100;
+padding: 24px 40px;
+}
+
 .article-feature-img img,
 .slide-img-item {
     object-position: center;
