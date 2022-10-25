@@ -140,6 +140,10 @@
     text-decoration: underline;
 }
 
+.no-click-flash{
+    cursor: default;
+}
+
 .go-to-article {
     font-size: 0.4 !important;
 }
