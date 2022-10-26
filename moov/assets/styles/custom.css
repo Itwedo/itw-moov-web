@@ -129,7 +129,7 @@
 
 /* flash actus */
 #flash_feature_home{
-    margin-top: -100px;
+    margin-top: -14vh;
 }
 
 #flash_container{
@@ -140,7 +140,7 @@
     height: 37rem;
 }
 #featured-news-card{
-    padding-top: 24px;
+    padding-top: 3.5vh;
 }
 
 .flash-actu {

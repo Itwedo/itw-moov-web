@@ -3,7 +3,32 @@
 Large Screen - Others
 ====================================
 */
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1920px){
+    #featured-news-card{
+        padding-top: 13vh;
+    }
+    #flash_container{
+        height: 510px;
+    }
+
+}
+@media screen and (min-width: 1536px) and (max-width:1919px){
+    #featured-news-card{
+        padding-top: 7.6vh;
+    }
+}
+@media screen and (min-width: 1400px) and (max-width:1535px){
+    #featured-news-card{
+        padding-top: 3.5vh;
+    }
+
+    #flash_container{
+        height: 514px;
+    }
+    
+    .flash-actu .list{
+        height: 37rem;
+    }
 
     .header-headline {
         width: 41vw;
@@ -33,6 +58,9 @@ Large Screen - Others
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1399px) {
+    #featured-news-card{
+        padding-top: 3.5vh;
+    }
 
     .header-headline {
         width: 41vw;
@@ -61,6 +89,9 @@ Large Screen - Others
 
 @media screen and (max-width: 1199px) {
 
+    #featured-news-card{
+        padding-top: 3.5vh;
+    }
     .header-headline {
         width: 41vw;
 
@@ -90,6 +121,9 @@ Medium Screen - Others
 ====================================
 */
 @media screen and (min-width: 992px) and (max-width: 1000px) {
+    #featured-news-card{
+        padding-top: 3.5vh;
+    }
 
     .header-headline {
         width: 100%;
