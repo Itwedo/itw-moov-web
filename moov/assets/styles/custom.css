@@ -128,6 +128,21 @@
 /* end slider */
 
 /* flash actus */
+#flash_feature_home{
+    margin-top: -100px;
+}
+
+#flash_container{
+    height: 514px;
+}
+
+.flash-actu .list{
+    height: 37rem;
+}
+#featured-news-card{
+    padding-top: 24px;
+}
+
 .flash-actu {
     background-color: #0090cb;
     margin-left: 0;
