@@ -60,7 +60,7 @@ class Connector(object):
 
     def insert_element(self, element):
         image_url = element["media"]
-        image_caption=element["media_copyright"]
+        image_caption = element["media_copyright"]
         image_name = image_url.split("/")[-1]
         image = requests.get(image_url, stream=True)
         with open(f"/tmp/{image_name}", "wb") as f:
@@ -85,30 +85,31 @@ class Connector(object):
                 except Exception:
                     obj = None
 
-                head, body = element["description"].split("\n", 1)
-                body = (
-                    body.replace("- ", "### ")
-                    .replace(" -", "")
-                    .replace("\n", "\n\n")
-                    .replace("]]>", "")
-                )
-                article_data = {
-                    "title": element["title"],
-                    "head": head,
-                    "body": body,
-                    "copyright": "afp",
-                    "rubrique": [get_rubrique_id(element["category"])],
-                    "metaTitle": element["title"][:79],
-                    "metaDescription": head[:119]
-                }
-                if obj:
-                    article_data["images"] = obj["id"]
+                head, body = element["description"]\
+                    .replace("<![CDATA[\n", "")\
+                    .replace("- ", "### ")\
+                    .replace(" -", "")\
+                    .replace("\n", "\n\n")\
+                    .replace("]]>", "")\
+                    .split("\n", 1)
 
-                response = requests.post(
-                    url=f"{config.STRAPI_API_URL}/actualites",
-                    headers=config.STRAPI_API_AUTH_TOKEN,
-                    json={"data": article_data},
-                )
+                if obj:
+                    article_data = {
+                        "title": element["title"],
+                        "head": head,
+                        "body": body,
+                        "copyright": "afp",
+                        "rubrique": [get_rubrique_id(element["category"])],
+                        "metaTitle": element["title"][:79],
+                        "metaDescription": head[:119],
+                        "images": obj["id"]
+                    }
+
+                    response = requests.post(
+                        url=f"{config.STRAPI_API_URL}/actualites",
+                        headers=config.STRAPI_API_AUTH_TOKEN,
+                        json={"data": article_data},
+                    )
         except PIL.UnidentifiedImageError:
             pass
 
