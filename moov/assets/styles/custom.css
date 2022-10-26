@@ -128,8 +128,20 @@
 /* end slider */
 
 /* flash actus */
+.flash-actu {
+    background-color: #0090cb;
+    margin-left: 0;
+    margin-top: 0;
+    width: unset;
+    padding: 1.5rem 6rem 0 6rem;
+}
+
 .linked-flash-actu:hover {
     text-decoration: underline;
+}
+
+.no-click-flash{
+    cursor: default;
 }
 
 .go-to-article {
@@ -306,6 +318,15 @@
     display: block !important;
 }
 
+
+.main-img-copiright{
+position: absolute;
+bottom: 0;
+z-index: 40;
+color: #ffd100;
+padding: 24px 40px;
+}
+
 .article-feature-img img,
 .slide-img-item {
     object-position: center;
@@ -317,6 +338,16 @@
     margin: 16px 0 !important;
 }
 
+.heading-clamp-2{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card-overlay{
+    height: 130px;
+}
 /* .current-article {
     position: relative;
     height: 640px;
@@ -404,6 +435,7 @@
 .reading-text {
     line-height: 1.8;
     text-align: justify;
+    text-justify: newspaper !important;
 }
 
 .reading-text h3 {

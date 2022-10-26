@@ -30,6 +30,12 @@
 <main>
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden">
+      {% if  news['data']['attributes']["copyright"] %}
+      <div class="main-img-copiright">
+        Copyright Image : © 
+        {{ news['data']['attributes']["copyright"] | title }}
+      </div>
+      {% endif %}
       <img class="backup-image img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image"
         onerror="this.src='/assets/images/MOOV.svg';">
     </div>
@@ -113,8 +119,9 @@
 
         </div>
         <div class="content news-content">
+          {% if news['data']['attributes']['head']  %}
           <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
-
+{% endif %}
           <div class="article-pub">
             <div
               class=" slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
