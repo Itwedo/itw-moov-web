@@ -1,9 +1,6 @@
 from datetime import datetime, date
 from flask import (
     Flask,
-    redirect,
-    request,
-    render_template,
     send_from_directory,
 )
 from logging.config import dictConfig
@@ -21,9 +18,12 @@ from .search import app as search
 from .article import app as article
 from .redirection import app as redirection
 
+from apscheduler.schedulers.background import BackgroundScheduler
+from .etl import afp
+
 import requests
 import markdown2
-
+from tqdm import tqdm
 
 dictConfig(
     {
@@ -95,6 +95,20 @@ app.register_blueprint(news)
 app.register_blueprint(preview)
 app.register_blueprint(search)
 app.register_blueprint(article)
+
+
+def my_scheduled_job():
+    for url in AFP_URLS:
+        obj = afp.Connector(url, "type")
+        feed = obj.get_feed()
+        for info in tqdm(obj.feed):
+            # for info in obj.feed:
+            obj.insert_element(info)
+
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=my_scheduled_job, trigger="interval", seconds=3600)
+scheduler.start()
 
 
 @app.template_filter("date")

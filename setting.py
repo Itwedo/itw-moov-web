@@ -35,6 +35,7 @@ setup(
         "requests",
         "requests-html",
         "captcha==0.4",
+        "APScheduler==3.9.1"
     ],
     entry_points={
         "console_scripts": ["moov = moov.api.cli:cmd"],

@@ -11,6 +11,7 @@ __all__ = [
     "STRAPI_API_URL",
     "STRAPI_API_AUTH_TOKEN",
     "STRAPI_PUBLIC_URL",
+    "AFP_URLS"
 ]
 
 config = configparser.ConfigParser()
@@ -60,3 +61,17 @@ else:
     STRAPI_API_AUTH_TOKEN = {
         "Authorization": f"Bearer {cms_config['STRAPI_API_AUTH_TOKEN']}"
     }
+
+
+try:
+    afp_config = config["AFP"]
+except KeyError:
+    AFP_URLS = os.environ.get(
+        "AFP_URLS", ["https://hosting.afp.com/clients/dts-host/francais/journal/mon/actu.xml",
+                    "https://hosting.afp.com/clients/dts-host/francais/journal/medecine/actu.xml",
+                    "https://hosting.afp.com/clients/dts-host/francais/journal/gen/actu.xml",
+                    "https://hosting.afp.com/clients/dts-host/francais/journal/hightech/actu.xml",
+                    "https://hosting.afp.com/clients/dts-host/francais/journal/spo/actu.xml"]
+    )
+else:
+    APF_URLS = cms_config["STRAPI_PUBLIC_URL"]

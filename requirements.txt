@@ -22,3 +22,5 @@ requests-html
 captcha==0.4
 wheel
 opencv-python
+APScheduler==3.9.1
+

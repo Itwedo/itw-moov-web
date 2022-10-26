@@ -28,7 +28,7 @@ class Connector(object):
             "Monde": "Internationale",
             "Sante": "Médecine & Santé",
             "People": "People",
-            "Tech-Media": "High Tech",
+            "Tech-Media": "HighTech",
             "Sport": "Sport",
         }
         return categories[category]
@@ -63,7 +63,6 @@ class Connector(object):
         image_caption=element["media_copyright"]
         image_name = image_url.split("/")[-1]
         image = requests.get(image_url, stream=True)
-        print(image_caption)
         with open(f"/tmp/{image_name}", "wb") as f:
             for chunk in image:
                 f.write(chunk)
