@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from flask import (
     Flask,
     send_from_directory,
@@ -112,7 +112,7 @@ scheduler.start()
 @app.template_filter("date")
 def _date(s):
     if isinstance(s, str):
-        return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime(
+        return (datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ") + timedelta(hours=3)).strftime(
             "%d/%m/%Y"
         )
     return ""
@@ -121,7 +121,7 @@ def _date(s):
 @app.template_filter("time")
 def _time(s):
     if isinstance(s, str):
-        return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%H:%M")
+        return (datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ")+timedelta(hours=3)).strftime("%H:%M")
     return ""
 
 
