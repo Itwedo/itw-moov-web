@@ -102,7 +102,6 @@ def my_scheduled_job():
         obj = afp.Connector(url, "type")
         feed = obj.get_feed()
         for info in tqdm(obj.feed):
-            # for info in obj.feed:
             obj.insert_element(info)
 
 

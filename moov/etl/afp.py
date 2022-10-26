@@ -92,23 +92,24 @@ class Connector(object):
                     .replace("\n", "\n\n")
                     .replace("]]>", "")
                 )
-                article_data = {
-                    "title": element["title"],
-                    "head": head,
-                    "body": body,
-                    "copyright": "afp",
-                    "rubrique": [get_rubrique_id(element["category"])],
-                    "metaTitle": element["title"][:79],
-                    "metaDescription": head[:119]
-                }
-                if obj:
-                    article_data["images"] = obj["id"]
 
-                response = requests.post(
-                    url=f"{config.STRAPI_API_URL}/actualites",
-                    headers=config.STRAPI_API_AUTH_TOKEN,
-                    json={"data": article_data},
-                )
+                if obj:
+                    article_data = {
+                        "title": element["title"],
+                        "head": head,
+                        "body": body,
+                        "copyright": "afp",
+                        "rubrique": [get_rubrique_id(element["category"])],
+                        "metaTitle": element["title"][:79],
+                        "metaDescription": head[:119],
+                        "images":obj["id"]
+                    }
+
+                    response = requests.post(
+                        url=f"{config.STRAPI_API_URL}/actualites",
+                        headers=config.STRAPI_API_AUTH_TOKEN,
+                        json={"data": article_data},
+                    )
         except PIL.UnidentifiedImageError:
             pass
 
