@@ -59,7 +59,6 @@ class Connector(object):
         return self.feed
 
     def insert_element(self, element):
-        print(element)
         image_url = element["media"]
         image_caption=element["media_copyright"]
         image_name = image_url.split("/")[-1]
@@ -90,8 +89,10 @@ class Connector(object):
                 body = (
                     body.replace("- ", "### ")
                     .replace(" -", "")
+                    .replace("<![CDATA[\n","")
                     .replace("\n", "\n\n")
                     .replace("]]>", "")
+
                 )
 
                 if obj:
