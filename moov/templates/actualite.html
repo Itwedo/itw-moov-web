@@ -122,21 +122,7 @@
           {% if news['data']['attributes']['head']  %}
           <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
 {% endif %}
-          <div class="article-pub">
-            <div
-              class=" slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-              {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
-              <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-                <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
-                  <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                      onerror="this.src='/assets/images/moov_square.svg';"></a>
-                </div>
-
-              </div>
-              {% endfor%}
-            </div>
-
-          </div>
+          
 
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
