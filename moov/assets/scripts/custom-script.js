@@ -25,7 +25,7 @@ $("#read-more-article").click(function () {
         let sectionPubPos = $('.pub-section-slide').offset().top;
         if (window.scrollY >= 980) {
             $("#article-side-pub-container").addClass("fixed-article-side-pub")
-            console.log($("#article-side-pub-container").width())
+            $("#article-side-pub-container").width($("#article-side-pub-container").width())
             let sidePubPos = ($('#article-side-pub-container').offset().top + $('#article-side-pub-container').height())
             if ((sectionPubPos - sidePubPos) < 40) {
                 $("#article-side-pub-container").removeClass("fixed-article-side-pub")

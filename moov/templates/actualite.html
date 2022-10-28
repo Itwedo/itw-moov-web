@@ -230,10 +230,12 @@
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {% for item in same_category %}
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
+
+            {% if item['attributes']['images']['data'] %}
             <img class="img-absolute-cover img-hover-scale"
               src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
               onerror="this.src='/assets/images/MOOV.svg';">
-
+            {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">
                 {{ item['attributes']['rubrique']['data']['attributes']['name'] }}
