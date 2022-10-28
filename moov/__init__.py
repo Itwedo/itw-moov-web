@@ -105,7 +105,7 @@ def my_scheduled_job():
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=my_scheduled_job, trigger="interval", seconds=3600)
+scheduler.add_job(func=my_scheduled_job, trigger="interval", seconds=300)
 scheduler.start()
 
 
