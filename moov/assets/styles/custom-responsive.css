@@ -5,7 +5,7 @@ Large Screen - Others
 */
 @media screen and (min-width: 1920px){
     #featured-news-card{
-        padding-top: 13vh;
+        padding-top: 120px;
     }
     #flash_container{
         height: 510px;
@@ -24,7 +24,7 @@ Large Screen - Others
 
 @media screen and (min-width: 1536px) and (max-width:1919px){
     #featured-news-card{
-        padding-top: 7.6vh;
+        padding-top: 6.6vh;
     }
 
     .news-flash.news-card {
