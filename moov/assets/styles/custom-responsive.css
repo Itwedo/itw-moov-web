@@ -118,6 +118,7 @@ Large Screen - Others
         padding-top: 72px;
     }
 
+   
     .header-headline {
         width: 41vw;
 
@@ -193,6 +194,13 @@ Small Screen - Tablate
 
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
+    #flash_feature_home {
+        margin-top: 24px;
+    }
+
+    #featured-news-card {
+        padding-top: 48px;
+    }
    
     .currency li {
         font-size: 10px;
@@ -318,6 +326,12 @@ Xtra Small Screen - Small Mobile
 ====================================
 */
 @media screen and (max-width: 576px) {
+    #flash_feature_home {
+        margin-top: -1vh;
+    }
+    #featured-news-card {
+        padding-top: 8px;
+    }
     .moov-logo {
         width: 240px;
     }
