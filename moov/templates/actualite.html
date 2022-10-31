@@ -140,6 +140,10 @@
 
           <div class="reading-text">
             {% for item in bodyCollection %}
+                       
+            <div>
+              {{item['Text'] |markdown|safe}}
+            </div>
             {% if item['images']['data'] %}
             <div class="float-none  my-2 w-full overflow-hidden">
               <img class="w-full h-auto mx-auto"
@@ -148,12 +152,9 @@
                 item['images']['data']['attributes']['caption'] }}</span>
             </div>
             {% endif %}
-            <br />
-            <div>
-              {{item['Text'] |markdown|safe}}
-            </div>
             {% endfor %}
           </div>
+          <br />
           {% endif %}
 
           <div class="comment-btn my-9 flex justify-center md:justify-end">
