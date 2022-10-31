@@ -135,7 +135,7 @@
             {% endif %}
           </div>
 
-          <br /><br />
+          <br />
           {% if bodyCollection %}
 
           <div class="reading-text">
@@ -144,6 +144,15 @@
             <div>
               {{item['Text'] |markdown|safe}}
             </div>
+            
+            <div>
+              <strong>
+              {% if news['data']['attributes']['author'] %}
+              {{news['data']['attributes']['author']}}
+              {% endif %}
+              </strong>
+            </div>
+            <br/>
             {% if item['images']['data'] %}
             <div class="float-none  my-2 w-full overflow-hidden">
               <img class="w-full h-auto mx-auto"
@@ -154,8 +163,9 @@
             {% endif %}
             {% endfor %}
           </div>
-          <br />
           {% endif %}
+          
+        
 
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
