@@ -135,7 +135,7 @@
             {% endif %}
           </div>
 
-          <br />
+          
           {% if bodyCollection %}
 
           <div class="reading-text">
@@ -162,6 +162,14 @@
             </div>
             {% endif %}
             {% endfor %}
+          </div>
+          {% else %}
+          <div>
+            <strong>
+            {% if news['data']['attributes']['author'] %}
+            {{news['data']['attributes']['author']}}
+            {% endif %}
+            </strong>
           </div>
           {% endif %}
           
