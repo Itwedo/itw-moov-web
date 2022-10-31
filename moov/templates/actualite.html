@@ -145,6 +145,8 @@
               {{item['Text'] |markdown|safe}}
             </div>
             
+            
+            {% if loop.last %}
             <div>
               <strong>
               {% if news['data']['attributes']['author'] %}
@@ -152,6 +154,7 @@
               {% endif %}
               </strong>
             </div>
+            {% endif %}
             <br/>
             {% if item['images']['data'] %}
             <div class="float-none  my-2 w-full overflow-hidden">
