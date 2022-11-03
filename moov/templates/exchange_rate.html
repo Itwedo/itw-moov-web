@@ -54,13 +54,50 @@
                     <canvas class="mt-10" id="myChart" style="width:100%;max-width:700px"></canvas>
                 </div>
                 <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
-                    {%for ad in ads['side_bar']%}
+                    <div
+                        class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+                        {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
+                        <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+                        <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                            <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                                class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+                        </div>
+
+                        </div>
+                        {% endfor%}
+                    </div>
+                    <div
+                        class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+                        {% for ad in ads['side_bar'][0]%}
+                        <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+                            <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}"
+                                        alt="Moov publicité" class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+                            </div>
+
+                        </div>
+                        {% endfor%}
+                    </div>
+
+                    <div
+                        class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+                        {% for ad in ads['side_bar'][1]%}
+                        <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+                            <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}"
+                                        alt="Moov publicité" class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+                            </div>
+
+                        </div>
+                        {% endfor%}
+                    </div>
+                    <!-- {%for ad in ads['side_bar']%}
                     <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
                         <a href="{{ad['url']}}" target="_blank"></a>
                         <img src="{{CMS_URL}}{{ad['image']}}">
                     </div>
-                   
-                    {%endfor%}
+
+                    {%endfor%} -->
                 </div>
             </div>
         </div>
@@ -92,7 +129,7 @@
             html_output += "<div class='flex-row-2 first' role='cell'>";
             html_output += "<div class='info'>" + data.currency + "</div></div>";
             html_output += "<div class='flex-row-2 first' role='cell'>";
-            html_output += "<div class='info'>" + data.value + "</div></div></div>";
+            html_output += "<div class='info'>" + data.value + " MGA</div></div></div>";
             return html_output;
 
         }

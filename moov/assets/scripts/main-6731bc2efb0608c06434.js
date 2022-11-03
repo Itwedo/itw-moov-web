@@ -291,7 +291,6 @@
                             value: function (e, t) {
                                 if ("undefined" !== e) {
                                     var n = e.slick("getSlick");
-                                    console.log("getSlick slide:", n), n && (console.log("unslick slide"), e.slick("unslick"));
                                 }
                             },
                         },

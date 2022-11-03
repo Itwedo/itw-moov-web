@@ -1,4 +1,9 @@
 /* header  */
+
+.moov-logo {
+    width: 360px;
+}
+
 .custom-navbar {
     display: flex;
     flex-direction: row;
@@ -50,7 +55,13 @@
 
 }
 
-
+.header-headline-caption {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    font-size: 4.5rem;
+    /* overflow: hidden; */
+    /* -webkit-line-clamp: 3; */
+}
 
 /* menu */
 .main-menu-list .menu-item {
@@ -116,6 +127,49 @@
 
 /* end slider */
 
+/* flash actus */
+#flash_feature_home{
+    margin-top: -14vh;
+}
+
+#flash_container{
+    height: 500px;
+}
+
+
+
+.flash-actu .list{
+    height: 37rem;
+}
+#featured-news-card{
+    padding-top: 3.5vh;
+    height: 450px;
+}
+
+.flash-actu {
+    background-color: #0090cb;
+    margin-left: 0;
+    margin-top: 0;
+    width: unset;
+    padding: 1.5rem 4rem 0 4rem;
+}
+
+
+
+.linked-flash-actu:hover {
+    text-decoration: underline;
+}
+
+.no-click-flash{
+    cursor: default;
+}
+
+.go-to-article {
+    font-size: 0.4 !important;
+}
+
+/*end flash actus */
+
 /* pub */
 #home-pub {
     object-fit: cover;
@@ -140,6 +194,9 @@
 
 /* news */
 
+.news-side a {
+    width: 100%;
+}
 
 .news-grid .news-card {
     height: 380px !important;
@@ -224,9 +281,9 @@
 }
 
 
-.news-content {
+/* .news-content {
     text-align: justify;
-}
+} */
 
 .actus-grid-side .mini-card h3 {
     font-size: 18px;
@@ -238,7 +295,28 @@
 }
 
 .mini-card-v1 {
-    max-height: 58.8rem !important;
+    max-height: 63.8rem !important;
+}
+
+.mini-card-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.threelines-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.news-card h2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .mini-img-cover {
@@ -252,6 +330,22 @@
 }
 
 
+.slick-dots {
+    display: none !important;
+}
+
+.home-header .slick-dots {
+    display: block !important;
+}
+
+
+.main-img-copiright{
+position: absolute;
+bottom: 0;
+z-index: 40;
+color: #ffd100;
+padding: 24px 40px;
+}
 
 .article-feature-img img,
 .slide-img-item {
@@ -264,24 +358,109 @@
     margin: 16px 0 !important;
 }
 
-.current-article {
+.heading-clamp-2{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card-overlay{
+    height: 130px;
+}
+/* .current-article {
     position: relative;
-    height: 600px;
+    height: 640px;
     overflow: hidden;
     z-index: 5;
+} */
+.croped-article {
+    height: 640px !important;
+}
+
+.scroll-article {
+
+    overflow-y: scroll !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+
+}
+
+.scroll-article::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-article::-moz-scollbars-none {
+    display: none;
+}
+
+
+.article-side-pub-container {
+    position: relative !important;
+    width: 400px !important;
+    z-index: 100;
+}
+
+.fixed-article-side-pub {
+    position: fixed !important;
+    width: 400px !important;
+    object-fit: cover !important;
+    top: 0px !important;
+    z-index: 200 !important;
+}
+
+/* 
+#article-side-pub {
+    position: absolute;
+    width: 400px;
+    width: 100%;
+    object-fit: cover;
+    top: 640px;
+    z-index: 200;
+    background: yellow !important
+} */
+
+#article-heading {
+    margin: 32px 0 !important;
+}
+
+.current-article {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    z-index: 5;
+    margin-bottom: 24px !important;
+}
+
+.picture {
+    margin-left: 32px !important;
+    margin-bottom: 24px !important;
+}
+
+.img-copyright {
+    position: relative;
+    left: 8px;
+    font-size: 12px;
 }
 
 .article-overlay {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 80px;
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+    height: 140px;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
     z-index: 10;
 }
 
 .reading-text {
     line-height: 1.8;
+    text-align: justify;
+    text-justify: newspaper !important;
+}
+
+.reading-text h3 {
+    font-size: 1.8rem;
+    margin: 16px 0;
 }
 
 .read-more {
@@ -306,4 +485,41 @@ currency
 /* article */
 .picture {
     margin: 0 0 0 24px;
+}
+
+/* contact */
+.contact-form .input-form:focus {
+    outline: none;
+}
+
+/* share links */
+.pop-comp-content {
+
+    width: 160px;
+    z-index: 30090;
+}
+
+.platform-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.platform-icon {
+    display: flex;
+    width: 3.2rem;
+    height: 3.2rem;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.popover-share {
+    font-size: 2rem;
+}
+
+
+.pop-comp-wrapper {
+    z-index: 3000 !important;
 }

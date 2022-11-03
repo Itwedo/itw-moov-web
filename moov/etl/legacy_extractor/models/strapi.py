@@ -22,6 +22,7 @@ class BaseNode(BaseModel):
 
 class Forum(BaseNode):
     body: str
+    category: str
     # ! field_categorie_forum
 
 
@@ -36,6 +37,24 @@ class Actualites(BaseNode):
     head: Optional[str]
     body: str
     images: List[str]
+    category: str
+    # field_images_actus
+    # * field_copyright_image_actus
+    # ! field_type_actualite
+    # field_slider_page_accueil
+    # field_slider_page_categorie
+    # field_compteur_accueil
+    # field_compteur_categorie
+    # field_slider_page_categorie_in
+    # ! field_copyright_contenu
+    # field_lien_sponsoris_actus
+
+
+class Tendances(BaseNode):
+    head: Optional[str]
+    body: str
+    images: List[str]
+    category: str
     # field_images_actus
     # * field_copyright_image_actus
     # ! field_type_actualite

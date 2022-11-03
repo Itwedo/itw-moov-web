@@ -10,7 +10,7 @@ from .config import *
 from .utils import use_template
 
 import requests
-
+import locale
 
 app = Blueprint("home", __name__, url_prefix="/")
 
@@ -21,10 +21,10 @@ def home():
     spotlights = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[spotlight][$eq]": "true",
-            "filters[Type][$eq]": "Actualite",
+            "filters[rubrique][type][$eq]" : "Actualite",
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -49,44 +49,59 @@ def home():
     magazine = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[spotlight][$eq]": "true",
-            "filters[Type][$eq]": "Tendance",
-            "pagination[limit]": 1,
+            "filters[rubrique][type][$eq]": "Tendance",
+            "pagination[limit]": 5,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
-            "filters[source][$eq]": "moov",
-            "pagination[limit]": 100,
+            "filters[rubrique][type][$eq]": "Actualite",
+            "pagination[limit]": 10,
+        },
+        headers=STRAPI_API_AUTH_TOKEN,
+    )
+    magazines = requests.get(
+        url=f"{STRAPI_API_URL}/actualites",
+        params={
+            "populate": ["images","rubrique"],
+            "sort": "id:desc",
+            "filters[rubrique][type][$eq]": "Tendance",
+            "pagination[limit]": 20,
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
 
+    locale.setlocale(locale.LC_TIME,'fr_FR.UTF-8')
     data = {
-        "today": datetime.now().strftime("%A, %d %B %Y"),
+        "today": datetime.now().strftime("%A, %d %B %Y").title(),
         "spotlights": [
             # each spotligh needs an image, an id, a title, createdAt, head
             {
                 "id": item["id"],
                 "title": item["attributes"]["title"],
-                "createdAt": item["attributes"]["createdAt"],
+                "createdAt": item["attributes"]["date"],
                 "head": item["attributes"]["head"],
                 "images": item["attributes"]["images"]["data"],
-                "category":item["attributes"]["category"]
+                "category": item["attributes"]["rubrique"]["data"]["attributes"]["name"],
+                "slugId": item["attributes"]["slugId"] if item["attributes"]["slugId"] else "article",
+                "copyright": item["attributes"]["copyright"]
             }
             for item in spotlights.json()["data"]
         ],
         "flashes": [
             {
                 "head": item["attributes"]["head"],
-                "createdAt": item["attributes"]["createdAt"],
+                "createdAt": item["attributes"]["date"],
                 "id": item["id"],
+                "article": True if item["attributes"].__contains__('slugId') else False,
+                "slugId": item["attributes"]["slugId"] if item["attributes"].__contains__('slugId') else ""
             }
             for item in flashes[:20]
         ],
@@ -98,7 +113,12 @@ def home():
         "magazine": [
             item
             for item in magazine.json()["data"]
+            if item["attributes"]["images"]["data"][0]["attributes"]["width"]
+        ],
+        "magazines": [
+            item
+            for item in magazines.json()["data"]
             if item["attributes"]["images"]["data"]
         ],
     }
-    return {'data': data}
+    return {"data": data}

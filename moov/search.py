@@ -21,7 +21,7 @@ def search():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "filters[title][$containsi]": request.args.get("query", ""),
             "pagination[pageSize]": 8,
@@ -33,7 +33,7 @@ def search():
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
             "pagination[limit]": 100,
         },

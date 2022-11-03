@@ -1,16 +1,20 @@
 import json
+import csv
 from functools import wraps
 from datetime import datetime, date
 
 from tqdm import tqdm
 from rich import print
 from rich.traceback import install
-
+from pathlib import Path
 from .const import EXPORT_DIR
 from .models.drupal import (
     Comment as DrupalComment,
     FieldDataBody,
     FieldDataFieldChapeau,
+    FieldDataFieldDescriptionTendance,
+    FieldDataFieldIconeTendanceMoov,
+    FieldDataFieldTypeActualite,
     FieldDataFieldContenuArticle,
     FieldDataFieldCourriel,
     FieldDataFieldDescriptionActualite,
@@ -20,15 +24,22 @@ from .models.drupal import (
     FieldDataFieldPhoneNumber,
     FieldDataFieldPrice,
     FieldDataFieldReferenceMvola,
+    FieldDataFieldTypeTendance,
     Node,
-    Users, )
+    TaxonomyTermData,
+    FieldDataFieldCategorieForum,
+    TaxonomyTermData,
+    Users,
+)
 from .models.strapi import (
     Comment as StrapiComment,
     Actualites,
     Article,
     Forum,
     SmallAds,
-    User, )
+    Tendances,
+    User,
+)
 
 install(show_locals=False)
 
@@ -54,18 +65,40 @@ class Export:
     def dump(self):
         if len(self.row) == 0:
             return
+        Path(f"/tmp/export/{self.name}").mkdir(exist_ok=True)
+        _file = EXPORT_DIR / self.name / f"{self.name}.{self.page}.json"
 
-        _file = EXPORT_DIR / f"{self.name}.{self.page}.json"
         _file.touch()
+        flaskbb_data = ['user', 'forum', 'comment']
 
         with _file.open("w") as fp:
             json.dump(self.row, fp, indent=2, default=json_serial)
 
+        if self.name in flaskbb_data:
+            self.create_csv()
+
         self.row.clear()
         self.page += 1
 
-    def __call__(self, func):
+    def create_csv(self):
+        if self.name == 'comment':
+            new_row = []
+            for row in self.row:
+                node = Node.select().where(
+                    Node.nid == row['created_for_id']).get()
+                if node.type == 'forum':
+                    new_row.append(row)
+            self.row = new_row
 
+        csv_file = EXPORT_DIR / self.name / f"{self.name}.csv"
+        with open(csv_file, 'a', encoding='UTF8', newline='') as f:
+            fieldnames = list(self.row[0].keys())
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            if self.page == 0:
+                writer.writeheader()
+            writer.writerows(self.row)
+
+    def __call__(self, func):
         @wraps(func)
         def wraped(source_row):
             model = func(source_row)
@@ -81,6 +114,7 @@ class Export:
         return wraped
 
 
+export_tendances = Export("tendance_moov")
 export_forum = Export("forum")
 export_article = Export("article")
 export_actualites = Export("actualites")
@@ -90,15 +124,27 @@ export_comment = Export("comment", item_per_page=50)
 
 
 @export_forum
-def process_forum(node:Node):
+def process_forum(node: Node):
     user = node.get_user()
+    try:
+        category_field = FieldDataFieldCategorieForum.select().where(
+            FieldDataFieldCategorieForum.entity_id == node.nid
+        ).get()
+        category = TaxonomyTermData.select().where(
+            TaxonomyTermData.tid == category_field.field_categorie_forum_tid
+        ).get()
+        category = category.name
+    except:
+        category = "Géneralité"
 
     return Forum(
         id=node.nid,
         title=node.title,
         body=node.get_field(FieldDataBody),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+        category=category,
+    )
 
 
 @export_article
@@ -110,21 +156,52 @@ def process_article(node):
         title=node.title,
         body=node.get_field(FieldDataFieldContenuArticle),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_actualites
 def process_actualites(node):
     user = node.get_user()
+    category = node.get_field(FieldDataFieldTypeActualite)
+    category = TaxonomyTermData.get_or_none(TaxonomyTermData.tid == category)
 
     return Actualites(
         id=node.nid,
         title=node.title,
         head=node.get_field(FieldDataFieldChapeau),
         body=node.get_field(FieldDataFieldDescriptionActualite),
-        images=node.get_media(FieldDataFieldImagesActus, FieldDataFieldImageActus, "field_image_actus_fid"),
+        category=category.name if category else "",
+        images=node.get_media(
+            FieldDataFieldImagesActus,
+            FieldDataFieldImageActus,
+            "field_image_actus_fid",
+        ),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
+
+
+@export_tendances
+def process_tendances(node):
+    user = node.get_user()
+    category = node.get_field(FieldDataFieldTypeTendance)
+    category = TaxonomyTermData.get_or_none(TaxonomyTermData.tid == category)
+
+    return Tendances(
+        id=node.nid,
+        title=node.title,
+        head=node.get_field(FieldDataFieldChapeau),
+        body=node.get_field(FieldDataFieldDescriptionTendance),
+        category=category.name if category else "",
+        images=node.get_media(
+            FieldDataFieldImagesActus,
+            FieldDataFieldImageActus,
+            "field_image_actus_fid",
+        ),
+        created_by=user.uid,
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_small_ads
@@ -140,7 +217,8 @@ def process_small_ads(node):
         email=node.get_field(FieldDataFieldCourriel),
         mvola_ref=node.get_field(FieldDataFieldReferenceMvola),
         created_by=user.uid,
-        created_at=datetime.fromtimestamp(node.created), )
+        created_at=datetime.fromtimestamp(node.created),
+    )
 
 
 @export_user
@@ -149,7 +227,8 @@ def create_user(user):
         id=user.uid,
         name=user.name,
         email=user.mail,
-        password=user.pass_, )
+        password=user.pass_,
+    )
 
 
 @export_comment
@@ -167,7 +246,8 @@ def create_comment(comment):
         body=getattr(body, "comment_body_value", None),
         created_by=getattr(user, "uid", None),
         created_for_id=node.nid,
-        created_at=datetime.fromtimestamp(comment.created), )
+        created_at=datetime.fromtimestamp(comment.created),
+    )
 
 
 def run():
@@ -178,6 +258,7 @@ def run():
     export_user.dump()
 
     unhandled_type = []
+
     def process_unhandled(node):
         if node.type not in unhandled_type:
             unhandled_type.append(node.type)
@@ -188,6 +269,7 @@ def run():
             "forum": process_forum,
             "article": process_article,
             "actualites": process_actualites,
+            "tendance_moov": process_tendances,
             "small_ads": process_small_ads,
         }.get(node.type, process_unhandled)
 
@@ -196,6 +278,7 @@ def run():
     export_forum.dump()
     export_article.dump()
     export_actualites.dump()
+    export_tendances.dump()
     export_small_ads.dump()
 
     # create comment

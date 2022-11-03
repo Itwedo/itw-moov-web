@@ -9,7 +9,7 @@
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
     <div class="container mx-auto">
       <h1 class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100">
-	Pharmacies de garde du {{ start }} au {{ stop }}
+        Pharmacies de garde du {{ start }} au {{ stop }}
       </h1>
     </div>
     <div class="container mx-auto">
@@ -32,7 +32,7 @@
                   role="columnheader"><span class="block">Téléphone</span></div>
               </div>
               <div class="body">
-		{% for element in result %}
+                {% for element in result %}
                 <div class="flex-table row" role="rowgroup">
                   <div class="flex-row first" role="cell">
                     <div class="info">Antananarivo</div>
@@ -44,22 +44,61 @@
                     <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["address"] }}</div>
                   </div>
                   <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"] }}</div>
+                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"] }}
+                    </div>
                   </div>
                 </div>
-		{% endfor %}
+                {% endfor %}
               </div>
             </div>
           </div>
         </div>
         <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
-              {%for ad in ads['side_bar']%}
+          <div
+            class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][0]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][1]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+
+          <!-- {%for ad in ads['side_bar']%}
               <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
                   <a href="{{ad['url']}}" target="_blank"></a>
                   <img src="{{CMS_URL}}{{ad['image']}}">
               </div>
-             
-              {%endfor%}
+
+              {%endfor%} -->
         </div>
       </div>
     </div>

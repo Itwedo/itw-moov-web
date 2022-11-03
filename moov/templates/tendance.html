@@ -13,28 +13,30 @@
     </div>
     <div
       class="mx-auto grid gap-3 sj-slide sj-slide-full slide-xl-3 mt-12 3xl:container grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {% for news in result["data"][:4] %}
+      {% for news in result["magazines"] %}
       <div class="slide-item px-6">
         <div class="news-card relative overflow-hidden w-full">
-          {%if news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
-          <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-          {%else%}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-          {%endif%}
+          <img class="img-absolute-cover img-hover-scale"
+            src={{CMS_URL}}{{news["attributes"]["images"]["data"][0]["attributes"]["url"]}}
+            onerror="this.src='/assets/images/moov_square.svg';">
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
+            <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+              news['attributes']['rubrique']['data']['attributes']['name'] }}</span>
           </div>
-          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
-            href={{ url_for('article.news_article', id=news["id"]) }}>
-            <h2 class="text-4xl mb-3">{{ news["attributes"]["title"] }}</h2>
+          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8 card-overlay"
+            href={{ url_for('article.news_article', id=news["id"],slug=news['attributes']['slugId'], type='magazine' ) }}>
+            <h2 class="text-4xl mb-3 heading-clamp-2">{{ news["attributes"]["title"] }}</h2>
             <div class="card-time">
-              <span class="mr-4">{{ news["attributes"]["createdAt"]|date }}</span>
-              <span class="mr-4">{{ news["attributes"]["createdAt"]|time }}</span>
-              <span class="mr-4 inline-flex items-center flex-nowrap">
-                <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
+              <span class="mr-4">{{ news["attributes"]["date"]|date }}</span>
+              <span class="mr-4">{{ news["attributes"]["date"]|time }}</span>
+              <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                onclick="return false;">
+                <i class="fas fa-share-nodes"
+                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId'], type='magazine') }}`)"></i>
+
+                <!-- 130 -->
+              </span>
             </div>
-            <p>{{ news["attributes"]["head"] }}</p>
           </a>
         </div>
       </div>
@@ -44,31 +46,30 @@
   <section>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">Tourisme & Voyage</h2>
+        <h2 class="text-6xl text-center">{{result['category_1']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-normal text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_1']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="grid gap-x-20 gap-y-10 mini-card-v3 no-scrollbar mt-10 mx-5 md:mx-20 grid-cols-1 lg:grid-cols-2">
-        {% for news in result["data"][4:8] %}
-        <a class="mini-card relative flex cat-mini-card " href={{ url_for('article.news_article', id=news["id"]) }}>
+        {% for news in result["category_1"]["articles"] %}
+        <a class="mini-card relative flex cat-mini-card " href={{ url_for('article.news_article',
+          id=news["id"], slug=news["attributes"]["slugId"], type='magazine') }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette">
-            {%if news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
-            <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-              news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            {%else%}
-            <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-            {%endif%}
+            <img class="img-absolute-cover img-hover-scale"
+              src={{CMS_URL}}{{news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
+              onerror="this.src='/assets/images/moov_square.svg';">
           </div>
           <div class="relative w-full md:w-2/3 cat-content-descri">
             <div class="w-full text-gray-600 px-4 pb-3">
               <div class="flex flex-wrap justify-between items-center">
                 <div class="cat-pasti">
-                  <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
+                  <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+                    news['attributes']['rubrique']['data']['attributes']['name'] }}</span>
                 </div>
                 <div class="card-time">
-                  <span class="mr-4 text-2xl">{{ news["attributes"]["createdAt"]|date }}</span>
+                  <span class="mr-4 text-2xl">{{ news["attributes"]["date"]|date }}</span>
                 </div>
               </div>
               <h3 class="text-3xl mb-3  text-gray-800 md:text-5xl leading-snug">
@@ -76,43 +77,46 @@
               </h3>
               <p class="text-xl  md:text-2xl leading-snug ">{{ news["attributes"]["head"] }}</p>
             </div>
-          </div>
+          </div> 
         </a>
         {% endfor %}
       </div>
     </div>
   </section>
-  <section>
+  <section >
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">Santé & Bien-être</h2>
+        <h2 class="text-6xl text-center">{{result['category_2']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-light text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_2']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="mx-auto 2xl:px-36 3xl:px-48 2xl:container">
       <div class="grid gap-10 mt-10 sj-slide sj-slide-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {% for news in result["data"][8:11] %}
+        {% for news in result["category_2"]["articles"] %}
         <div class="slide-item news-card-v2 relative overflow-hidden w-full">
-          {%if news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-          {%else%}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-          {%endif%}
+            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
+            onerror="this.src='/assets/images/moov_square.svg';">
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"]}}</span>
+            <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+              news['attributes']['rubrique']['data']['attributes']['name']}}</span>
           </div>
-          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
-            href={{ url_for('article.news_article', id=news["id"]) }}>
-            <h2 class="text-4xl mb-3">{{ news["attributes"]["title"] }}</h2>
+          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8 card-overlay"
+            href={{ url_for('article.news_article', id=news["id"], slug=['attributes']['slugId'], type='magazine') }}>
+            <h2 class="text-4xl mb-3 heading-clamp-2">{{ news["attributes"]["title"] }}</h2>
             <div class="card-time">
-              <span class="mr-4">{{ news["attributes"]["createdAt"]|date }}</span>
-              <span class="mr-4">{{ news["attributes"]["createdAt"]|time }}</span>
-              <span class="mr-4 inline-flex items-center flex-nowrap">
-                <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
+              <span class="mr-4">{{ news["attributes"]["date"]|date }}</span>
+              <span class="mr-4">{{ news["attributes"]["date"]|time }}</span>
+
+              <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                onclick="return false;">
+                <i class="fas fa-share-nodes"
+                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId'], type='magazine') }}`)"></i>
+
+                <!-- 130 -->
+              </span>
             </div>
-            <p>{{ news["attributes"]["head"] }}</p>
           </a>
         </div>
         {% endfor %}
@@ -127,7 +131,8 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section"
+            onerror="this.src='/assets/images/MOOV.svg';" />
         </a>
       </div>
 
@@ -140,31 +145,30 @@
   <section>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">Maison & Jardin</h2>
+        <h2 class="text-6xl text-center">{{result['category_3']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-normal text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_3']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="grid gap-x-20 gap-y-10 mini-card-v3 no-scrollbar mt-10 mx-5 md:mx-20 grid-cols-1 lg:grid-cols-2">
-        {% for news in result["data"][11:15] %}
-        <a class="mini-card relative flex" href={{ url_for('article.news_article', id=news["id"]) }}>
+        {% for news in result["category_3"]['articles'] %}
+        <a class="mini-card relative flex" href={{ url_for('article.news_article',
+          id=news["id"], slug=news['attributes']['slugId'], type='magazine') }}>
           <div class="relative overflow-hidden w-full md:w-1/3 cat-vignette ">
-            {%if news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
             <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-              news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-            {%else%}
-            <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-            {%endif%}
+              news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
+              onerror="this.src='/assets/images/moov_square.svg';">
           </div>
           <div class="relative w-full md:w-2/3 cat-content-descri">
             <div class="w-full text-gray-600 px-4 pb-3">
               <div class="flex flex-wrap justify-between items-center">
                 <div class="cat-pasti">
-                  <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"] }}</span>
+                  <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+                    news['attributes']['rubrique']['data']['attributes']['name'] }}</span>
                 </div>
                 <div class="card-time">
-                  <span class="mr-4 text-2xl">{{ news["attributes"]["createdAt"]|date }}</span>
+                  <span class="mr-4 text-2xl">{{ news["attributes"]["date"]|date }}</span>
                 </div>
               </div>
               <h3 class="text-3xl mb-3  text-gray-800 md:text-5xl leading-snug">
@@ -183,42 +187,48 @@
       </div>
     </div>
   </section>
-  <section class="pb-12">
+  <section class="pb-12 px-8">
     <div class="container mx-auto 2xl:px-36 3xl:px-48">
       <div class="relative border-b-2 border-gray-300 py-6 px-3 mb-3 mx-auto md:mx-20">
-        <h2 class="text-6xl text-center">High-tech</h2>
+        <h2 class="text-6xl text-center">{{result['category_4']['rubrique']['name']}}</h2>
         <a class="absolute bottom-2 right-4 font-light text-blue-500 hover:underline"
-          href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}">Tout voir</a>
+          href="{{ url_for('magazine.category_magazines', category=result['category_4']['rubrique']['slug']) }}">Tout voir</a>
       </div>
     </div>
     <div class="mx-auto 2xl:px-36 3xl:px-48 2xl:container">
       <div class="grid gap-10 mt-10 sj-slide sj-slide-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {% for news in result["data"][15:18] %}
-        <div class="slide-item news-card-v2 relative overflow-hidden w-full">
-          {%if news["attributes"]["images"]["data"][0]["attributes"]["width"]%}
+        {% for news in result["category_4"]["articles"] %}
+        <div class="slide-item  news-card-v2 relative overflow-hidden w-full">
           <img class="img-absolute-cover img-hover-scale" src={{ CMS_URL }}{{
-            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}>
-          {%else%}
-          <img class="img-absolute-cover img-hover-scale" src="/assets/images/Apercu.png" }}>
-          {%endif%}
+            news["attributes"]["images"]["data"][0]["attributes"]["url"] }}
+            onerror="this.src='/assets/images/moov_square.svg';">
+
           <div class="cat-pasti absolute top-8 left-0">
-            <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news["attributes"]["category"]}}</span>
+            <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+              news['attributes']['rubrique']['data']['attributes']['name']}}</span>
           </div>
-          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8"
-            href={{ url_for('article.news_article', id=news["id"]) }}>
-            <h2 class="text-4xl mb-3">{{ news["attributes"]["title"] }}</h2>
+          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-8 py-8 card-overlay "
+            href={{ url_for('article.news_article', id=news["id"], slug=news["attributes"]["slugId"], type='magazine') }}>
+            <h2 class="text-4xl mb-3 heading-clamp-2" >{{ news["attributes"]["title"] }}</h2>
             <div class="card-time">
-              <span class="mr-4">{{ news["attributes"]["createdAt"]|date }}</span>
-              <span class="mr-4">{{ news["attributes"]["createdAt"]|time }}</span>
-              <span class="mr-4 inline-flex items-center flex-nowrap">
-                <img class="h-6 pr-2" src="/assets/images/share-white.svg">130</span>
+              <span class="mr-4">{{ news["attributes"]["date"]|date }}</span>
+              <span class="mr-4">{{ news["attributes"]["date"]|time }}</span>
+              <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                onclick="return false;">
+                <i class="fas fa-share-nodes"
+                  onclick="setLinkToShare(`{{ url_for('article.news_article', id=news['id'], slug=news['attributes']['slugId'], type='magazine') }}`)"></i>
+
+                <!-- 130 -->
+              </span>
             </div>
-            <p>{{ news["attributes"]["head"] }}</p>
           </a>
         </div>
         {% endfor %}
       </div>
     </div>
   </section>
+
+  {% include 'includes/share-popover.html' %}
+
 </main>
 {% endblock %}

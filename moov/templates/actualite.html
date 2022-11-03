@@ -1,19 +1,43 @@
 {% extends 'base.html' %}
+
 {% block meta %}
-<meta name="description" content="Article">
+{% if news['data']['attributes']['metaTitle'] %}
+<meta property="og:title" content="{{news['data']['attributes']['metaTitle']}}" />
+{% else %}
+<meta property="og:title" content="{{news['data']['attributes']['title']}}"
+  or="this.content='/assets/images/MOOV.svg';" />
+{% endif %}
+<meta property="og:image" content="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" />
+{% if news['data']['attributes']['metaDescription'] %}
+<meta name="description" content="{{news['data']['attributes']['metaDescription']}}">
+<meta property="og:description" content="{{news['data']['attributes']['metaDescription']}}" />
+{% else %}
+<meta name="description" content="{{news['data']['attributes']['head']}}">
+<meta property="og:description" content="{{news['data']['attributes']['head']}}" />
+{% endif %}
+
 {% endblock %}
-{% block title %}Actualités{% endblock %}
+
+{% block title %}
+{% if news['data']['attributes']['metaTitle'] %}
+{{news['data']['attributes']['metaTitle']}}
+{% else %}
+{{news['data']['attributes']['title']}}
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <main>
   <section class="mx-auto 3xl:container">
     <div class="article-feature-img relative overflow-hidden">
-      {% if images and images[0]['attributes']['width']%}
-      <img class="img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image">
-      {% else %}
-      <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-        alt="Image">
+      {% if  news['data']['attributes']["copyright"] %}
+      <div class="main-img-copiright">
+        Copyright Image : © 
+        {{ news['data']['attributes']["copyright"] | title }}
+      </div>
       {% endif %}
+      <img class="backup-image img-absolute-cover" src="{{ CMS_URL }}{{ images[0]['attributes']['url'] }}" alt="Image"
+        onerror="this.src='/assets/images/MOOV.svg';">
     </div>
     <div class="px-5 py-2 bg-black w-full">
       <div class="breadcrumb article-breadcrumb pl-0 md:pl-4 xl:pl-12">
@@ -28,101 +52,157 @@
     <div class="flex flex-wrap">
       <div
         class="hidden flex-wrap flex-row justify-end w-full md:flex lg:flex-col lg:justify-start lg:w-1/3 py-10 2xl:pl-36 3xl:pl-48">
-        {% for ad in ads['side_bar'][:2]%}
-        <div
-          class="news-pub news-side flex flex-wrap relative overflow-hidden my-7 items-end justify-end ml-auto mr-0 w-1/2 lg:w-full">
-          <a href="{{ad['url']}}" target="_blank">
-            <img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité">
-          </a>
+        <div class="flex flex-col w-full object-cover " id="article-side-pub-container">
+          <!-- <div class="flex flex-col" id="article-side-pub"> -->
+
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][0]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][1]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+          <!-- </div> -->
+
         </div>
-        {%endfor%}
 
       </div>
       <div
-        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article">
+        class="w-full lg:w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article croped-article ">
 
         <div class="article-overlay"></div>
         <div class="cat-pasti">
-          <span class="text-3xl px-3 py-3 my-3 inline-block">{{ news['data']['attributes']['category'] }}</span>
+          <span class="text-3xl px-3 py-3 my-3 inline-block">{{
+            news['data']['attributes']['rubrique']['data']['attributes']['name'] }} </span>
         </div>
         <h1 class="text-5xl text-bold mb-4 lg:text-7xl xl:text-8xl">
           {{ news['data']['attributes']['title'] }}
         </h1>
         <div class="card-time  heading-card-time">
-          <span class="mr-4">{{ news['data']['attributes']["createdAt"]|date }}</span>
-          <span class="mr-4">{{ news['data']['attributes']["createdAt"]|time }}</span>
-          <span class="mr-4">23/11/2021</span>
-          <span class="mr-4">19:30</span>
-          <span class="mr-4 inline-flex items-center flex-nowrap">
-            <img class="h-6 pr-2" src="/assets/images/share-gray.svg">130
-          </span>
+          {% if news['data']['attributes']["date"]|date %}
+          <span class="mr-4">{{ news['data']['attributes']["date"]|date }}</span>
+          {% endif %}
+
+          {% if news['data']['attributes']["date"]|time %}
+          <span class="mr-4">{{ news['data']['attributes']["date"]|time }}</span>
+          {% endif %}
+          <span class="mr-4"> © </span>
+          <span class="mr-4"> {{ news['data']['attributes']["copyright"] | title }}</span>
+          <a
+            href="https://moov-web.sudo.mg/article/{{ news['data']['id'] }}-{{ news['data']['attributes']['slugId'] }}">
+
+            <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+              onclick="return false;">
+              <i class="fas fa-share-nodes"
+                onclick="setLinkToShare(`/article/{{ news['data']['id'] }}-{{ news['data']['attributes']['slugId'] }}`)"></i>
+
+              <!-- 130 -->
+            </span>
+          </a>
+
         </div>
         <div class="content news-content">
-          <p class="text-3xl robotoslab text-left">{{ news['data']['attributes']['head'] }}</p> <br />
+          {% if news['data']['attributes']['head']  %}
+          <p class="text-3xl robotoslab text-left " id="article-heading">{{ news['data']['attributes']['head'] }}</p>
+{% endif %}
+          
 
-          <div class="article-pub">
-            <div
-              class=" slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-              {% for ad in ads['side_bar'][:2]%}
-              <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-                <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
-                  <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}"
-                      alt="Moov publicité"></a>
-                </div>
-
-              </div>
-              {% endfor%}
-            </div>
-
-          </div>
-          <!-- <div class="flex flex-wrap flex-row justify-end w-full mb-10 md:hidden">
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto  lg:w-full">
-              <img src="/assets/images/powerbox1_0.jpg">
-            </div>
-            <div class="news-pub news-side relative overflow-hidden my-7 mr-0 ml-auto w-1/2 lg:w-full">
-              <img src="/assets/images/morateamb.jpg">
-            </div>
-          </div> -->
           <div class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2">
             {% if number_of_images > 1 %}
             <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[1]['attributes']['url'] }}">
             {% endif %}
           </div>
           <div class="reading-text">
-
-            {{ body[0]|markdown|safe }}
+            {% if body %}
+            {{ body|markdown|safe }}
+            {% endif %}
           </div>
-          {% if not body[1] %}
+
+          
+          {% if bodyCollection %}
+
+          <div class="reading-text">
+            {% for item in bodyCollection %}
+                       
+            <div>
+              {{item['Text'] |markdown|safe}}
+            </div>
+            
+            
+          
+            <br/>
+            {% if item['images']['data'] %}
+            <div class="float-none  my-2 w-full overflow-hidden">
+              <img class="w-full h-auto mx-auto"
+                src="{{ CMS_URL }}{{item['images']['data']['attributes']['url']}}" />
+              <span class="img-copyright"> Copyright Image : © {{
+                item['images']['data']['attributes']['caption'] }}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <br/>
+          <div>
+            <strong>
+            {% if news['data']['attributes']['author'] %}
+            {{news['data']['attributes']['author']}}
+            {% endif %}
+            </strong>
+          </div>
+        
+         
+          {% endif %}
+          
+        
+
           <div class="comment-btn my-9 flex justify-center md:justify-end">
             <button
               class="hidden modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
               <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
             </button>
           </div>
-          {%else%}
+
           <div class="article-overlay">
 
           </div>
-          <div class="flex flex-row justify-center ">
+
+          <div class="flex flex-col items-center" id="read-more-article">
 
             <a href="#body2"
               class="z-50 absolute bottom-0 font-normal text-blue-600 hover:underline text-center read-more">Lire la
               suite </a>
-            <div class="reading-text">
-            </div>
-
-            <div class="reading-text">
-
-              {{ body[2]|markdown|safe }}
-            </div>
           </div>
 
 
-          {% endif %}
+
         </div>
+
+
+
+
       </div>
     </div>
+
   </article>
+
+
   <section class=" global-margin mx-auto 3xl:container 2xl:px-36 3xl:px-48">
     <!-- <img class="w-auto pub-section" src="/assets/images/206504526_4371917949494124_5011724154299493509_n@2x.jpg"
       alt="banner"> -->
@@ -131,78 +211,14 @@
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
         <a href="{{ ad['url'] }}" target="_blank">
-          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section" />
+          <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section"
+            onerror="this.src='/assets/images/MOOV.svg';" />
         </a>
       </div>
       {% endfor %}
     </div>
   </section>
   <section class="global-margin mx-auto flex flex-wrap pb-7 overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
-    {% if body[1] %}
-    <div class="relative m-ht py-12 md:pr-12 w-full lg:w-1/2 xl:w-3/5" id="body2">
-      <div class="content text-justify px-5 md:px-0">
-        <div class="picture float-right mb-2 w-full overflow-hidden">
-          {% if number_of_images > 2 %}
-          <img class="w-full h-auto mx-auto" src="{{ CMS_URL }}{{ images[2]['attributes']['url'] }}">
-          {% endif %}
-        </div>
-        <div class="reading-text">
-
-          {{ body[1]|markdown|safe }}
-        </div>
-      </div>
-      <div class="comment-btn my-9 flex justify-center md:justify-end">
-        <button
-          class="hidden modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap">
-          <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
-        </button>
-      </div>
-    </div>
-
-    <div class="relative m-ht hidden md:block w-full lg:w-1/2 xl:w-2/5">
-      <div class="relative bg-gray-100 py-10 px-0 mt-12 mr-0 ml-2 shadow-lg md:px-10 md:ml-0">
-        <h2 class="block border-b-2 robotoslab text-5xl font-normal text-gray-600 pb-4 mb-7 text-center md:text-left">
-          Les derniers articles
-        </h2>
-        <div class="mini-card-v1 mini-card-article no-scrollbar">
-          {% for item in regular %}
-          <a class="mini-card relative flex pb-4" href="{{ url_for('article.news_article', id=item['id']) }}">
-            <div class="relative overflow-hidden w-full md:w-2/5">
-              {%if item['attributes']['images']['data'] and
-              item['attributes']['images']['data'][0]['attributes']['width']%}
-              <img class="img-absolute-cover img-hover-scale"
-                src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-              {%else%}
-              <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-                alt="Image">
-              {%endif%}
-            </div>
-            <div class="relative w-full md:w-3/5">
-              <div class="w-full text-gray-600 px-4 pb-3">
-                <h3 class="text-3xl mb-3">
-                  {{ item['attributes']['title'] }}
-                </h3>
-                <div class="card-time">
-                  <span class="mr-4">{{ item['attributes']["createdAt"]|date }}</span>
-                  <span class="mr-4">{{ item['attributes']["createdAt"]|time }}</span>
-                  <span class="mr-4 inline-flex items-center flex-nowrap">
-                    <img class="h-6 pr-2" src="/assets/images/share-white.svg">
-                    130
-                  </span>
-                </div>
-                <p class="text-xl">{{ item['attributes']['head'] }}</p>
-              </div>
-            </div>
-          </a>
-          {% endfor %}
-        </div>
-        <div
-          class="flex justify-center items-center absolute bottom-0 left-0 h-22 text-center bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm w-full cursor-pointer">
-          <img class="h-20 mx-5 py-5" src="/assets/images/arrow-down.svg">
-        </div>
-      </div>
-    </div>
-    {% endif %}
   </section>
   <section class="pt-7 md:pt-24">
     <div class="mx-auto overflow-hidden 3xl:container 2xl:px-36 3xl:px-48">
@@ -216,28 +232,33 @@
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {% for item in same_category %}
           <div class="slide-item news-card v3 relative overflow-hidden w-full md:mx-auto">
-            {%if item['attributes']['images']['data'] and
-            item['attributes']['images']['data'][0]['attributes']['width']%}
+
+            {% if item['attributes']['images']['data'] %}
             <img class="img-absolute-cover img-hover-scale"
-              src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image">
-            {%else%}
-            <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" src="/assets/images/Banner.png"
-              alt="Image">
-            {%endif%}
+              src="{{ CMS_URL }}{{ item['attributes']['images']['data'][0]['attributes']['url'] }}" alt="Image"
+              onerror="this.src='/assets/images/MOOV.svg';">
+            {% endif %}
             <div class="cat-pasti absolute top-8 left-0">
               <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">
-                {{ item['attributes']['category'] }}
+                {{ item['attributes']['rubrique']['data']['attributes']['name'] }}
               </span>
             </div>
             <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
-              href="{{ url_for('article.news_article', id=item['id']) }}">
+              href="{{ url_for('article.news_article', id=item['id'], slug=item['attributes']['slugId'])}}">
               <h2 class="text-2xl mb-3 sm:text-4xl">{{ item['attributes']['title'] }}</h2>
               <div class="card-time flex items-center">
-                <span class="mr-4">{{ item['attributes']["createdAt"]|date }}</span>
-                <span class="mr-4">{{ item['attributes']["createdAt"]|time }}</span>
-                <span class="mr-4 inline-flex items-center flex-nowrap">
-                  <img class="h-6 pr-2" src="/assets/images/share-white.svg">
-                  130
+                {% if item['attributes']["date"]|date %}
+                <span class="mr-4">{{ item['attributes']["date"]|date }}</span>
+                {% endif %}
+                {% if item['attributes']["date"]|time %}
+                <span class="mr-4">{{ item['attributes']["date"]|time }}</span>
+                {% endif %}
+                <span class=" inline-flex items-center flex-nowrap popover-share" data-popover-target="#popover-target"
+                  onclick="return false;">
+                  <i class="fas fa-share-nodes"
+                    onclick="setLinkToShare(`{{ url_for('article.news_article', id=item['id'] , slug=item['attributes']['slugId'])}}`)"></i>
+
+                  <!-- 130 -->
                 </span>
               </div>
             </a>
@@ -246,6 +267,9 @@
         </div>
       </div>
     </div>
+    {% include 'includes/share-popover.html' %}
   </section>
+
+
 </main>
 {% endblock %}

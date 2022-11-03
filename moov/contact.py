@@ -12,7 +12,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 from .config import *
-from .utils import use_template
+from .utils import use_template, create_captcha
+
 
 import smtplib
 import requests
@@ -32,6 +33,7 @@ class ContactForm(FlaskForm):
 @use_template("contact.html")
 def contact():
     form = ContactForm()
+    captcha = create_captcha()
     if request.method == "POST":
         data = form.data
         moment = datetime.now()
@@ -48,6 +50,7 @@ def contact():
                 }
             },
         )
+
         # message = MIMEMultipart('alternative')
         # message['Subject'] = 'Contact'
         # message['From'] = data['email']
@@ -65,5 +68,13 @@ def contact():
         # with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
         #     server.login(EMAIL_USER, EMAIL_PASSWORD)
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
-        return redirect("/contact.html")
-    return {"form": form}
+        return {
+            "form": form,
+            "captcha": captcha["text"],
+            "image": captcha["image"],
+        }
+    return {
+        "form": form,
+        "captcha": captcha["text"],
+        "image": captcha["image"],
+    }

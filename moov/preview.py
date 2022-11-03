@@ -8,6 +8,7 @@ from flask import (
     request,
     render_template,
     send_from_directory,
+    url_for,
 )
 
 from .config import *
@@ -28,7 +29,7 @@ def preview_page(slug):
         params={
             "populate": "images",
             "publicationState": "preview",
-            "filters[slug][$eq]": slug,
+            "filters[slug][$eq]": f"https://moov.sudo.mg{url_for('preview.preview_page', slug=slug)}",
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -55,7 +56,7 @@ def preview_page(slug):
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filter[category][$eq]": article["attributes"]["category"],
+            "filter[rubrique][slug][$eq]": article["attributes"]["rubrique"]["data"]["attributes"]["slug"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )

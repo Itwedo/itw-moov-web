@@ -1,6 +1,6 @@
-# moov-proto
+# moov-web
 
-Prototype for the brand new moov.mg portal.
+Brand new moov.mg portal.
 
 This application is using Flask and consuming the Strapi CMS REST API (https://github.com/codeandscale/moov-cms)
 
@@ -45,6 +45,23 @@ With the `moov` command, you can actually initalize this file:
 
 ```
 (.env)moov$ moov config generate
+```
+### Packaging
+
+Good ol' python packaging vibes !
+
+You should simply bump the version in `setup.cfg` and run:
+
+```
+(.env)moov$ python -m build
+```
+
+It will then create a folder `dist` with `moov-web-x.y.z.tar.gz` in it.
+
+That same package will be fully installable in another environment as such:
+
+```
+(other-env)$ pip install moov-web-x.y.z.tar.gz
 ```
 
 ### Launching

@@ -6,7 +6,7 @@ from flask import (
     send_from_directory,
 )
 from .config import *
-from .utils import cut_body, use_template
+from .utils import cut_body, use_template, get_category_display
 
 import requests
 
@@ -17,14 +17,17 @@ get_category = {
     "vaovao": {"content": "Vaovao", "display": "Vaovao"},
     "nationale": {"content": "Nationale", "display": "Nationale"},
     "internationale": {
-        "content": "Monde",
+        "content": "Internationale",
         "display": "Internationale",
     },
     "economie": {"content": "Economie", "display": "Economie"},
-    "sport": {"content": "Sports", "display": "Sports"},
+    "sport": {"content": "Sport", "display": "Sports"},
     "culture": {"content": "Culture", "display": "Culture"},
-    "gasy-winner": {"content": "GasyWinner", "display": "Gasy Winner"},
-    "sante-medecine": {"content": "Sante", "display": "Medecine et santé"},
+    "gasy-winner": {"content": "Gasy Winner", "display": "Gasy Winner"},
+    "sante-medecine": {
+        "content": "Médecine & Santé",
+        "display": "Médecine & santé",
+    },
     "people": {"content": "People", "display": "People"},
 }
 
@@ -35,8 +38,9 @@ def news():
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
+            "filters[rubrique][type][$eq]": "Actualite",
             "pagination[pageSize]": 9,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
@@ -46,15 +50,18 @@ def news():
     return {"result": result.json(), "page": request.args.get("page", 1)}
 
 
-@app.route("/<category>")
+@app.route("/<string:category>")
 @use_template("category.html")
 def category_actuality(category):
+    if category == "médecine-et-santé":
+        category = "sante-medecine"
+
     result = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": "images",
+            "populate": ["images","rubrique"],
             "sort": "id:desc",
-            "filters[category][$eq]": get_category[category]["content"],
+            "filters[rubrique][slug][$eq]": category,
             "pagination[pageSize]": 9,
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
@@ -62,8 +69,8 @@ def category_actuality(category):
         headers=STRAPI_API_AUTH_TOKEN,
     )
     return {
-        "category": get_category[category]["display"],
+        "category": get_category_display(category),
         "result": result.json(),
         "page": request.args.get("page", 1),
-        "type": "Actualités",
+        "type": {"name":"Actualités", "slug":"actualite"},
     }

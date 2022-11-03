@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+  {% include 'includes/analytics.html' %}
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/apple-icon-57x57.png">
@@ -13,10 +14,10 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/images/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/moov_favicon_m.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/moov_favicon_m.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/moov_favicon_m.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/moov_favicon_m.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -33,7 +34,16 @@
   <link href="/assets/styles/main-4eca6c8dbda212f15ad7.css" rel="stylesheet">
   <link href="/assets/styles/custom.css" rel="stylesheet">
   <link href="/assets/styles/custom-responsive.css" rel="stylesheet">
-
+  <link href="/assets/styles/theme-update.css" rel="stylesheet">
+  <!-- fontawesome css -->
+  <link href="/assets/fontawesome-free-6.2.0-web/css/fontawesome.css" rel="stylesheet">
+  <link href="/assets/fontawesome-free-6.2.0-web/css/brands.css" rel="stylesheet">
+  <link href="/assets/fontawesome-free-6.2.0-web/css/solid.css" rel="stylesheet">
+  <!-- popover -->
+  <link href="/assets/popover/popover.min.css" rel="stylesheet">
+  <script src="/assets/popover/popover.min.js"></script>
+  <!-- clipboard -->
+  <script src="/assets/scripts/clipboard.js"></script>
 
   <style>
     .navbar {
@@ -115,7 +125,7 @@
 <body>
   <header id="main-header">
     <div class="overflow-hidden mx-auto">
-      <div class="custom-navbar bg-gray-100 px-5 hidden sm:block mx-auto 3xl:container">
+      <div class="custom-navbar bg-gray-100 px-5 hidden sm:block mx-auto 3xl:container-fluid">
         <ul class="list-none flex items-start justify-content-center container 2xl:pl-20 3xl:pl-28">
           <li class="h-12 px-4 py-2 sm:px-6 md:px-10"><a class="robotoslab font-bold text-gray-600 hover:text-black"
               href="https://telma.tv" target="_blank">Telma TV</a></li>
@@ -139,13 +149,13 @@
           </div>
         </ul>
       </div>
-      <div class="flex flex-wrap mx-auto 3xl:container">
+      <div class="flex flex-wrap mx-auto 3xl:container-fluid">
         <div class="relative flex justify-content-center items-center mx-auto container w-full md:w-2/5">
           <div class="burger-menu flex md:hidden rounded-r-xl sm:rounded-xl"><img class="opacity-100"
-              src="/assets/images/burger-gray.svg"><img class="opacity-0" src="/assets/images/burger-white.svg"></div><a
-            class="block px-7 py-7 mx-auto h-28 overflow-hidden md:h-32 2xl:h-40 3xl:h-48 lg:mr-0 xl:mr-10 3xl:mr-20 lg:ml-auto"
-            href="{{ url_for('home.home') }}"><img class="h-full w-auto mr-0 lg:mr-14"
-              src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo"></a>
+              src="/assets/images/burger-gray.svg"><img class="opacity-0" src="/assets/images/burger-white.svg"></div>
+          <a class="moov-logo img-fluid block px-7  mx-auto h-28 overflow-hidden md:h-32 2xl:h-40 3xl:h-48 lg:mr-0 xl:mr-10 3xl:mr-20 lg:ml-auto"
+            href="{{ url_for('home.home') }}"><img class="img-fluid mr-0 lg:mr-14"
+              src="/assets/images/logo_moov_svg.svg" alt="Moov logo"></a>
         </div>
         <div class="header-pub">
           <div
@@ -154,7 +164,8 @@
             <div class="pub-slide block-slide relative overflow-hidden">
               <a href="{{ad['url']}}" target="_blank">
                 <img src="{{ CMS_URL }}{{ad['image']}}" alt="Moov publicité" id="header_large_leaderboard"
-                  class="header-slide-img img-absolute-cover objec-cover xl:w-auto h-full xl:h-auto">
+                  class="header-slide-img img-absolute-cover objec-cover xl:w-auto h-full xl:h-auto"
+                  onerror="this.src='/assets/images/MOOV.svg';">
               </a>
             </div>
             {% endfor %}
@@ -175,7 +186,7 @@
 
       </div>
     </div>
-    <div class="flex items-center bg-black mx-auto 3xl:container">
+    <div class="flex items-center bg-black mx-auto 3xl:container-fluid">
 
       <ul
         class="main-menu-list list-none container flex flex-nowrap items-center justify-start mx-auto px-7 md:justify-center w-4/5">
@@ -189,7 +200,6 @@
               class="menu-item horizontal">{{category["display"]}}</a>
             {% endfor%}
 
-            <a href="{{ url_for('news.news') }}" class="menu-item horizontal">Tous</a>
           </div>
         </li>
         <li class="mx-3 dropdown">
@@ -201,8 +211,6 @@
             <a href="{{ url_for('magazine.category_magazines', category=category['slug']) }}"
               class="menu-item horizontal">{{category["display"]}}</a>
             {%endfor%}
-            <a href="{{ url_for('magazine.category_magazines', category='tourisme-voyage') }}"
-              class="menu-item horizontal">Tous</a>
           </div>
         </li>
 
@@ -212,12 +220,12 @@
             Vie pratique<span class="menu-hover-line bg-pink-300"></span>
           </a>
           <div class="dropdown-content">
-            <a href="{{url_for('drugstores.drugstores')}}" class="menu-item horizontal">Pharmacies de garde</a>
-            <a href="{{url_for('forex.exchange_rates')}}" class="menu-item horizontal">Cours de change</a>
+            <a href="{{url_for('life.drugstores')}}" class="menu-item horizontal">Pharmacies de garde</a>
+            <a href="{{url_for('life.exchange_rates')}}" class="menu-item horizontal">Cours de change</a>
           </div>
         </li>
         <li class="mx-3 dropdown">
-          <a class="menu-item horizontal" href="https://moov.mg/forum" target="_blank">
+          <a class="menu-item horizontal" href="https://moov-web.sudo.mg/forum" target="_blank">
             Forum<span class="menu-hover-line bg-purple-300"></span>
           </a>
           <!-- <div class="dropdown-content">
@@ -248,60 +256,68 @@
     </div>
   </header>
   {% block content %}{% endblock %}
-  <footer class="pt-12 pb-14 px-5 bg-gray-100 mx-auto 3xl:container" id="main-footer">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div class="flex items-center flex-col justify-center m-ht">
-        <div class="inline-block text-4xl text-gray-600 border-b-2 border-gray-400 mb-7">Liens utiles</div>
-        <ul class="block">
-          <li>
-            <a class="text-gray-600 hover:text-black hover:underline"
-              href="{{ url_for('search.search') }}">Recherche</a>
-          </li>
-          <li>
+  <footer class="pt-12  bg-gray-100 " id="main-footer">
+    <div class="flex flex-col w-full">
+
+      <div class="flex  flex-col items-center border">
+        <a class="block px-7  mx-auto h-40 moov-logo" href="{{ url_for('home.home') }}">
+          <img class="img-fluid" src="/assets/images/logo_moov_svg.svg" alt="Moov logo" />
+        </a>
+
+        <div class="md:w-2/5 flex items-center flex-col md:flex-row  justify-between  divide-x">
+          <div>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news.news') }}">Actualités</a>
+          </div>
+          <span class="hidden md:block">|</span>
+          <div>
+            <a class=" text-gray-600 hover:text-black hover:underline" href="{{ url_for('magazine.magazine') }}">
+              Tendances Moov</a>
+          </div>
+          <span class="hidden md:block">|</span>
+
+
+          <div>
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('life.drugstores') }}">Pharmacie
+              de garde</a>
+          </div>
+          <span class="hidden md:block">|</span>
+
+          <div>
             <a class="text-gray-600 hover:text-black hover:underline"
               href="{{ url_for('contact.contact') }}">Contact</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news.news') }}">Actualités</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-black hover:underline"
-              href="{{ url_for('drugstores.drugstores') }}">Pharmacie</a>
-          </li>
-        </ul>
-      </div>
-      <div class="flex items-center flex-col m-ht">
-        <a class="block px-7 py-7 mx-auto h-40" href="{{ url_for('home.home') }}">
-          <img class="h-20 w-auto" src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo">
-        </a>
-        <a class="text-3xl text-center text-gray-600 hover:underline" href="{{ url_for('mention') }}">Mention Légales et
-          CGV</a>
-
-        <div class="text-gray-600 ">
-          MOOV © 2022 - Designed by <a href="http://codeandscale.com/fr/">Code & Scale</a>
+          </div>
         </div>
-      </div>
-      <div class="flex items-center justify-center m-ht">
 
-
-        <div class="flex justify-center flex-row">
+        <div class="flex flex-row justify-center  py-8">
           <a class="px-2 py-2" href="https://www.facebook.com/moovmadagascar">
-            <img class="footer-sociale-icon" src="/assets/images/FB.png" alt="Moov facebook">
+            <img class="footer-sociale-icon" src="/assets/images/facebook_.svg" alt="Moov facebook">
           </a>
-          <a class="px-2 py-2" href="#">
-            <img class="footer-sociale-icon" src="/assets/images/In.png" alt="Moov tweeter">
-          </a>
+
           <a class="px-2 py-2" href="https://twitter.com/moov_mg">
-            <img class="footer-sociale-icon" src="/assets/images/Tweet.png" alt="Moov tweeter">
+            <img class="footer-sociale-icon" src="/assets/images/twitter_.svg" alt="Moov tweeter">
           </a>
-          <a class="px-2 py-2" href="#">
-            <img class="footer-sociale-icon" src="/assets/images/youtube.png" alt="Moov tweeter">
-          </a>
-          <a class="px-2 py-2" href="#">
-            <img class="footer-sociale-icon" src="/assets/images/tiktok.png" alt="Moov tweeter">
-          </a>
+         
+        </div>
+
+      
+      </div>
+      <div class="flex flex-col bg-black  px-32 py-10  ">
+
+        <div class="flex  flex-col items-center md:flex-row  justify-between  ">
+          <div class="text-white text-center ">
+            MOOV © 2022 - Designed by <a href="http://codeandscale.com/fr/">Code & Scale</a>
+          </div>
+          <div>
+
+            <a class=" text-center text-white hover:underline" href="{{ url_for('mention') }}">Mentions Légales et
+              CGV</a>
+          </div>
+
+
+
         </div>
       </div>
+
     </div>
   </footer>
   {% block javascript %}{% endblock %}
@@ -367,9 +383,7 @@
                   class="block pl-7 py-2">{{category["display"]}}</a>
               </li>
               {% endfor%}
-              <li>
-                <a href="{{ url_for('news.news') }}" class="block pl-7 py-2">Tous</a>
-              </li>
+
             </ul>
           </li>
 
@@ -388,27 +402,26 @@
                   class="block pl-7 py-2">{{category["display"]}}</a>
               </li>
               {%endfor%}
-              <li><a href="{{ url_for('magazine.magazine') }}" class="block pl-7 py-2">Tous</a></li>
             </ul>
           </li>
 
           <li class="w-full">
             <div class="relative border-b-2  w-full custom-divider">
-              <a class="menu-item" href="{{url_for('drugstores.drugstores')}}">Vie pratique</a>
+              <a class="menu-item" href="#">Vie pratique</a>
               <span class="menu-arrow absolute top-0 right-2">
                 <img class="w-6 transform rotate-90" src="/assets/images/icon-arrow-down.png" />
               </span>
             </div>
             <ul class="sub-menu hidden robotoslab text-bold h-1 opacity-0 z-0">
-              <li><a class="block pl-7 py-2" href="{{url_for('drugstores.drugstores')}}">Pharmacies de garde</a></li>
-              <li><a href="{{url_for('forex.exchange_rates')}}" class="block pl-7 py-2">Cours de change</a></li>
+              <li><a class="block pl-7 py-2" href="{{url_for('life.drugstores')}}">Pharmacies de garde</a></li>
+              <li><a href="{{url_for('life.exchange_rates')}}" class="block pl-7 py-2">Cours de change</a></li>
 
             </ul>
           </li>
 
           <li class="w-full">
             <div class="relative border-b-2  w-full custom-divider">
-              <a class="menu-item" href="https://moov.mg/forum" target="_blank">Forum</a>
+              <a class="menu-item" href="https://moov-web.sudo.mg/forum" target="_blank">Forum</a>
               <span class="menu-arrow absolute top-0 right-2">
                 <img class="w-6 transform rotate-90" src="/assets/images/icon-arrow-down.png" />
               </span>
@@ -462,7 +475,7 @@
         </div>
         <textarea class="px-4 py-9 mt-5 mb-5 text-2xl text-gray-700 w-full block rounded-3xl" rows="10"
           placeholder="Votre commentaire ...">
-</textarea>
+        </textarea>
         <div class="flex justify-center pt-2">
           <button class="btn bg-transparent rounded-lg border-2 border-3xl py-2 px-7 rounded-3xl">Publier</button>
         </div>
