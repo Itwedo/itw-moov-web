@@ -25,9 +25,6 @@ import requests
 import markdown2
 from tqdm import tqdm
 
-session = requests.Session()
-session.verify = False
-
 dictConfig(
     {
         "version": 1,
