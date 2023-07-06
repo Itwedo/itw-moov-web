@@ -46,7 +46,7 @@ try:
     cms_config = config["CMS"]
 except KeyError:
     STRAPI_API_URL = os.environ.get(
-        "STRAPI_API_URL", "https://tapt812lv:2338/api"
+        "STRAPI_API_URL", "http://tapt812lv:2337/api"
     )
     STRAPI_API_AUTH_TOKEN = {
         "Authorization": "Bearer 3d91c1e848f16979b1f12c88630f2bb02528f38f4249264941d5f8776988998bfcebbd4b766aec0fffa48cac6f93ce288c5bd32ebdbffd96d1a0ad5ed8350e2791526cbd9cdd48e6e721c50c0daa39fbaabca28ae7771261476dfc2ff1684e4cf60187376a563676c01f41f0133bd6276f4a768211d8e7257174b2960ac35f7c"
