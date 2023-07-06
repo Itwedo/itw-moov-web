@@ -25,6 +25,9 @@ import requests
 import markdown2
 from tqdm import tqdm
 
+
+requests.packages.urllib3.disable_warnings()
+
 dictConfig(
     {
         "version": 1,
