@@ -26,7 +26,12 @@ import markdown2
 from tqdm import tqdm
 
 
-requests.packages.urllib3.disable_warnings()
+def get_without_ssl_verification(*args, **kwargs):
+    kwargs['verify'] = False
+    return requests.get(*args, **kwargs)
+
+# Remplacer la fonction get() par la version personnalisée
+requests.get = get_without_ssl_verification
 
 dictConfig(
     {
