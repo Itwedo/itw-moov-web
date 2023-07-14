@@ -101,14 +101,14 @@ def get_heigh(text_type, text):
     heigh = len(text) * types[text_type]["heigh"] / types[text_type]["line"]
     if "<h2>" or "<h3>" in text:
         heigh += types[text_type]["heigh"]
-    if "https://cms.moov.mg" in text:
+    if "http://tapt812lv:2337" in text:
         heigh += 500
     return heigh
 
 
 def image_body(text):
     if "/uploads/" in text:
-        text = text.replace("/uploads", f"https://cms.moov.mg/uploads")
+        text = text.replace("/uploads", f"http://tapt812lv:2337/uploads")
     return text
 
 
@@ -159,7 +159,7 @@ def cut_body(title, head, text, images_number):
                 first_part.append(child)
 
     if second_part:
-        if f"https://cms.moov.mg/uploads" in second_part[0]:
+        if f"http://tapt812lv:2337/uploads" in second_part[0]:
             medium = second_part[1] if len(second_part) >= 2 else ""
         else:
             medium = (
