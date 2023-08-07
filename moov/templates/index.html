@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Moov{% endblock %}
+{% block meta %}
+<meta name="description" content="Actualité Madagascar en temps réel 7j/7. Connectez-vous à Moov.mg pour les actus Madagascar politique, social, économie, sport, culture, magazine et forum.">
+{% endblock %}
+{% block title %}moov.mg | Site d'actualités à Madagascar{% endblock %}
 
 {% block content %}
 <main>
-  <section class="mx-auto 3xl:container-fluid">
+  <section class="mx-auto 3xl:container-fluid homepage_mv">
     <div
       class="slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows home-header">
       {% for item in data["spotlights"] %}
@@ -91,7 +94,7 @@
           <div class="cat-pasti absolute top-8 left-0">
             {% if data["magazine"] %}
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
-              data["magazine"][0]["attributes"]["rubrique"]["data"]["attributes"]["name"] }}</span>
+              data["magazine"][0]["attributes"]["category"]["data"]["attributes"]["name"] }}</span>
             {% else %}
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Tendance à la Une</span>
             {% endif %}
@@ -154,7 +157,7 @@
             onerror="this.src='/assets/images/moov_square.svg';">
           <div class="cat-pasti absolute top-8 left-0">
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
-              item["attributes"]["rubrique"]["data"]["attributes"]["name"] }}</span>
+              item["attributes"]["category"]["data"]["attributes"]["name"] }}</span>
           </div>
           <a class="overlay absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
             href={{ url_for('article.news_article', id=item["id"],slug=item['attributes']['slugId']) }}>
@@ -207,7 +210,7 @@
       class="pub-section-slide slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
       {% for ad in ads['banner'] %}
       <div class="pub-slide block-slide relative overflow-hidden">
-        <a href="{{ CMS_URL }}{{ ad['url'] }}" target="_blank">
+       <a href="{{ ad['url'] }}" target="_blank">
           <img src="{{ CMS_URL }}{{ ad['image'] }}" alt="Moov publicité" id="home_hugeboard" class="pub-section"
             onerror="this.src='/assets/images/MOOV.svg';" />
         </a>
