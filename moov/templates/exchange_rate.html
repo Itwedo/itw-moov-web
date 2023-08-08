@@ -14,7 +14,11 @@
                         <label for="selected_date w-full md:w-2/5"> Cours des devises en date du : </label>
                         <select class="select currency-rate w-full md:w-3/5" id="selected_date">
                             {% for d in seven_date%}
-                            <option value={{d}}>{{d}}</option>
+                              {% if d == seven_date[-1]%}
+                              <option value={{d}} selected="selected">{{d}}</option>
+                              {%else%}
+                              <option value={{d}}>{{d}}</option>
+                              {% endif %}
                             {%endfor%}
                         </select>
                     </div>
@@ -195,7 +199,7 @@
                     yAxes: [{
                         ticks: {
                             min: 3500,
-                            max: 4900
+                            max: 10000
                         },
 
                         scaleLabel: {
