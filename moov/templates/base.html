@@ -44,6 +44,8 @@
   <script src="/assets/popover/popover.min.js"></script>
   <!-- clipboard -->
   <script src="/assets/scripts/clipboard.js"></script>
+  <!-- Vérification nom de domaine -->
+  <meta name="facebook-domain-verification" content="2olk2sdc5770uy5e0nvzzifl4py3fw" />
 
   <style>
     .navbar {
@@ -220,12 +222,12 @@
             Vie pratique<span class="menu-hover-line bg-pink-300"></span>
           </a>
           <div class="dropdown-content">
-            <a href="{{url_for('life.drugstores')}}" class="menu-item horizontal">Pharmacies de garde</a>
-            <a href="{{url_for('life.exchange_rates')}}" class="menu-item horizontal">Cours de change</a>
+           <a href="{{url_for('life.drugstores')}}" class="menu-item horizontal">Pharmacies de garde</a>
+           <a href="{{url_for('life.exchange_rates')}}" class="menu-item horizontal">Cours de change</a>
           </div>
         </li>
         <li class="mx-3 dropdown">
-          <a class="menu-item horizontal" href="https://moov-web.sudo.mg/forum" target="_blank">
+          <a class="menu-item horizontal" href="/forum" target="_blank">
             Forum<span class="menu-hover-line bg-purple-300"></span>
           </a>
           <!-- <div class="dropdown-content">
@@ -296,10 +298,10 @@
           <a class="px-2 py-2" href="https://twitter.com/moov_mg">
             <img class="footer-sociale-icon" src="/assets/images/twitter_.svg" alt="Moov tweeter">
           </a>
-         
+
         </div>
 
-      
+
       </div>
       <div class="flex flex-col bg-black  px-32 py-10  ">
 
@@ -334,7 +336,7 @@
       </div>
     </div>
     <a class="block px-7 py-7 mx-auto h-28 overflow-hidden md:h-40" href="{{ url_for('home.home') }}">
-      <img class="h-full w-auto mx-auto" src="/assets/images/Moov-logo_0@2x.png" alt="Moov logo">
+      <img class="h-full w-auto mx-auto" src="/assets/images/Moov-logo_0@2x.png?v=abc" alt="Moov logo">
     </a>
     <div class="flex items-center justify-center z-10">
       <form method="get" action="{{ url_for('search.search') }}">
@@ -420,8 +422,8 @@
           </li>
 
           <li class="w-full">
-            <div class="relative border-b-2  w-full custom-divider">
-              <a class="menu-item" href="https://moov-web.sudo.mg/forum" target="_blank">Forum</a>
+            <div class="relative birder-b-2  w-full custom-divider">
+              <a class="menu-item" href="/forum" target="_blank">Forum</a>
               <span class="menu-arrow absolute top-0 right-2">
                 <img class="w-6 transform rotate-90" src="/assets/images/icon-arrow-down.png" />
               </span>
