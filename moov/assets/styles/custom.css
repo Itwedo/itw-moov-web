@@ -102,7 +102,6 @@
 
 /* menu */
 
-
 .pub-slide {
     width: 100%;
     height: 100%;
@@ -112,9 +111,8 @@
 }
 
 #header_large_leaderboard {
-    height: 100%;
+    height: auto;
     object-fit: cover;
-
 }
 
 /* slider */
@@ -122,7 +120,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
 
 /* end slider */
