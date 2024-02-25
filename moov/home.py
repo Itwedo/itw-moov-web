@@ -122,7 +122,8 @@ def home():
         params={
             "populate": ["images","category"],
             "sort": "id:desc",
-            "filters[category][type][$eq]": "Tendance",
+            "filters[category][type][$eq]": "Actualite",
+            "filters[category][name][$in]": ["International", "Médecine & Santé"],
             "pagination[limit]": 20,
         },
         headers=STRAPI_API_AUTH_TOKEN,
