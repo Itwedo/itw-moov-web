@@ -41,7 +41,7 @@ def news_article(id, slug, type=None, category=None):
             "populate": ["images","category"],
             "sort": "id:desc",
             "pagination[limit]": 100,
-            # "filters[category][name][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["name"], // by itwedo
+            "filters[category][name][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["name"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -105,7 +105,7 @@ def news_article2():
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            # "filters[category][slug][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["slug"], //by itwedo
+            "filters[category][slug][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["slug"],
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
