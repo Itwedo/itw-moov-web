@@ -17,7 +17,7 @@ app = Blueprint("article", __name__, url_prefix="")
 def news_article(id, slug, type=None, category=None):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
-        params={"populate": ["images","rubrique","bodyCollection","bodyCollection.images"]},
+        params={"populate": ["images","category","bodyCollection","bodyCollection.images"]},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
@@ -38,10 +38,10 @@ def news_article(id, slug, type=None, category=None):
     same_category = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": ["images","rubrique"],
+            "populate": ["images","category"],
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filters[rubrique][name][$eq]": news["data"]["attributes"]["rubrique"]["data"]["attributes"]["name"],
+            # "filters[category][name][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["name"], // by itwedo
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )
@@ -56,7 +56,7 @@ def news_article(id, slug, type=None, category=None):
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
         params={
-            "populate": ["images","rubrique"],
+            "populate": ["images","category"],
             "sort": "id:desc",
             "pagination[limit]": 100,
         },
@@ -86,7 +86,7 @@ def news_article(id, slug, type=None, category=None):
 def news_article2():
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/5368",
-        params={"populate": "images","populate":"rubrique"},
+        params={"populate": "images","populate":"category"},
         headers=STRAPI_API_AUTH_TOKEN,
     )
     news = response.json()
@@ -105,7 +105,7 @@ def news_article2():
             "populate": "images",
             "sort": "id:desc",
             "pagination[limit]": 100,
-            "filters[rubrique][slug][$eq]": news["data"]["attributes"]["rubrique"]["data"]["attributes"]["slug"],
+            # "filters[category][slug][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["slug"], //by itwedo
         },
         headers=STRAPI_API_AUTH_TOKEN,
     )

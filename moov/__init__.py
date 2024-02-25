@@ -5,21 +5,21 @@ from flask import (
 )
 from logging.config import dictConfig
 from pathlib import Path
-from .config import *
+from moov.config import *
 
-from .utils import use_template
-from .contact import app as contact
-from .life import app as life
-from .home import app as home
-from .magazine import app as magazine
-from .news import app as news
-from .preview import app as preview
-from .search import app as search
-from .article import app as article
-from .redirection import app as redirection
+from moov.utils import use_template
+from moov.contact import app as contact
+from moov.life import app as life
+from moov.home import app as home
+from moov.magazine import app as magazine
+from moov.news import app as news
+from moov.preview import app as preview
+from moov.search import app as search
+from moov.article import app as article
+from moov.redirection import app as redirection
 
 from apscheduler.schedulers.background import BackgroundScheduler
-from .etl import afp
+from moov.etl import afp
 
 import requests
 import markdown2

@@ -47,7 +47,7 @@ $("#read-more-article-static").click(function () {
 })
 
 
-//share popover
+// share popover
 function setLinkToShare(link) {
     $(".to-copy-link .platform-name").text("Copier le lien")
     $(".fb-link").attr("href", "https://www.facebook.com/share.php?u=https://moov-web.sudo.mg" + link)

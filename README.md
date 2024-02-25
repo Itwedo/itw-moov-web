@@ -20,7 +20,7 @@ Clone and configure
 ```
 $ mkdir moov
 $ cd moov
-moov$ git clone git@github.com:codeandscale/moov-proto.git .
+moov$ git clone git@github.com:codeandscale/moov-proto.git
 moov$ python3 -m venv .env
 moov$ source .env/bin/activate
 (.env)moov$ pip install .
@@ -33,6 +33,7 @@ $ mkdir moov
 $ cd moov
 moov$ python3 -m venv .env
 moov$ source .env/bin/activate
+# .\.env\Scripts\activate in windows
 (.env)moov$ pip install moov-x.y.z.tar.gz
 ```
 

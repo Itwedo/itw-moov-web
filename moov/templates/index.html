@@ -99,10 +99,10 @@
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">Tendance à la Une</span>
             {% endif %}
           </div>
-          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
+          <a class="absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8 news-card-link-container"
             href="{{ url_for('article.news_article', id=data['magazine'][0]['id'],slug=data['magazine'][0]['attributes']['slugId']) }}">
             {% if data["magazine"] %}
-            <h2 class="text-2xl mb-3 sm:text-4xl">
+            <h2 class="text-2xl mb-3 sm:text-4xl news-card-link-title">
               {{ data["magazine"][0]["attributes"]["title"] }}
             </h2>
             {% else %}
@@ -159,9 +159,9 @@
             <span class="text-2xl px-3 py-3 my-3 inline-block sm:text-3xl">{{
               item["attributes"]["category"]["data"]["attributes"]["name"] }}</span>
           </div>
-          <a class="overlay absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8"
+          <a class="overlay absolute bottom-0 left-0 w-full text-white bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-8 news-card-link-container"
             href={{ url_for('article.news_article', id=item["id"],slug=item['attributes']['slugId']) }}>
-            <h2 class=" text-2xl mb-3 sm:text-4xl">{{ item["attributes"]["title"] }}</h2>
+            <h2 class=" text-2xl mb-3 sm:text-4xl news-card-link-title">{{ item["attributes"]["title"] }}</h2>
             <div class="card-time flex items-center text-xl">
               {% if item["attributes"]["date"]|date %}
               <span class="mr-4">
@@ -372,5 +372,23 @@
       news_pos = 0;
     }
   }
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const titles = document.querySelectorAll('.news-card-link-title');
+    titles.forEach(title => {
+        const lineHeight = parseInt(window.getComputedStyle(title).lineHeight); // Récupérer la hauteur de ligne
+        const maxHeight = 2 * lineHeight; // Hauteur maximale pour le texte (par exemple, 2 lignes)
+        let fontSize = 22; // Taille de police initiale
+        title.style.fontSize = fontSize + 'px';
+        
+        // Redimensionner la police jusqu'à ce que le texte tienne dans la hauteur maximale
+        while (title.scrollHeight > maxHeight) {
+            fontSize -= 1;
+            title.style.fontSize = fontSize + 'px';
+            if(fontSize <= 12) break;
+        }
+    });
+});
+
 </script>
 {% endblock %}

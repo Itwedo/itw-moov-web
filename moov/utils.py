@@ -211,10 +211,10 @@ def get_paginated_curency(date_list, page, result_list, existant_dates):
 
 def get_menus(type):
     actualities = requests.get(
-        url=f"{STRAPI_API_URL}/rubriques",
+        url=f"{STRAPI_API_URL}/article-categories",
         headers=STRAPI_API_AUTH_TOKEN,
         params={
-            "filters[actualites][id][$notNull]": True,
+            # "filters[actualites][id][$notNull]": True,
             "filters[type][$eq]": type,
         },
     )
@@ -223,7 +223,7 @@ def get_menus(type):
 
 def get_category_display(category):
     return requests.get(
-        url=f"{STRAPI_API_URL}/rubriques",
+        url=f"{STRAPI_API_URL}/article-categories",
         params={
             "filters[slug][$eq]": category,
             "sort": "order:asc"
@@ -234,7 +234,7 @@ def get_category_display(category):
 
 def get_rubriques():
     menus = requests.get(
-        url=f"{STRAPI_API_URL}/rubriques",
+        url=f"{STRAPI_API_URL}/article-categories",
         headers=STRAPI_API_AUTH_TOKEN,
     ).json()["data"]
     menu_list = []
@@ -269,10 +269,16 @@ def use_template(template=None):
             ctx["ads"] = get_ads()
             ctx["currency"] = get_currency()
             ctx["CMS_URL"] = STRAPI_PUBLIC_URL
-            ctx["actualities"] = [{"display": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]} for menu
+            if get_menus("Actualite"):
+                ctx["actualities"] = [{"display": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]} for menu
                                   in get_menus("Actualite")]
-            ctx["magazines"] = [{"display": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]} for menu in
+            else:
+                ctx["actualities"] = []
+            if get_menus("Tendance"):
+                ctx["magazines"] = [{"display": menu["attributes"]["name"], "slug": menu["attributes"]["slug"]} for menu in
                                 get_menus("Tendance")]
+            else:
+                ctx["magazines"] = []
             return render_template(template_name, **ctx)
 
         return decorated_function

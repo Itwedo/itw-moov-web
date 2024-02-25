@@ -466,7 +466,13 @@ padding: 24px 40px;
     border: 1px solid;
     border-radius: 30px;
     background: #fff;
+}
 
+.reading-text p{
+    line-height: 1.8;
+    text-align: justify !important;
+    text-justify: newspaper !important;
+    padding-bottom: 1rem !important;
 }
 
 /* 
@@ -519,4 +525,26 @@ currency
 
 .pop-comp-wrapper {
     z-index: 3000 !important;
+}
+
+.news-card-link-container{
+    overflow: hidden !important;
+    width: 100% !important;
+    /* max-height: 145px !important; */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding-top: 1.5rem !important;
+}
+
+.news-card-link-title{
+    padding: 0 !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    /* white-space: nowrap !important; */
+    -webkit-line-clamp: 10 !important;
+}
+
+.news-card-link-container .card-time{
+    margin-top: 0px !important;
 }

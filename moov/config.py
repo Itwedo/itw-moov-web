@@ -24,14 +24,15 @@ __all__ = [
 ]
 
 config = configparser.ConfigParser()
-config.read("/opt/moov/moov-web.conf")
-
+# config.read("/opt/moov/moov-web.conf")
+config.read("G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.conf") 
 
 try:
     misc_config = config["MISC"]
 except KeyError:
     DEBUG = False
-    LOG_FILE = "/opt/moov/log/moov-web/moov-web.log"
+    # LOG_FILE = "/opt/moov/log/moov-web/moov-web.log"
+    LOG_FILE = "G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.log"
 else:
     DEBUG = eval(misc_config["DEBUG"])
     LOG_FILE = misc_config["WEBSITE_LOG_FILE"]
@@ -52,15 +53,14 @@ else:
     CONTACT_SMTP_PORT = contact_config["CONTACT_SMTP_PORT"]
     CONTACT_EMAIL_ACCOUNT = contact_config["CONTACT_EMAIL_ACCOUNT"]
 
-
 try:
     cms_config = config["CMS"]
 except KeyError:
     STRAPI_API_URL = os.environ.get(
-        "STRAPI_API_URL", "https://moov-cms.sudo.mg/api"
+        "STRAPI_API_URL", "http://localhost:1337/"
     )
     STRAPI_API_AUTH_TOKEN = {
-        "Authorization": "Bearer 3d91c1e848f16979b1f12c88630f2bb02528f38f4249264941d5f8776988998bfcebbd4b766aec0fffa48cac6f93ce288c5bd32ebdbffd96d1a0ad5ed8350e2791526cbd9cdd48e6e721c50c0daa39fbaabca28ae7771261476dfc2ff1684e4cf60187376a563676c01f41f0133bd6276f4a768211d8e7257174b2960ac35f7c"
+        "Authorization": "Bearer 1ac43231c24bc07a3d0b476f15234c1348a3bb37af00f4d4da40181e28602b2352334882ffe5b045aa434b0ef6faaa3b19f911dcefa7794e9d266b86d8194a442bd3f044f5320bb14465a2cce35dcc210f46bc687cbc9f8b1c8d3b2e924e13d7f4717c2304a83ed382e610aa48eed717bca659999206e90ea977a37beaab20ab"
     }
     STRAPI_PUBLIC_URL = os.environ.get(
         "STRAPI_PUBLIC_URL",
@@ -77,7 +77,7 @@ else:
     }
     PREVIEW_BASE_URL = cms_config["PREVIEW_BASE_URL"]
 
-
+    
 try:
     afp_config = config["AFP"]
 except KeyError:
