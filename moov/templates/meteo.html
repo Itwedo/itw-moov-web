@@ -170,11 +170,8 @@
       const cityParam = "{{ city }}";
       citySelect.value = cityParam;
 
-      // Écouter les changements de sélection de ville
       searchWeather.addEventListener('click', function () {
-        // Récupérer la nouvelle valeur de la ville sélectionnée
         const newCity = citySelect.value;
-        // Rediriger vers la page de météo avec le nom de la nouvelle ville sélectionnée
         window.location.href = `/vie-pratique/meteo/${newCity}`;
       });
 

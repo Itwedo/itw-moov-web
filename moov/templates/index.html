@@ -376,12 +376,11 @@
   window.addEventListener('DOMContentLoaded', (event) => {
     const titles = document.querySelectorAll('.news-card-link-title');
     titles.forEach(title => {
-        const lineHeight = parseInt(window.getComputedStyle(title).lineHeight); // Récupérer la hauteur de ligne
-        const maxHeight = 2 * lineHeight; // Hauteur maximale pour le texte (par exemple, 2 lignes)
-        let fontSize = 22; // Taille de police initiale
+        const lineHeight = parseInt(window.getComputedStyle(title).lineHeight); 
+        const maxHeight = 2 * lineHeight; 
+        let fontSize = 22; 
         title.style.fontSize = fontSize + 'px';
         
-        // Redimensionner la police jusqu'à ce que le texte tienne dans la hauteur maximale
         while (title.scrollHeight > maxHeight) {
             fontSize -= 1;
             title.style.fontSize = fontSize + 'px';
