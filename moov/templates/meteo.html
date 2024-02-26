@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Météo{% endblock %}
+
+
+{% block content %}
+<main>
+  <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
+    <div class="container mx-auto meteo-header">
+      <h1 id="cityHeader" class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100 meteo-header-title">
+          Prévisions météo pour {{ city }}
+      </h1>
+      <div class="container mx-auto meteo-header-city">
+        <form id="weatherForm" action="/meteo" method="GET" class="mb-8">
+          <select name="city" id="city" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 meteo-header-select">
+              <option value="Antananarivo">Antananarivo</option>
+              <option value="Antsirabe">Antsirabe</option>
+              <option value="Fianarantsoa">Fianarantsoa</option>
+              <option value="Toamasina">Toamasina</option>
+              <option value="Mahajanga">Mahajanga</option>
+              <option value="Antsiranana">Antsiranana</option>
+              <option value="Toliara">Toliara</option>
+          </select>
+        </form>
+      </div>
+    </div>
+    <div class="container mx-auto">
+      <div class="flex flex-wrap flex-col-reverse md:flex-row">
+        <div class="w-full md:w-2/3 meteo-container">
+          <div class="container mx-auto">
+              {% if weather_data %}
+                <div class="weather-data">
+                  <div class="current-weather">
+                    <div class="general">
+                      <div>
+                        <span class="degree">{{ weather_data["current"]["temp_c"] }} <sup>°C</sup> </span>
+                      </div>
+                      <div>
+                        <span class="datetime"> {{ weather_data["location"]["localtime"] }} </span>
+                      </div>
+                    </div>
+                    <div class="details">
+                      <div class="location">
+                        <span class="region">{{ weather_data["location"]["region"] }}</span>, 
+                        <span class="country">{{ weather_data["location"]["country"] }}</span>
+                      </div>
+                      <div>Vent: {{ weather_data["current"]["wind_kph"] }}km/h</div>
+                      <div>Humidité: {{ weather_data["current"]["humidity"] }}%</div>
+                    </div>
+                    <div class="icon">
+                      <img class="weather-current-icon" src={{ weather_data["current"]["condition"]["icon"] }} alt="weather-icon">
+                      <div class="weather-current-text">{{ weather_data["current"]["condition"]["text"] }}</div>
+                    </div>
+                  </div>
+                  <div class="days-forecast">
+                    <ul class="weather-cards">
+                      {% for day_forecast in weather_data["forecast"]["forecastday"] %}
+                        <li class="card">
+                          <div class="weather-forecast-date">
+                            {{ day_forecast["date"] }}
+                          </div>
+                          <img class="weather-forecast-icon" src={{ day_forecast["day"]["condition"]["icon"] }} alt="weather-icon">
+                          <div>
+                            <span class="degree_min"> {{ day_forecast["day"]["mintemp_c"] }}°C </span> / <span class="degree_max">  {{ day_forecast["day"]["maxtemp_c"] }}°C </span>
+                          </div>
+                          <div>
+                            Vent: {{ day_forecast["day"]["maxwind_kph"] }} km/h
+                          </div>
+                          <div>
+                            Humidité: {{ day_forecast["day"]["avghumidity"] }}%
+                          </div>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              {% endif %}
+          </div>
+        </div>
+        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
+          <div
+            class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][0]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+
+          <div
+            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+            {% for ad in ads['side_bar'][1]%}
+            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
+              </div>
+
+            </div>
+            {% endfor%}
+          </div>
+
+          <!-- {%for ad in ads['side_bar']%}
+              <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">
+                  <a href="{{ad['url']}}" target="_blank"></a>
+                  <img src="{{CMS_URL}}{{ad['image']}}">
+              </div>
+
+              {%endfor%} -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const citySelect = document.getElementById('city');
+      const cityHeader = document.getElementById('cityHeader');
+
+      const cityParam = "{{ city }}";
+      citySelect.value = cityParam;
+
+      // Écouter les changements de sélection de ville
+      citySelect.addEventListener('change', function () {
+          // Récupérer la nouvelle valeur de la ville sélectionnée
+          const newCity = citySelect.value;
+          // Rediriger vers la page de météo avec le nom de la nouvelle ville sélectionnée
+          window.location.href = `/vie-pratique/meteo/${newCity}`;
+      });
+  });
+</script>
+{% endblock %}

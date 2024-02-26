@@ -63,3 +63,17 @@ def drugstores():
         result[0]["attributes"]["stop"], "%Y-%m-%d"
     ).strftime("%d/%m/%Y")
     return {"start": start, "stop": stop, "result": result}
+
+@app.route("/meteo")
+@app.route("/meteo/<string:city>")
+@use_template("meteo.html")
+def weather_report(city="Antananarivo"):
+    city = request.args.get("city", city)  
+    lang = request.args.get("lang", "fr")  
+    api_key = "f44c786dff794da38fd73052231209"
+    response = requests.get(
+        url="http://api.weatherapi.com/v1/forecast.json",
+        params={"key": api_key, "q": city, "days": 7, lang: lang}  # Récupérer les prévisions pour 7 jours
+    )
+    weather_data = response.json()
+    return {"city": city, "weather_data": weather_data}
