@@ -8,12 +8,15 @@ from flask import (
 from datetime import datetime, date, timedelta
 from .config import *
 from .utils import use_template, get_paginated_curency
+from datetime import date
+import locale
+import calendar
 
 import requests
 
 
 app = Blueprint("life", __name__, url_prefix="/vie-pratique")
-
+locale.setlocale(locale.LC_TIME, "fr_FR")
 
 @app.route("/cours-de-change")
 @use_template("exchange_rate.html")
@@ -69,11 +72,40 @@ def drugstores():
 @use_template("meteo.html")
 def weather_report(city="Antananarivo"):
     city = request.args.get("city", city)  
-    lang = request.args.get("lang", "fr")  
+    lang = request.args.get("lang", "fr")
+    hour = request.args.get("hour", 6)  
     api_key = "f44c786dff794da38fd73052231209"
     response = requests.get(
         url="http://api.weatherapi.com/v1/forecast.json",
-        params={"key": api_key, "q": city, "days": 7, lang: lang}  # Récupérer les prévisions pour 7 jours
+        params={"key": api_key, "q": city, "days": 7, lang: lang, "hour": hour}  # Récupérer les prévisions pour 7 jours
     )
     weather_data = response.json()
-    return {"city": city, "weather_data": weather_data}
+    for forecast in weather_data["forecast"]["forecastday"]:
+        date_string = forecast["date"]
+        date_object = datetime.strptime(date_string, "%Y-%m-%d")
+        mois = calendar.month_name[date_object.month]
+        formatted_date = date_object.strftime("%d") + " " + mois
+        forecast["formatted_date"] = formatted_date
+        forecast["formatted_day"] = datetime.strptime(date_string, "%Y-%m-%d").strftime("%A")
+
+    #Get all data hour for the current day
+    weather_hours_data = []
+    
+    for hour in range(1, 24):
+        response = requests.get(
+            url="http://api.weatherapi.com/v1/forecast.json",
+            params={"key": api_key, "q": city, "days": 1, "lang": lang, "hour": hour}
+        )
+        wh_data = response.json()
+        
+        for forecast in wh_data["forecast"]["forecastday"]:
+            if(len(forecast['hour']) > 0):
+                hour_data = forecast['hour'][0]
+                time_string = forecast['hour'][0]['time']
+                time_object = datetime.strptime(time_string, "%Y-%m-%d %H:%M")
+                formatted_hour = time_object.strftime("%H")
+                hour_data["target_hour"] = int(formatted_hour)
+                hour_data["target_temp_c"] = int(hour_data['temp_c'])
+                weather_hours_data.append(hour_data)
+    
+    return {"city": city, "weather_data": weather_data, "now": date.today().strftime('%d/%m/%Y'), "weather_hours_data": weather_hours_data }
