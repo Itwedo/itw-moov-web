@@ -23,4 +23,5 @@ wheel
 opencv-python
 APScheduler==3.9.1
 Werkzeug==2.0.0
+python-dotenv==1.0.0
 

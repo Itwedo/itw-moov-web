@@ -38,15 +38,16 @@ def get_ads_by_location(location):
     )
 
     list_ads = []
-    for ad in ads.json()["data"]:
-        list_ads.append(
-            {
-                "image": ad["attributes"]["image"]["data"][0]["attributes"][
-                    "url"
-                ],
-                "url": ad["attributes"]["destinationUrl"],
-            }
-        )
+    if(ads.json().get("data")):
+        for ad in ads.json()["data"]:
+            list_ads.append(
+                {
+                    "image": ad["attributes"]["image"]["data"][0]["attributes"][
+                        "url"
+                    ],
+                    "url": ad["attributes"]["destinationUrl"],
+                }
+            )
 
     return list_ads
 
