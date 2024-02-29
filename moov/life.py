@@ -9,14 +9,12 @@ from datetime import datetime, date, timedelta
 from .config import *
 from .utils import use_template, get_paginated_curency
 from datetime import date
-import locale
 import calendar
 
 import requests
 
 
 app = Blueprint("life", __name__, url_prefix="/vie-pratique")
-locale.setlocale(locale.LC_TIME, "fr_FR")
 
 @app.route("/cours-de-change")
 @use_template("exchange_rate.html")
