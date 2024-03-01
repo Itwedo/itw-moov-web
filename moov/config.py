@@ -25,24 +25,20 @@ __all__ = [
 ]
 
 config = configparser.ConfigParser()
-# config.read("/opt/moov/moov-web.conf")
-# config.read("G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.conf") 
 
 load_dotenv()
 
 try:
-    # misc_config = config["MISC"]
     DEBUG = os.environ.get("DEBUG")
     LOG_FILE = os.environ.get("WEBSITE_LOG_FILE")
 except KeyError:
     DEBUG = False
-    # LOG_FILE = "/opt/moov/log/moov-web/moov-web.log"
-    LOG_FILE = "G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.log"
+    LOG_FILE = "moov-web.log"
 else:
     # DEBUG = eval(misc_config["DEBUG"])
     # LOG_FILE = misc_config["WEBSITE_LOG_FILE"]
     DEBUG = False
-    LOG_FILE = "G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.log"
+    LOG_FILE = "moov-web.log"
 
 try:
     # contact_config = config["CONTACT"]
