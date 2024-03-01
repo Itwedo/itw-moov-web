@@ -73,7 +73,8 @@ try:
     }
     STRAPI_PUBLIC_URL = os.environ.get("STRAPI_PUBLIC_URL")
     PREVIEW_BASE_URL = os.environ.get("PREVIEW_BASE_URL")
-    print(STRAPI_API_URL)
+    print("STRAPI_API_AUTH_TOKEN try")
+    print(STRAPI_API_AUTH_TOKEN)
 except KeyError:
     STRAPI_API_URL = os.environ.get(
         "STRAPI_API_URL", "http://localhost:1337/"
@@ -88,6 +89,8 @@ except KeyError:
     PREVIEW_BASE_URL = os.environ.get(
         "PREVIEW_BASE_URL", "http://localhost:8000"
     )
+    print("STRAPI_API_AUTH_TOKEN except")
+    print(STRAPI_API_AUTH_TOKEN)
 else:
     # STRAPI_PUBLIC_URL = cms_config["STRAPI_PUBLIC_URL"]
     # STRAPI_API_URL = cms_config["STRAPI_API_URL"]
@@ -99,7 +102,7 @@ else:
         "STRAPI_API_URL", "http://localhost:1337/"
     )
     STRAPI_API_AUTH_TOKEN = {
-        "Authorization": "Bearer f2ab0fe63de719bd17f5d321628a22a8d91cac37014afd980c6178f89ba755a8514560a7ec98987e73d7ebf948cf1cb730a4ac55956431560a12d3ef9b5746af5da8a8a7733a559fe3e997c9f8e1009de2d187b0147c01045fd8f38f1edadcdfb10be3a664610d6ee64ef033f515437208abe6546b1feb7fdb64ed14af3314a3"
+        "Authorization": "Bearer 2efc0d1f3a2ef356dd50deeaf46b0ed0be41518370e0036067fc160f943559c9334c3ea0b602010bc665310cc9459b164e92c8f866af8a2dcc4e09ed7129621fb0d2809b2b00e2903820c4ab03b4118c65cd7b7da4774f6f81e0c96bec94f947e4e129e7a98bce84ae8330ffdc6ba3a04e746b54bfe086f5c569125f304785a3"
     }
     STRAPI_PUBLIC_URL = os.environ.get(
         "STRAPI_PUBLIC_URL",
@@ -108,7 +111,8 @@ else:
     PREVIEW_BASE_URL = os.environ.get(
         "PREVIEW_BASE_URL", "http://localhost:8000"
     )
-
+    print("STRAPI_API_AUTH_TOKEN else")
+    print(STRAPI_API_AUTH_TOKEN)
     
 try:
     afp_config = config["AFP"]
