@@ -90,7 +90,7 @@ except KeyError:
         "PREVIEW_BASE_URL", "http://localhost:8000"
     )
     print("STRAPI_API_AUTH_TOKEN except")
-    print(STRAPI_API_AUTH_TOKEN)
+    print(STRAPI_API_AUTH_TOKEN_BEARER)
 else:
     # STRAPI_PUBLIC_URL = cms_config["STRAPI_PUBLIC_URL"]
     # STRAPI_API_URL = cms_config["STRAPI_API_URL"]
