@@ -26,14 +26,14 @@ __all__ = [
 
 config = configparser.ConfigParser()
 # config.read("/opt/moov/moov-web.conf")
-config.read("G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.conf") 
+# config.read("G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.conf") 
 
 load_dotenv()
 
 try:
     # misc_config = config["MISC"]
-    DEBUG = os.getenv("DEBUG")
-    LOG_FILE = os.getenv("WEBSITE_LOG_FILE")
+    DEBUG = os.environ.get("DEBUG")
+    LOG_FILE = os.environ.get("WEBSITE_LOG_FILE")
 except KeyError:
     DEBUG = False
     # LOG_FILE = "/opt/moov/log/moov-web/moov-web.log"
@@ -46,11 +46,11 @@ else:
 
 try:
     # contact_config = config["CONTACT"]
-    CONTACT_EMAIL_USER = os.getenv("CONTACT_EMAIL_USER")
-    CONTACT_EMAIL_PASSWORD = os.getenv("CONTACT_EMAIL_PASSWORD")
-    CONTACT_SMTP_SERVER = os.getenv("CONTACT_SMTP_SERVER")
-    CONTACT_SMTP_PORT = os.getenv("CONTACT_SMTP_PORT")
-    CONTACT_EMAIL_ACCOUNT = os.getenv("CONTACT_EMAIL_ACCOUNT")
+    CONTACT_EMAIL_USER = os.environ.get("CONTACT_EMAIL_USER")
+    CONTACT_EMAIL_PASSWORD = os.environ.get("CONTACT_EMAIL_PASSWORD")
+    CONTACT_SMTP_SERVER = os.environ.get("CONTACT_SMTP_SERVER")
+    CONTACT_SMTP_PORT = os.environ.get("CONTACT_SMTP_PORT")
+    CONTACT_EMAIL_ACCOUNT = os.environ.get("CONTACT_EMAIL_ACCOUNT")
 except KeyError:
     CONTACT_EMAIL_USER = os.environ.get("EMAIL_USER", "")
     CONTACT_EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", "")
@@ -71,18 +71,19 @@ else:
 
 try:
     # cms_config = config["CMS"]
-    STRAPI_API_URL = os.getenv("STRAPI_API_URL")
+    STRAPI_API_URL = os.environ.get("STRAPI_API_URL")
     STRAPI_API_AUTH_TOKEN = {
-        "Authorization": "Bearer " + os.getenv("STRAPI_API_AUTH_TOKEN")
+        "Authorization": "Bearer " + os.environ.get("STRAPI_API_AUTH_TOKEN")
     }
-    STRAPI_PUBLIC_URL = os.getenv("STRAPI_PUBLIC_URL")
-    PREVIEW_BASE_URL = os.getenv("PREVIEW_BASE_URL")
+    STRAPI_PUBLIC_URL = os.environ.get("STRAPI_PUBLIC_URL")
+    PREVIEW_BASE_URL = os.environ.get("PREVIEW_BASE_URL")
+    print(STRAPI_API_URL)
 except KeyError:
     STRAPI_API_URL = os.environ.get(
         "STRAPI_API_URL", "http://localhost:1337/"
     )
     STRAPI_API_AUTH_TOKEN = {
-        "Authorization": "Bearer " + os.getenv("STRAPI_API_AUTH_TOKEN")
+        "Authorization": "Bearer " + os.environ.get("STRAPI_API_AUTH_TOKEN")
     }
     STRAPI_PUBLIC_URL = os.environ.get(
         "STRAPI_PUBLIC_URL",
@@ -115,7 +116,7 @@ else:
     
 try:
     afp_config = config["AFP"]
-    AFP_URLS = os.getenv("AFP_URLS")
+    AFP_URLS = os.environ.get("AFP_URLS")
 except KeyError:
     AFP_URLS = os.environ.get(
         "AFP_URLS", ["https://hosting.afp.com/clients/dts-host/francais/journal/mon/actu.xml",
@@ -136,12 +137,12 @@ else:
 
 try:
     # migration = config["MIGRATION"]
-    ETL_DATABASE_HOST = os.getenv("ETL_DATABASE_HOST")
-    ETL_DATABASE_PORT = os.getenv("ETL_DATABASE_PORT")
-    ETL_DATABASE_NAME = os.getenv("ETL_DATABASE_NAME")
-    ETL_DATABASE_USER = os.getenv("ETL_DATABASE_USER")
-    ETL_DATABASE_PASSWORD = os.getenv("ETL_DATABASE_PASSWORD")
-    EXPORT_DIR = os.getenv("EXPORT_DIR")
+    ETL_DATABASE_HOST = os.environ.get("ETL_DATABASE_HOST")
+    ETL_DATABASE_PORT = os.environ.get("ETL_DATABASE_PORT")
+    ETL_DATABASE_NAME = os.environ.get("ETL_DATABASE_NAME")
+    ETL_DATABASE_USER = os.environ.get("ETL_DATABASE_USER")
+    ETL_DATABASE_PASSWORD = os.environ.get("ETL_DATABASE_PASSWORD")
+    EXPORT_DIR = os.environ.get("EXPORT_DIR")
 except KeyError:
     ETL_DATABASE_HOST = os.environ.get("ETL_DATABASE_HOST",'localhost')
     ETL_DATABASE_PORT = os.environ.get("ETL_DATABASE_PORT",3306)
