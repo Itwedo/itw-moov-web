@@ -1,6 +1,6 @@
 import configparser
 from flask import request
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
 __all__ = [
@@ -26,7 +26,7 @@ __all__ = [
 
 config = configparser.ConfigParser()
 
-load_dotenv()
+# load_dotenv()
 
 try:
     DEBUG = os.environ.get("DEBUG")
