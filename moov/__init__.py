@@ -166,6 +166,8 @@ def coming_soon():
 @app.errorhandler(500)
 @use_template("404.html")
 def not_found(error):
+    print("Error : ")
+    print(error)
     return
 
 
