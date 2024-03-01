@@ -1,6 +1,6 @@
 import configparser
 from flask import request
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
 __all__ = [
@@ -28,7 +28,7 @@ config = configparser.ConfigParser()
 # config.read("/opt/moov/moov-web.conf")
 config.read("G:\ITWEDO\Projet\Telma\moov-web-setup\moov-web.conf") 
 
-# load_dotenv()
+load_dotenv()
 
 try:
     # misc_config = config["MISC"]
