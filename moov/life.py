@@ -48,7 +48,7 @@ def drugstores():
     todays_month = today.split("-")[1]
     response = requests.get(
         url=f"{STRAPI_API_URL}/allnighters",
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
         params={
             "filters[$and][0][start][$lte]": today,
             "filters[$and][1][stop][$gte]": today,

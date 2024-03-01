@@ -31,7 +31,7 @@ def preview_page(slug):
             "publicationState": "preview",
             "filters[slug][$eq]": f"https://moov.sudo.mg{url_for('preview.preview_page', slug=slug)}",
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     news = response.json()
     if not news["data"]:
@@ -58,7 +58,7 @@ def preview_page(slug):
             "pagination[limit]": 100,
             "filter[rubrique][slug][$eq]": article["attributes"]["rubrique"]["data"]["attributes"]["slug"],
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     same_category = same_category.json()["data"]
     if same_category:
@@ -75,7 +75,7 @@ def preview_page(slug):
             "sort": "id:desc",
             "pagination[limit]": 100,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     regular = regular.json()["data"]
     if regular:

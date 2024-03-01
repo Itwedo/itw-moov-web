@@ -39,7 +39,7 @@ def contact():
         moment = datetime.now()
         response = requests.post(
             url=f"{STRAPI_API_URL}/contacts",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             json={
                 "data": {
                     "date": moment.isoformat(),

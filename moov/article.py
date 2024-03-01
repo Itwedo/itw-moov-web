@@ -18,7 +18,7 @@ def news_article(id, slug, type=None, category=None):
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/{id}",
         params={"populate": ["images","category","bodyCollection","bodyCollection.images"]},
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     news = response.json()
     images = news["data"]["attributes"]["images"]["data"]
@@ -43,7 +43,7 @@ def news_article(id, slug, type=None, category=None):
             "pagination[limit]": 100,
             "filters[category][name][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["name"],
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     same_category = same_category.json()["data"]
     if same_category:
@@ -60,7 +60,7 @@ def news_article(id, slug, type=None, category=None):
             "sort": "id:desc",
             "pagination[limit]": 100,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     regular = regular.json()["data"]
     if regular:
@@ -87,7 +87,7 @@ def news_article2():
     response = requests.get(
         url=f"{STRAPI_API_URL}/actualites/5368",
         params={"populate": "images","populate":"category"},
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     news = response.json()
     images = news["data"]["attributes"]["images"]["data"]
@@ -107,7 +107,7 @@ def news_article2():
             "pagination[limit]": 100,
             "filters[category][slug][$eq]": news["data"]["attributes"]["category"]["data"]["attributes"]["slug"],
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     same_category = same_category.json()["data"]
     if same_category:
@@ -124,7 +124,7 @@ def news_article2():
             "sort": "id:desc",
             "pagination[limit]": 100,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     regular = regular.json()["data"]
     if regular:

@@ -26,8 +26,10 @@ def home():
             "filters[spotlight][$eq]": "true",
             "filters[category][type][$eq]" : "Actualite",
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
+    print(f"{STRAPI_API_URL}/actualites")
+    print(spotlights_response)
     spotlights = []
     if spotlights_response.ok:
         spotlights_data = spotlights_response.json()["data"]
@@ -47,7 +49,7 @@ def home():
     flashes_0_response = requests.get(
         url=f"{STRAPI_API_URL}/flash-news",
         params={"populate": "images", "sort": "id:desc"},
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     flashes_0 = []
     if flashes_0_response.ok:
@@ -59,7 +61,7 @@ def home():
             "sort": "id:desc",
             "filters[flash][$eq]": "true",
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     flashes_1 = []
     if flashes_0_response.ok:
@@ -89,7 +91,7 @@ def home():
             "filters[category][type][$eq]": "Tendance",
             "pagination[limit]": 5,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     magazine = []
     if magazine_response.ok:
@@ -107,7 +109,7 @@ def home():
             "filters[category][type][$eq]": "Actualite",
             "pagination[limit]": 10,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     news = []
     if news_response.ok:
@@ -126,7 +128,7 @@ def home():
             "filters[category][name][$in]": ["International", "Médecine & Santé"],
             "pagination[limit]": 20,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     magazines = []
     if magazines_response.ok:

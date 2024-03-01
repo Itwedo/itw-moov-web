@@ -28,7 +28,7 @@ def search():
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     regular = requests.get(
         url=f"{STRAPI_API_URL}/actualites",
@@ -37,7 +37,7 @@ def search():
             "sort": "id:desc",
             "pagination[limit]": 100,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
 
     actualites = {"data": []}

@@ -45,7 +45,7 @@ def news():
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     return {"result": result.json(), "page": request.args.get("page", 1)}
 
@@ -66,7 +66,7 @@ def category_actuality(category):
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     return {
         "category": get_category_display(category),

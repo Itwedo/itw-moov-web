@@ -49,7 +49,7 @@ class Connector(object):
                 actuality_item[item] = value
         result = requests.post(
             url=f"{STRAPI_API_URL}/actualites",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             json={"data": actuality_item},
         )
         if result.json()["data"] and result.json()["data"].get("id"):
@@ -59,7 +59,7 @@ class Connector(object):
         id = None
         doublons = requests.get(
             url=f"{STRAPI_API_URL}/actualites",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             params={
                 "populate": "images",
                 "filters[title][$eq]": article["title"],
@@ -132,7 +132,7 @@ class Connector(object):
         """
         response = requests.post(
             url=f"{STRAPI_API_URL}/upload",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             files={
                 "files": (
                     filename,

@@ -87,7 +87,7 @@ def filter_articles(minchars):
     while True:
         response = requests.get(
             url=f"{STRAPI_API_URL}/actualites",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             params={
                 "populate": "images",
                 "pagination[start]": count,
@@ -111,7 +111,7 @@ def filter_articles(minchars):
                     )
                     result = requests.delete(
                         url=f"{STRAPI_API_URL}/actualites/{info['id']}",
-                        headers=STRAPI_API_AUTH_TOKEN,
+                        headers=STRAPI_API_AUTH_TOKEN_BEARER,
                     )
                 elif (
                     info["attributes"]["images"]["data"]
@@ -136,7 +136,7 @@ def filter_articles(minchars):
                         )
                         result = requests.delete(
                             url=f"{STRAPI_API_URL}/actualites/{info['id']}",
-                            headers=STRAPI_API_AUTH_TOKEN,
+                            headers=STRAPI_API_AUTH_TOKEN_BEARER,
                         )
         count += 100
         click.echo(f"{len(infos)}/{count}")
@@ -185,7 +185,7 @@ def post_category():
     for category in csv_file :
         response=requests.post(
             url=f"{STRAPI_API_URL}/rubriques",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             json={"data": {"name": category[2],"slug": category[0],"type":category[3]}},
         )
         print (category[2] + "added")
@@ -197,7 +197,7 @@ def update_actuality():
     while True:
         response = requests.get(
             url=f"{STRAPI_API_URL}/actualites",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             params={
                 "populate": "images",
                  "sort": "id:desc",
@@ -216,7 +216,7 @@ def update_actuality():
             print(menu)
             requests.put(
                 url=f"{STRAPI_API_URL}/actualites/{article['id']}",
-                headers=STRAPI_API_AUTH_TOKEN,
+                headers=STRAPI_API_AUTH_TOKEN_BEARER,
                 json={"data": {"rubrique": [menu]}},
 
             )
@@ -231,7 +231,7 @@ def update_slug(category):
     while True:
         response = requests.get(
             url=f"{STRAPI_API_URL}/actualites",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             params={
                 "populate": "images",
                 "sort": "id:desc",
@@ -246,7 +246,7 @@ def update_slug(category):
         for article in tqdm(data, desc=str(count)):
             requests.put(
                 url=f"{STRAPI_API_URL}/actualites/{article['id']}",
-                headers=STRAPI_API_AUTH_TOKEN,
+                headers=STRAPI_API_AUTH_TOKEN_BEARER,
                 json={"data": {"title": article["attributes"]["title"]+" "}},
             )
 
@@ -271,7 +271,7 @@ def get_category():
                 "pagination[pageSize]": 9,
                 "pagination[withCount]": 1,
             },
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
         )
         if result.json()["data"] and not row[2] in actualities:
             actualities.append({"display": row[2], "slug": row[0]})
@@ -286,7 +286,7 @@ def get_category():
                 "pagination[pageSize]": 9,
                 "pagination[withCount]": 1,
             },
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
         )
         if result.json()["data"] and not row[2] in magazines:
             # magazines.append({row[2]: row[0]})
@@ -330,7 +330,7 @@ def delete_actus():
                 "pagination[pageSize]": 100,
                 "sort": "id:asc",
             },
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
         )
 
         with click.progressbar(
@@ -340,7 +340,7 @@ def delete_actus():
 
                 result = requests.delete(
                     url=f"{STRAPI_API_URL}/actualites/{actu['id']}",
-                    headers=STRAPI_API_AUTH_TOKEN,
+                    headers=STRAPI_API_AUTH_TOKEN_BEARER,
                 )
         print(i)
 
@@ -353,7 +353,7 @@ def delete_doublon():
     while True:
         response = requests.get(
             url=f"{STRAPI_API_URL}/actualites",
-            headers=STRAPI_API_AUTH_TOKEN,
+            headers=STRAPI_API_AUTH_TOKEN_BEARER,
             params={
                 "populate": "images",
                 "filters[Type][$eq]": "Tendance",
@@ -367,7 +367,7 @@ def delete_doublon():
         for article in tqdm(data, desc=str(count)):
             doublons = requests.get(
                 url=f"{STRAPI_API_URL}/actualites",
-                headers=STRAPI_API_AUTH_TOKEN,
+                headers=STRAPI_API_AUTH_TOKEN_BEARER,
                 params={
                     "populate": "images",
                     "filters[title][$eq]": article["attributes"]["title"],
@@ -377,7 +377,7 @@ def delete_doublon():
                 for doublon in doublons.json()["data"][1:]:
                     result = requests.delete(
                         url=f"{STRAPI_API_URL}/actualites/{doublon['id']}",
-                        headers=STRAPI_API_AUTH_TOKEN,
+                        headers=STRAPI_API_AUTH_TOKEN_BEARER,
                     )
                     deleted += 1
 

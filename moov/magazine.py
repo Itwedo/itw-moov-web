@@ -25,7 +25,7 @@ def magazine():
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
 
     rubriques = requests.get(
@@ -33,7 +33,7 @@ def magazine():
         params={
             'populate':'categorie.rubrique'
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     categories_news =[]
     for rubrique in rubriques.json()['data']['attributes']['categorie']:
@@ -64,7 +64,7 @@ def category_magazines(category):
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": 1,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
     return {
         "category": get_category_display(category),
@@ -86,6 +86,6 @@ def get_news_by_rubrique(rubrique,article_per_page,page_count,request):
             "pagination[page]": request.args.get("page", 1),
             "pagination[withCount]": page_count,
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     ).json()["data"]
 

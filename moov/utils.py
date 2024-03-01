@@ -34,7 +34,7 @@ def get_ads_by_location(location):
     ads = requests.get(
         url=f"{STRAPI_API_URL}/ads",
         params={"populate": "image", "filters[location][$eq]": location},
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
 
     list_ads = []
@@ -72,7 +72,7 @@ def get_currency():
     result = {currency: 0 for currency in currencies}
     response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
         params={
             "sort": "date:asc",
             "filters[date][$in]": map(lambda x: x.strftime("%Y-%m-%d"), dates),
@@ -178,7 +178,7 @@ def cut_body(title, head, text, images_number):
 def get_paginated_curency(date_list, page, result_list, existant_dates):
     paginated_response = requests.get(
         url=f"{STRAPI_API_URL}/exchangerates",
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
         params={
             "filters[date][$in]": date_list,
             "filters[currency][$in]": [
@@ -213,7 +213,7 @@ def get_paginated_curency(date_list, page, result_list, existant_dates):
 def get_menus(type):
     actualities = requests.get(
         url=f"{STRAPI_API_URL}/article-categories",
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
         params={
             # "filters[actualites][id][$notNull]": True,
             "filters[type][$eq]": type,
@@ -229,14 +229,14 @@ def get_category_display(category):
             "filters[slug][$eq]": category,
             "sort": "order:asc"
         },
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     ).json()["data"][0]["attributes"]
 
 
 def get_rubriques():
     menus = requests.get(
         url=f"{STRAPI_API_URL}/article-categories",
-        headers=STRAPI_API_AUTH_TOKEN,
+        headers=STRAPI_API_AUTH_TOKEN_BEARER,
     ).json()["data"]
     menu_list = []
     for menu in menus:
