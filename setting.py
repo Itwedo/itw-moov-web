@@ -17,7 +17,8 @@ setup(
         "beautifulsoup4 ==4.10.0",
         "build ==0.7.0",
         "click ==8.0.4",
-        "ipython ==8.0.1",
+        # "ipython ==8.0.1",
+        "ipython",
         "markdown2 ==2.4.2",
         "flask ==2.0.2",
         "Flask-WTF ==1.0.0",
@@ -25,7 +26,8 @@ setup(
         "requests ==2.26.0",
         "WTForms ==3.0.1",
         "openpyxl ==3.0.9",
-        "pandas ==1.4.1",
+        # "pandas ==1.4.1",
+        "pandas",
         "PyMySQL >=1.0.2",
         "rich >=10.14.0",
         "cryptography >=36.0.0",
@@ -35,7 +37,9 @@ setup(
         "requests",
         "requests-html",
         "captcha==0.4",
-        "APScheduler==3.9.1"
+        "APScheduler==3.9.1",
+        "Werkzeug==2.0.0"
+        "python-dotenv>=0.10.0,<0.11.0"
     ],
     entry_points={
         "console_scripts": ["moov = moov.api.cli:cmd"],

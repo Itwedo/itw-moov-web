@@ -1,6 +1,6 @@
 import configparser
 from flask import request
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
 __all__ = [
@@ -26,7 +26,7 @@ __all__ = [
 
 config = configparser.ConfigParser()
 
-# load_dotenv()
+load_dotenv()
 
 try:
     DEBUG = os.environ.get("DEBUG")
@@ -77,7 +77,7 @@ try:
     print(STRAPI_API_AUTH_TOKEN_BEARER)
 except KeyError:
     STRAPI_API_URL = os.environ.get(
-        "STRAPI_API_URL", "http://localhost:1337/"
+        "STRAPI_API_URL", "http://34.27.109.166/moov-mg/api"
     )
     STRAPI_API_AUTH_TOKEN_BEARER = {
         "Authorization": "Bearer " + os.environ.get("STRAPI_API_AUTH_TOKEN")
@@ -87,7 +87,7 @@ except KeyError:
         STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', ""),
     )
     PREVIEW_BASE_URL = os.environ.get(
-        "PREVIEW_BASE_URL", "http://localhost:8000"
+        "PREVIEW_BASE_URL", "http://34.27.109.166:8000"
     )
     print("STRAPI_API_AUTH_TOKEN except")
     print(STRAPI_API_AUTH_TOKEN_BEARER)
@@ -99,17 +99,17 @@ else:
     # }
     # PREVIEW_BASE_URL = cms_config["PREVIEW_BASE_URL"]
     STRAPI_API_URL = os.environ.get(
-        "STRAPI_API_URL", "http://localhost:1337/"
+        "STRAPI_API_URL", "http://34.27.109.166/moov-mg/api"
     )
     STRAPI_API_AUTH_TOKEN_BEARER = {
-        "Authorization": "Bearer 2efc0d1f3a2ef356dd50deeaf46b0ed0be41518370e0036067fc160f943559c9334c3ea0b602010bc665310cc9459b164e92c8f866af8a2dcc4e09ed7129621fb0d2809b2b00e2903820c4ab03b4118c65cd7b7da4774f6f81e0c96bec94f947e4e129e7a98bce84ae8330ffdc6ba3a04e746b54bfe086f5c569125f304785a3"
+        "Authorization": "Bearer db4751b26b0845e7dfa4fe324444a793adaecda5a70d560b1a21634cb9b9dbfb64701a50f3abf23c9d12fb1317b8d0dedda14f85ac3430dc5dcecbbdd4710edf961edf5147486a6f552449a3c952d3b997dd29cfb4ff3935e9864c880867cd9fdc82f01794d21a9d195b101b54013c7f754d1924fae47686cb5b95636d9957db"
     }
     STRAPI_PUBLIC_URL = os.environ.get(
         "STRAPI_PUBLIC_URL",
         STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', ""),
     )
     PREVIEW_BASE_URL = os.environ.get(
-        "PREVIEW_BASE_URL", "http://localhost:8000"
+        "PREVIEW_BASE_URL", "http://34.27.109.166:8000"
     )
     print("STRAPI_API_AUTH_TOKEN else")
     print(STRAPI_API_AUTH_TOKEN_BEARER)

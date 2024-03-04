@@ -10,7 +10,7 @@ from .config import *
 from .utils import use_template
 
 import requests
-import locale
+# import locale
 
 app = Blueprint("home", __name__, url_prefix="/")
 
@@ -139,7 +139,7 @@ def home():
             if item["attributes"]["images"]["data"]
         ]
 
-    locale.setlocale(locale.LC_TIME,'fr_FR.UTF-8')
+    # locale.setlocale(locale.LC_TIME,'fr_FR.UTF-8')
     data = {
         "today": datetime.now().strftime("%A, %d %B %Y").title(),
         "spotlights": spotlights,
