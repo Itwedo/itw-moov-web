@@ -78,13 +78,18 @@ def weather_report(city="Antananarivo"):
         params={"key": api_key, "q": city, "days": 7, lang: lang, "hour": hour}  # Récupérer les prévisions pour 7 jours
     )
     weather_data = response.json()
+    day = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+    month = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+
     for forecast in weather_data["forecast"]["forecastday"]:
         date_string = forecast["date"]
         date_object = datetime.strptime(date_string, "%Y-%m-%d")
-        mois = calendar.month_name[date_object.month]
+        mois = month[date_object.month - 1]  # Adjusting month index to start from 0
         formatted_date = date_object.strftime("%d") + " " + mois
+        day_of_week = calendar.weekday(date_object.year, date_object.month, date_object.day)
+        formatted_day = day[day_of_week]
         forecast["formatted_date"] = formatted_date
-        forecast["formatted_day"] = datetime.strptime(date_string, "%Y-%m-%d").strftime("%A")
+        forecast["formatted_day"] = formatted_day
 
     #Get all data hour for the current day
     weather_hours_data = []
