@@ -1,7 +1,6 @@
-[2024-03-03 21:08:37,923] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:08:37,927] DEBUG in base: Next wakeup is due at 2024-03-03 21:13:37.913164+03:00 (in 299.986842 seconds)
-[2024-03-03 21:08:37,927] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:13:37 +03)" (scheduled at 2024-03-03 21:08:37.913164+03:00)
-[2024-03-03 21:08:37,929] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:13:37 +03)" raised an exception
+[2024-03-04 17:10:20,700] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:15:20 +03)" (scheduled at 2024-03-04 17:10:20.686561+03:00)
+[2024-03-04 17:10:20,700] DEBUG in base: Next wakeup is due at 2024-03-04 17:15:20.686561+03:00 (in 299.985695 seconds)
+[2024-03-04 17:10:20,706] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:15:20 +03)" raised an exception
 Traceback (most recent call last):
   File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
     retval = job.func(*job.args, **job.kwargs)
@@ -12,10 +11,57 @@ Traceback (most recent call last):
   File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
     with self.source as source:
 TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:08:46,938] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:08:46,939] DEBUG in base: Next wakeup is due at 2024-03-03 21:13:46.909242+03:00 (in 299.969709 seconds)
-[2024-03-03 21:08:46,940] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:13:46 +03)" (scheduled at 2024-03-03 21:08:46.909242+03:00)
-[2024-03-03 21:08:46,944] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:13:46 +03)" raised an exception
+[2024-03-04 17:19:14,359] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+[2024-03-04 17:19:14,360] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-04 17:19:14,361] INFO in base: Scheduler started
+[2024-03-04 17:19:14,362] DEBUG in base: Looking for jobs to run
+[2024-03-04 17:19:14,364] DEBUG in base: Next wakeup is due at 2024-03-04 17:24:14.359796+03:00 (in 299.995001 seconds)
+[2024-03-04 17:19:16,518] INFO in _internal:  * Restarting with stat
+[2024-03-04 17:19:20,015] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+[2024-03-04 17:19:20,016] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-04 17:19:20,016] INFO in base: Scheduler started
+[2024-03-04 17:19:20,019] DEBUG in base: Looking for jobs to run
+[2024-03-04 17:19:20,023] DEBUG in base: Next wakeup is due at 2024-03-04 17:24:20.014479+03:00 (in 299.991251 seconds)
+[2024-03-04 17:19:22,242] WARNING in _internal:  * Debugger is active!
+[2024-03-04 17:19:22,255] INFO in _internal:  * Debugger PIN: 125-542-277
+[2024-03-04 17:19:22,396] INFO in _internal:  * Running on http://127.0.0.1:8000/ (Press CTRL+C to quit)
+[2024-03-04 17:19:47,252] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:47] "GET /vie-pratique/meteo HTTP/1.1" 200 -
+[2024-03-04 17:19:47,961] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:47] "GET /vie-pratique/meteo HTTP/1.1" 200 -
+[2024-03-04 17:19:48,021] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:48] "GET /vie-pratique/meteo HTTP/1.1" 200 -
+[2024-03-04 17:19:48,544] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:48] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
+[2024-03-04 17:19:48,545] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:48] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
+[2024-03-04 17:19:48,549] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:48] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
+[2024-03-04 17:19:48,755] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:48] "GET /assets/styles/custom.css HTTP/1.1" 200 -
+[2024-03-04 17:19:49,321] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:49] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
+[2024-03-04 17:19:56,241] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:56] "GET /assets/popover/popover.min.js HTTP/1.1" 200 -
+[2024-03-04 17:19:56,697] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:56] "GET /assets/fontawesome-free-6.2.0-web/css/solid.css HTTP/1.1" 200 -
+[2024-03-04 17:19:56,972] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:56] "GET /assets/fontawesome-free-6.2.0-web/css/fontawesome.css HTTP/1.1" 200 -
+[2024-03-04 17:19:57,205] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:57] "GET /assets/popover/popover.min.css HTTP/1.1" 200 -
+[2024-03-04 17:19:57,313] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:57] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
+[2024-03-04 17:19:57,314] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:57] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
+[2024-03-04 17:19:57,677] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:57] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
+[2024-03-04 17:19:58,291] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:58] "GET /assets/fontawesome-free-6.2.0-web/css/brands.css HTTP/1.1" 200 -
+[2024-03-04 17:19:58,926] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:19:58] "GET /assets/images/search.svg HTTP/1.1" 200 -
+[2024-03-04 17:20:00,110] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:00] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
+[2024-03-04 17:20:00,245] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:00] "GET /assets/images/new-arrow-left.png HTTP/1.1" 200 -
+[2024-03-04 17:20:00,576] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:00] "GET /assets/images/new-arrow-right.png HTTP/1.1" 200 -
+[2024-03-04 17:20:00,770] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:00] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
+[2024-03-04 17:20:01,008] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:01] "GET /assets/scripts/main-6731bc2efb0608c06434.js HTTP/1.1" 200 -
+[2024-03-04 17:20:01,026] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:01] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
+[2024-03-04 17:20:01,060] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:01] "GET /assets/images/Apercu.png HTTP/1.1" 200 -
+[2024-03-04 17:20:01,693] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:01] "GET /assets/images/facebook_.svg HTTP/1.1" 200 -
+[2024-03-04 17:20:01,779] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:01] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
+[2024-03-04 17:20:01,820] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:01] "GET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1" 200 -
+[2024-03-04 17:20:02,151] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:02] "GET /assets/images/twitter_.svg HTTP/1.1" 200 -
+[2024-03-04 17:20:02,533] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:02] "GET /assets/images/Moov-logo_0@2x.png?v=abc HTTP/1.1" 200 -
+[2024-03-04 17:20:02,566] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:02] "GET /assets/images/icon-arrow-down.png HTTP/1.1" 200 -
+[2024-03-04 17:20:03,392] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:03] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
+[2024-03-04 17:20:10,546] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:10] "GET /assets/styles/530e3e24230ca03e9328.gif HTTP/1.1" 200 -
+[2024-03-04 17:20:10,901] INFO in _internal: 127.0.0.1 - - [04/Mar/2024 17:20:10] "GET /assets/images/moov_favicon_m.svg HTTP/1.1" 200 -
+[2024-03-04 17:24:14,367] DEBUG in base: Looking for jobs to run
+[2024-03-04 17:24:14,371] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:29:14 +03)" (scheduled at 2024-03-04 17:24:14.359796+03:00)
+[2024-03-04 17:24:14,372] DEBUG in base: Next wakeup is due at 2024-03-04 17:29:14.359796+03:00 (in 299.991648 seconds)
+[2024-03-04 17:24:14,378] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:29:14 +03)" raised an exception
 Traceback (most recent call last):
   File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
     retval = job.func(*job.args, **job.kwargs)
@@ -26,10 +72,10 @@ Traceback (most recent call last):
   File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
     with self.source as source:
 TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:13:37,918] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:13:37,918] DEBUG in base: Next wakeup is due at 2024-03-03 21:18:37.913164+03:00 (in 299.994785 seconds)
-[2024-03-03 21:13:37,918] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:18:37 +03)" (scheduled at 2024-03-03 21:13:37.913164+03:00)
-[2024-03-03 21:13:37,920] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:18:37 +03)" raised an exception
+[2024-03-04 17:24:20,030] DEBUG in base: Looking for jobs to run
+[2024-03-04 17:24:20,032] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:29:20 +03)" (scheduled at 2024-03-04 17:24:20.014479+03:00)
+[2024-03-04 17:24:20,032] DEBUG in base: Next wakeup is due at 2024-03-04 17:29:20.014479+03:00 (in 299.982944 seconds)
+[2024-03-04 17:24:20,038] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:29:20 +03)" raised an exception
 Traceback (most recent call last):
   File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
     retval = job.func(*job.args, **job.kwargs)
@@ -40,79 +86,9 @@ Traceback (most recent call last):
   File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
     with self.source as source:
 TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:13:46,921] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:13:46,923] DEBUG in base: Next wakeup is due at 2024-03-03 21:18:46.909242+03:00 (in 299.987068 seconds)
-[2024-03-03 21:13:46,923] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:18:46 +03)" (scheduled at 2024-03-03 21:13:46.909242+03:00)
-[2024-03-03 21:13:46,927] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:18:46 +03)" raised an exception
-Traceback (most recent call last):
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
-    retval = job.func(*job.args, **job.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
-    feed = obj.get_feed()
-           ^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
-    with self.source as source:
-TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:18:37,917] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:18:37,920] DEBUG in base: Next wakeup is due at 2024-03-03 21:23:37.913164+03:00 (in 299.993744 seconds)
-[2024-03-03 21:18:37,920] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:23:37 +03)" (scheduled at 2024-03-03 21:18:37.913164+03:00)
-[2024-03-03 21:18:37,924] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:23:37 +03)" raised an exception
-Traceback (most recent call last):
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
-    retval = job.func(*job.args, **job.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
-    feed = obj.get_feed()
-           ^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
-    with self.source as source:
-TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:18:46,912] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:18:46,913] DEBUG in base: Next wakeup is due at 2024-03-03 21:23:46.909242+03:00 (in 299.995278 seconds)
-[2024-03-03 21:18:46,914] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:23:46 +03)" (scheduled at 2024-03-03 21:18:46.909242+03:00)
-[2024-03-03 21:18:46,919] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:23:46 +03)" raised an exception
-Traceback (most recent call last):
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
-    retval = job.func(*job.args, **job.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
-    feed = obj.get_feed()
-           ^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
-    with self.source as source:
-TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:23:37,922] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:23:37,922] DEBUG in base: Next wakeup is due at 2024-03-03 21:28:37.913164+03:00 (in 299.990463 seconds)
-[2024-03-03 21:23:37,923] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:28:37 +03)" (scheduled at 2024-03-03 21:23:37.913164+03:00)
-[2024-03-03 21:23:37,926] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:28:37 +03)" raised an exception
-Traceback (most recent call last):
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
-    retval = job.func(*job.args, **job.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
-    feed = obj.get_feed()
-           ^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
-    with self.source as source:
-TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:23:46,915] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:23:46,916] DEBUG in base: Next wakeup is due at 2024-03-03 21:28:46.909242+03:00 (in 299.993117 seconds)
-[2024-03-03 21:23:46,917] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:28:46 +03)" (scheduled at 2024-03-03 21:23:46.909242+03:00)
-[2024-03-03 21:23:46,920] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:28:46 +03)" raised an exception
-Traceback (most recent call last):
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
-    retval = job.func(*job.args, **job.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
-    feed = obj.get_feed()
-           ^^^^^^^^^^^^^^
-  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
-    with self.source as source:
-TypeError: 'NoneType' object does not support the context manager protocol
-[2024-03-03 21:28:37,923] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:28:37,924] DEBUG in base: Next wakeup is due at 2024-03-03 21:33:37.913164+03:00 (in 299.988729 seconds)
-[2024-03-03 21:28:37,924] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:33:37 +03)" (scheduled at 2024-03-03 21:28:37.913164+03:00)
-[2024-03-03 21:28:46,915] DEBUG in base: Looking for jobs to run
-[2024-03-03 21:28:46,916] DEBUG in base: Next wakeup is due at 2024-03-03 21:33:46.909242+03:00 (in 299.992621 seconds)
-[2024-03-03 21:28:46,917] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-03 21:33:46 +03)" (scheduled at 2024-03-03 21:28:46.909242+03:00)
+[2024-03-04 17:29:14,374] DEBUG in base: Looking for jobs to run
+[2024-03-04 17:29:14,375] DEBUG in base: Next wakeup is due at 2024-03-04 17:34:14.359796+03:00 (in 299.985427 seconds)
+[2024-03-04 17:29:14,375] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:34:14 +03)" (scheduled at 2024-03-04 17:29:14.359796+03:00)
+[2024-03-04 17:29:20,027] DEBUG in base: Looking for jobs to run
+[2024-03-04 17:29:20,028] DEBUG in base: Next wakeup is due at 2024-03-04 17:34:20.014479+03:00 (in 299.987275 seconds)
+[2024-03-04 17:29:20,028] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-04 17:34:20 +03)" (scheduled at 2024-03-04 17:29:20.014479+03:00)

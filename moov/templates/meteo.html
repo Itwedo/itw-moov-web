@@ -58,7 +58,9 @@
                   </div>
 
                   <div class="days-forecast-container">
-                    <button class="scroll-hours-left-button">&lt;</button>
+                    <button class="scroll-hours-left-button">
+                      <img class="scroll-icon" src="/assets/images/new-arrow-left.png" alt="Arrow left">
+                    </button>
                     <div class="days-forecast">
                       <ul class="weather-hours-cards">
                         {% for hour_forecast in weather_hours_data %}
@@ -76,12 +78,16 @@
                         {% endfor %}
                       </ul>
                     </div>
-                    <button class="scroll-hours-right-button">&gt;</button>
+                    <button class="scroll-hours-right-button">
+                      <img class="scroll-icon" src="/assets/images/new-arrow-right.png" alt="Arrow right">
+                    </button>
                   </div> 
 
                   <h2 class="inline-block text-4xl text-black py-10 px-5">Prévisions météo pour les 7 prochains jours</h2>
                   <div class="days-forecast-container">
-                    <button class="scroll-left-button">&lt;</button>
+                    <button class="scroll-left-button">
+                      <img class="scroll-icon" src="/assets/images/new-arrow-left.png" alt="Arrow left">
+                    </button>
                     <div class="days-forecast">
                       <ul class="weather-cards">
                         {% for day_forecast in weather_data["forecast"]["forecastday"] %}
@@ -101,7 +107,9 @@
                         {% endfor %}
                       </ul>
                     </div>
-                    <button class="scroll-right-button">&gt;</button>
+                    <button class="scroll-right-button">
+                      <img class="scroll-icon" src="/assets/images/new-arrow-right.png" alt="Arrow right">
+                    </button>
                   </div>                  
                 </div>
               {% endif %}
@@ -190,6 +198,12 @@
         scrollLeftButton.style.display = weatherCards.scrollLeft > 0 ? 'block' : 'none';
     });
 
+    scrollLeftButton.style.display = 'none'; 
+
+    if (weatherCards.scrollWidth <= weatherCards.clientWidth) {
+        scrollRightButton.style.display = 'none';
+    }
+
     scrollLeftButton.addEventListener('click', function () {
         scrollPosition -= scrollAmount;
         weatherCards.scrollTo({
@@ -219,6 +233,12 @@
         scrollRightButton.style.display = weatherCards.scrollLeft < weatherCards.scrollWidth - weatherCards.clientWidth ? 'block' : 'none';
         scrollLeftButton.style.display = weatherCards.scrollLeft > 0 ? 'block' : 'none';
     });
+
+    scrollLeftButton.style.display = 'none'; 
+
+    if (weatherCards.scrollWidth <= weatherCards.clientWidth) {
+        scrollRightButton.style.display = 'none';
+    }
 
     scrollLeftButton.addEventListener('click', function () {
         scrollPosition -= scrollAmount;

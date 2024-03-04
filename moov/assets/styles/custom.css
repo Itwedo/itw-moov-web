@@ -708,8 +708,8 @@ currency
   }
 
   .meteo-header-select{
-    font-size: 12px !important;
-    padding: 18px;
+    font-size: 14px !important;
+    padding: 15px;
     border: 1px solid #b8b8b8;
     min-width: 200px;
     margin-left: 4px;
@@ -813,7 +813,7 @@ currency
   }
 
   .days-forecast-container {
-    overflow-x: auto; 
+    /* overflow-x: auto;  */
     position: relative;
     margin-left: 10px !important;
   }
@@ -834,8 +834,8 @@ currency
   }
   
   .scroll-left-button {
-    left: 0;
-    padding: 0px;
+    left: -15px !important;
+    padding: 5px;
     background: #8686bd;
     border-radius: 50%;
     width: 25px;
@@ -847,8 +847,8 @@ currency
   }
   
   .scroll-right-button {
-    right: 0;
-    padding: 0px;
+    right: -15px !important;
+    padding: 5px;
     background: #8686bd;
     border-radius: 50%;
     width: 25px;
@@ -950,8 +950,8 @@ currency
     }
   
     .scroll-hours-left-button {
-        left: 0;
-        padding: 0px;
+        left: -15px !important;
+        padding: 5px !important;
         background: #8686bd;
         border-radius: 50%;
         width: 25px;
@@ -963,8 +963,8 @@ currency
     }
   
     .scroll-hours-right-button {
-        right: 0;
-        padding: 0px;
+        right: -15px !important;
+        padding: 5px !important;
         background: #8686bd;
         border-radius: 50%;
         width: 25px;
