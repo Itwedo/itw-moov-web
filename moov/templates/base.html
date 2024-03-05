@@ -260,38 +260,30 @@
   </header>
   {% block content %}{% endblock %}
   <footer class="pt-12  bg-gray-100 " id="main-footer">
-    <div class="flex flex-col w-full">
+    <div class=" w-full">
 
-      <div class="flex  flex-col items-center border">
-        <a class="block px-7  mx-auto h-40 moov-logo" href="{{ url_for('home.home') }}">
+      <div class="grid grid-cols-3 sm: border ">
+
+        <div class="flex items-center flex-col justify-start px-12">
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news.news') }}">Actualités</a>
+
+            <a class=" text-gray-600 hover:text-black hover:underline" href="{{ url_for('magazine.magazine') }}">
+              Tendances Moov</a>
+
+            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('life.drugstores') }}">Pharmacie
+              de garde</a>
+
+            <a class="text-gray-600 hover:text-black hover:underline"
+              href="{{ url_for('contact.contact') }}">Contact</a>
+        </div>
+
+        <a class=" block px-7  mx-auto h-40 moov-logo px-12" href="{{ url_for('home.home') }}">
           <img class="img-fluid" src="/assets/images/logo_moov_svg.svg" alt="Moov logo" />
         </a>
 
-        <div class="md:w-2/5 flex items-center flex-col md:flex-row  justify-between  divide-x">
-          <div>
-            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('news.news') }}">Actualités</a>
-          </div>
-          <span class="hidden md:block">|</span>
-          <div>
-            <a class=" text-gray-600 hover:text-black hover:underline" href="{{ url_for('magazine.magazine') }}">
-              Tendances Moov</a>
-          </div>
-          <span class="hidden md:block">|</span>
 
 
-          <div>
-            <a class="text-gray-600 hover:text-black hover:underline" href="{{ url_for('life.drugstores') }}">Pharmacie
-              de garde</a>
-          </div>
-          <span class="hidden md:block">|</span>
-
-          <div>
-            <a class="text-gray-600 hover:text-black hover:underline"
-              href="{{ url_for('contact.contact') }}">Contact</a>
-          </div>
-        </div>
-
-        <div class="flex flex-row justify-center  py-8">
+        <div class="sm:col-span-3 flex flex-row justify-center  py-8 px-12">
           <a class="px-2 py-2" href="https://www.facebook.com/moovmadagascar">
             <img class="footer-sociale-icon" src="/assets/images/facebook_.svg" alt="Moov facebook">
           </a>

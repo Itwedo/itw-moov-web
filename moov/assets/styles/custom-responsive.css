@@ -550,4 +550,35 @@ Xtra Small Screen - Small Mobile
     #side-menu .main-menu-list .sub-menu li a:focus {
         color: #6667AB;
     }
+
+      .bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bottom-content .moov-logo {
+    order: 2;
+    align-self: center; /* Centre le logo horizontalement */
+  }
+
+  .bottom-content .md:w-2/5 {
+    order: 1;
+    width: 100%;
+    justify-content: flex-start; /* Aligner les liens à gauche */
+    flex-direction: row; /* Assure que les liens sont disposés horizontalement */
+    flex-wrap: wrap; /* Permet aux liens de passer à la ligne si nécessaire */
+    gap: 10px; /* Ajoute un peu d'espace entre les liens */
+  }
+
+  .bottom-content .md:w-2/5 > div,
+  .bottom-content .md:w-2/5 span {
+    display: block; /* S'assure que les divs et les spans s'affichent correctement */
+  }
+
+  .bottom-content a {
+    display: inline-block; /* Rend chaque lien inline pour une meilleure disposition */
+  }
+
+
 }
