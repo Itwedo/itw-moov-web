@@ -8,62 +8,68 @@
 <main>
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
     <div class="container mx-auto">
-      <h1 class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100">
-        Pharmacies de garde du {{ start }} au {{ stop }}
-      </h1>
-    </div>
-    <div class="container mx-auto meteo-header-select-container">
-      <select name="city" id="city" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 meteo-header-select">
-        <option value="Antananarivo">Antananarivo</option>
-        <option value="Fianarantsoa">Fianarantsoa</option>
-        <option value="Toamasina">Toamasina</option>
-        <option value="Mahajanga">Mahajanga</option>
-        <option value="Antsiranana">Antsiranana</option>
-        <option value="Toliara">Toliara</option>
-      </select>
-    </div>
-    <div class="container mx-auto">
       <div class="flex flex-wrap flex-col-reverse md:flex-row">
-        <div class="w-full md:w-2/3">
-          <div class="pharma-table px-0 sm:px-5">
-            <div class="table-container robotoslab text-xl md:text-2xl" role="table">
-              <div class="flex-table header" role="rowgroup">
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Province</span></div>
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Pharmacie</span></div>
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Adresse</span></div>
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Téléphone</span></div>
-              </div>
-              <div class="body">
-                {% for element in result %}
-                <div class="flex-table row" role="rowgroup">
-                  <div class="flex-row first" role="cell">
-                    <div class="info">Antananarivo</div>
-                  </div>
-                  <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["name"] }}</div>
-                  </div>
-                  <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["address"] }}</div>
-                  </div>
-                  <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"] }}
-                    </div>
-                  </div>
+        <div class="w-full md:w-2/3 itw-container">
+          <div class="container mx-auto itw-header">
+            <h1 class="inline-block text-6xl text-black py-10 px-5 border-gray-100 itw-header-title itw-text-6xl">
+              Pharmacies de garde du {{ start }} au {{ stop }}
+            </h1>
+          </div>
+          <div class="container mx-auto itw-header-select-container px-5">
+              <div class="pharma-city-select-container">
+                <div class="itw-pharma-icon-img-container">
+                  <img src="/assets/images/location-24.png" alt="location" class="Localisation">
                 </div>
-                {% endfor %}
+                <div>
+                  <select name="city" id="city" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 itw-header-select pharma-city-select" onchange="redirectToSelectedCity(this)">
+                    <option value="Antananarivo">Antananarivo</option>
+                    <option value="Fianarantsoa">Fianarantsoa</option>
+                    <option value="Toamasina">Toamasina</option>
+                    <option value="Mahajanga">Mahajanga</option>
+                    <option value="Antsiranana">Antsiranana</option>
+                    <option value="Toliara">Toliara</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+
+          <h2 class="inline-block text-4xl text-black px-5 pt-6" id="itw-drugstore-city"></h2>
+
+          <div class="container mx-auto">
+            <div class="pharma-table px-0 sm:px-5">
+              <div class="table-container robotoslab text-xl md:text-2xl" role="table">
+                <div class="flex-table header" role="rowgroup">
+                  <div
+                    class="flex-row first text-xl h-20 justify-center items-center md:text-xl lg:text-xl"
+                    role="columnheader"><span class="block">Pharmacie</span></div>
+                  <div
+                    class="flex-row first text-xl h-20 justify-center items-center md:text-xl lg:text-xl"
+                    role="columnheader"><span class="block">Adresse</span></div>
+                  <div
+                    class="flex-row first text-xl h-20 justify-center items-center md:text-2xl lg:text-xl"
+                    role="columnheader"><span class="block">Téléphone</span></div>
+                </div>
+                <div class="body">
+                  {% for element in result %}
+                    <div class="flex-table row itw-drugstore drugstore-{{ element["attributes"]["drugstore"]["data"]["attributes"]["region"] }}" role="rowgroup" data-region="{{ element['attributes']['drugstore']['data']['attributes']['region'] }}">
+                      <div class="flex-row first" role="cell">
+                        <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["name"] }}</div>
+                      </div>
+                      <div class="flex-row first" role="cell">
+                        <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["address"] }}</div>
+                      </div>
+                      <div class="flex-row first" role="cell">
+                        <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"] }}
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
+        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col itw-ads-container-side">
           <div
             class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
             {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
@@ -114,4 +120,33 @@
     </div>
   </section>
 </main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+  function redirectToSelectedCity(selectElement) {
+    const selectedCity = selectElement.value;
+    document.getElementById("itw-drugstore-city").textContent = selectedCity; 
+    const drugstoreRows = document.querySelectorAll('.itw-drugstore');
+    
+    drugstoreRows.forEach(row => {
+      const region = row.getAttribute('data-region');
+      
+      if (selectedCity === 'Antananarivo' && (region === null || region === "None")) {
+        row.style.display = 'flex';
+      } else if (region === selectedCity) {
+        row.style.display = 'flex'; 
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const defaultCitySelect = document.getElementById('city');
+    redirectToSelectedCity(defaultCitySelect);
+  });
+
+</script>
 {% endblock %}

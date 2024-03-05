@@ -24,7 +24,7 @@ __all__ = [
     "EXPORT_DIR"
 ]
 
-config = configparser.ConfigParser()
+# config = configparser.ConfigParser()
 
 load_dotenv()
 
@@ -75,6 +75,7 @@ try:
     PREVIEW_BASE_URL = os.environ.get("PREVIEW_BASE_URL")
     print("STRAPI_API_AUTH_TOKEN try")
     print(STRAPI_API_AUTH_TOKEN_BEARER)
+    print(STRAPI_API_URL)
 except KeyError:
     STRAPI_API_URL = os.environ.get(
         "STRAPI_API_URL", "http://34.27.109.166/moov-mg/api"
@@ -87,10 +88,11 @@ except KeyError:
         STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', ""),
     )
     PREVIEW_BASE_URL = os.environ.get(
-        "PREVIEW_BASE_URL", "http://34.27.109.166:8000"
+        "PREVIEW_BASE_URL", "http://34.27.109.166/moov-mg"
     )
     print("STRAPI_API_AUTH_TOKEN except")
     print(STRAPI_API_AUTH_TOKEN_BEARER)
+    print(STRAPI_API_URL)
 else:
     # STRAPI_PUBLIC_URL = cms_config["STRAPI_PUBLIC_URL"]
     # STRAPI_API_URL = cms_config["STRAPI_API_URL"]
@@ -101,21 +103,23 @@ else:
     STRAPI_API_URL = os.environ.get(
         "STRAPI_API_URL", "http://34.27.109.166/moov-mg/api"
     )
+    STRAPI_API_AUTH_TOKEN = os.environ.get("STRAPI_API_AUTH_TOKEN")
     STRAPI_API_AUTH_TOKEN_BEARER = {
-        "Authorization": "Bearer db4751b26b0845e7dfa4fe324444a793adaecda5a70d560b1a21634cb9b9dbfb64701a50f3abf23c9d12fb1317b8d0dedda14f85ac3430dc5dcecbbdd4710edf961edf5147486a6f552449a3c952d3b997dd29cfb4ff3935e9864c880867cd9fdc82f01794d21a9d195b101b54013c7f754d1924fae47686cb5b95636d9957db"
+        "Authorization": "Bearer " + STRAPI_API_AUTH_TOKEN
     }
     STRAPI_PUBLIC_URL = os.environ.get(
         "STRAPI_PUBLIC_URL",
         STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', ""),
     )
     PREVIEW_BASE_URL = os.environ.get(
-        "PREVIEW_BASE_URL", "http://34.27.109.166:8000"
+        "PREVIEW_BASE_URL", "http://34.27.109.166/moov-mg"
     )
     print("STRAPI_API_AUTH_TOKEN else")
     print(STRAPI_API_AUTH_TOKEN_BEARER)
+    print(STRAPI_API_URL)
     
 try:
-    afp_config = config["AFP"]
+    # afp_config = config["AFP"]
     AFP_URLS = os.environ.get("AFP_URLS")
 except KeyError:
     AFP_URLS = os.environ.get(

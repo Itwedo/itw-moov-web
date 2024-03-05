@@ -9,21 +9,21 @@
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
     <div class="container mx-auto">
       <div class="flex flex-wrap flex-col-reverse md:flex-row">
-        <div class="w-full md:w-2/3 meteo-container">
-          <div class="container mx-auto meteo-header">
-            <h1 id="cityHeader" class="inline-block text-6xl text-black py-10 px-5 meteo-header-title">
+        <div class="w-full md:w-2/3 itw-container">
+          <div class="container mx-auto itw-header">
+            <h1 id="cityHeader" class="inline-block text-6xl text-black py-10 px-5 itw-header-title">
               Météo
             </h1>
           </div> 
-          <div class="container mx-auto meteo-header-select-container">
+          <div class="container mx-auto itw-header-select-container">
             <form id="weatherForm" action="#" method="GET" class="mb-8">
-              <select name="day" id="day" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 meteo-header-select">
+              <select name="day" id="day" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 itw-header-select meteo-select">
                 <option value="day">Météo du jour</option>
               </select>
-              <select name="week" id="week" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 meteo-header-select">
+              <select name="week" id="week" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 itw-header-select meteo-select">
                 <option value="day">Prévision de la semaine</option>
               </select>
-              <select name="city" id="city" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 meteo-header-select">
+              <select name="city" id="city" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 itw-header-select meteo-select">
                   <option value="Antananarivo">Antananarivo</option>
                   <option value="Fianarantsoa">Fianarantsoa</option>
                   <option value="Toamasina">Toamasina</option>
@@ -31,7 +31,7 @@
                   <option value="Antsiranana">Antsiranana</option>
                   <option value="Toliara">Toliara</option>
               </select>
-              <button type="button" id="search-weather" class="meteo-header-search-weather">Rechercher</button>
+              <button type="button" id="search-weather" class="itw-header-search-weather">Rechercher</button>
             </form>
           </div>
           <div class="container mx-auto">
@@ -115,7 +115,7 @@
               {% endif %}
           </div>
         </div>
-        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
+        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col itw-ads-container-side">
           <div
             class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
             {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
