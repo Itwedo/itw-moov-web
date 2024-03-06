@@ -1,85 +1,75 @@
-[2024-03-05 15:49:13,279] INFO in _internal:  * Restarting with stat
-[2024-03-05 15:49:15,219] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
-[2024-03-05 15:49:15,220] INFO in base: Added job "my_scheduled_job" to job store "default"
-[2024-03-05 15:49:15,222] INFO in base: Scheduler started
-[2024-03-05 15:49:15,223] DEBUG in base: Looking for jobs to run
-[2024-03-05 15:49:15,227] DEBUG in base: Next wakeup is due at 2024-03-05 15:54:15.218339+03:00 (in 299.990988 seconds)
-[2024-03-05 15:49:41,700] WARNING in _internal:  * Debugger is active!
-[2024-03-05 15:49:41,718] INFO in _internal:  * Debugger PIN: 394-072-150
-[2024-03-05 15:49:41,939] WARNING in _internal:  * Running on all addresses.
+[2024-03-06 15:38:46,127] INFO in _internal:  * Restarting with stat
+[2024-03-06 15:38:47,109] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+[2024-03-06 15:38:47,110] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-06 15:38:47,110] INFO in base: Scheduler started
+[2024-03-06 15:38:47,111] DEBUG in base: Looking for jobs to run
+[2024-03-06 15:38:47,113] DEBUG in base: Next wakeup is due at 2024-03-06 15:43:47.109481+03:00 (in 299.995527 seconds)
+[2024-03-06 15:39:07,144] WARNING in _internal:  * Debugger is active!
+[2024-03-06 15:39:07,149] INFO in _internal:  * Debugger PIN: 394-072-150
+[2024-03-06 15:39:07,244] WARNING in _internal:  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
-[2024-03-05 15:49:41,943] INFO in _internal:  * Running on http://192.168.88.13:8080/ (Press CTRL+C to quit)
-[2024-03-05 15:50:11,977] INFO in _internal:  * Detected change in 'D:\\work\\python\\itw-moov-web\\moov\\templates\\base.html', reloading
-[2024-03-05 15:50:12,124] INFO in _internal:  * Restarting with stat
-[2024-03-05 15:50:13,356] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
-[2024-03-05 15:50:13,356] INFO in base: Added job "my_scheduled_job" to job store "default"
-[2024-03-05 15:50:13,358] INFO in base: Scheduler started
-[2024-03-05 15:50:13,358] DEBUG in base: Looking for jobs to run
-[2024-03-05 15:50:13,361] DEBUG in base: Next wakeup is due at 2024-03-05 15:55:13.356928+03:00 (in 299.994990 seconds)
-[2024-03-05 15:50:33,418] WARNING in _internal:  * Debugger is active!
-[2024-03-05 15:50:33,428] INFO in _internal:  * Debugger PIN: 394-072-150
-[2024-03-05 15:50:33,528] WARNING in _internal:  * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
-[2024-03-05 15:50:33,530] INFO in _internal:  * Running on http://192.168.88.13:8080/ (Press CTRL+C to quit)
-[2024-03-05 15:51:02,211] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:02] "GET / HTTP/1.1" 200 -
-[2024-03-05 15:51:02,469] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:02] "GET /assets/styles/custom.css HTTP/1.1" 200 -
-[2024-03-05 15:51:02,479] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:02] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
-[2024-03-05 15:51:02,675] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:02] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
-[2024-03-05 15:51:02,679] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:02] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
-[2024-03-05 15:51:03,088] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:03] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
-[2024-03-05 15:51:03,429] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:03] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:03,765] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:03] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:04,124] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:04] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:08,614] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:08] "GET /assets/fontawesome-free-6.2.0-web/css/brands.css HTTP/1.1" 200 -
-[2024-03-05 15:51:08,621] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:08] "GET /assets/fontawesome-free-6.2.0-web/css/fontawesome.css HTTP/1.1" 200 -
-[2024-03-05 15:51:08,720] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:08] "GET /assets/popover/popover.min.css HTTP/1.1" 200 -
-[2024-03-05 15:51:08,791] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:08] "GET /assets/popover/popover.min.js HTTP/1.1" 200 -
-[2024-03-05 15:51:08,863] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:08] "GET /assets/fontawesome-free-6.2.0-web/css/solid.css HTTP/1.1" 200 -
-[2024-03-05 15:51:09,134] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
-[2024-03-05 15:51:09,187] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
-[2024-03-05 15:51:09,215] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
-[2024-03-05 15:51:09,258] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/search.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:09,287] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/arrow-down.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:09,381] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/scripts/main-6731bc2efb0608c06434.js HTTP/1.1" 200 -
-[2024-03-05 15:51:09,546] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/partenaire-1_0.png HTTP/1.1" 200 -
-[2024-03-05 15:51:09,551] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/partenaire-2_0.png HTTP/1.1" 200 -
-[2024-03-05 15:51:09,579] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/partenaire-4_0.png HTTP/1.1" 200 -
-[2024-03-05 15:51:09,593] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/partenaire-3_0.png HTTP/1.1" 200 -
-[2024-03-05 15:51:09,600] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/facebook_.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:09,884] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/twitter_.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:09,897] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/icon-arrow-down.png HTTP/1.1" 200 -
-[2024-03-05 15:51:09,901] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/Moov-logo_0@2x.png?v=abc HTTP/1.1" 200 -
-[2024-03-05 15:51:09,917] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:09] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:10,206] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:10] "GET /assets/images/moov_square.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:10,243] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:10] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
-[2024-03-05 15:51:10,462] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:10] "GET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1" 200 -
-[2024-03-05 15:51:15,670] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:15] "GET /assets/styles/624002425f3ac9b50279.woff HTTP/1.1" 200 -
-[2024-03-05 15:51:15,804] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:15] "GET /assets/styles/530e3e24230ca03e9328.gif HTTP/1.1" 200 -
-[2024-03-05 15:51:23,728] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:23] "GET /assets/styles/144cc10895443840bf41.ttf HTTP/1.1" 200 -
-[2024-03-05 15:51:24,152] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:24] "GET /assets/images/moov_favicon_m.svg HTTP/1.1" 200 -
-[2024-03-05 15:51:33,333] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:33] "GET /assets/images/apple-icon-180x180.png HTTP/1.1" 200 -
-[2024-03-05 15:51:42,168] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:42] "GET /assets/images/apple-icon-152x152.png HTTP/1.1" 200 -
-[2024-03-05 15:51:51,563] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:51:51] "GET /assets/images/apple-icon-144x144.png HTTP/1.1" 200 -
-[2024-03-05 15:52:00,371] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:00] "GET /assets/images/apple-icon-120x120.png HTTP/1.1" 200 -
-[2024-03-05 15:52:01,418] INFO in _internal:  * Detected change in 'D:\\work\\python\\itw-moov-web\\moov\\templates\\base.html', reloading
-[2024-03-05 15:52:01,650] INFO in _internal:  * Restarting with stat
-[2024-03-05 15:52:03,117] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
-[2024-03-05 15:52:03,117] INFO in base: Added job "my_scheduled_job" to job store "default"
-[2024-03-05 15:52:03,118] INFO in base: Scheduler started
-[2024-03-05 15:52:03,119] DEBUG in base: Looking for jobs to run
-[2024-03-05 15:52:03,130] DEBUG in base: Next wakeup is due at 2024-03-05 15:57:03.117775+03:00 (in 299.987474 seconds)
-[2024-03-05 15:52:26,440] WARNING in _internal:  * Debugger is active!
-[2024-03-05 15:52:26,444] INFO in _internal:  * Debugger PIN: 394-072-150
-[2024-03-05 15:52:26,582] WARNING in _internal:  * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
-[2024-03-05 15:52:26,584] INFO in _internal:  * Running on http://192.168.88.13:8080/ (Press CTRL+C to quit)
-[2024-03-05 15:52:47,186] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:47] "GET / HTTP/1.1" 200 -
-[2024-03-05 15:52:47,400] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:47] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
-[2024-03-05 15:52:47,474] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:47] "GET /assets/styles/custom.css HTTP/1.1" 200 -
-[2024-03-05 15:52:47,637] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:47] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
-[2024-03-05 15:52:47,641] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:47] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
-[2024-03-05 15:52:48,010] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:48] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
-[2024-03-05 15:52:48,336] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:48] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
-[2024-03-05 15:52:48,651] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:48] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
-[2024-03-05 15:52:49,023] INFO in _internal: 127.0.0.1 - - [05/Mar/2024 15:52:49] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
-[2024-03-05 15:54:48,634] INFO in _internal:  * Restarting with stat
+[2024-03-06 15:39:07,254] INFO in _internal:  * Running on http://192.168.8.100:8080/ (Press CTRL+C to quit)
+[2024-03-06 15:39:43,820] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:43] "GET /article/82102-environnement-une-hausse-de-temperature-de-12oc HTTP/1.1" 200 -
+[2024-03-06 15:39:44,747] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:44] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
+[2024-03-06 15:39:44,759] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:44] "GET /assets/styles/custom.css HTTP/1.1" 200 -
+[2024-03-06 15:39:45,084] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:45] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
+[2024-03-06 15:39:45,332] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:45] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
+[2024-03-06 15:39:54,066] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:54] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
+[2024-03-06 15:39:54,448] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:54] "GET /assets/fontawesome-free-6.2.0-web/css/fontawesome.css HTTP/1.1" 200 -
+[2024-03-06 15:39:54,460] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:54] "GET /assets/fontawesome-free-6.2.0-web/css/solid.css HTTP/1.1" 200 -
+[2024-03-06 15:39:54,485] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:54] "GET /assets/fontawesome-free-6.2.0-web/css/brands.css HTTP/1.1" 200 -
+[2024-03-06 15:39:54,810] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:54] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
+[2024-03-06 15:39:54,811] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:54] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
+[2024-03-06 15:39:55,859] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:39:55] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:03,278] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:03] "GET /assets/popover/popover.min.css HTTP/1.1" 200 -
+[2024-03-06 15:40:03,600] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:03] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
+[2024-03-06 15:40:03,984] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:03] "GET /assets/scripts/main-6731bc2efb0608c06434.js HTTP/1.1" 200 -
+[2024-03-06 15:40:04,300] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:04] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
+[2024-03-06 15:40:05,540] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:05] "GET /assets/popover/popover.min.js HTTP/1.1" 200 -
+[2024-03-06 15:40:05,910] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:05] "GET /assets/images/search.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:05,921] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:05] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
+[2024-03-06 15:40:05,932] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:05] "GET /assets/images/facebook_.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:05,936] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:05] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
+[2024-03-06 15:40:06,038] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:06] "GET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1" 200 -
+[2024-03-06 15:40:06,810] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:06] "GET /assets/images/moov_square.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:06,811] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:06] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:08,674] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:08] "GET /assets/images/twitter_.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:08,984] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:08] "GET /assets/images/Moov-logo_0@2x.png?v=abc HTTP/1.1" 200 -
+[2024-03-06 15:40:08,989] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:08] "GET /assets/images/icon-arrow-down.png HTTP/1.1" 200 -
+[2024-03-06 15:40:15,784] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:15] "GET /assets/styles/530e3e24230ca03e9328.gif HTTP/1.1" 200 -
+[2024-03-06 15:40:16,172] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:16] "GET /assets/images/moov_favicon_m.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:17,826] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:17] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
+[2024-03-06 15:40:24,977] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:24] "GET /assets/images/apple-icon-180x180.png HTTP/1.1" 200 -
+[2024-03-06 15:40:28,106] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:28] "GET /assets/styles/624002425f3ac9b50279.woff HTTP/1.1" 200 -
+[2024-03-06 15:40:34,198] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:34] "GET /assets/images/apple-icon-152x152.png HTTP/1.1" 200 -
+[2024-03-06 15:40:37,348] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:37] "GET /assets/styles/144cc10895443840bf41.ttf HTTP/1.1" 200 -
+[2024-03-06 15:40:43,395] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:43] "GET /assets/images/apple-icon-144x144.png HTTP/1.1" 200 -
+[2024-03-06 15:40:52,809] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:40:52] "GET /assets/images/apple-icon-120x120.png HTTP/1.1" 200 -
+[2024-03-06 15:41:01,709] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:41:01] "GET /assets/images/apple-icon-114x114.png HTTP/1.1" 200 -
+[2024-03-06 15:41:10,892] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:41:10] "GET /assets/images/apple-icon-76x76.png HTTP/1.1" 200 -
+[2024-03-06 15:41:19,927] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:41:19] "GET /assets/images/apple-icon-72x72.png HTTP/1.1" 200 -
+[2024-03-06 15:41:29,334] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:41:29] "GET /assets/images/apple-icon-60x60.png HTTP/1.1" 200 -
+[2024-03-06 15:41:38,142] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:41:38] "GET /assets/images/apple-icon-57x57.png HTTP/1.1" 200 -
+[2024-03-06 15:42:48,484] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:48] "GET /article/82102-environnement-une-hausse-de-temperature-de-12oc HTTP/1.1" 200 -
+[2024-03-06 15:42:49,013] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:49] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
+[2024-03-06 15:42:49,018] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:49] "GET /assets/styles/custom.css HTTP/1.1" 200 -
+[2024-03-06 15:42:49,331] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:49] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
+[2024-03-06 15:42:49,683] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:49] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
+[2024-03-06 15:42:50,082] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:50] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
+[2024-03-06 15:42:59,236] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/fontawesome-free-6.2.0-web/css/brands.css HTTP/1.1" 200 -
+[2024-03-06 15:42:59,253] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/popover/popover.min.js HTTP/1.1" 200 -
+[2024-03-06 15:42:59,262] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/popover/popover.min.css HTTP/1.1" 200 -
+[2024-03-06 15:42:59,282] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/fontawesome-free-6.2.0-web/css/fontawesome.css HTTP/1.1" 200 -
+[2024-03-06 15:42:59,584] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
+[2024-03-06 15:42:59,584] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
+[2024-03-06 15:42:59,900] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/fontawesome-free-6.2.0-web/css/solid.css HTTP/1.1" 200 -
+[2024-03-06 15:42:59,913] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:42:59] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
+[2024-03-06 15:43:00,248] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:00] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
+[2024-03-06 15:43:00,519] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:00] "GET /assets/scripts/main-6731bc2efb0608c06434.js HTTP/1.1" 200 -
+[2024-03-06 15:43:00,564] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:00] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
+[2024-03-06 15:43:00,619] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:00] "GET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1" 200 -
+[2024-03-06 15:43:01,736] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:01] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
+[2024-03-06 15:43:01,786] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:01] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
+[2024-03-06 15:43:02,135] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:02] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
+[2024-03-06 15:43:04,632] INFO in _internal: 127.0.0.1 - - [06/Mar/2024 15:43:04] "GET /assets/images/moov_square.svg HTTP/1.1" 200 -
+[2024-03-06 15:45:03,113] INFO in _internal:  * Restarting with stat

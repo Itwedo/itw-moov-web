@@ -400,7 +400,7 @@ padding: 24px 40px;
 
 .fixed-article-side-pub {
     position: fixed !important;
-    width: 400px !important;
+    /* width: 400px !important; */
     object-fit: cover !important;
     top: 0px !important;
     z-index: 200 !important;
@@ -975,4 +975,17 @@ currency
         justify-content: center;
     }
     
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Par défaut, 3 colonnes */
+        border: 1px solid transparent;
+    }
+
+    a.cgv-link{
+      text-decoration: underline; 
+    }
+
+    #main-footer{
+      padding: 24px 0;
+    }
         
