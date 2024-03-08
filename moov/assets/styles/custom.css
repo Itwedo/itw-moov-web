@@ -985,7 +985,8 @@ currency
     justify-content: flex-start !important;
     font-size: 15px;
     padding: 1.5rem !important;
-    word-break: break-all;
+    word-break: normal !important;
+    text-align: left !important;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(1) {
@@ -1045,14 +1046,16 @@ currency
 
   .itw-pharma-icon-img-container{
     background: #dedede !important;
-    padding: 1rem !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 40px;
+    padding: 10px;
+    border-radius: 4px 0px 0px 4px !important;
   }
 
   .pharma-city-select{
-    padding: 12px !important;
+    height: 40px   !important;
     border: 1px solid #dedede !important;
     min-width: 300px !important;
     background-color: #fff !important;
@@ -1064,4 +1067,89 @@ currency
   .itw-ads-container-side{
     padding-top: 4rem !important;
   }
-        
+      
+  /* Styles pour le select personnalisé */
+  .custom-select {
+    position: relative;
+    width: 100%;
+  }
+
+  .custom-select select {
+    display: none !important;
+  }
+
+  .select-selected {
+    background-color: #f5f5f5;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .select-selected:hover {
+    background-color: #ddd;
+  }
+
+  .select-items div {
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  .select-items div.select-item:hover {
+    background-color: #f5f5f5;
+  }
+
+  .select-hide {
+    display: none;
+  }
+
+  /* Styles pour simuler l'effet de survol */
+  /* .custom-select:hover .select-items {
+    display: block;
+  } */
+
+  .select-items {
+    position: absolute !important;
+    top: 50px !important;
+    background: #fff !important;
+    width: 115% !important;
+    left: -45px !important;
+    border: 1px solid #dedede !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+  }
+
+  #arrow-select{
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    width: 15px !important;
+  }
+
+  .select-items-searchbar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .select-items-searchbar input{
+    width: 100%;
+    border: 1px solid #dedede !important;
+    border-left: none !important;
+    border-radius: 0px 4px 4px 0px;
+    font-size: medium;
+    height: 40px;
+  }
+
+  .search-icon-select-container{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #dedede;
+    border-right: none !important;
+    border-radius: 4px 0px 0px 4px;
+  }
+  
+  
+    
