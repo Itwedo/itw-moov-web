@@ -14,20 +14,44 @@ $(".menu-item").click(function () {
     }
 });
 
+if ($(window).width() < 1000) {
+    if ($("#article-side-pub-container")) handleClickReadMore()
+}
 
-$("#read-more-article").click(function () {
+// actualite
+window.onresize = function () {
+
+    if ($(window).width() < 1000) {
+        if ($("#article-side-pub-container")) handleClickReadMore()
+    }
+};
+
+function handleClickReadMore() {
+    window.onresize = function () {
+
+        if ($(window).width() < 760) {
+            if ($("#article-side-pub-container")) {
+                $("#article-side-pub-container").width($("#side-pub-container").width())
+                $("#article-side-pub-container").removeClass("fixed-article-side-pub")
+            }
+        }
+    };
+
     $(".current-article").removeClass('croped-article')
     $("#read-more-article").toggle()
-    $(".article-overlay").toggle()  
+    $(".article-overlay").toggle()
 
 
     window.addEventListener("scroll", () => {
         let sectionPubPos = $('.pub-section-slide').offset().top;
-        if (window.scrollY >= 980) {
+        if (window.scrollY >= 980 && $(window).width() > 760) {
             $("#article-side-pub-container").addClass("fixed-article-side-pub")
-            $("#article-side-pub-container").width($("#article-side-pub-container").width())
+            $("#article-side-pub-container").width($("#side-pub-container").width())
             let sidePubPos = ($('#article-side-pub-container').offset().top + $('#article-side-pub-container').height())
-            if ((sectionPubPos - sidePubPos) < 40) {
+
+            const differenceHeight = sectionPubPos - sidePubPos
+
+            if ((differenceHeight) < 40) {
                 $("#article-side-pub-container").removeClass("fixed-article-side-pub")
 
             }
@@ -37,9 +61,9 @@ $("#read-more-article").click(function () {
             $("#article-side-pub-container").removeClass("fixed-article-side-pub")
         }
     })
+}
 
-
-})
+$("#read-more-article").click(handleClickReadMore)
 
 $("#read-more-article-static").click(function () {
     $("#read-more-article-static").toggle()
@@ -55,6 +79,7 @@ function setLinkToShare(link) {
     $(".in-link").attr("href", `https://www.linkedin.com/sharing/share-offsite/?url=moov-web.sudo.mg${link}`)
     $(".to-copy-link").attr("data-clipboard-text", `https://moov-web.sudo.mg${link}`)
 }
+
 PopoverComponent.init({
     ele: '.popover-share'
 });

@@ -67,10 +67,11 @@ content %}
   <article class="global-margin mx-auto 3xl:container">
     <div class="flex flex-wrap">
       <div
-        class="flex-wrap flex-row justify-end w-1/3 sm:w-full md:flex lg:flex-col lg:justify-start py-10 2xl:pl-36 3xl:pl-48"
+        class="flex-wrap flex-row justify-end w-1/3 sm:w-full sm:flex-row md:flex lg:flex-col lg:justify-start py-10 2xl:pl-36 3xl:pl-48"
+        id="side-pub-container"
       >
         <div
-          class="flex flex-col w-full object-cover"
+          class="flex flex-col sm:flex-row w-full object-cover"
           id="article-side-pub-container"
         >
           <!-- <div class="flex flex-col" id="article-side-pub"> -->
@@ -122,6 +123,7 @@ content %}
       </div>
       <div
         class="w-2/3 pb-16 bg-white pr-5 pl-5 md:pl-16 pt-9 mt-0 md:-mt-16 2xl:pr-36 3xl:pr-48 current-article croped-article sm:w-full"
+        id="news-container"
       >
         <div class="article-overlay"></div>
         <div class="cat-pasti">
@@ -271,7 +273,9 @@ content %}
         </h2>
       </div>
     </div>
-    <div class="bg-black py-16 px-5 md:py-24 3xl:px-10 mx-auto 3xl:container">
+    <div
+      class="more-news-container bg-black py-16 sm:px-5 md:py-24 mx-auto 3xl:container"
+    >
       <div class="container mx-auto">
         <div
           class="similar-article grid gap-12 sj-slide sj-slide-md slide-md-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"

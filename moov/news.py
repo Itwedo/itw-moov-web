@@ -68,6 +68,7 @@ def category_actuality(category):
         },
         headers=STRAPI_API_AUTH_TOKEN_BEARER,
     )
+
     return {
         "category": get_category_display(category),
         "result": result.json(),

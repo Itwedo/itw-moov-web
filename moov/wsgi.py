@@ -7,6 +7,7 @@ templates_path = 'moov/templates/*.html'  # Assurez-vous que le chemin correspon
 template_files = glob.glob(templates_path, recursive=True)  # Utilisez recursive=True si vous avez des sous-dossiers
 
 css_files = glob.glob('moov/assets/styles/*.css', recursive=True)
+js_files = glob.glob('moov/assets/scripts/*.js', recursive=True)
 
 def reload_install():
     try:
@@ -20,5 +21,5 @@ if __name__ == "__main__":
     reload_install()
 
     print("############# " )
-    application.run(host="0.0.0.0", port=8080, debug=True, threaded=True , extra_files=template_files + css_files)
+    application.run(host="0.0.0.0", port=8080, debug=True, threaded=True , extra_files=template_files + css_files + js_files)
     

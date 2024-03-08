@@ -377,7 +377,8 @@ Small Screen - Mobile
 Xtra Small Screen - Small Mobile
 ====================================
 */
-@media screen and (max-width: 576px) {
+/* @media screen and (max-width: 576px) { */
+@media screen and (max-width: 614px) {
     #flash_feature_home {
         margin-top: -1vh;
     }
@@ -652,4 +653,5 @@ Xtra Small Screen - Small Mobile
     .text-7xl{
         font-size: 3.5rem
     }
+
 }
