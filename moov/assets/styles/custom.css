@@ -1000,3 +1000,25 @@ currency
       padding-left: 6vw;
       padding-right: 6vw;
     }
+
+    .subtitle-mention{
+      color: #0090cb
+    }
+
+    .base_chevron-menu{
+      right: -17px
+    }
+
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex-grow: 1;
+    }

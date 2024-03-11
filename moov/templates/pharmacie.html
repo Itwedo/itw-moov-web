@@ -1,14 +1,30 @@
-{% extends 'base.html' %}
+{% macro ads_block(ads , additional_classes='') %}
+<div
+  class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows"
+>
+  {% for ad in ads %}
+  <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+    <div class="object-cover relative overflow-hidden mr-0 ml-auto lg:w-full">
+      <a href="{{ad['url']}}" target="_blank"
+        ><img
+          src="{{CMS_URL}}{{ad['image']}}"
+          alt="Moov publicité"
+          class="object-cover w-full"
+          onerror="this.src='/assets/images/Apercu.png';"
+      /></a>
+    </div>
+  </div>
+  {% endfor%}
+</div>
 
-
-{% block title %}Pharmacie{% endblock %}
-
-
-{% block content %}
+{% endmacro %} {% extends 'base.html' %} {% block title %}Pharmacie{% endblock
+%} {% block content %}
 <main>
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
     <div class="container mx-auto">
-      <h1 class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100">
+      <h1
+        class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100"
+      >
         Pharmacies de garde du {{ start }} au {{ stop }}
       </h1>
     </div>
@@ -16,36 +32,62 @@
       <div class="flex flex-wrap flex-col-reverse md:flex-row">
         <div class="w-full md:w-2/3">
           <div class="pharma-table px-0 sm:px-5">
-            <div class="table-container robotoslab text-xl md:text-2xl" role="table">
+            <div
+              class="table-container robotoslab text-xl md:text-2xl"
+              role="table"
+            >
               <div class="flex-table header" role="rowgroup">
                 <div
                   class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Province</span></div>
+                  role="columnheader"
+                >
+                  <span class="block">Province</span>
+                </div>
                 <div
                   class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Pharmacie</span></div>
+                  role="columnheader"
+                >
+                  <span class="block">Pharmacie</span>
+                </div>
                 <div
                   class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Adresse</span></div>
+                  role="columnheader"
+                >
+                  <span class="block">Adresse</span>
+                </div>
                 <div
                   class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"><span class="block">Téléphone</span></div>
+                  role="columnheader"
+                >
+                  <span class="block">Téléphone</span>
+                </div>
               </div>
               <div class="body">
                 {% for element in result %}
                 <div class="flex-table row" role="rowgroup">
                   <div class="flex-row first" role="cell">
-                    <div class="info">Antananarivo</div>
+                    <p class="info break-normal">Antananarivo</p>
                   </div>
                   <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["name"] }}</div>
+                    <p class="info break-normal">
+                      {{
+                      element["attributes"]["drugstore"]["data"]["attributes"]["name"]
+                      }}
+                    </p>
                   </div>
                   <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["address"] }}</div>
+                    <p class="info break-normal">
+                      {{
+                      element["attributes"]["drugstore"]["data"]["attributes"]["address"]
+                      }}
+                    </p>
                   </div>
                   <div class="flex-row first" role="cell">
-                    <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"] }}
-                    </div>
+                    <p class="info break-normal">
+                      {{
+                      element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"]
+                      }}
+                    </p>
                   </div>
                 </div>
                 {% endfor %}
@@ -54,43 +96,9 @@
           </div>
         </div>
         <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
-          <div
-            class="article-pub w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-            {% for ad in ads['side_bar'][0]+ads['side_bar'][1]%}
-            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
-              </div>
-
-            </div>
-            {% endfor%}
-          </div>
-          <div
-            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-            {% for ad in ads['side_bar'][0]%}
-            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
-              </div>
-
-            </div>
-            {% endfor%}
-          </div>
-
-          <div
-            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-            {% for ad in ads['side_bar'][1]%}
-            <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-              <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-                <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                    class="object-cover w-full" onerror="this.src='/assets/images/Apercu.png';"></a>
-              </div>
-
-            </div>
-            {% endfor%}
-          </div>
+          <!-- {{ ads_block(ads['side_bar'][0]+ads['side_bar'][1] ) }}  -->
+          {{ ads_block(ads['side_bar'][0] ) }} {{ ads_block(ads['side_bar'][1] )
+          }}
 
           <!-- {%for ad in ads['side_bar']%}
               <div class="news-pub news-side relative overflow-hidden mx-5 my-7 w-1/2 md:w-full">

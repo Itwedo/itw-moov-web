@@ -330,6 +330,11 @@ textarea::placeholder {
     top: 50%
 }
 
+.right-0 {
+    right: 0
+}
+
+
 .right-2 {
     right: .5rem
 }
@@ -760,6 +765,12 @@ textarea::placeholder {
     --tw-rotate: 90deg
 }
 
+.-rotate-90 {
+    --tw-rotate: -90deg
+}
+
+.break-normal{overflow-wrap:normal;word-break:normal}
+
 @-webkit-keyframes spin {
     to {
         -webkit-transform: rotate(1turn);
@@ -998,6 +1009,9 @@ textarea::placeholder {
     border-right-width: 2px
 }
 
+.border-b-1 {
+    border-bottom-width: 1px
+}
 .border-b-2 {
     border-bottom-width: 2px
 }
@@ -3188,6 +3202,10 @@ body {
         max-width: 72rem
     }
 
+    .md\:col-span-1{
+        grid-column:span 1/span 1
+    }
+
     .md\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
@@ -3372,6 +3390,11 @@ body {
         display: none
     }
 
+    .lg\:visible {
+        display: unset
+    }
+  
+
     .lg\:h-full {
         height: 100%
     }
@@ -3399,6 +3422,11 @@ body {
     .lg\:w-full {
         width: 100%
     }
+
+    .lg\:col-span-1{grid-column:span 1/span 1}
+
+    .lg\:col-span-2{grid-column:span 2/span 2}
+
 
     .lg\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))

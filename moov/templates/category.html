@@ -1,7 +1,7 @@
 <!-- macro -->
 
-{% macro newsCard(news_item, moreClasses='') %}
-<div class="news-card {{ moreClasses}} relative overflow-hidden w-full v2">
+{% macro news_card(news_item, additional_classes='') %}
+<div class="news-card {{ additional_classes}} relative overflow-hidden w-full v2">
   <img class="img-absolute-cover img-hover-scale xl:w-auto h-full xl:h-auto" style="border: 1px"
        src="{{ CMS_URL }}{{ news_item['attributes']['images']['data'][0]['attributes']['url'] }}"
        alt="Image" onerror="this.src='/assets/images/moov_square.svg';">
@@ -30,9 +30,9 @@
 </div>
 {% endmacro %}
 
-{% macro latestNews(moreClasses='') %}
+{% macro latest_news(additional_classes='') %}
 
-<div class="relative bg-white shadow-md py-10 px-5 mt-12 mr-0 ml-0 mb-7 md:ml-0 {{moreClasses}}">
+<div class="relative bg-white shadow-md py-10 px-5 mt-12 mr-0 ml-0 mb-7 md:ml-0 {{additional_classes}}">
           <h2 class="block border-b-2 robotoslab text-5xl font-normal text-gray-600 pb-4 text-center md:text-left">Les
             derniers articles</h2>
           <div class="mini-card-v1 no-scrollbar">
@@ -74,6 +74,28 @@
         </div>
 {% endmacro %}
 
+
+{% macro ads_inside_bar(ads , additional_classes='') %}
+  <div class="{{additional_classes}}">
+    <div
+      class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
+      {% for ad in ads %}
+      <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+        <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
+          <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
+              class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
+        </div>
+
+      </div>
+  </div>
+
+    {% endfor%}
+  </div>
+
+{% endmacro %}
+
+
+
 <!-- end macro -->
 
 {% extends 'base.html' %}
@@ -112,30 +134,32 @@
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {% for i in range(result['data']|length) %}
             {% if i == 0 %}
-              {{ newsCard(result['data'][i], 'col-span-2 order-' ~ i |string) }}
-              <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex sm:hidden md:hidden">
+              {{ news_card(result['data'][i], 'col-span-2 ') }}
+              <div class="news-pub relative overflow-hidden w-full v2 hidden lg:visible">
                 <a href="{{ ads['with_article'][0]['url'] }}" target="_blank">
                   <img class="img-absolute-contain" src="{{ CMS_URL }}{{ ads['with_article'][i // 4]['image'] }}"
                       alt="Moov publicité" onerror="this.src='/assets/images/moov_square.svg';">
                 </a>
               </div>
             {% elif i > 0 and i < 4 %} <!-- 2-3-4 -->
-              {{ newsCard(result['data'][i] , 'order-' ~ i |string) }}
+              {{ news_card(result['data'][i] , '') }}
             {% elif i == 4 %}
-              <div class="news-pub relative overflow-hidden w-full v2 hidden md:flex sm:hidden md:hidden">
+              <div class="news-pub relative overflow-hidden w-full v2 hidden lg:visible">
                 <a href="{{ ads['with_article'][1]['url'] }}" target="_blank">
                   <img class="img-absolute-contain" src="{{ CMS_URL }}{{ ads['with_article'][i // 4]['image'] }}"
                       alt="Moov publicité" onerror="this.src='/assets/images/moov_square.svg';">
                 </a>
               </div>
-              {{ newsCard(result['data'][i], 'col-span-2 sm:col-span-1 order-' ~ i |string) }}
+              {{ news_card(result['data'][i], 'lg:col-span-2 ') }}
             {% elif i > 4 %} <!-- 6-7-8-9 -->
 
               {% if i == 5 %}
-                {{ latestNews('hidden sm:visible md:visible col-span-2 order-' ~ i |string) }}
+                {{ ads_inside_bar(ads['side_bar'][0]  , 'visible lg:hidden') }}
+                {{ ads_inside_bar(ads['side_bar'][1]  , 'visible lg:hidden') }}
+                {{ latest_news('visible lg:hidden col-span-2 ') }}
               {% endif %}
 
-              {{ newsCard(result['data'][i] , 'sm:col-span-2 order-' ~ i |string if i == 5 else 'order-' ~ (i+1) |string) }}
+              {{ news_card(result['data'][i] , 'col-span-2 lg:col-span-1' if i == 5 else '') }}
             {% endif %}
 
 
@@ -144,35 +168,20 @@
 
         {% include 'includes/pagination.html' %}
       </div>
-      <div class="actus-grid-side py-5 w-full lg:w-1/3">
-        <div
-          class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-          {% for ad in ads['side_bar'][0]%}
-          <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-            <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-              <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
-            </div>
+      <div class="actus-grid-side py-5 w-full lg:w-1/3 hidden lg:visible">
 
-          </div>
-          {% endfor%}
-        </div>
+         <!-- side pub-slider -->
 
-        {{ latestNews('sm:hidden md:hidden') }}
+        {{ ads_inside_bar(ads['side_bar'][0] ) }}
 
         <!-- side pub-slider -->
-        <div
-          class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows ">
-          {% for ad in ads['side_bar'][1]%}
-          <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
-            <div class="object-cover relative overflow-hidden  mr-0 ml-auto  lg:w-full">
-              <a href="{{ad['url']}}" target="_blank"><img src="{{CMS_URL}}{{ad['image']}}" alt="Moov publicité"
-                  class="object-cover w-full" onerror="this.src='/assets/images/moov_square.svg';"></a>
-            </div>
 
-          </div>
-          {% endfor%}
-        </div>
+        {{ latest_news() }}
+
+        <!-- side pub-slider -->
+
+        {{ ads_inside_bar(ads['side_bar'][1] ) }}
+
         <!-- side pub-slider -->
 
       </div>
