@@ -43,7 +43,7 @@ def exchange_rates():
 
 @app.route("/pharmacie")
 @use_template("pharmacie.html")
-def drugstores():
+def drugstores(city="Antananarivo"):
     today = date.today().strftime("%Y-%m-%d")
     todays_month = today.split("-")[1]
     response = requests.get(
@@ -57,6 +57,7 @@ def drugstores():
         },
     )
     result = response.json()["data"]
+    print(f"result: ${result}")
     start = datetime.strptime(
         result[0]["attributes"]["start"], "%Y-%m-%d"
     ).strftime("%d/%m/%Y")

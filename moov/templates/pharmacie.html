@@ -22,80 +22,88 @@
 <main>
   <section class="mx-auto 3xl:container 2xl:px-36 3xl:px-48 pb-16">
     <div class="container mx-auto">
-      <h1
-        class="inline-block text-6xl text-black py-10 px-5 border-b-2 border-gray-100"
-      >
-        Pharmacies de garde du {{ start }} au {{ stop }}
-      </h1>
-    </div>
-    <div class="container mx-auto">
       <div class="flex flex-wrap flex-col-reverse md:flex-row">
-        <div class="w-full md:w-2/3">
-          <div class="pharma-table px-0 sm:px-5">
-            <div
-              class="table-container robotoslab text-xl md:text-2xl"
-              role="table"
-            >
-              <div class="flex-table header" role="rowgroup">
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"
-                >
-                  <span class="block">Province</span>
+        <div class="w-full md:w-2/3 itw-container">
+          <div class="container mx-auto itw-header">
+            <h1 class="inline-block text-6xl text-black py-10 px-5 border-gray-100 itw-header-title itw-text-6xl">
+              Pharmacies de garde du {{ start }} au {{ stop }}
+            </h1>
+          </div>
+          <div class="container mx-auto itw-header-select-container px-5">
+              <div class="pharma-city-select-container">
+                <div class="itw-pharma-icon-img-container">
+                  <img src="/assets/images/location-24.png" alt="location" class="Localisation">
                 </div>
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"
-                >
-                  <span class="block">Pharmacie</span>
-                </div>
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"
-                >
-                  <span class="block">Adresse</span>
-                </div>
-                <div
-                  class="flex-row first text-xl h-20 rounded-t-3xl justify-center items-center md:text-2xl lg:text-3xl"
-                  role="columnheader"
-                >
-                  <span class="block">Téléphone</span>
+                <div class="custom-select">
+                  <select id="city"  class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 itw-header-select pharma-city-select" >
+                    <option value="Antananarivo">Antananarivo</option>
+                    <option value="Fianarantsoa">Fianarantsoa</option>
+                    <option value="Toamasina">Toamasina</option>
+                    <option value="Mahajanga">Mahajanga</option>
+                    <option value="Antsiranana">Antsiranana</option>
+                    <option value="Toliara">Toliara</option>
+                  </select>
+                  <div class="select-selected border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 itw-header-select pharma-city-select" >
+                    Choisissez une ville
+                  </div>
+                  <img src="/assets/images/arrow-down-24.png" alt="arrow" class="arrow-select" id="arrow-select">
+                  <div class="select-items select-hide">
+                    <div class="select-items-searchbar">
+                      <div class="search-icon-select-container">
+                        <img src="/assets/images/search-24.png" alt="arrow" id="search-icon-select">
+                      </div>
+                      <input type="text" placeholder="Rechercher" id="search-input"/>
+                    </div>
+                    <div class="select-option-item">
+                      <div class="select-item">Antananarivo</div>
+                      <div class="select-item">Fianarantsoa</div>
+                      <div class="select-item">Toamasina</div>
+                      <div class="select-item">Mahajanga</div>
+                      <div class="select-item">Antsiranana</div>
+                      <div class="select-item">Toliara</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="body">
-                {% for element in result %}
-                <div class="flex-table row" role="rowgroup">
-                  <div class="flex-row first" role="cell">
-                    <p class="info break-normal">Antananarivo</p>
-                  </div>
-                  <div class="flex-row first" role="cell">
-                    <p class="info break-normal">
-                      {{
-                      element["attributes"]["drugstore"]["data"]["attributes"]["name"]
-                      }}
-                    </p>
-                  </div>
-                  <div class="flex-row first" role="cell">
-                    <p class="info break-normal">
-                      {{
-                      element["attributes"]["drugstore"]["data"]["attributes"]["address"]
-                      }}
-                    </p>
-                  </div>
-                  <div class="flex-row first" role="cell">
-                    <p class="info break-normal">
-                      {{
-                      element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"]
-                      }}
-                    </p>
-                  </div>
+          </div>
+
+          <h2 class="inline-block text-4xl text-black px-5 pt-6" id="itw-drugstore-city"></h2>
+
+          <div class="container mx-auto">
+            <div class="pharma-table px-0 sm:px-5">
+              <div class="table-container robotoslab text-xl md:text-2xl" role="table">
+                <div class="flex-table header" role="rowgroup">
+                  <div
+                    class="flex-row first text-xl h-20 justify-center items-center md:text-xl lg:text-xl"
+                    role="columnheader"><span class="block">Pharmacie</span></div>
+                  <div
+                    class="flex-row first text-xl h-20 justify-center items-center md:text-xl lg:text-xl"
+                    role="columnheader"><span class="block">Adresse</span></div>
+                  <div
+                    class="flex-row first text-xl h-20 justify-center items-center md:text-2xl lg:text-xl"
+                    role="columnheader"><span class="block">Téléphone</span></div>
                 </div>
-                {% endfor %}
+                <div class="body">
+                  {% for element in result %}
+                    <div class="flex-table row itw-drugstore drugstore-{{ element["attributes"]["drugstore"]["data"]["attributes"]["region"] }}" role="rowgroup" data-region="{{ element['attributes']['drugstore']['data']['attributes']['region'] }}">
+                      <div class="flex-row first" role="cell">
+                        <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["name"] }}</div>
+                      </div>
+                      <div class="flex-row first" role="cell">
+                        <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["address"] }}</div>
+                      </div>
+                      <div class="flex-row first" role="cell">
+                        <div class="info">{{ element["attributes"]["drugstore"]["data"]["attributes"]["phonenumbers"] }}
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col">
+        <div class="flex flex-row w-full md:w-1/3 md:flex-wrap md:flex-col itw-ads-container-side">
           <!-- {{ ads_block(ads['side_bar'][0]+ads['side_bar'][1] ) }}  -->
           {{ ads_block(ads['side_bar'][0] ) }} {{ ads_block(ads['side_bar'][1] )
           }}
@@ -112,4 +120,123 @@
     </div>
   </section>
 </main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    // Fonction pour rediriger vers la ville sélectionnée
+    function redirectToSelectedCity(selectedCity) {
+      document.getElementById("itw-drugstore-city").textContent = selectedCity;
+      const drugstoreRows = document.querySelectorAll('.itw-drugstore');
+
+      drugstoreRows.forEach(row => {
+        const region = row.getAttribute('data-region');
+
+        if (selectedCity === 'Antananarivo' && (region === null || region === "None")) {
+          row.style.display = 'flex';
+        } else if (region === selectedCity) {
+          row.style.display = 'flex';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Sélectionner par défaut la première ville dans la liste
+      const defaultCitySelect = document.getElementById('city');
+      const firstCity = defaultCitySelect.querySelector('option').value;
+      redirectToSelectedCity(firstCity);
+
+      // Appeler la fonction redirectToSelectedCity lorsqu'une ville est sélectionnée
+      defaultCitySelect.addEventListener('change', function() {
+        const selectedCity = this.value;
+        redirectToSelectedCity(selectedCity);
+      });
+    });
+
+    // Récupérer les éléments du select personnalisé
+    var selectContainer = document.querySelector('.custom-select');
+    var select = selectContainer.querySelector('select');
+    var selectSelected = selectContainer.querySelector('.select-selected');
+    var selectItems = selectContainer.querySelector('.select-items');
+    var selectOptions = selectContainer.querySelector('.select-option-item');
+    var selectItem = selectContainer.querySelector('.select-item');
+    var arrowSelect = document.getElementById("arrow-select");
+    // Récupérer l'élément input de recherche
+    var searchInput = document.getElementById('search-input');
+
+    var defaultCity = "Antananarivo";
+    select.value = defaultCity;
+    selectSelected.textContent = defaultCity;
+    redirectToSelectedCity(select.value);
+
+    function toggleSelectItems() {
+      selectItems.classList.toggle('select-hide');
+      // Changer l'image de la flèche en fonction de l'état de la liste déroulante
+      const arrowImg = document.getElementById('arrow-select');
+      if (selectItems.classList.contains('select-hide')) {
+        arrowImg.src = '/assets/images/arrow-down-24.png';
+      } else {
+        arrowImg.src = '/assets/images/arrow-up-24.png';
+      }
+    }
+
+    arrowSelect.addEventListener("click", function(event){
+      toggleSelectItems();
+    })
+
+    // Mettre à jour la valeur sélectionnée lorsque l'utilisateur clique sur un élément
+    selectOptions.addEventListener('click', function(event) {
+      var value = event.target.textContent;
+      selectSelected.textContent = value;
+      select.value = value;
+      redirectToSelectedCity(value);
+      toggleSelectItems();
+      searchInput.value = "";
+      filterItems("")
+    });
+
+    // Afficher ou masquer la liste déroulante lorsque l'utilisateur clique sur la zone de sélection
+    selectSelected.addEventListener('click', function() {
+      toggleSelectItems();
+    });
+
+    // Masquer la liste déroulante lorsque l'utilisateur clique en dehors de celle-ci
+    document.addEventListener('click', function(event) {
+      if (!selectContainer.contains(event.target)) {
+        selectItems.classList.add('select-hide');
+        // Changer l'image de la flèche lorsque la liste déroulante est masquée
+        const arrowImg = document.getElementById('arrow-select');
+        arrowImg.src = '/assets/images/arrow-down-24.png';
+      }
+    });
+
+    // Fonction pour filtrer les éléments de la liste en fonction du texte de recherche
+    function filterItems(searchText) {
+      // Récupérer tous les éléments de la liste
+      var items = document.querySelectorAll('.select-item');
+
+      // Parcourir tous les éléments et vérifier s'ils correspondent au texte de recherche
+      items.forEach(function(item) {
+        if(searchText.trim() != ""){
+          var itemText = item.textContent.toLowerCase();
+          if (itemText.includes(searchText.toLowerCase())) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }else{
+          item.style.display = 'block';
+        }
+      });
+    }
+
+    // Ajouter un événement input à l'élément input de recherche
+    searchInput.addEventListener('input', function() {
+      // Filtrer les éléments de la liste en fonction du texte de recherche actuel
+      filterItems(this.value);
+    });
+
+</script>
 {% endblock %}
