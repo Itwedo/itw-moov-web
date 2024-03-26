@@ -26,6 +26,7 @@ window.onresize = function () {
     }
 };
 
+
 function handleClickReadMore() {
     window.onresize = function () {
 
@@ -41,16 +42,24 @@ function handleClickReadMore() {
     $("#read-more-article").toggle()
     $(".article-overlay").toggle()
 
+    $("#read-more-article").hide()
+    $(".article-overlay").hide()
 
-    window.addEventListener("scroll", () => {
+
+    document.body.addEventListener("scroll", () => {
+
         let sectionPubPos = $('.pub-section-slide').offset().top;
-        if (window.scrollY >= 980 && $(window).width() > 760) {
+
+        var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+
+        // if (window.scrollY >= 980 && $(window).width() > 760) {
+        if (scrollPosition >= 980 && $(window).width() > 640) {
             $("#article-side-pub-container").addClass("fixed-article-side-pub")
             $("#article-side-pub-container").width($("#side-pub-container").width())
             let sidePubPos = ($('#article-side-pub-container').offset().top + $('#article-side-pub-container').height())
 
             const differenceHeight = sectionPubPos - sidePubPos
-
+            console.log('differenceHeight', differenceHeight)
             if ((differenceHeight) < 40) {
                 $("#article-side-pub-container").removeClass("fixed-article-side-pub")
 

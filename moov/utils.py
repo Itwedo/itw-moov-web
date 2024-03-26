@@ -10,6 +10,9 @@ from .config import *
 
 import requests
 
+import tempfile
+import os
+
 
 def generate_dates_interval(ref_date=None, days=7, forward=False):
     """Generates all dates, between `ref_date`
@@ -287,20 +290,40 @@ def use_template(template=None):
     return decorator
 
 
+# def create_captcha():
+#     print("Creating captcha #############################")
+#     captcha_path = "/tmp/captcha"
+#     Path(captcha_path).mkdir(exist_ok=True)
+#     captcha_name = f"captcha{random.randint(0, 100)}"
+#     captcha_text = "".join(
+#         random.choices(string.ascii_uppercase + string.digits, k=5)
+#     )
+#     # Create an image instance of the given size
+#     image = ImageCaptcha(width=280, height=45)
+#     data = image.generate(captcha_text)
+
+#     # write the image on the given file and save it
+#     image.write(captcha_text, f"{captcha_path}/{captcha_name}.png")
+#     return {
+#         "image": f"{captcha_path}/{captcha_name}.png",
+#         "text": captcha_text,
+#     }
+
 def create_captcha():
-    captcha_path = "/tmp/captcha"
+    print("Creating captcha #############################")
+    # Utilisez tempfile pour créer un dossier temporaire de manière portable
+    temp_dir = tempfile.gettempdir()
+    captcha_path = os.path.join(temp_dir, "captcha")
     Path(captcha_path).mkdir(exist_ok=True)
     captcha_name = f"captcha{random.randint(0, 100)}"
-    captcha_text = "".join(
-        random.choices(string.ascii_uppercase + string.digits, k=5)
-    )
+    captcha_text = "".join(random.choices(string.ascii_uppercase + string.digits, k=5))
     # Create an image instance of the given size
     image = ImageCaptcha(width=280, height=45)
     data = image.generate(captcha_text)
-
     # write the image on the given file and save it
-    image.write(captcha_text, f"{captcha_path}/{captcha_name}.png")
+    image_file_path = os.path.join(captcha_path, f"{captcha_name}.png")
+    image.write(captcha_text, image_file_path)
     return {
-        "image": f"{captcha_path}/{captcha_name}.png",
+        "image": image_file_path,
         "text": captcha_text,
     }

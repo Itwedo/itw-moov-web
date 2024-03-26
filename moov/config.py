@@ -78,7 +78,7 @@ try:
     print(STRAPI_API_URL)
 except KeyError:
     STRAPI_API_URL = os.environ.get(
-        "STRAPI_API_URL", "http://34.27.109.166/moov-mg/api"
+        "STRAPI_API_URL", "http://34.123.38.243/moov-mg/api"
     )
     STRAPI_API_AUTH_TOKEN_BEARER = {
         "Authorization": "Bearer " + os.environ.get("STRAPI_API_AUTH_TOKEN")
@@ -88,7 +88,7 @@ except KeyError:
         STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', ""),
     )
     PREVIEW_BASE_URL = os.environ.get(
-        "PREVIEW_BASE_URL", "http://34.27.109.166/moov-mg"
+        "PREVIEW_BASE_URL", "http://34.123.38.243/moov-mg"
     )
     print("STRAPI_API_AUTH_TOKEN except")
     print(STRAPI_API_AUTH_TOKEN_BEARER)
@@ -101,7 +101,7 @@ else:
     # }
     # PREVIEW_BASE_URL = cms_config["PREVIEW_BASE_URL"]
     STRAPI_API_URL = os.environ.get(
-        "STRAPI_API_URL", "http://34.27.109.166/moov-mg/api"
+        "STRAPI_API_URL", "http://34.123.38.243/moov-mg/api"
     )
     STRAPI_API_AUTH_TOKEN = os.environ.get("STRAPI_API_AUTH_TOKEN")
     STRAPI_API_AUTH_TOKEN_BEARER = {
@@ -112,7 +112,7 @@ else:
         STRAPI_API_URL.replace(f'/{STRAPI_API_URL.split("/")[-1]}', ""),
     )
     PREVIEW_BASE_URL = os.environ.get(
-        "PREVIEW_BASE_URL", "http://34.27.109.166/moov-mg"
+        "PREVIEW_BASE_URL", "http://34.123.38.243/moov-mg"
     )
     print("STRAPI_API_AUTH_TOKEN else")
     print(STRAPI_API_AUTH_TOKEN_BEARER)

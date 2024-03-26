@@ -641,7 +641,7 @@ currency
     }
     .container {
       flex-wrap: wrap;
-      padding: 15px;
+      /* padding: 15px; */
     }
     .weather-data h2 {
       font-size: 1.35rem;
@@ -989,47 +989,54 @@ currency
 
   .pharma-table .flex-row {
     width: 33.333% !important;
-    border: 1px solid #fff !important;
-    justify-content: flex-start !important;
+    /* border: 1px solid #fff !important; */
+    justify-content: center !important;
     font-size: 15px;
     padding: 1.5rem !important;
     word-break: normal !important;
     text-align: left !important;
   }
+  
+  .pharma-table .info {
+    text-align: center;
+    word-break: break-all;
+  }
+  .pharma-table .flex-table.header {
+    padding: 0 2vw;
+    flex-flow: nowrap !important;
+  }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(1) {
     background-color: #95F8FF !important;
-    color: #000 !important;
-    font-weight: 600;
+    color: #8686BD !important;
     font-size: 18px !important;
-    font-family: Abril Fatface, Arial, sans-serif !important;
+    /* font-family: Abril Fatface, Arial, sans-serif !important; */
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(2) {
     background-color: #6FFBC6 !important;
-    color: #000 !important;
-    font-weight: 600;
+    color: #8686BD !important;
     font-size: 18px !important;
-    font-family: Abril Fatface, Arial, sans-serif !important;
+    margin-left: -20px;
+    z-index: 10;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(3) {
     background-color: #F9F177 !important;
-    color: #000 !important;
-    font-weight: 600;
+    color: #8686BD !important;
     font-size: 18px !important;
-    font-family: Abril Fatface, Arial, sans-serif !important;
+    margin-left: -20px;
+    z-index: 10;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row{
     margin-right: 0px !important;
     box-shadow: none !important;
     border: 1px solid #fff !important;
+    width: 40% !important;
   }
 
-  .pharma-table .flex-table.header{
-    padding-left: 0px !important;
-  }
+  
 
   .pharma-table .body {
     padding-left: 0rem !important;

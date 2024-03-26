@@ -497,6 +497,10 @@ textarea::placeholder {
     margin-right: 1rem
 }
 
+.mb-0{
+    margin-bottom: 0
+}
+
 .mb-2 {
     margin-bottom: .5rem
 }
@@ -719,6 +723,14 @@ textarea::placeholder {
     width: 66.666667%
 }
 
+.w-2\/5{
+    width: 40%
+}
+
+.w-3\/5{
+    width: 60%
+}
+
 
 .w-full {
     width: 100%
@@ -767,6 +779,15 @@ textarea::placeholder {
 
 .-rotate-90 {
     --tw-rotate: -90deg
+}
+
+.rounded-tl-lg{
+    border-top-left-radius:1.5rem
+}
+
+.rounded-t-lg{
+    border-top-left-radius:1.5rem;
+    border-top-right-radius:1.5rem;
 }
 
 .break-normal{overflow-wrap:normal;word-break:normal}
@@ -2337,13 +2358,13 @@ body {
 }
 
 .pharma-table .flex-table.header {
-    padding-left: 1rem;
-    padding-right: 0
+    /* padding-left: 1rem;
+    padding-right: 0 */
 }
 
 @media (min-width:768px) {
     .pharma-table .flex-table.header {
-        padding-left: 4rem
+        /* padding-left: 4rem */
     }
 }
 
@@ -2994,6 +3015,11 @@ body {
 @media only screen and (max-width:640px) {
     .sm\:block {
         display: block
+    }
+
+    .sm\:px-0 {
+    padding-left: 0;
+    padding-right: 0
     }
 
     .sm\:hidden {

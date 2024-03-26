@@ -1,3 +1,28 @@
+<!-- macro -->
+{% macro ads_in_side_bar(ads , additional_classes='') %}
+
+<div
+  class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows"
+>
+  {% for ad in ads%}
+  <div class="article-pub-slide pub-slide block-slide relative overflow-hidden">
+    <div class="object-cover relative overflow-hidden mr-0 ml-auto lg:w-full">
+      <a href="{{ad['url']}}" target="_blank"
+        ><img
+          src="{{CMS_URL}}{{ad['image']}}"
+          alt="Moov publicité"
+          class="object-cover w-full"
+          onerror="this.src='/assets/images/moov_square.svg';"
+      /></a>
+    </div>
+  </div>
+  {% endfor%}
+</div>
+
+{% endmacro %}
+
+<!-- end macro -->
+
 {% extends 'base.html' %} {% block meta %} {% if
 news['data']['attributes']['metaTitle'] %}
 <meta
@@ -67,57 +92,17 @@ content %}
   <article class="global-margin mx-auto 3xl:container">
     <div class="flex flex-wrap">
       <div
-        class="flex-wrap flex-row justify-end w-1/3 sm:w-full sm:flex-row md:flex lg:flex-col lg:justify-start py-10 2xl:pl-36 3xl:pl-48"
+        class="flex-row justify-end w-1/3 md:flex lg:flex-col lg:justify-start py-10 2xl:pl-36 3xl:pl-48 sm:hidden"
         id="side-pub-container"
       >
         <div
-          class="flex flex-col sm:flex-row w-full object-cover"
+          class="flex flex-col w-full object-cover"
           id="article-side-pub-container"
         >
           <!-- <div class="flex flex-col" id="article-side-pub"> -->
 
-          <div
-            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows"
-          >
-            {% for ad in ads['side_bar'][0]%}
-            <div
-              class="article-pub-slide pub-slide block-slide relative overflow-hidden"
-            >
-              <div
-                class="object-cover relative overflow-hidden mr-0 ml-auto lg:w-full"
-              >
-                <a href="{{ad['url']}}" target="_blank"
-                  ><img
-                    src="{{CMS_URL}}{{ad['image']}}"
-                    alt="Moov publicité"
-                    class="object-cover w-full"
-                    onerror="this.src='/assets/images/moov_square.svg';"
-                /></a>
-              </div>
-            </div>
-            {% endfor%}
-          </div>
-          <div
-            class="w-full slider-element relative sj-slide sj-slide-full sj-slide-auto sj-slide-5s sj-slide-fade no-arrows"
-          >
-            {% for ad in ads['side_bar'][1]%}
-            <div
-              class="article-pub-slide pub-slide block-slide relative overflow-hidden"
-            >
-              <div
-                class="object-cover relative overflow-hidden mr-0 ml-auto lg:w-full"
-              >
-                <a href="{{ad['url']}}" target="_blank"
-                  ><img
-                    src="{{CMS_URL}}{{ad['image']}}"
-                    alt="Moov publicité"
-                    class="object-cover w-full"
-                    onerror="this.src='/assets/images/moov_square.svg';"
-                /></a>
-              </div>
-            </div>
-            {% endfor%}
-          </div>
+          {{ads_in_side_bar(ads['side_bar'][0])}}
+          {{ads_in_side_bar(ads['side_bar'][1])}}
           <!-- </div> -->
         </div>
       </div>
@@ -133,7 +118,7 @@ content %}
             }}
           </span>
         </div>
-        <h1 class="text-5xl text-bold mb-4 lg:text-7xl xl:text-8xl">
+        <h1 class="text-5xl text-bold mb- lg:text-7xl xl:text-8xl">
           {{ news['data']['attributes']['title'] }}
         </h1>
         <div class="card-time heading-card-time">
@@ -173,6 +158,25 @@ content %}
             {{ news['data']['attributes']['head'] }}
           </p>
           {% endif %}
+
+          <!-- block pub mobile -->
+          <div
+            class="flex-wrap flex-row justify-end sm:w-full sm:flex-row py-10 hidden sm:visible"
+            id="side-pub-container"
+          >
+            <div
+              class="flex flex-col sm:flex-row w-full object-cover"
+              id="article-side-pub-container"
+            >
+              <!-- <div class="flex flex-col" id="article-side-pub"> -->
+
+              {{ads_in_side_bar(ads['side_bar'][0])}}
+              {{ads_in_side_bar(ads['side_bar'][1])}}
+              <!-- </div> -->
+            </div>
+          </div>
+
+          <!-- block pub mobile -->
 
           <div
             class="picture float-none mx-auto my-2 max-w-xl overflow-hidden md:float-right md:mx-2"
@@ -219,9 +223,11 @@ content %}
 
           {% endif %}
 
-          <div class="comment-btn my-9 flex justify-center md:justify-end">
+          <div
+            class="hidden comment-btn my-9 flex justify-center md:justify-end"
+          >
             <button
-              class="hidden modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap"
+              class="modal-open border-2 border-3xl py-4 px-7 rounded-3xl flex justify-center items-center flex-nowrap"
             >
               <b class="text-4xl bold pr-2">+</b>Ajouter votre commentaire
             </button>

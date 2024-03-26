@@ -270,6 +270,12 @@ Small Screen - Mobile
 
 
 @media screen and (min-width: 614px) and (max-width: 767px) {
+
+    .pharma-table .flex-table.header {
+        padding: 0;
+    }
+
+    
     .header-headline {
         width: 100%;
 
@@ -379,6 +385,11 @@ Xtra Small Screen - Small Mobile
 */
 /* @media screen and (max-width: 576px) { */
 @media screen and (max-width: 614px) {
+
+    .pharma-table .flex-table.header {
+        padding: 0;
+    }
+
     #flash_feature_home {
         margin-top: -1vh;
     }
@@ -652,6 +663,14 @@ Xtra Small Screen - Small Mobile
     
     .text-7xl{
         font-size: 3.5rem
+    }
+
+    #news-container{
+        padding-bottom: unset;
+    }
+
+    .heading-card-time {
+        margin:  0 !important;
     }
 
 }
