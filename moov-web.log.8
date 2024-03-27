@@ -1,0 +1,104 @@
+[2024-03-27 16:32:18,165] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:32:18,170] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:37:18 +03)" (scheduled at 2024-03-27 16:32:18.153654+03:00)
+[2024-03-27 16:32:18,171] DEBUG in base: Next wakeup is due at 2024-03-27 16:37:18.153654+03:00 (in 299.983698 seconds)
+[2024-03-27 16:32:18,176] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:37:18 +03)" raised an exception
+Traceback (most recent call last):
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
+    feed = obj.get_feed()
+           ^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
+    with self.source as source:
+TypeError: 'NoneType' object does not support the context manager protocol
+[2024-03-27 16:32:21,332] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:32:21,333] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:37:21 +03)" (scheduled at 2024-03-27 16:32:21.327659+03:00)
+[2024-03-27 16:32:21,334] DEBUG in base: Next wakeup is due at 2024-03-27 16:37:21.327659+03:00 (in 299.994942 seconds)
+[2024-03-27 16:32:21,336] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:37:21 +03)" raised an exception
+Traceback (most recent call last):
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
+    feed = obj.get_feed()
+           ^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
+    with self.source as source:
+TypeError: 'NoneType' object does not support the context manager protocol
+[2024-03-27 16:37:18,169] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:37:18,169] DEBUG in base: Next wakeup is due at 2024-03-27 16:42:18.153654+03:00 (in 299.984541 seconds)
+[2024-03-27 16:37:18,170] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:42:18 +03)" (scheduled at 2024-03-27 16:37:18.153654+03:00)
+[2024-03-27 16:37:18,171] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:42:18 +03)" raised an exception
+Traceback (most recent call last):
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
+    feed = obj.get_feed()
+           ^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
+    with self.source as source:
+TypeError: 'NoneType' object does not support the context manager protocol
+[2024-03-27 16:37:21,336] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:37:21,336] DEBUG in base: Next wakeup is due at 2024-03-27 16:42:21.327659+03:00 (in 299.990928 seconds)
+[2024-03-27 16:37:21,336] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:42:21 +03)" (scheduled at 2024-03-27 16:37:21.327659+03:00)
+[2024-03-27 16:37:21,338] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:42:21 +03)" raised an exception
+Traceback (most recent call last):
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
+    feed = obj.get_feed()
+           ^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
+    with self.source as source:
+TypeError: 'NoneType' object does not support the context manager protocol
+[2024-03-27 16:38:23,798] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:23] "[36mGET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:23,804] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:23] "[36mGET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:24,119] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:24] "[36mGET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:24,177] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:24] "[36mGET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:24,242] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:24] "[36mGET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:24,546] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:24] "[36mGET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:31,157] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:31] "[35m[1mGET /contact HTTP/1.1[0m" 500 -
+[2024-03-27 16:38:31,250] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:31] "GET /contact?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+[2024-03-27 16:38:31,390] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:31] "GET /contact?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+[2024-03-27 16:38:31,740] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:31] "GET /contact?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[2024-03-27 16:38:31,742] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:31] "GET /contact?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+[2024-03-27 16:38:32,002] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:32] "GET /contact?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+[2024-03-27 16:38:46,135] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:46] "[36mGET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:46,445] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:46] "[36mGET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:46,592] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:46] "[36mGET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:46,772] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:46] "[36mGET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:46,910] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:46] "[36mGET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:38:47,078] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:38:47] "[36mGET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1[0m" 304 -
+[2024-03-27 16:42:18,158] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:42:18,159] DEBUG in base: Next wakeup is due at 2024-03-27 16:47:18.153654+03:00 (in 299.993743 seconds)
+[2024-03-27 16:42:18,159] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:47:18 +03)" (scheduled at 2024-03-27 16:42:18.153654+03:00)
+[2024-03-27 16:42:18,162] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:47:18 +03)" raised an exception
+Traceback (most recent call last):
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
+    feed = obj.get_feed()
+           ^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
+    with self.source as source:
+TypeError: 'NoneType' object does not support the context manager protocol
+[2024-03-27 16:42:21,344] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:42:21,345] DEBUG in base: Next wakeup is due at 2024-03-27 16:47:21.327659+03:00 (in 299.983370 seconds)
+[2024-03-27 16:42:21,345] INFO in base: Running job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:47:21 +03)" (scheduled at 2024-03-27 16:42:21.327659+03:00)
+[2024-03-27 16:42:21,348] ERROR in base: Job "my_scheduled_job (trigger: interval[0:05:00], next run at: 2024-03-27 16:47:21 +03)" raised an exception
+Traceback (most recent call last):
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\__init__.py", line 102, in my_scheduled_job
+    feed = obj.get_feed()
+           ^^^^^^^^^^^^^^
+  File "G:\ITWEDO\Projet\Telma\moov-web\env\Lib\site-packages\moov\etl\afp.py", line 38, in get_feed
+    with self.source as source:
+TypeError: 'NoneType' object does not support the context manager protocol
+[2024-03-27 16:47:18,156] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:47:18,158] DEBUG in base: Next wakeup is due at 2024-03-27 16:52:18.153654+03:00 (in 299.995096 seconds)
