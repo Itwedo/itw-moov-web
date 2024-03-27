@@ -290,40 +290,21 @@ def use_template(template=None):
     return decorator
 
 
-# def create_captcha():
-#     print("Creating captcha #############################")
-#     captcha_path = "/tmp/captcha"
-#     Path(captcha_path).mkdir(exist_ok=True)
-#     captcha_name = f"captcha{random.randint(0, 100)}"
-#     captcha_text = "".join(
-#         random.choices(string.ascii_uppercase + string.digits, k=5)
-#     )
-#     # Create an image instance of the given size
-#     image = ImageCaptcha(width=280, height=45)
-#     data = image.generate(captcha_text)
-
-#     # write the image on the given file and save it
-#     image.write(captcha_text, f"{captcha_path}/{captcha_name}.png")
-#     return {
-#         "image": f"{captcha_path}/{captcha_name}.png",
-#         "text": captcha_text,
-#     }
-
 def create_captcha():
     print("Creating captcha #############################")
-    # Utilisez tempfile pour créer un dossier temporaire de manière portable
-    temp_dir = tempfile.gettempdir()
-    captcha_path = os.path.join(temp_dir, "captcha")
+    captcha_path = "/tmp/captcha"
     Path(captcha_path).mkdir(exist_ok=True)
     captcha_name = f"captcha{random.randint(0, 100)}"
-    captcha_text = "".join(random.choices(string.ascii_uppercase + string.digits, k=5))
+    captcha_text = "".join(
+        random.choices(string.ascii_uppercase + string.digits, k=5)
+    )
     # Create an image instance of the given size
     image = ImageCaptcha(width=280, height=45)
     data = image.generate(captcha_text)
+
     # write the image on the given file and save it
-    image_file_path = os.path.join(captcha_path, f"{captcha_name}.png")
-    image.write(captcha_text, image_file_path)
+    image.write(captcha_text, f"{captcha_path}/{captcha_name}.png")
     return {
-        "image": image_file_path,
+        "image": f"{captcha_path}/{captcha_name}.png",
         "text": captcha_text,
     }

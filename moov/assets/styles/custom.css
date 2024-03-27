@@ -999,7 +999,7 @@ currency
   
   .pharma-table .info {
     text-align: center;
-    word-break: break-all;
+    word-break: break-world;
   }
   .pharma-table .flex-table.header {
     padding: 0 2vw;
@@ -1009,14 +1009,14 @@ currency
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(1) {
     background-color: #95F8FF !important;
     color: #8686BD !important;
-    font-size: 18px !important;
+    font-size: 18px;
     /* font-family: Abril Fatface, Arial, sans-serif !important; */
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(2) {
     background-color: #6FFBC6 !important;
     color: #8686BD !important;
-    font-size: 18px !important;
+    font-size: 18px;
     margin-left: -20px;
     z-index: 10;
   }
@@ -1024,7 +1024,7 @@ currency
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(3) {
     background-color: #F9F177 !important;
     color: #8686BD !important;
-    font-size: 18px !important;
+    font-size: 18px;
     margin-left: -20px;
     z-index: 10;
   }

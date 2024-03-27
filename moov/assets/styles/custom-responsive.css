@@ -259,6 +259,12 @@ Small Screen - Tablate
     .news-flash.news-card {
         height: 450px;
     }
+
+    .global-margin.contact-content {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
 }
 
 
@@ -273,6 +279,7 @@ Small Screen - Mobile
 
     .pharma-table .flex-table.header {
         padding: 0;
+        
     }
 
     
@@ -376,6 +383,12 @@ Small Screen - Mobile
         display: none;
     }
 
+    .global-margin {
+        margin-right: 0;
+        margin-left: 0;
+
+    }
+
 }
 
 /*
@@ -385,6 +398,10 @@ Xtra Small Screen - Small Mobile
 */
 /* @media screen and (max-width: 576px) { */
 @media screen and (max-width: 614px) {
+
+    .pharma-table .flex-table .title {
+        font-size: 3.5vw!important;
+    }
 
     .pharma-table .flex-table.header {
         padding: 0;

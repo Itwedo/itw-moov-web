@@ -33,7 +33,7 @@ class ContactForm(FlaskForm):
 @use_template("contact.html")
 def contact():
     form = ContactForm()
-    # captcha = create_captcha()
+    captcha = create_captcha()
     if request.method == "POST":
         data = form.data
         moment = datetime.now()
@@ -70,11 +70,11 @@ def contact():
         #     server.sendmail(data['email'], EMAIL_ACCOUNT, message.as_string())
         return {
             "form": form,
-            # "captcha": captcha["text"],
-            # "image": captcha["image"],
+            "captcha": captcha["text"],
+            "image": captcha["image"],
         }
     return {
         "form": form,
-        # "captcha": captcha["text"],
-        # "image": captcha["image"],
+        "captcha": captcha["text"],
+        "image": captcha["image"],
     }

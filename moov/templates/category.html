@@ -132,6 +132,9 @@
         </div>
 
         <div class="actus-grid grid gap-4 md:gap-8 3xl:gap-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+
+        {% if result['data'] %}
+
           {% for i in range(result['data']|length) %}
             {% if i == 0 %}
               {{ news_card(result['data'][i], 'col-span-2 ') }}
@@ -164,6 +167,9 @@
 
 
           {% endfor %}
+
+        {% endif %}
+
         </div>
 
         {% include 'includes/pagination.html' %}
