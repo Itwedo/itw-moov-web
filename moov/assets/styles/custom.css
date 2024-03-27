@@ -989,8 +989,8 @@ currency
 
   .pharma-table .flex-row {
     width: 33.333% !important;
-    /* border: 1px solid #fff !important; */
-    justify-content: center !important;
+    border: 1px solid #fff !important;
+    justify-content: flex-start !important;
     font-size: 15px;
     padding: 1.5rem !important;
     word-break: normal !important;
@@ -998,45 +998,43 @@ currency
   }
   
   .pharma-table .info {
-    text-align: center;
-    word-break: break-world;
+    /* text-align: center; */
+    word-break: break-word;
   }
+
   .pharma-table .flex-table.header {
-    padding: 0 2vw;
-    flex-flow: nowrap !important;
+    padding-left: 0px !important;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(1) {
     background-color: #95F8FF !important;
-    color: #8686BD !important;
-    font-size: 18px;
-    /* font-family: Abril Fatface, Arial, sans-serif !important; */
+    color: #000 !important;
+    font-weight: 600;
+    font-size: 18px !important;
+    font-family: Abril Fatface, Arial, sans-serif !important;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(2) {
     background-color: #6FFBC6 !important;
-    color: #8686BD !important;
-    font-size: 18px;
-    margin-left: -20px;
-    z-index: 10;
+    color: #000 !important;
+    font-weight: 600;
+    font-size: 18px !important;
+    font-family: Abril Fatface, Arial, sans-serif !important;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row:nth-child(3) {
     background-color: #F9F177 !important;
-    color: #8686BD !important;
-    font-size: 18px;
-    margin-left: -20px;
-    z-index: 10;
+    color: #000 !important;
+    font-weight: 600;
+    font-size: 18px !important;
+    font-family: Abril Fatface, Arial, sans-serif !important;
   }
 
   .pharma-table .flex-table.header:first-of-type .flex-row{
     margin-right: 0px !important;
     box-shadow: none !important;
     border: 1px solid #fff !important;
-    width: 40% !important;
   }
-
-  
 
   .pharma-table .body {
     padding-left: 0rem !important;

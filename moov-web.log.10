@@ -1,81 +1,83 @@
-[2024-03-27 11:16:20,603] INFO in _internal:  * Restarting with stat
-[2024-03-27 11:16:21,724] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
-[2024-03-27 11:16:21,726] INFO in base: Added job "my_scheduled_job" to job store "default"
-[2024-03-27 11:16:21,726] INFO in base: Scheduler started
-[2024-03-27 11:16:21,726] DEBUG in base: Looking for jobs to run
-[2024-03-27 11:16:21,729] DEBUG in base: Next wakeup is due at 2024-03-27 11:21:21.724961+03:00 (in 299.995909 seconds)
-[2024-03-27 11:16:34,582] WARNING in _internal:  * Debugger is active!
-[2024-03-27 11:16:34,586] INFO in _internal:  * Debugger PIN: 162-519-294
-[2024-03-27 11:16:34,627] WARNING in _internal:  * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
-[2024-03-27 11:16:34,628] INFO in _internal:  * Running on http://192.168.8.109:8080/ (Press CTRL+C to quit)
-[2024-03-27 11:16:43,982] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:43] "GET /vie-pratique/pharmacie HTTP/1.1" 200 -
-[2024-03-27 11:16:44,130] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/select2.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,135] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,391] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,392] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,392] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/custom.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,392] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/fontawesome.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,441] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/brands.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,441] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/solid.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,706] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/styles/popover.css HTTP/1.1" 200 -
-[2024-03-27 11:16:44,728] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
-[2024-03-27 11:16:44,747] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:44] "GET /assets/scripts/popover.js HTTP/1.1" 200 -
-[2024-03-27 11:16:45,051] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/location-24.png HTTP/1.1" 200 -
-[2024-03-27 11:16:45,057] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/arrow-down-24.png HTTP/1.1" 200 -
-[2024-03-27 11:16:45,087] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:45,097] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
-[2024-03-27 11:16:45,108] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:45,129] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:45,361] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
-[2024-03-27 11:16:45,697] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/Apercu.png HTTP/1.1" 200 -
-[2024-03-27 11:16:45,970] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
-[2024-03-27 11:16:45,971] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
-[2024-03-27 11:16:45,986] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:45] "GET /assets/images/search.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:46,041] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:46] "GET /assets/scripts/main-6731bc2efb0608c06434.js HTTP/1.1" 200 -
-[2024-03-27 11:16:46,309] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:46] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:46,392] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:46] "GET /assets/images/search-24.png HTTP/1.1" 200 -
-[2024-03-27 11:16:46,420] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:46] "GET /assets/images/facebook_.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:46,432] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:46] "GET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1" 200 -
-[2024-03-27 11:16:47,440] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:47] "GET /assets/images/twitter_.svg HTTP/1.1" 200 -
-[2024-03-27 11:16:47,444] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:47] "GET /assets/images/icon-arrow-down.png HTTP/1.1" 200 -
-[2024-03-27 11:16:47,447] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:47] "GET /assets/images/Moov-logo_0@2x.png?v=abc HTTP/1.1" 200 -
-[2024-03-27 11:16:53,690] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:53] "GET /assets/styles/530e3e24230ca03e9328.gif HTTP/1.1" 200 -
-[2024-03-27 11:16:54,023] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:16:54] "GET /assets/images/moov_favicon_m.svg HTTP/1.1" 200 -
-[2024-03-27 11:17:01,071] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:01] "GET /assets/images/apple-icon-180x180.png HTTP/1.1" 200 -
-[2024-03-27 11:17:10,532] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:10] "GET /assets/images/apple-icon-152x152.png HTTP/1.1" 200 -
-[2024-03-27 11:17:11,305] INFO in _internal:  * Detected change in 'D:\\work\\python\\itw-moov-web\\moov\\assets\\styles\\custom-responsive.css', reloading
-[2024-03-27 11:17:11,388] INFO in _internal:  * Restarting with stat
-[2024-03-27 11:17:12,325] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
-[2024-03-27 11:17:12,325] INFO in base: Added job "my_scheduled_job" to job store "default"
-[2024-03-27 11:17:12,326] INFO in base: Scheduler started
-[2024-03-27 11:17:12,326] DEBUG in base: Looking for jobs to run
-[2024-03-27 11:17:12,329] DEBUG in base: Next wakeup is due at 2024-03-27 11:22:12.325471+03:00 (in 299.995630 seconds)
-[2024-03-27 11:17:28,005] WARNING in _internal:  * Debugger is active!
-[2024-03-27 11:17:28,010] INFO in _internal:  * Debugger PIN: 162-519-294
-[2024-03-27 11:17:28,070] WARNING in _internal:  * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
-[2024-03-27 11:17:28,071] INFO in _internal:  * Running on http://192.168.8.109:8080/ (Press CTRL+C to quit)
-[2024-03-27 11:17:39,925] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:39] "GET /vie-pratique/pharmacie HTTP/1.1" 200 -
-[2024-03-27 11:17:40,161] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/select2.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,164] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,377] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/custom.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,379] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,396] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,400] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/fontawesome.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,471] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/brands.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,478] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/solid.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,708] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/styles/popover.css HTTP/1.1" 200 -
-[2024-03-27 11:17:40,746] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/scripts/popover.js HTTP/1.1" 200 -
-[2024-03-27 11:17:40,771] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:40] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
-[2024-03-27 11:17:41,068] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/arrow-down-24.png HTTP/1.1" 200 -
-[2024-03-27 11:17:41,073] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
-[2024-03-27 11:17:41,102] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
-[2024-03-27 11:17:41,103] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/location-24.png HTTP/1.1" 200 -
-[2024-03-27 11:17:41,157] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
-[2024-03-27 11:17:41,190] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
-[2024-03-27 11:17:41,378] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
-[2024-03-27 11:17:41,755] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/Apercu.png HTTP/1.1" 200 -
-[2024-03-27 11:17:41,853] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
-[2024-03-27 11:17:41,854] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
-[2024-03-27 11:17:41,993] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 11:17:41] "GET /assets/images/search.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:18,281] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-27 16:18:18,283] INFO in base: Scheduler started
+[2024-03-27 16:18:18,287] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:18:18,291] DEBUG in base: Next wakeup is due at 2024-03-27 16:23:18.280945+03:00 (in 299.989030 seconds)
+[2024-03-27 16:18:19,746] INFO in _internal:  * Restarting with stat
+[2024-03-27 16:18:21,294] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+[2024-03-27 16:18:21,295] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-27 16:18:21,295] INFO in base: Scheduler started
+[2024-03-27 16:18:21,296] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:18:21,303] DEBUG in base: Next wakeup is due at 2024-03-27 16:23:21.294457+03:00 (in 299.991973 seconds)
+[2024-03-27 16:18:22,674] WARNING in _internal:  * Debugger is active!
+[2024-03-27 16:18:22,683] INFO in _internal:  * Debugger PIN: 125-542-277
+[2024-03-27 16:18:22,858] INFO in _internal:  * Running on http://127.0.0.1:8000/ (Press CTRL+C to quit)
+[2024-03-27 16:18:51,998] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:51] "GET /vie-pratique/pharmacie HTTP/1.1" 200 -
+[2024-03-27 16:18:52,000] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:52] "GET /vie-pratique/pharmacie HTTP/1.1" 200 -
+[2024-03-27 16:18:52,048] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:52] "GET /vie-pratique/pharmacie HTTP/1.1" 200 -
+[2024-03-27 16:18:52,765] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:52] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,090] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/select2.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,355] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/custom.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,405] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,670] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,687] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/fontawesome.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,728] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/brands.css HTTP/1.1" 200 -
+[2024-03-27 16:18:53,912] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:53] "GET /assets/styles/solid.css HTTP/1.1" 200 -
+[2024-03-27 16:18:54,051] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/styles/popover.css HTTP/1.1" 200 -
+[2024-03-27 16:18:54,078] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
+[2024-03-27 16:18:54,109] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/scripts/popover.js HTTP/1.1" 200 -
+[2024-03-27 16:18:54,222] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:54,365] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:54,411] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:54,422] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
+[2024-03-27 16:18:54,819] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/scripts/main-6731bc2efb0608c06434.js HTTP/1.1" 200 -
+[2024-03-27 16:18:54,841] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/scripts/custom-script.js HTTP/1.1" 200 -
+[2024-03-27 16:18:54,858] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:54] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js.map HTTP/1.1" 200 -
+[2024-03-27 16:18:55,001] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:55] "GET /assets/scripts/main-6731bc2efb0608c06434.js.map HTTP/1.1" 200 -
+[2024-03-27 16:18:56,003] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:56] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
+[2024-03-27 16:18:57,405] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:57] "GET /assets/images/search.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:57,406] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:57] "GET /assets/images/location-24.png HTTP/1.1" 200 -
+[2024-03-27 16:18:57,727] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:57] "GET /assets/images/arrow-down-24.png HTTP/1.1" 200 -
+[2024-03-27 16:18:58,078] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:58] "GET /assets/images/MOOV.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:58,089] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:58] "GET /assets/images/search-24.png HTTP/1.1" 200 -
+[2024-03-27 16:18:58,406] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:58] "GET /assets/images/facebook_.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:58,406] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:58] "GET /assets/images/twitter_.svg HTTP/1.1" 200 -
+[2024-03-27 16:18:58,754] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:58] "GET /assets/images/Moov-logo_0@2x.png?v=abc HTTP/1.1" 200 -
+[2024-03-27 16:18:58,755] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:58] "GET /assets/images/Apercu.png HTTP/1.1" 200 -
+[2024-03-27 16:18:59,076] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:18:59] "GET /assets/images/icon-arrow-down.png HTTP/1.1" 200 -
+[2024-03-27 16:19:14,401] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:19:14] "GET /assets/styles/530e3e24230ca03e9328.gif HTTP/1.1" 200 -
+[2024-03-27 16:19:14,745] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:19:14] "GET /assets/images/moov_favicon_m.svg HTTP/1.1" 200 -
+[2024-03-27 16:21:45,549] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+[2024-03-27 16:21:45,549] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-27 16:21:45,550] INFO in base: Scheduler started
+[2024-03-27 16:21:45,551] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:21:45,553] DEBUG in base: Next wakeup is due at 2024-03-27 16:26:45.549308+03:00 (in 299.995965 seconds)
+[2024-03-27 16:21:46,987] INFO in _internal:  * Restarting with stat
+[2024-03-27 16:21:48,403] INFO in base: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+[2024-03-27 16:21:48,405] INFO in base: Added job "my_scheduled_job" to job store "default"
+[2024-03-27 16:21:48,408] INFO in base: Scheduler started
+[2024-03-27 16:21:48,409] DEBUG in base: Looking for jobs to run
+[2024-03-27 16:21:48,413] DEBUG in base: Next wakeup is due at 2024-03-27 16:26:48.403305+03:00 (in 299.989998 seconds)
+[2024-03-27 16:21:49,757] WARNING in _internal:  * Debugger is active!
+[2024-03-27 16:21:49,764] INFO in _internal:  * Debugger PIN: 125-542-277
+[2024-03-27 16:21:49,876] INFO in _internal:  * Running on http://127.0.0.1:8000/ (Press CTRL+C to quit)
+[2024-03-27 16:22:15,864] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:15] "GET /vie-pratique/pharmacie HTTP/1.1" 200 -
+[2024-03-27 16:22:16,002] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/main-4eca6c8dbda212f15ad7.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,255] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/select2.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,317] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/custom.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,360] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/custom-responsive.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,572] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/theme-update.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,657] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/fontawesome.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,687] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/brands.css HTTP/1.1" 200 -
+[2024-03-27 16:22:16,895] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:16] "GET /assets/styles/solid.css HTTP/1.1" 200 -
+[2024-03-27 16:22:17,008] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/styles/popover.css HTTP/1.1" 200 -
+[2024-03-27 16:22:17,046] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/scripts/clipboard.js HTTP/1.1" 200 -
+[2024-03-27 16:22:17,335] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/scripts/popover.js HTTP/1.1" 200 -
+[2024-03-27 16:22:17,351] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/burger-gray.svg HTTP/1.1" 200 -
+[2024-03-27 16:22:17,403] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/burger-white.svg HTTP/1.1" 200 -
+[2024-03-27 16:22:17,689] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/arrow-down-24.png HTTP/1.1" 200 -
+[2024-03-27 16:22:17,707] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/location-24.png HTTP/1.1" 200 -
+[2024-03-27 16:22:17,732] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/search.svg HTTP/1.1" 200 -
+[2024-03-27 16:22:17,771] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/betay.jpg HTTP/1.1" 200 -
+[2024-03-27 16:22:17,868] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/Apercu.png HTTP/1.1" 200 -
+[2024-03-27 16:22:17,880] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:17] "GET /assets/images/logo_moov_svg.svg HTTP/1.1" 200 -
+[2024-03-27 16:22:18,028] INFO in _internal: 127.0.0.1 - - [27/Mar/2024 16:22:18] "GET /assets/scripts/manifest-338105182854d6bd0d7f.js HTTP/1.1" 200 -
